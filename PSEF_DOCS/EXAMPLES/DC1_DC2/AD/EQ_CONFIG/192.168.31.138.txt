@@ -1,0 +1,55 @@
+conf t
+
+
+object-group service icmp-app
+service-object icmp 
+
+object-group service http-app
+service-object tcp destination range 80 80
+
+object-group service https-app
+service-object tcp destination range 443 443
+
+object-group service icmp-app-set
+group-object icmp-app
+
+object-group service web-app-set
+group-object http-app
+group-object https-app
+
+object-group network dc2-vlan211
+network-object 10.201.1.0 255.255.255.0
+
+object-group network dc1-vlan111
+network-object 10.101.1.0 255.255.255.0
+
+object-group network dc1-vlan121
+network-object 10.102.1.0 255.255.255.0
+
+object-group network dc1-vlan112
+network-object 10.101.2.0 255.255.255.0
+
+object-group network dc1-vrf1-set
+group-object dc1-vlan111
+group-object dc1-vlan112
+
+object-group network dc1-vlan112-set
+group-object dc1-vlan112
+
+object-group network dc1-vlan121-set
+group-object dc1-vlan121
+
+object-group network dc1-vlan111-set
+group-object dc1-vlan111
+
+object-group network dc2-vlan211-set
+group-object dc2-vlan211
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group dc1-vlan121-set object-group dc2-vlan211-set
+access-list all_zones_out extended permit object-group web-app-set object-group dc1-vlan121-set object-group dc2-vlan211-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group dc1-vrf1-set object-group dc2-vlan211-set
+access-list all_zones_out extended permit object-group web-app-set object-group dc1-vrf1-set object-group dc2-vlan211-set
+
+exit
