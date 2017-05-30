@@ -1,0 +1,47 @@
+conf t
+
+
+interface e0/1
+switchport trunk allowed vlan remove 211
+
+no interface vlan211
+
+no vlan 211
+
+object-group network dc2-vlan211
+no 10.201.1.0 255.255.255.0
+no object-group network dc2-vlan211
+
+interface e0/1
+switchport trunk allowed vlan remove 212
+
+no interface vlan212
+
+no vlan 212
+
+object-group network dc2-vlan212
+no 10.201.2.0 255.255.255.0
+no object-group network dc2-vlan212
+
+interface e0/1
+switchport trunk allowed vlan remove 221
+
+no interface vlan221
+
+no vlan 221
+
+object-group network dc2-vlan221
+no 10.202.1.0 255.255.255.0
+no object-group network dc2-vlan221
+
+interface e0/1
+switchport trunk allowed vlan remove 222
+
+no interface vlan222
+
+no vlan 222
+
+object-group network dc2-vlan222
+no 10.202.2.0 255.255.255.0
+no object-group network dc2-vlan222
+exit

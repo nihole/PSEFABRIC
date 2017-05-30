@@ -1,0 +1,25 @@
+conf t
+
+
+interface e0/0
+switchport trunk allowed vlan remove 311
+
+no interface vlan311
+
+no vlan 311
+
+object-group network dc3-vlan311
+no 10.3.1.0 255.255.255.0
+no object-group network dc3-vlan311
+
+interface e0/0
+switchport trunk allowed vlan remove 312
+
+no interface vlan312
+
+no vlan 312
+
+object-group network dc3-vlan312
+no 10.3.2.0 255.255.255.0
+no object-group network dc3-vlan312
+exit
