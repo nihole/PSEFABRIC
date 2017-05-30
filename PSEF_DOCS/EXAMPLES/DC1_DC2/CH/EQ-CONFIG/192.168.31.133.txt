@@ -1,0 +1,9 @@
+conf t
+
+
+object-group network dc1-vrf1-set
+no group-object dc1-vlan112
+
+object-group network dc1-vrf1-set
+group-object dc1-vlan111
+exit
