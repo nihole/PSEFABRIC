@@ -1,0 +1,63 @@
+conf t
+
+
+vlan 211
+name dc2-vlan211
+
+interface vlan211
+description dc2-vlan211
+ip vrf forwarding DMZ
+ip address 10.201.1.1 255.255.255.0
+no shut
+
+object-group network dc2-vlan211
+10.201.1.0 255.255.255.0
+
+interface e0/1
+switchport trunk allowed vlan add 211
+
+vlan 212
+name dc2-vlan212
+
+interface vlan212
+description dc2-vlan212
+ip vrf forwarding DMZ
+ip address 10.201.2.1 255.255.255.0
+no shut
+
+object-group network dc2-vlan212
+10.201.2.0 255.255.255.0
+
+interface e0/1
+switchport trunk allowed vlan add 212
+
+vlan 221
+name dc2-vlan221
+
+interface vlan221
+description dc2-vlan221
+ip vrf forwarding TRUST
+ip address 10.202.1.1 255.255.255.0
+no shut
+
+object-group network dc2-vlan221
+10.202.1.0 255.255.255.0
+
+interface e0/1
+switchport trunk allowed vlan add 221
+
+vlan 222
+name dc2-vlan222
+
+interface vlan222
+description dc2-vlan222
+ip vrf forwarding TRUST
+ip address 10.202.2.1 255.255.255.0
+no shut
+
+object-group network dc2-vlan222
+10.202.2.0 255.255.255.0
+
+interface e0/1
+switchport trunk allowed vlan add 222
+exit
