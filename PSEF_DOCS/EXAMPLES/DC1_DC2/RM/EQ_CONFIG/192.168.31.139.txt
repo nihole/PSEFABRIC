@@ -1,0 +1,29 @@
+conf t
+
+
+interface e0/1
+switchport trunk allowed vlan remove 211
+
+no interface vlan211
+
+no vlan 211
+
+object-group network dc2-vlan211
+no 10.201.1.0 255.255.255.0
+no object-group network dc2-vlan211
+
+object-group service icmp-app-set
+no group-object icmp-app
+no object-group service icmp-app-set
+
+object-group service web-app-set
+no group-object http-app
+no group-object https-app
+no object-group service web-app-set
+
+no object-group service icmp-app
+
+no object-group service http-app
+
+no object-group service https-app
+exit

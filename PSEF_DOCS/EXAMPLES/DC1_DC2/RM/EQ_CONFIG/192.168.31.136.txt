@@ -1,0 +1,55 @@
+conf t
+
+
+object-group network dc1-vrf1-set
+no group-object dc1-vlan111
+no group-object dc1-vlan112
+no object-group network dc1-vrf1-set
+
+object-group network dc1-vlan112-set
+no group-object dc1-vlan112
+no object-group network dc1-vlan112-set
+
+object-group network dc1-vlan121-set
+no group-object dc1-vlan121
+no object-group network dc1-vlan121-set
+
+object-group network dc1-vlan111-set
+no group-object dc1-vlan111
+no object-group network dc1-vlan111-set
+
+object-group network dc2-vlan211-set
+no group-object dc2-vlan211
+no object-group network dc2-vlan211-set
+
+object-group network dc2-vlan211
+no 10.201.1.0 255.255.255.0
+no object-group network dc2-vlan211
+
+object-group network dc1-vlan111
+no 10.101.1.0 255.255.255.0
+no object-group network dc1-vlan111
+
+object-group network dc1-vlan121
+no 10.102.1.0 255.255.255.0
+no object-group network dc1-vlan121
+
+object-group network dc1-vlan112
+no 10.101.2.0 255.255.255.0
+no object-group network dc1-vlan112
+
+object-group service icmp-app-set
+no group-object icmp-app
+no object-group service icmp-app-set
+
+object-group service web-app-set
+no group-object http-app
+no group-object https-app
+no object-group service web-app-set
+
+no object-group service icmp-app
+
+no object-group service http-app
+
+no object-group service https-app
+exit
