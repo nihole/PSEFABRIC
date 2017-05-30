@@ -1,0 +1,22 @@
+<configuration>
+
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan111</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address>
+<name>dc1-vlan111</name>
+<ip-prefix>10.101.1.0/24</ip-prefix>
+</address>
+</address-book>
+</security>
+</configuration>

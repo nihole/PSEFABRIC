@@ -1,0 +1,9 @@
+conf t
+
+
+object-group network dc1-vlan111
+no network-object 10.111.1.0 255.255.255.0
+
+object-group network dc1-vlan111
+network-object 10.101.1.0 255.255.255.0
+exit
