@@ -1,0 +1,75 @@
+module policy {
+
+  yang-version "1";
+
+  // namespace
+  namespace "http://psefabric/policy";
+
+  prefix "policy";
+
+  include addresses;
+  include applications;
+  
+  container policies {
+	  list policy {
+		  key policy-name;
+		  leaf policy-name {
+			  type string;
+			  mandatory true;
+		  }
+		  container match {
+			  
+			  container source-addresses {
+                  				 
+				  leaf-list address-set {
+ 					  min-elements 1;
+					  type leafref {
+						  path "/address-sets/address-set-name";
+					  }
+				  }
+			  }
+			  container destination-addresses {
+
+				  leaf-list address-set {
+    				  min-elements 1;
+					  type leafref {
+						  path "/address-sets/address-set-name";
+					  }
+				  }
+			  }
+			  container applications {
+				  
+				  leaf-list application-set {
+					  min-elements 1;
+					  type leafref {
+						  path "/application-sets/application-set-name";
+					  }
+				  }
+			  }
+		  }
+		  container then {
+              description
+                "Definitions of action criteria for this Access List Entry.";
+              choice packet-handling {
+                default "permit";
+                description
+                  "Packet handling action.";
+                case deny {
+                  leaf deny {
+                    type empty;
+                    description
+                      "Deny action.";
+                  }
+                }
+                case permit {
+                  leaf permit {
+                    type empty;
+                    description
+                      "Permit action.";
+                  }
+               }
+            }
+		  }    
+	  }
+   }
+}
