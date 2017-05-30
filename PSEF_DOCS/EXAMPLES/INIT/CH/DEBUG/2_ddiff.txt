@@ -1,0 +1,32 @@
+{
+  "iterable_item_removed": {
+    "root['data']['addresses'][1]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan111", 
+      "ipv4-prefix": "10.101.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "111", 
+        "vrf": "VRF1"
+      }
+    }
+  }, 
+  "iterable_item_added": {
+    "root['data']['addresses'][1]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan111", 
+      "ipv4-prefix": "10.111.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "111", 
+        "vrf": "VRF1"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "applications_ad": [], 
+  "policies_ad": [], 
+  "addresses_rm": [
+    {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan111", 
+      "ipv4-prefix": "10.101.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "111", 
+        "vrf": "VRF1"
+      }
+    }
+  ], 
+  "application_sets_ad": [], 
+  "address_sets_rm": [], 
+  "policies_rm": [], 
+  "application_sets_rm": [], 
+  "address_sets_ad": [], 
+  "addresses_ad": [
+    {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan111", 
+      "ipv4-prefix": "10.111.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "111", 
+        "vrf": "VRF1"
+      }
+    }
+  ], 
+  "applications_rm": []
+}
