@@ -1,0 +1,168 @@
+Psefabric's layers.
+
+1. Configuration Management Engine
+2. Configuration Analyser
+3. Demultiplexer
+4. Configurator
+5. Configuration Encapsulation
+6. MOs Configuration Loader
+7. Control/Data Plans of MOs 
+
+We may logicaly devide psefabric layers into 3 groups:
+- layer 1 (Configuration Management Engine)
+- layers 2 - 6 (Configuration Analyser, Demultiplexer, Configurator, MOs Configuration Loader)
+- layers 7 (CP/DP of network equipment)
+
+1. Configuration Management Engine.
+In our examples we use a free version of Tail-f ConfD Management Agent.
+(http://www.tail-f.com)
+
+This engine provides all necessary configuration management servicies we usually have with network equipments.
+
+Here some of them:
+- transaction management
+- session management
+- rolebased access control
+- redundancy/replication
+- validation of input data
+- rollback management
+- upgfades/downgrades
+- aaa servicies
+
+It also provides a set of interfaces and protocols for administration:
+- cli (ssh, telnet)
+- netconf
+- snmp
+- rest
+- http 
+- cli
+
+All configurations of a psefabric are done through this engine.
+It is thanks to this element that the administrator gets the impression that he works with a fabric.
+
+Configuration Management Engine is an essential part of the psefabric but it is not a part of this project except one element.
+This element is YANG data model. We use it to describe psefabrig configuration model structure. This way we may create cisco-like or
+juniper-like etc configuration model or create something new one.  
+
+One of the key concepts of psefabric is a structure.
+A structure is a list of variables that an administrator can assign to configuration items (addresses in our examples).
+Then it will be used at the Demultiplexer layer to uniquely determine which network equipment should be configured.
+
+Her is an example of a YANG piece of code which describes the strusture elements:
+    container structure {
+          leaf-list data-centers {
+		  type types:dc;
+	  }
+	  leaf-list equipments {
+		  type types:eq;
+	  }
+	  leaf-list interfaces {
+		  type types:interface;
+	  }
+	  leaf-list zones {
+		  type types:zone;
+	  }
+	  leaf-list vrf {
+		  type types:vrf;
+	  }
+	  list vlans {
+		  key vlan-name;
+		  leaf vlan-name {
+			  type string;
+		  }
+		  leaf vlan-number {
+			  type int16 {
+			  range "0..4095";  
+			  }
+		  }
+	  }
+
+2. Configuration Analyser
+Performs management of psefabric configuration files. 
+Performs preliminary data processing.
+
+- takes new psefabric configuration data from Configuration Management Engine database
+- takes previouse psefabric configuration data 
+- analyses these data and the difference between them
+- provides the convinient format of required data for Demultiplexer layer
+
+3. Demultiplexer
+It is a core of a psefabric.
+It determins the sequence of commants for each MO (CPs of network equipments) and tranfers thist commants with all neccassary data to the
+Configurator Layer.
+
+The decision is made on the basis of
+- asigned structure elements (described earlier)
+- global logic 
+
+Global logic is the next key concept of a psefabric.
+To understand this point answer the question: what we have to do if we want to automate some operations in our network?
+Fist of all of course we need to describe the algorithm of this process.
+We have the same situation. 
+
+In our case we use python dictionaries for this purpose.
+For example this part of code describes what psefabric has to do when we add or remove address with structure parameters: 
+dc = DC1
+vlan = any vlan not equal 0
+
+def mult_dict_address():
+    ....
+    mult[('DC1', 'vlan')][0]['eq_addr'] = '192.168.31.133'
+    ....
+    mult[('DC1', 'vlan')][0]['cmd']['rm'].append('ctemplates.cisco_remove_vlan_to_trunk')
+    mult[('DC1', 'vlan')][0]['cmd']['rm'].append('ctemplates.cisco_delete_svi')
+    mult[('DC1', 'vlan')][0]['cmd']['rm'].append('ctemplates.cisco_delete_vlan')
+    mult[('DC1', 'vlan')][0]['cmd']['rm'].append('ctemplates.cisco_delete_address')
+    mult[('DC1', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_create_vlan')
+    mult[('DC1', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_create_svi')
+    mult[('DC1', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_create_address')
+    mult[('DC1', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
+    ....
+    return (mult)
+
+So we require the next sequences of actions with 192.168.31.133 as a result of adding or removal of an address:
+- in case of removal
+  - 'ctemplates.cisco_remove_vlan_to_trunk'
+  - 'ctemplates.cisco_delete_svi'
+  - 'ctemplates.cisco_delete_vlan'
+  - 'ctemplates.cisco_delete_address'
+- in case of adding
+  - 'ctemplates.cisco_create_vlan'
+  - 'ctemplates.cisco_create_svi'
+  - 'ctemplates.cisco_create_address'
+
+4. Configurator
+Creates and manage configurations  for real network equipment.
+Takes the data form Demultiplexer Layer and with using of templates translate it to the configuration.
+
+Example of possible template:
+
+- ctemplates.cisco_create_svi
+
+    def cisco_create_svi (name, ipv4_prefix, vlan, vrf, interface):
+        network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
+        vrf_forw = ''
+        if not vrf == 'none':
+            vrf_forw = 'ip vrf forwarding %s\n' % vrf
+        config_txt = '''
+    interface vlan%s
+    description %s
+    %sip address %s %s
+    no shut''' % (vlan, name, vrf_forw, gate, netmask)
+        return config_txt
+
+- ctemplate.cisco_delete_svi
+
+    def cisco_delete_svi (name, ipv4_prefix, vlan, vrf, interface):
+        config_txt = '''
+    no interface vlan%s''' % vlan
+        return config_txt
+
+
+5. Configuration Encapsulation
+Encapsulates or adapts data to the protocol or tool through which it will be downloaded to the equipment (telnet/ssh, neconf, ansible etc.).
+
+6. MOs Configuration Loader
+Uploads the configuration on the real eqipment.
+
+7. Control Plans, Data Plans of network eqiepment.

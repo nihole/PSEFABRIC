@@ -1,0 +1,22 @@
+Psefabric model.
+
+We have these layers in our model of psefabric:
+1. Configuration Management Engine
+2. Configuration Analyser
+3. Demultiplexer
+4. Configurator
+5. MOs Configuration Loader
+6. Control Plans of MOs
+7. Data Plans of MOs
+
+Main principles of data flow.
+
+1. The data always flow in the direction from the higher layer to the lower one.
+2. Exchange always occurs only either within the layer (between different part of the layer) or between adjacent layers.
+3. The psefabric.py script is the dataflow manager. It runs scripts in the correct order and is responsible for exchanging data between them.
+
+Debugging.
+
+There is a powful debuging mechanism in psefabric. You may examine almost any essential internal data exhange.
+If debugging is on (PSEFABRIC/PSEF_SCRIPTS/psef_debug.py) this information is saved in the folder PSEFABRIC/PSEF_LOGS/.
+For comfort of reading they will be saved in json format.
