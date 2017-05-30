@@ -1,0 +1,505 @@
+<configuration>
+
+
+<security>
+<policies> 
+<global>            
+<policy operation='delete'>        
+<name>all-loop-ping</name>
+</policy>
+</global>
+</policies> 
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>all-loop-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-global-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan111-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan112-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan121-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan122-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan131-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan132-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vrf1-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vrf2-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vrf3-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-dmz-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-global-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-trust-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-vlan211-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-vlan212-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-vlan221-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-vlan222-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc3-global-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc3-vlan311-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc3-vlan312-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>lo-dc1-sw1-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>lo-dc2-sw1-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>lo-dc3-sw1-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-global</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan111</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan112</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan121</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan122</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan131</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan132</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vrf1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vrf2</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vrf3</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-dmz</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-global</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-trust</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-vlan211</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-vlan212</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-vlan221</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-vlan222</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc3-global</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc3-vlan311</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc3-vlan312</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo0-dc3-sw1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo101-dc1-sw1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo102-dc1-sw1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo103-dc1-sw1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo201-dc2-sw1</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>lo202-dc2-sw1</name>
+</address>
+</address-book>
+</security>
+
+<applications>
+<application-set operation='delete'>
+<name>icmp-app-set</name>
+</application-set>
+</applications>
+
+<applications>
+<application-set operation='delete'>
+<name>web-app-set</name>
+</application-set>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>http-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>https-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>icmp-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>ssh-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>telnet-app</name>
+</application>
+</applications>
+</configuration>

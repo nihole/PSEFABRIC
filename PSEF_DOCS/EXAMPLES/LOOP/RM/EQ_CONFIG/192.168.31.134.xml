@@ -1,0 +1,160 @@
+<configuration>
+
+
+<security>
+<policies> 
+<global>            
+<policy operation='delete'>        
+<name>all-loop-ping</name>
+</policy>
+</global>
+</policies> 
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan121-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan111-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vlan112-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vrf1-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-global-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc1-vrf2-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-dmz-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-vlan211-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address-set operation='delete'>
+<name>dc2-global-set</name>
+</address-set>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan121</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc2-vlan211</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan112</name>
+</address>
+</address-book>
+</security>
+
+<security>
+<address-book>
+<name>global</name>
+<address operation='delete'>
+<name>dc1-vlan111</name>
+</address>
+</address-book>
+</security>
+
+<applications>
+<application-set operation='delete'>
+<name>icmp-app-set</name>
+</application-set>
+</applications>
+
+<applications>
+<application-set operation='delete'>
+<name>web-app-set</name>
+</application-set>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>http-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>icmp-app</name>
+</application>
+</applications>
+
+<applications>
+<application operation='delete'>
+<name>https-app</name>
+</application>
+</applications>
+</configuration>

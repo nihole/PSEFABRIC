@@ -1,0 +1,245 @@
+{
+  "rm": [], 
+  "ad": [
+    {
+      "policy-name": "all-loop-ping", 
+      "match": {
+        "source-addresses": {
+          "(DC1,VRF3)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo103-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.103/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF3"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC1,VRF1)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo101-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.101/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF1"
+                  }
+                }, 
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo102-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.102/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF1"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC3,none)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo0-dc3-sw1", 
+                  "ipv4-prefix": "172.16.3.2/32", 
+                  "structure": {
+                    "dc": "DC3", 
+                    "zone": "none", 
+                    "device": "192.168.31.137", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "none"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC2,TRUST)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo202-dc2-sw1", 
+                  "ipv4-prefix": "172.16.2.202/32", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "TRUST"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC2,DMZ)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo201-dc2-sw1", 
+                  "ipv4-prefix": "172.16.2.201/32", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "DMZ"
+                  }
+                }
+              ]
+            }
+          ]
+        }, 
+        "destination-addresses": {
+          "(DC1,VRF3)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo103-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.103/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF3"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC1,VRF1)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo101-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.101/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF1"
+                  }
+                }, 
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo102-dc1-sw1", 
+                  "ipv4-prefix": "172.16.1.102/32", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "VRF1"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC3,none)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo0-dc3-sw1", 
+                  "ipv4-prefix": "172.16.3.2/32", 
+                  "structure": {
+                    "dc": "DC3", 
+                    "zone": "none", 
+                    "device": "192.168.31.137", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "none"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC2,TRUST)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo202-dc2-sw1", 
+                  "ipv4-prefix": "172.16.2.202/32", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "TRUST"
+                  }
+                }
+              ]
+            }
+          ], 
+          "(DC2,DMZ)": [
+            {
+              "address-set-name": "all-loop-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "lo201-dc2-sw1", 
+                  "ipv4-prefix": "172.16.2.201/32", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "none", 
+                    "vlan": "0", 
+                    "vrf": "DMZ"
+                  }
+                }
+              ]
+            }
+          ]
+        }, 
+        "applications": {
+          "application-set": [
+            "icmp-app-set"
+          ]
+        }
+      }
+    }
+  ]
+}

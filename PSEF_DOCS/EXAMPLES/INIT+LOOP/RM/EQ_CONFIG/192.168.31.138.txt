@@ -1,0 +1,248 @@
+conf t
+
+
+ip access-list extended all_vlans_out
+no access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+object-group network all-loop-set
+no group-object lo0-dc3-sw1
+no group-object lo101-dc1-sw1
+no group-object lo102-dc1-sw1
+no group-object lo103-dc1-sw1
+no group-object lo201-dc2-sw1
+no group-object lo202-dc2-sw1
+no object-group network all-loop-set
+
+object-group network dc1-global-set
+no group-object dc1-vlan111
+no group-object dc1-vlan112
+no group-object dc1-vlan121
+no group-object dc1-vlan122
+no group-object dc1-vlan131
+no group-object dc1-vlan132
+no object-group network dc1-global-set
+
+object-group network dc1-vlan111-set
+no group-object dc1-vlan111
+no object-group network dc1-vlan111-set
+
+object-group network dc1-vlan112-set
+no group-object dc1-vlan112
+no object-group network dc1-vlan112-set
+
+object-group network dc1-vlan121-set
+no group-object dc1-vlan121
+no object-group network dc1-vlan121-set
+
+object-group network dc1-vlan122-set
+no group-object dc1-vlan122
+no object-group network dc1-vlan122-set
+
+object-group network dc1-vlan131-set
+no group-object dc1-vlan131
+no object-group network dc1-vlan131-set
+
+object-group network dc1-vlan132-set
+no group-object dc1-vlan132
+no object-group network dc1-vlan132-set
+
+object-group network dc1-vrf1-set
+no group-object dc1-vlan111
+no group-object dc1-vlan112
+no object-group network dc1-vrf1-set
+
+object-group network dc1-vrf2-set
+no group-object dc1-vlan121
+no group-object dc1-vlan122
+no object-group network dc1-vrf2-set
+
+object-group network dc1-vrf3-set
+no group-object dc1-vlan131
+no group-object dc1-vlan132
+no object-group network dc1-vrf3-set
+
+object-group network dc2-dmz-set
+no group-object dc2-vlan211
+no group-object dc2-vlan212
+no object-group network dc2-dmz-set
+
+object-group network dc2-global-set
+no group-object dc2-vlan211
+no group-object dc2-vlan212
+no group-object dc2-vlan221
+no group-object dc2-vlan222
+no object-group network dc2-global-set
+
+object-group network dc2-trust-set
+no group-object dc2-vlan221
+no group-object dc2-vlan222
+no object-group network dc2-trust-set
+
+object-group network dc2-vlan211-set
+no group-object dc2-vlan211
+no object-group network dc2-vlan211-set
+
+object-group network dc2-vlan212-set
+no group-object dc2-vlan212
+no object-group network dc2-vlan212-set
+
+object-group network dc2-vlan221-set
+no group-object dc2-vlan221
+no object-group network dc2-vlan221-set
+
+object-group network dc2-vlan222-set
+no group-object dc2-vlan222
+no object-group network dc2-vlan222-set
+
+object-group network dc3-global-set
+no group-object dc3-vlan311
+no group-object dc3-vlan312
+no object-group network dc3-global-set
+
+object-group network dc3-vlan311-set
+no group-object dc3-vlan311
+no object-group network dc3-vlan311-set
+
+object-group network dc3-vlan312-set
+no group-object dc3-vlan312
+no object-group network dc3-vlan312-set
+
+object-group network lo-dc1-sw1-set
+no group-object lo101-dc1-sw1
+no group-object lo102-dc1-sw1
+no group-object lo103-dc1-sw1
+no object-group network lo-dc1-sw1-set
+
+object-group network lo-dc2-sw1-set
+no group-object lo201-dc2-sw1
+no group-object lo202-dc2-sw1
+no object-group network lo-dc2-sw1-set
+
+object-group network lo-dc3-sw1-set
+no group-object lo0-dc3-sw1
+no object-group network lo-dc3-sw1-set
+
+object-group network dc1-global
+no network-object 10.1.0.0 255.255.0.0
+no object-group network dc1-global
+
+object-group network dc1-vlan111
+no network-object 10.101.1.0 255.255.255.0
+no object-group network dc1-vlan111
+
+object-group network dc1-vlan112
+no network-object 10.101.2.0 255.255.255.0
+no object-group network dc1-vlan112
+
+object-group network dc1-vlan121
+no network-object 10.102.1.0 255.255.255.0
+no object-group network dc1-vlan121
+
+object-group network dc1-vlan122
+no network-object 10.102.2.0 255.255.255.0
+no object-group network dc1-vlan122
+
+object-group network dc1-vlan131
+no network-object 10.103.1.0 255.255.255.0
+no object-group network dc1-vlan131
+
+object-group network dc1-vlan132
+no network-object 10.103.2.0 255.255.255.0
+no object-group network dc1-vlan132
+
+object-group network dc1-vrf1
+no network-object 10.101.0.0 255.255.0.0
+no object-group network dc1-vrf1
+
+object-group network dc1-vrf2
+no network-object 10.102.0.0 255.255.0.0
+no object-group network dc1-vrf2
+
+object-group network dc1-vrf3
+no network-object 10.103.0.0 255.255.0.0
+no object-group network dc1-vrf3
+
+object-group network dc2-dmz
+no network-object 10.201.0.0 255.255.0.0
+no object-group network dc2-dmz
+
+object-group network dc2-global
+no network-object 10.2.0.0 255.255.0.0
+no object-group network dc2-global
+
+object-group network dc2-trust
+no network-object 10.202.0.0 255.255.0.0
+no object-group network dc2-trust
+
+object-group network dc2-vlan211
+no network-object 10.201.1.0 255.255.255.0
+no object-group network dc2-vlan211
+
+object-group network dc2-vlan212
+no network-object 10.201.2.0 255.255.255.0
+no object-group network dc2-vlan212
+
+object-group network dc2-vlan221
+no network-object 10.202.1.0 255.255.255.0
+no object-group network dc2-vlan221
+
+object-group network dc2-vlan222
+no network-object 10.202.2.0 255.255.255.0
+no object-group network dc2-vlan222
+
+object-group network dc3-global
+no network-object 10.3.0.0 255.255.0.0
+no object-group network dc3-global
+
+object-group network dc3-vlan311
+no network-object 10.3.1.0 255.255.255.0
+no object-group network dc3-vlan311
+
+object-group network dc3-vlan312
+no network-object 10.3.2.0 255.255.255.0
+no object-group network dc3-vlan312
+
+object-group network lo0-dc3-sw1
+no network-object 172.16.3.2 255.255.255.255
+no object-group network lo0-dc3-sw1
+
+object-group network lo101-dc1-sw1
+no network-object 172.16.1.101 255.255.255.255
+no object-group network lo101-dc1-sw1
+
+object-group network lo102-dc1-sw1
+no network-object 172.16.1.102 255.255.255.255
+no object-group network lo102-dc1-sw1
+
+object-group network lo103-dc1-sw1
+no network-object 172.16.1.103 255.255.255.255
+no object-group network lo103-dc1-sw1
+
+object-group network lo201-dc2-sw1
+no network-object 172.16.2.201 255.255.255.255
+no object-group network lo201-dc2-sw1
+
+object-group network lo202-dc2-sw1
+no network-object 172.16.2.202 255.255.255.255
+no object-group network lo202-dc2-sw1
+
+object-group service icmp-app-set
+no group-object icmp-app
+no object-group service icmp-app-set
+
+object-group service web-app-set
+no group-object http-app
+no group-object https-app
+no object-group service web-app-set
+
+no object-group service http-app
+
+no object-group service https-app
+
+no object-group service icmp-app
+
+no object-group service ssh-app
+
+no object-group service telnet-app
+exit

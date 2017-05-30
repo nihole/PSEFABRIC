@@ -1,0 +1,84 @@
+submodule applications {
+  belongs-to policy {
+    prefix policy;
+  }
+	  
+  yang-version "1";
+
+  import ietf-inet-types { prefix ietf; }
+  import ietf-packet-fields { prefix fields; }
+  
+  list applications {
+	  key application-name;
+	  leaf application-name {
+		  mandatory true;
+		  type string;
+	  }
+	  leaf prot {
+		  type int8;
+		  description
+			  "Protocol number";
+	  }
+	  container ports {
+		  container source-port-range {
+		      presence "Enables setting source port range";
+		      description
+		        "Inclusive range representing source ports to be used.
+		        When only lower-port is present, it represents a single port.";
+		      leaf lower-port {
+		        type int16;
+		        mandatory true;
+		        description
+		          "Lower boundary for port.";
+		      }
+		      leaf upper-port {
+		        type int16;
+		        must ". >= ../lower-port" {
+		          error-message
+		          "The upper-port must be greater than or equal to lower-port";
+		        }
+		        description
+		          "Upper boundary for port . If existing, the upper port
+		          must be greater or equal to lower-port.";
+		      }
+		    }
+		    container destination-port-range {
+		      presence "Enables setting destination port range";
+		      description
+		        "Inclusive range representing destination ports to be used. When
+		        only lower-port is present, it represents a single port.";
+		      leaf lower-port {
+		        type int16;
+		        mandatory true;
+		        description
+		          "Lower boundary for port.";
+		      }
+		      leaf upper-port {
+		        type int16;
+		        must ". >= ../lower-port" {
+		          error-message
+		            "The upper-port must be greater than or equal to lower-port";
+		        }
+
+		        description
+		          "Upper boundary for port. If existing, the upper port must
+		          be greater or equal to lower-port";
+		      }
+		    }
+	  }
+   }
+  list application-sets {
+	 key application-set-name;
+	 leaf application-set-name {
+		 mandatory true;
+		  type string;
+	  }
+	  leaf-list applications {
+          min-elements 1;
+		  type leafref {
+			  path "/applications/application-name";
+		  }
+	 }
+	  
+ }
+}  

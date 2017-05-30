@@ -1,0 +1,87 @@
+conf t
+
+
+object-group service http-app
+service-object tcp destination range 80 80
+
+object-group service https-app
+service-object tcp destination range 443 443
+
+object-group service icmp-app
+service-object icmp 
+
+object-group service ssh-app
+service-object tcp destination range 22 22
+
+object-group service telnet-app
+service-object tcp destination range 23 23
+
+object-group service icmp-app-set
+group-object icmp-app
+
+object-group service web-app-set
+group-object http-app
+group-object https-app
+
+object-group network lo202-dc2-sw1
+network-object 172.16.2.202 255.255.255.255
+
+object-group network lo201-dc2-sw1
+network-object 172.16.2.201 255.255.255.255
+
+object-group network lo101-dc1-sw1
+network-object 172.16.1.101 255.255.255.255
+
+object-group network lo0-dc3-sw1
+network-object 172.16.3.2 255.255.255.255
+
+object-group network lo103-dc1-sw1
+network-object 172.16.1.103 255.255.255.255
+
+object-group network lo102-dc1-sw1
+network-object 172.16.1.102 255.255.255.255
+
+object-group network lo-dc1-sw1-set
+group-object lo101-dc1-sw1
+group-object lo102-dc1-sw1
+group-object lo103-dc1-sw1
+
+object-group network lo-dc3-sw1-set
+group-object lo0-dc3-sw1
+
+object-group network lo-dc2-sw1-set
+group-object lo201-dc2-sw1
+group-object lo202-dc2-sw1
+
+object-group network all-loop-set
+group-object lo0-dc3-sw1
+group-object lo101-dc1-sw1
+group-object lo102-dc1-sw1
+group-object lo103-dc1-sw1
+group-object lo201-dc2-sw1
+group-object lo202-dc2-sw1
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+
+access-list all_zones_out extended permit object-group icmp-app-set object-group all-loop-set object-group all-loop-set
+
+exit

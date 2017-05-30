@@ -128,3 +128,4 @@ This file is uploaded through the terminal to the Configuration Manager (CONFD).
 
 psef_config.conf
 This is result of the command "show configuration commit changes" and shows the last changes on Configuration Manager (CONFD).
+

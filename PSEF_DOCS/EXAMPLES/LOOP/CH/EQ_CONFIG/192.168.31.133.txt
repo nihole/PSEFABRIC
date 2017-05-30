@@ -1,0 +1,14 @@
+conf t
+
+
+object-group network lo-dc1-sw1-set
+
+object-group network lo111-dc1-sw1
+172.16.1.111 255.255.255.255
+
+object-group network lo-dc1-sw1-set
+group-object lo101-dc1-sw1
+group-object lo102-dc1-sw1
+group-object lo103-dc1-sw1
+group-object lo111-dc1-sw1
+exit

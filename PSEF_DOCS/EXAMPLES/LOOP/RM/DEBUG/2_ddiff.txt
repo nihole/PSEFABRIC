@@ -1,0 +1,201 @@
+{
+  "dictionary_item_removed": {
+    "root['data']['policies']": {
+      "@xmlns": "http://psefabric/policy", 
+      "policy": [
+        {
+          "policy-name": "all-loop-ping", 
+          "match": {
+            "source-addresses": {
+              "address-set": [
+                "all-loop-set"
+              ]
+            }, 
+            "destination-addresses": {
+              "address-set": [
+                "all-loop-set"
+              ]
+            }, 
+            "applications": {
+              "application-set": [
+                "icmp-app-set"
+              ]
+            }
+          }
+        }
+      ]
+    }, 
+    "root['data']['application-sets']": [
+      {
+        "@xmlns": "http://psefabric/policy", 
+        "application-set-name": "icmp-app-set", 
+        "applications": [
+          "icmp-app"
+        ]
+      }, 
+      {
+        "@xmlns": "http://psefabric/policy", 
+        "application-set-name": "web-app-set", 
+        "applications": [
+          "http-app", 
+          "https-app"
+        ]
+      }
+    ]
+  }, 
+  "iterable_item_removed": {
+    "root['data']['addresses'][3]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan121", 
+      "ipv4-prefix": "10.102.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "121", 
+        "vrf": "VRF2"
+      }
+    }, 
+    "root['data']['addresses'][13]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc2-vlan211", 
+      "ipv4-prefix": "10.201.1.0/24", 
+      "structure": {
+        "dc": "DC2", 
+        "zone": "none", 
+        "device": "192.168.31.139", 
+        "interface": "e0/1", 
+        "vlan": "211", 
+        "vrf": "DMZ"
+      }
+    }, 
+    "root['data']['applications'][0]": {
+      "@xmlns": "http://psefabric/policy", 
+      "application-name": "http-app", 
+      "prot": "6", 
+      "ports": {
+        "destination-port-range": {
+          "lower-port": "80", 
+          "upper-port": "80"
+        }
+      }
+    }, 
+    "root['data']['applications'][2]": {
+      "@xmlns": "http://psefabric/policy", 
+      "application-name": "icmp-app", 
+      "prot": "1"
+    }, 
+    "root['data']['address-sets'][4]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vlan121-set", 
+      "addresses": [
+        "dc1-vlan121"
+      ]
+    }, 
+    "root['data']['addresses'][2]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan112", 
+      "ipv4-prefix": "10.101.2.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "112", 
+        "vrf": "VRF1"
+      }
+    }, 
+    "root['data']['address-sets'][2]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vlan111-set", 
+      "addresses": [
+        "dc1-vlan111"
+      ]
+    }, 
+    "root['data']['address-sets'][3]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vlan112-set", 
+      "addresses": [
+        "dc1-vlan112"
+      ]
+    }, 
+    "root['data']['address-sets'][8]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf1-set", 
+      "addresses": [
+        "dc1-vlan111", 
+        "dc1-vlan112"
+      ]
+    }, 
+    "root['data']['address-sets'][1]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-global-set", 
+      "addresses": [
+        "dc1-vlan111", 
+        "dc1-vlan112", 
+        "dc1-vlan121", 
+        "dc1-vlan122", 
+        "dc1-vlan131", 
+        "dc1-vlan132"
+      ]
+    }, 
+    "root['data']['address-sets'][9]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf2-set", 
+      "addresses": [
+        "dc1-vlan121", 
+        "dc1-vlan122"
+      ]
+    }, 
+    "root['data']['address-sets'][11]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc2-dmz-set", 
+      "addresses": [
+        "dc2-vlan211", 
+        "dc2-vlan212"
+      ]
+    }, 
+    "root['data']['address-sets'][14]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc2-vlan211-set", 
+      "addresses": [
+        "dc2-vlan211"
+      ]
+    }, 
+    "root['data']['applications'][1]": {
+      "@xmlns": "http://psefabric/policy", 
+      "application-name": "https-app", 
+      "prot": "6", 
+      "ports": {
+        "destination-port-range": {
+          "lower-port": "443", 
+          "upper-port": "443"
+        }
+      }
+    }, 
+    "root['data']['address-sets'][12]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc2-global-set", 
+      "addresses": [
+        "dc2-vlan211", 
+        "dc2-vlan212", 
+        "dc2-vlan221", 
+        "dc2-vlan222"
+      ]
+    }, 
+    "root['data']['addresses'][1]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-name": "dc1-vlan111", 
+      "ipv4-prefix": "10.101.1.0/24", 
+      "structure": {
+        "dc": "DC1", 
+        "zone": "none", 
+        "device": "192.168.31.133", 
+        "interface": "e0/0", 
+        "vlan": "111", 
+        "vrf": "VRF1"
+      }
+    }
+  }
+}
