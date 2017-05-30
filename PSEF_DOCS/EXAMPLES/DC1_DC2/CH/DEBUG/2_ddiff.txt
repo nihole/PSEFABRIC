@@ -1,0 +1,21 @@
+{
+  "iterable_item_removed": {
+    "root['data']['address-sets'][7]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf1-set", 
+      "addresses": [
+        "dc1-vlan111", 
+        "dc1-vlan112"
+      ]
+    }
+  }, 
+  "iterable_item_added": {
+    "root['data']['address-sets'][7]": {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf1-set", 
+      "addresses": [
+        "dc1-vlan111"
+      ]
+    }
+  }
+}

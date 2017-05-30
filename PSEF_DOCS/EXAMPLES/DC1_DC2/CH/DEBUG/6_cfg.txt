@@ -1,0 +1,8 @@
+{
+  "192.168.31.133": "\n\nno object-group network dc1-vrf1-set\nobject-group network dc1-vrf1-set\nno group-object dc1-vlan111\nno group-object dc1-vlan112\nno object-group network dc1-vrf1-set\n\nobject-group network dc1-vrf1-set\ngroup-object dc1-vlan111", 
+  "192.168.31.134": "\n\n<security>\n<address-book>\n<name>global</name>\n<address-set operation='delete'>\n<name>dc1-vrf1-set</name>\n</address-set>\n</address-book>\n</security>\n\n<security>\n<address-book>\n<name>global</name>\n<address-set>       \n<name>dc1-vrf1-set</name>\n<address>\n<name>dc1-vlan111</name>\n</address>\n</address-set>\n</address-book>\n</security>", 
+  "192.168.31.137": "", 
+  "192.168.31.136": "\n\nobject-group network dc1-vrf1-set\nno group-object dc1-vlan111\nno group-object dc1-vlan112\nno object-group network dc1-vrf1-set\nno object-group network dc1-vrf1-set\n\nobject-group network dc1-vrf1-set\ngroup-object dc1-vlan111", 
+  "192.168.31.139": "", 
+  "192.168.31.138": "\n\nobject-group network dc1-vrf1-set\nno group-object dc1-vlan111\nno group-object dc1-vlan112\nno object-group network dc1-vrf1-set\nno object-group network dc1-vrf1-set\n\nobject-group network dc1-vrf1-set\ngroup-object dc1-vlan111"
+}

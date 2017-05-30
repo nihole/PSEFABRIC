@@ -1,0 +1,29 @@
+{
+  "applications_ad": [], 
+  "policies_ad": [], 
+  "addresses_rm": [], 
+  "application_sets_ad": [], 
+  "address_sets_rm": [
+    {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf1-set", 
+      "addresses": [
+        "dc1-vlan111", 
+        "dc1-vlan112"
+      ]
+    }
+  ], 
+  "policies_rm": [], 
+  "application_sets_rm": [], 
+  "address_sets_ad": [
+    {
+      "@xmlns": "http://psefabric/policy", 
+      "address-set-name": "dc1-vrf1-set", 
+      "addresses": [
+        "dc1-vlan111"
+      ]
+    }
+  ], 
+  "addresses_ad": [], 
+  "applications_rm": []
+}
