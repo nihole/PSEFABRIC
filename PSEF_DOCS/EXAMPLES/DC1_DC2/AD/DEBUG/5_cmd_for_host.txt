@@ -1,0 +1,948 @@
+{
+  "192.168.31.133": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [], 
+      "application": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "1", 
+          "name": "icmp-app"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "http-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "80", 
+              "upper-port": "80"
+            }
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "https-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "443", 
+              "upper-port": "443"
+            }
+          }
+        }
+      ], 
+      "application-set": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "icmp-app"
+          ], 
+          "name": "icmp-app-set"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "http-app", 
+            "https-app"
+          ], 
+          "name": "web-app-set"
+        }
+      ], 
+      "address-set": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address_set"
+          ], 
+          "name": "dc1-vrf1-set", 
+          "address": [
+            "dc1-vlan111", 
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address_set"
+          ], 
+          "name": "dc1-vlan112-set", 
+          "address": [
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address_set"
+          ], 
+          "name": "dc1-vlan121-set", 
+          "address": [
+            "dc1-vlan121"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address_set"
+          ], 
+          "name": "dc1-vlan111-set", 
+          "address": [
+            "dc1-vlan111"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address_set"
+          ], 
+          "name": "dc2-vlan211-set", 
+          "address": [
+            "dc2-vlan211"
+          ]
+        }
+      ], 
+      "address": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address"
+          ], 
+          "ipv4-prefix": "10.201.1.0/24", 
+          "name": "dc2-vlan211", 
+          "structure": {
+            "dc": "DC2", 
+            "zone": "none", 
+            "device": "192.168.31.139", 
+            "interface": "e0/1", 
+            "vlan": "211", 
+            "vrf": "DMZ"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_vlan", 
+            "ctemplates.cisco_create_svi", 
+            "ctemplates.cisco_create_address", 
+            "ctemplates.cisco_add_vlan_to_trunk"
+          ], 
+          "ipv4-prefix": "10.101.1.0/24", 
+          "name": "dc1-vlan111", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "111", 
+            "vrf": "VRF1"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_vlan", 
+            "ctemplates.cisco_create_svi", 
+            "ctemplates.cisco_create_address", 
+            "ctemplates.cisco_add_vlan_to_trunk"
+          ], 
+          "ipv4-prefix": "10.102.1.0/24", 
+          "name": "dc1-vlan121", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "121", 
+            "vrf": "VRF2"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_vlan", 
+            "ctemplates.cisco_create_svi", 
+            "ctemplates.cisco_create_address", 
+            "ctemplates.cisco_add_vlan_to_trunk"
+          ], 
+          "ipv4-prefix": "10.101.2.0/24", 
+          "name": "dc1-vlan112", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "112", 
+            "vrf": "VRF1"
+          }
+        }
+      ]
+    }
+  }, 
+  "192.168.31.134": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [], 
+      "application": [
+        {
+          "command-list": [
+            "jtemplates.srx_create_application"
+          ], 
+          "prot": "1", 
+          "name": "icmp-app"
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_application"
+          ], 
+          "prot": "6", 
+          "name": "http-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "80", 
+              "upper-port": "80"
+            }
+          }
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_application"
+          ], 
+          "prot": "6", 
+          "name": "https-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "443", 
+              "upper-port": "443"
+            }
+          }
+        }
+      ], 
+      "application-set": [
+        {
+          "command-list": [
+            "jtemplates.srx_create_application_set"
+          ], 
+          "application": [
+            "icmp-app"
+          ], 
+          "name": "icmp-app-set"
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_application_set"
+          ], 
+          "application": [
+            "http-app", 
+            "https-app"
+          ], 
+          "name": "web-app-set"
+        }
+      ], 
+      "address-set": [
+        {
+          "command-list": [
+            "jtemplates.srx_create_address_set"
+          ], 
+          "name": "dc1-vrf1-set", 
+          "address": [
+            "dc1-vlan111", 
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address_set"
+          ], 
+          "name": "dc1-vlan112-set", 
+          "address": [
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address_set"
+          ], 
+          "name": "dc1-vlan121-set", 
+          "address": [
+            "dc1-vlan121"
+          ]
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address_set"
+          ], 
+          "name": "dc1-vlan111-set", 
+          "address": [
+            "dc1-vlan111"
+          ]
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address_set"
+          ], 
+          "name": "dc2-vlan211-set", 
+          "address": [
+            "dc2-vlan211"
+          ]
+        }
+      ], 
+      "address": [
+        {
+          "command-list": [
+            "jtemplates.srx_create_address"
+          ], 
+          "ipv4-prefix": "10.201.1.0/24", 
+          "name": "dc2-vlan211", 
+          "structure": {
+            "dc": "DC2", 
+            "zone": "none", 
+            "device": "192.168.31.139", 
+            "interface": "e0/1", 
+            "vlan": "211", 
+            "vrf": "DMZ"
+          }
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address"
+          ], 
+          "ipv4-prefix": "10.101.1.0/24", 
+          "name": "dc1-vlan111", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "111", 
+            "vrf": "VRF1"
+          }
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address"
+          ], 
+          "ipv4-prefix": "10.102.1.0/24", 
+          "name": "dc1-vlan121", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "121", 
+            "vrf": "VRF2"
+          }
+        }, 
+        {
+          "command-list": [
+            "jtemplates.srx_create_address"
+          ], 
+          "ipv4-prefix": "10.101.2.0/24", 
+          "name": "dc1-vlan112", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "112", 
+            "vrf": "VRF1"
+          }
+        }
+      ]
+    }
+  }, 
+  "192.168.31.137": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }
+  }, 
+  "192.168.31.136": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [], 
+      "application": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "1", 
+          "name": "icmp-app"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "http-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "80", 
+              "upper-port": "80"
+            }
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "https-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "443", 
+              "upper-port": "443"
+            }
+          }
+        }
+      ], 
+      "application-set": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "icmp-app"
+          ], 
+          "name": "icmp-app-set"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "http-app", 
+            "https-app"
+          ], 
+          "name": "web-app-set"
+        }
+      ], 
+      "address-set": [
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vrf1-set", 
+          "address": [
+            "dc1-vlan111", 
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan112-set", 
+          "address": [
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan121-set", 
+          "address": [
+            "dc1-vlan121"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan111-set", 
+          "address": [
+            "dc1-vlan111"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc2-vlan211-set", 
+          "address": [
+            "dc2-vlan211"
+          ]
+        }
+      ], 
+      "address": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address"
+          ], 
+          "ipv4-prefix": "10.201.1.0/24", 
+          "name": "dc2-vlan211", 
+          "structure": {
+            "dc": "DC2", 
+            "zone": "none", 
+            "device": "192.168.31.139", 
+            "interface": "e0/1", 
+            "vlan": "211", 
+            "vrf": "DMZ"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address"
+          ], 
+          "ipv4-prefix": "10.101.1.0/24", 
+          "name": "dc1-vlan111", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "111", 
+            "vrf": "VRF1"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address"
+          ], 
+          "ipv4-prefix": "10.102.1.0/24", 
+          "name": "dc1-vlan121", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "121", 
+            "vrf": "VRF2"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_address"
+          ], 
+          "ipv4-prefix": "10.101.2.0/24", 
+          "name": "dc1-vlan112", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "112", 
+            "vrf": "VRF1"
+          }
+        }
+      ]
+    }
+  }, 
+  "192.168.31.139": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [], 
+      "application": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "1", 
+          "name": "icmp-app"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "http-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "80", 
+              "upper-port": "80"
+            }
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application"
+          ], 
+          "prot": "6", 
+          "name": "https-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "443", 
+              "upper-port": "443"
+            }
+          }
+        }
+      ], 
+      "application-set": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "icmp-app"
+          ], 
+          "name": "icmp-app-set"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.cisco_create_application_set"
+          ], 
+          "application": [
+            "http-app", 
+            "https-app"
+          ], 
+          "name": "web-app-set"
+        }
+      ], 
+      "address-set": [], 
+      "address": [
+        {
+          "command-list": [
+            "ctemplates.cisco_create_vlan", 
+            "ctemplates.cisco_create_svi", 
+            "ctemplates.cisco_create_address", 
+            "ctemplates.cisco_add_vlan_to_trunk"
+          ], 
+          "ipv4-prefix": "10.201.1.0/24", 
+          "name": "dc2-vlan211", 
+          "structure": {
+            "dc": "DC2", 
+            "zone": "none", 
+            "device": "192.168.31.139", 
+            "interface": "e0/1", 
+            "vlan": "211", 
+            "vrf": "DMZ"
+          }
+        }
+      ]
+    }
+  }, 
+  "192.168.31.138": {
+    "rm": {
+      "policy": [], 
+      "application": [], 
+      "application-set": [], 
+      "address-set": [], 
+      "address": []
+    }, 
+    "ad": {
+      "policy": [
+        {
+          "name": "test-dc1-dc2", 
+          "command-list": [
+            "ctemplates.asa_create_access"
+          ], 
+          "applications": {
+            "application-set": [
+              "icmp-app-set", 
+              "web-app-set"
+            ]
+          }, 
+          "source-addresses": [
+            {
+              "address-set-name": "dc1-vlan121-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "dc1-vlan121", 
+                  "ipv4-prefix": "10.102.1.0/24", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "e0/0", 
+                    "vlan": "121", 
+                    "vrf": "VRF2"
+                  }
+                }
+              ]
+            }
+          ], 
+          "destination-addresses": [
+            {
+              "address-set-name": "dc2-vlan211-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "dc2-vlan211", 
+                  "ipv4-prefix": "10.201.1.0/24", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "e0/1", 
+                    "vlan": "211", 
+                    "vrf": "DMZ"
+                  }
+                }
+              ]
+            }
+          ], 
+          "action": "permit"
+        }, 
+        {
+          "name": "test-dc1-dc2", 
+          "command-list": [
+            "ctemplates.asa_create_access"
+          ], 
+          "applications": {
+            "application-set": [
+              "icmp-app-set", 
+              "web-app-set"
+            ]
+          }, 
+          "source-addresses": [
+            {
+              "address-set-name": "dc1-vrf1-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "dc1-vlan111", 
+                  "ipv4-prefix": "10.101.1.0/24", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "e0/0", 
+                    "vlan": "111", 
+                    "vrf": "VRF1"
+                  }
+                }, 
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "dc1-vlan112", 
+                  "ipv4-prefix": "10.101.2.0/24", 
+                  "structure": {
+                    "dc": "DC1", 
+                    "zone": "none", 
+                    "device": "192.168.31.133", 
+                    "interface": "e0/0", 
+                    "vlan": "112", 
+                    "vrf": "VRF1"
+                  }
+                }
+              ]
+            }
+          ], 
+          "destination-addresses": [
+            {
+              "address-set-name": "dc2-vlan211-set", 
+              "structure-to-addresses": [
+                {
+                  "@xmlns": "http://psefabric/policy", 
+                  "address-name": "dc2-vlan211", 
+                  "ipv4-prefix": "10.201.1.0/24", 
+                  "structure": {
+                    "dc": "DC2", 
+                    "zone": "none", 
+                    "device": "192.168.31.139", 
+                    "interface": "e0/1", 
+                    "vlan": "211", 
+                    "vrf": "DMZ"
+                  }
+                }
+              ]
+            }
+          ], 
+          "action": "permit"
+        }
+      ], 
+      "application": [
+        {
+          "command-list": [
+            "ctemplates.asa_create_application"
+          ], 
+          "prot": "1", 
+          "name": "icmp-app"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_application"
+          ], 
+          "prot": "6", 
+          "name": "http-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "80", 
+              "upper-port": "80"
+            }
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_application"
+          ], 
+          "prot": "6", 
+          "name": "https-app", 
+          "ports": {
+            "destination-port-range": {
+              "lower-port": "443", 
+              "upper-port": "443"
+            }
+          }
+        }
+      ], 
+      "application-set": [
+        {
+          "command-list": [
+            "ctemplates.asa_create_application_set"
+          ], 
+          "application": [
+            "icmp-app"
+          ], 
+          "name": "icmp-app-set"
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_application_set"
+          ], 
+          "application": [
+            "http-app", 
+            "https-app"
+          ], 
+          "name": "web-app-set"
+        }
+      ], 
+      "address-set": [
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vrf1-set", 
+          "address": [
+            "dc1-vlan111", 
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan112-set", 
+          "address": [
+            "dc1-vlan112"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan121-set", 
+          "address": [
+            "dc1-vlan121"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc1-vlan111-set", 
+          "address": [
+            "dc1-vlan111"
+          ]
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address_set"
+          ], 
+          "name": "dc2-vlan211-set", 
+          "address": [
+            "dc2-vlan211"
+          ]
+        }
+      ], 
+      "address": [
+        {
+          "command-list": [
+            "ctemplates.asa_create_address"
+          ], 
+          "ipv4-prefix": "10.201.1.0/24", 
+          "name": "dc2-vlan211", 
+          "structure": {
+            "dc": "DC2", 
+            "zone": "none", 
+            "device": "192.168.31.139", 
+            "interface": "e0/1", 
+            "vlan": "211", 
+            "vrf": "DMZ"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address"
+          ], 
+          "ipv4-prefix": "10.101.1.0/24", 
+          "name": "dc1-vlan111", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "111", 
+            "vrf": "VRF1"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address"
+          ], 
+          "ipv4-prefix": "10.102.1.0/24", 
+          "name": "dc1-vlan121", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "121", 
+            "vrf": "VRF2"
+          }
+        }, 
+        {
+          "command-list": [
+            "ctemplates.asa_create_address"
+          ], 
+          "ipv4-prefix": "10.101.2.0/24", 
+          "name": "dc1-vlan112", 
+          "structure": {
+            "dc": "DC1", 
+            "zone": "none", 
+            "device": "192.168.31.133", 
+            "interface": "e0/0", 
+            "vlan": "112", 
+            "vrf": "VRF1"
+          }
+        }
+      ]
+    }
+  }
+}
