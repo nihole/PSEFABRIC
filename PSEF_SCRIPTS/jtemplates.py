@@ -1,7 +1,7 @@
 import re
 
 '''
-The list of templates for cisco
+The list of templates for juniper srx
 '''
 
 ###################   policy   ###########################

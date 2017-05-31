@@ -1,5 +1,5 @@
 '''
-This set of functions manage the creation and versioning of MOs configuration files.
+The aim of this layer is encapsulation or adaptation of data to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.).
 Files are written to a folder ../PSEF_CONF/EQ_CONF/.
 '''
 
