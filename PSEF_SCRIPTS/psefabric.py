@@ -43,12 +43,11 @@ def version_file(flg_ok_):
 username='admin'
 password='admin'
 host='127.0.0.1'
-password='admin'
-port=2022
+port = 2022
 
 # take new and old xml config files and transfirm them to the dictionaries
 
-with manager.connect(host, port, username, password, hostkey_verify=False) as m:
+with manager.connect(host = '127.0.0.1', port = 2022, username = 'admin', password = 'admin', hostkey_verify=False) as m:
     c = m.get_config(source='running').data_xml
     psef_conf_new_ = xmltodict.parse(c)
 

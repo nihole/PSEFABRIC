@@ -1,0 +1,44 @@
+<INFO> 5-Jun-2017::15:43:51.540 ubuntu confd[15690]: confd embedded apps in early_phase0: []
+<INFO> 5-Jun-2017::15:43:51.632 ubuntu confd[15690]: confd mmap_schema handle_info got msg: timeout
+<INFO> 5-Jun-2017::15:43:51.637 ubuntu confd[15690]: confd embedded apps in phase0: []
+<INFO> 5-Jun-2017::15:43:51.756 ubuntu confd[15690]: devel-cdb init files found in ./confd-cdb: aaa_init.xml
+<INFO> 5-Jun-2017::15:43:51.789 ubuntu confd[15690]: devel-cdb Compacted CDB journal file: 0 ms (87 nodes in memory, disk size 1.43 KiB -> 1.39 KiB)
+<INFO> 5-Jun-2017::15:43:51.794 ubuntu confd[15690]: confd embedded apps in phase1: []
+<ERR> 5-Jun-2017::15:43:51.837 ubuntu confd[15690]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
+<INFO> 5-Jun-2017::15:43:51.849 ubuntu confd[15690]: confd embedded apps in phase2: []
+<INFO> 5-Jun-2017::15:45:23.740 ubuntu confd[15747]: confd embedded apps in early_phase0: []
+<INFO> 5-Jun-2017::15:45:23.829 ubuntu confd[15747]: confd mmap_schema handle_info got msg: timeout
+<INFO> 5-Jun-2017::15:45:23.835 ubuntu confd[15747]: confd embedded apps in phase0: []
+<INFO> 5-Jun-2017::15:45:23.873 ubuntu confd[15747]: devel-cdb Loaded oper data from ./confd-cdb/O.cdb (4 bytes data in 0.000s)
+<INFO> 5-Jun-2017::15:45:23.901 ubuntu confd[15747]: devel-cdb Loaded schema file: ./confd-cdb/C.cdb (v3 from 6.3)
+<INFO> 5-Jun-2017::15:45:23.902 ubuntu confd[15747]: devel-cdb Loaded configuration from ./confd-cdb/A.cdb (1.39 KiB data, 1 transaction in 0.000s)
+<INFO> 5-Jun-2017::15:45:23.952 ubuntu confd[15747]: confd embedded apps in phase1: []
+<ERR> 5-Jun-2017::15:45:24.005 ubuntu confd[15747]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
+<INFO> 5-Jun-2017::15:45:24.018 ubuntu confd[15747]: confd embedded apps in phase2: []
+<INFO> 5-Jun-2017::15:46:25.917 ubuntu confd[15792]: confd embedded apps in early_phase0: []
+<INFO> 5-Jun-2017::15:46:25.999 ubuntu confd[15792]: confd mmap_schema handle_info got msg: timeout
+<INFO> 5-Jun-2017::15:46:26.006 ubuntu confd[15792]: confd embedded apps in phase0: []
+<INFO> 5-Jun-2017::15:46:26.042 ubuntu confd[15792]: devel-cdb Loaded oper data from ./confd-cdb/O.cdb (4 bytes data in 0.000s)
+<INFO> 5-Jun-2017::15:46:26.066 ubuntu confd[15792]: devel-cdb Loaded schema file: ./confd-cdb/C.cdb (v3 from 6.3)
+<INFO> 5-Jun-2017::15:46:26.067 ubuntu confd[15792]: devel-cdb Loaded configuration from ./confd-cdb/A.cdb (1.39 KiB data, 1 transaction in 0.000s)
+<INFO> 5-Jun-2017::15:46:26.118 ubuntu confd[15792]: confd embedded apps in phase1: []
+<ERR> 5-Jun-2017::15:46:26.166 ubuntu confd[15792]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
+<INFO> 5-Jun-2017::15:46:26.179 ubuntu confd[15792]: confd embedded apps in phase2: []
+<INFO> 5-Jun-2017::15:47:07.238 ubuntu confd[15859]: confd embedded apps in early_phase0: []
+<INFO> 5-Jun-2017::15:47:07.330 ubuntu confd[15859]: confd mmap_schema handle_info got msg: timeout
+<INFO> 5-Jun-2017::15:47:07.335 ubuntu confd[15859]: confd embedded apps in phase0: []
+<INFO> 5-Jun-2017::15:47:07.372 ubuntu confd[15859]: devel-cdb Loaded oper data from ./confd-cdb/O.cdb (4 bytes data in 0.000s)
+<INFO> 5-Jun-2017::15:47:07.399 ubuntu confd[15859]: devel-cdb Loaded schema file: ./confd-cdb/C.cdb (v3 from 6.3)
+<INFO> 5-Jun-2017::15:47:07.399 ubuntu confd[15859]: devel-cdb Loaded configuration from ./confd-cdb/A.cdb (1.39 KiB data, 1 transaction in 0.000s)
+<INFO> 5-Jun-2017::15:47:07.446 ubuntu confd[15859]: confd embedded apps in phase1: []
+<ERR> 5-Jun-2017::15:47:07.499 ubuntu confd[15859]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
+<INFO> 5-Jun-2017::15:47:07.510 ubuntu confd[15859]: confd embedded apps in phase2: []
+<INFO> 5-Jun-2017::15:48:28.537 ubuntu confd[15948]: confd embedded apps in early_phase0: []
+<INFO> 5-Jun-2017::15:48:28.623 ubuntu confd[15948]: confd mmap_schema handle_info got msg: timeout
+<INFO> 5-Jun-2017::15:48:28.628 ubuntu confd[15948]: confd embedded apps in phase0: []
+<INFO> 5-Jun-2017::15:48:28.663 ubuntu confd[15948]: devel-cdb Loaded oper data from ./confd-cdb/O.cdb (4 bytes data in 0.000s)
+<INFO> 5-Jun-2017::15:48:28.688 ubuntu confd[15948]: devel-cdb Loaded schema file: ./confd-cdb/C.cdb (v3 from 6.3)
+<INFO> 5-Jun-2017::15:48:28.689 ubuntu confd[15948]: devel-cdb Loaded configuration from ./confd-cdb/A.cdb (1.39 KiB data, 1 transaction in 0.000s)
+<INFO> 5-Jun-2017::15:48:28.741 ubuntu confd[15948]: confd embedded apps in phase1: []
+<ERR> 5-Jun-2017::15:48:28.789 ubuntu confd[15948]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
+<INFO> 5-Jun-2017::15:48:28.805 ubuntu confd[15948]: confd embedded apps in phase2: []
