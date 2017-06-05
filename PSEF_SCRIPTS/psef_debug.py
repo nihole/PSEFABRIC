@@ -34,7 +34,7 @@ def version_file(dict_name, dict_debug):
 
     path_ = '../PSEF_LOGS/%s.txt' % dict_name
     if not  os.path.isfile(path_):
-        open(path_, 'a')
+        open(path_, 'a+')
     if (vrs.VersionFile(path_)):
         with open(path_, 'w') as f10:
             f10.write(dict_debug)
