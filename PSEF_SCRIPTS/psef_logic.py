@@ -29,7 +29,7 @@ def mult_dict_address():
     mult = {}
     mult[('DC', 'no_vlan')]=[]
     mult[('DC', 'no_vlan')].append({})
-    mult[('DC', 'no_vlan')][0]['eq_addr'] = '192.168.31.134'
+    mult[('DC', 'no_vlan')][0]['eq_addr'] = 'dc1_fw1'
     mult[('DC', 'no_vlan')][0]['cmd'] = {}
     mult[('DC', 'no_vlan')][0]['cmd']['ad'] = []
     mult[('DC', 'no_vlan')][0]['cmd']['rm'] = []
@@ -37,7 +37,7 @@ def mult_dict_address():
     mult[('DC', 'no_vlan')][0]['cmd']['rm'].append('jtemplates.srx_delete_address')
 
     mult[('DC', 'no_vlan')].append({})
-    mult[('DC', 'no_vlan')][1]['eq_addr'] = '192.168.31.133'
+    mult[('DC', 'no_vlan')][1]['eq_addr'] = 'dc1_sw1'
     mult[('DC', 'no_vlan')][1]['cmd'] = {}
     mult[('DC', 'no_vlan')][1]['cmd']['ad'] = []
     mult[('DC', 'no_vlan')][1]['cmd']['rm'] = []
@@ -45,7 +45,7 @@ def mult_dict_address():
     mult[('DC', 'no_vlan')][1]['cmd']['ad'].append('ctemplates.cisco_create_address')
 
     mult[('DC', 'no_vlan')].append({})
-    mult[('DC', 'no_vlan')][2]['eq_addr'] = '192.168.31.138'
+    mult[('DC', 'no_vlan')][2]['eq_addr'] = 'dc2_fw1'
     mult[('DC', 'no_vlan')][2]['cmd'] = {}
     mult[('DC', 'no_vlan')][2]['cmd']['ad'] = []
     mult[('DC', 'no_vlan')][2]['cmd']['rm'] = []
@@ -53,7 +53,7 @@ def mult_dict_address():
     mult[('DC', 'no_vlan')][2]['cmd']['ad'].append('ctemplates.asa_create_address')
 
     mult[('DC', 'no_vlan')].append({})
-    mult[('DC', 'no_vlan')][3]['eq_addr'] = '192.168.31.136'
+    mult[('DC', 'no_vlan')][3]['eq_addr'] = 'dc3_r1'
     mult[('DC', 'no_vlan')][3]['cmd'] = {}
     mult[('DC', 'no_vlan')][3]['cmd']['ad'] = []
     mult[('DC', 'no_vlan')][3]['cmd']['rm'] = []
@@ -63,7 +63,7 @@ def mult_dict_address():
 
     mult[('DC1', 'vlan')]=[]
     mult[('DC1', 'vlan')].append({})
-    mult[('DC1', 'vlan')][0]['eq_addr'] = '192.168.31.133'
+    mult[('DC1', 'vlan')][0]['eq_addr'] = 'dc1_sw1'
     mult[('DC1', 'vlan')][0]['cmd'] = {}
     mult[('DC1', 'vlan')][0]['cmd']['ad'] = []
     mult[('DC1', 'vlan')][0]['cmd']['rm'] = []
@@ -77,12 +77,12 @@ def mult_dict_address():
     mult[('DC1', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
     
     for mult_el in mult_[('DC', 'no_vlan')]:
-        if not (mult_el['eq_addr'] == '192.168.31.133'):
+        if not (mult_el['eq_addr'] == 'dc1_sw1'):
             mult[('DC1', 'vlan')].append(mult_el)
 
     mult[('DC2', 'vlan')]=[]
     mult[('DC2', 'vlan')].append({})
-    mult[('DC2', 'vlan')][0]['eq_addr'] = '192.168.31.139'
+    mult[('DC2', 'vlan')][0]['eq_addr'] = 'dc2_sw1'
     mult[('DC2', 'vlan')][0]['cmd'] = {}
     mult[('DC2', 'vlan')][0]['cmd']['ad'] = []
     mult[('DC2', 'vlan')][0]['cmd']['rm'] = []
@@ -95,12 +95,12 @@ def mult_dict_address():
     mult[('DC2', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_create_address')
     mult[('DC2', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
     for mult_el in mult_[('DC', 'no_vlan')]:
-        if not (mult_el['eq_addr'] == '192.168.31.139'):
+        if not (mult_el['eq_addr'] == 'dc2_sw1'):
             mult[('DC2', 'vlan')].append(mult_el) 
 
     mult[('DC3', 'vlan')]=[]
     mult[('DC3', 'vlan')].append({})
-    mult[('DC3', 'vlan')][0]['eq_addr'] = '192.168.31.137'
+    mult[('DC3', 'vlan')][0]['eq_addr'] = 'dc3_sw1'
     mult[('DC3', 'vlan')][0]['cmd'] = {}
     mult[('DC3', 'vlan')][0]['cmd']['ad'] = []
     mult[('DC3', 'vlan')][0]['cmd']['rm'] = []
@@ -113,7 +113,7 @@ def mult_dict_address():
     mult[('DC3', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_create_address')
     mult[('DC3', 'vlan')][0]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
     for mult_el in mult_[('DC', 'no_vlan')]:
-        if not (mult_el['eq_addr'] == '192.168.31.137'):
+        if not (mult_el['eq_addr'] == 'dc3_sw1'):
             mult[('DC3', 'vlan')].append(mult_el)
 
     return (mult)
@@ -127,7 +127,7 @@ def mult_dict_address_set():
 
     mult = []
     mult.append({})
-    mult[0]['eq_addr'] = '192.168.31.134'
+    mult[0]['eq_addr'] = 'dc1_fw1'
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
@@ -135,7 +135,7 @@ def mult_dict_address_set():
     mult[0]['cmd']['ad'].append('jtemplates.srx_create_address_set')
 
     mult.append({})
-    mult[1]['eq_addr'] = '192.168.31.133'
+    mult[1]['eq_addr'] = 'dc1_sw1'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
@@ -143,7 +143,7 @@ def mult_dict_address_set():
     mult[1]['cmd']['ad'].append('ctemplates.cisco_create_address_set')
 
     mult.append({})
-    mult[2]['eq_addr'] = '192.168.31.138'
+    mult[2]['eq_addr'] = 'dc2_fw1'
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
@@ -151,7 +151,7 @@ def mult_dict_address_set():
     mult[2]['cmd']['ad'].append('ctemplates.asa_create_address_set')
 
     mult.append({})
-    mult[3]['eq_addr'] = '192.168.31.136'
+    mult[3]['eq_addr'] = 'dc3_r1'
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
@@ -169,7 +169,7 @@ def mult_dict_application():
 
     mult=[]
     mult.append({})
-    mult[0]['eq_addr'] = '192.168.31.134'
+    mult[0]['eq_addr'] = 'dc1_fw1'
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
@@ -177,7 +177,7 @@ def mult_dict_application():
     mult[0]['cmd']['ad'].append('jtemplates.srx_create_application')
     
     mult.append({}) 
-    mult[1]['eq_addr'] = '192.168.31.133'
+    mult[1]['eq_addr'] = 'dc1_sw1'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
@@ -185,7 +185,7 @@ def mult_dict_application():
     mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application')
 
     mult.append({})
-    mult[2]['eq_addr'] = '192.168.31.138'
+    mult[2]['eq_addr'] = 'dc2_fw1'
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
@@ -193,7 +193,7 @@ def mult_dict_application():
     mult[2]['cmd']['ad'].append('ctemplates.asa_create_application')
 
     mult.append({})
-    mult[3]['eq_addr'] = '192.168.31.139'
+    mult[3]['eq_addr'] = 'dc2_sw1'
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
@@ -201,7 +201,7 @@ def mult_dict_application():
     mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application')
 
     mult.append({})
-    mult[4]['eq_addr'] = '192.168.31.136'
+    mult[4]['eq_addr'] = 'dc3_r1'
     mult[4]['cmd'] = {}
     mult[4]['cmd']['ad'] = []
     mult[4]['cmd']['rm'] = []
@@ -219,7 +219,7 @@ def mult_dict_application_set():
 
     mult=[]
     mult.append({})
-    mult[0]['eq_addr'] = '192.168.31.134'
+    mult[0]['eq_addr'] = 'dc1_fw1'
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
@@ -227,7 +227,7 @@ def mult_dict_application_set():
     mult[0]['cmd']['ad'].append('jtemplates.srx_create_application_set')
 
     mult.append({})
-    mult[1]['eq_addr'] = '192.168.31.133'
+    mult[1]['eq_addr'] = 'dc1_sw1'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
@@ -235,7 +235,7 @@ def mult_dict_application_set():
     mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
 
     mult.append({})
-    mult[2]['eq_addr'] = '192.168.31.138'
+    mult[2]['eq_addr'] = 'dc2_fw1'
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
@@ -243,7 +243,7 @@ def mult_dict_application_set():
     mult[2]['cmd']['ad'].append('ctemplates.asa_create_application_set')
 
     mult.append({})
-    mult[3]['eq_addr'] = '192.168.31.139'
+    mult[3]['eq_addr'] = 'dc2_sw1'
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
@@ -251,7 +251,7 @@ def mult_dict_application_set():
     mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
 
     mult.append({})
-    mult[4]['eq_addr'] = '192.168.31.136'
+    mult[4]['eq_addr'] = 'dc3_r1'
     mult[4]['cmd'] = {}
     mult[4]['cmd']['ad'] = []
     mult[4]['cmd']['rm'] = []
@@ -274,14 +274,14 @@ def mult_dict_policy():
     mult = {}
     mult[('same_dc', 'diff_vrf','DC1')]=[]
     mult[('same_dc', 'diff_vrf','DC1')].append({})
-    mult[('same_dc', 'diff_vrf','DC1')][0]['eq_addr'] = '192.168.31.134'
+    mult[('same_dc', 'diff_vrf','DC1')][0]['eq_addr'] = 'dc1_fw1'
     mult[('same_dc', 'diff_vrf','DC1')][0]['cmd'] = {}
     mult[('same_dc', 'diff_vrf','DC1')][0]['cmd']['ad'] = []
     mult[('same_dc', 'diff_vrf','DC1')][0]['cmd']['rm'] = []
     mult[('same_dc', 'diff_vrf','DC1')][0]['cmd']['rm'].append('jtemplates.srx_delete_policy')
     mult[('same_dc', 'diff_vrf','DC1')][0]['cmd']['ad'].append('jtemplates.srx_create_policy')
     mult[('same_dc', 'diff_vrf','DC1')].append({})
-    mult[('same_dc', 'diff_vrf','DC1')][1]['eq_addr'] = '192.168.31.133'
+    mult[('same_dc', 'diff_vrf','DC1')][1]['eq_addr'] = 'dc1_sw1'
     mult[('same_dc', 'diff_vrf','DC1')][1]['cmd'] = {}
     mult[('same_dc', 'diff_vrf','DC1')][1]['cmd']['ad'] = []
     mult[('same_dc', 'diff_vrf','DC1')][1]['cmd']['rm'] = []
@@ -290,7 +290,7 @@ def mult_dict_policy():
 
     mult[('same_dc', 'same_vrf','DC1')]=[]
     mult[('same_dc', 'same_vrf','DC1')].append({})
-    mult[('same_dc', 'same_vrf','DC1')][0]['eq_addr'] = '192.168.31.133'
+    mult[('same_dc', 'same_vrf','DC1')][0]['eq_addr'] = 'dc1_sw1'
     mult[('same_dc', 'same_vrf','DC1')][0]['cmd'] = {}
     mult[('same_dc', 'same_vrf','DC1')][0]['cmd']['ad'] = []
     mult[('same_dc', 'same_vrf','DC1')][0]['cmd']['rm'] = []
@@ -299,14 +299,14 @@ def mult_dict_policy():
 
     mult[('diff_dc', 'diff_vrf','DC1')]=[]
     mult[('diff_dc', 'diff_vrf','DC1')].append({})
-    mult[('diff_dc', 'diff_vrf','DC1')][0]['eq_addr'] = '192.168.31.134'
+    mult[('diff_dc', 'diff_vrf','DC1')][0]['eq_addr'] = 'dc1_fw1'
     mult[('diff_dc', 'diff_vrf','DC1')][0]['cmd'] = {}
     mult[('diff_dc', 'diff_vrf','DC1')][0]['cmd']['ad'] = []
     mult[('diff_dc', 'diff_vrf','DC1')][0]['cmd']['rm'] = []
     mult[('diff_dc', 'diff_vrf','DC1')][0]['cmd']['rm'].append('jtemplates.srx_delete_policy')
     mult[('diff_dc', 'diff_vrf','DC1')][0]['cmd']['ad'].append('jtemplates.srx_create_policy')
     mult[('diff_dc', 'diff_vrf','DC1')].append({})
-    mult[('diff_dc', 'diff_vrf','DC1')][1]['eq_addr'] = '192.168.31.133'
+    mult[('diff_dc', 'diff_vrf','DC1')][1]['eq_addr'] = 'dc1_sw1'
     mult[('diff_dc', 'diff_vrf','DC1')][1]['cmd'] = {}
     mult[('diff_dc', 'diff_vrf','DC1')][1]['cmd']['ad'] = []
     mult[('diff_dc', 'diff_vrf','DC1')][1]['cmd']['rm'] = []
@@ -315,7 +315,7 @@ def mult_dict_policy():
 
     mult[('same_dc', 'diff_vrf','DC2')]=[]
     mult[('same_dc', 'diff_vrf','DC2')].append({})
-    mult[('same_dc', 'diff_vrf','DC2')][0]['eq_addr'] = '192.168.31.138'
+    mult[('same_dc', 'diff_vrf','DC2')][0]['eq_addr'] = 'dc2_fw1'
     mult[('same_dc', 'diff_vrf','DC2')][0]['cmd'] = {}
     mult[('same_dc', 'diff_vrf','DC2')][0]['cmd']['ad'] = []
     mult[('same_dc', 'diff_vrf','DC2')][0]['cmd']['rm'] = []
@@ -324,7 +324,7 @@ def mult_dict_policy():
 
     mult[('diff_dc', 'diff_vrf','DC2')]=[]
     mult[('diff_dc', 'diff_vrf','DC2')].append({})
-    mult[('diff_dc', 'diff_vrf','DC2')][0]['eq_addr'] = '192.168.31.138'
+    mult[('diff_dc', 'diff_vrf','DC2')][0]['eq_addr'] = 'dc2_fw1'
     mult[('diff_dc', 'diff_vrf','DC2')][0]['cmd'] = {}
     mult[('diff_dc', 'diff_vrf','DC2')][0]['cmd']['ad'] = []
     mult[('diff_dc', 'diff_vrf','DC2')][0]['cmd']['rm'] = []
@@ -333,7 +333,7 @@ def mult_dict_policy():
 
     mult[('diff_dc', 'diff_vrf','DC3')]=[]
     mult[('diff_dc', 'diff_vrf','DC3')].append({})
-    mult[('diff_dc', 'diff_vrf','DC3')][0]['eq_addr'] = '192.168.31.136'
+    mult[('diff_dc', 'diff_vrf','DC3')][0]['eq_addr'] = 'dc3_r1'
     mult[('diff_dc', 'diff_vrf','DC3')][0]['cmd'] = {}
     mult[('diff_dc', 'diff_vrf','DC3')][0]['cmd']['ad'] = []
     mult[('diff_dc', 'diff_vrf','DC3')][0]['cmd']['rm'] = []

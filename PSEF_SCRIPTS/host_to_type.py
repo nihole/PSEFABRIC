@@ -6,10 +6,11 @@ The mul_cfg.py script uses them in the deciding how to process the data.
 
 def host_to_type():
     host = {}
-    host['192.168.31.133'] = 'cisco_l3sw'
-    host['192.168.31.134'] = 'juniper_srx'
-    host['192.168.31.138'] = 'cisco_asa'
-    host['192.168.31.139'] = 'cisco_l3sw'
-    host['192.168.31.137'] = 'cisco_l2sw'
-    host['192.168.31.136'] = 'cisco_router'
+    host['dc1_sw1'] = 'cisco_l3sw'
+    host['dc1_fw1'] = 'juniper_srx'
+    host['dc2_fw1'] = 'cisco_asa'
+    host['dc2_sw1'] = 'cisco_l3sw'
+    host['dc3_sw1'] = 'cisco_l2sw'
+    host['dc3_r1'] = 'cisco_router'
     return host
+

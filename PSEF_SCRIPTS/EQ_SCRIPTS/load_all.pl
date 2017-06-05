@@ -18,8 +18,8 @@ sub juniper_load_config {
     print "$host OK\n";
 }
 
-@cisco_list = ('192.168.31.133', '192.168.31.136', '192.168.31.137', '192.168.31.138', '192.168.31.139');
-@juniper_list = ('192.168.31.134');
+@cisco_list = ('dc1_sw1', 'dc3_r1', 'dc2_sw1', 'dc2_fw2', 'dc3_sw1');
+@juniper_list = ('dc1_fw1');
 
 foreach (@cisco_list) {
 #     print "$_\n";
