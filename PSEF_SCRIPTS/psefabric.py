@@ -44,6 +44,7 @@ username='admin'
 password='admin'
 host='127.0.0.1'
 password='admin'
+port=2022
 
 # take new and old xml config files and transfirm them to the dictionaries
 
