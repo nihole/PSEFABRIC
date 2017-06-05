@@ -1,0 +1,35 @@
+<INFO> 5-Jun-2017::17:05:30.255 ubuntu confd[2813]: - Writing daemon log to /home/nihole/CONFD/examples.confd/PSEFABRIC/CONFD/confd.log
+<INFO> 5-Jun-2017::17:05:30.259 ubuntu confd[2813]: - Writing NETCONF log to /home/nihole/CONFD/examples.confd/PSEFABRIC/CONFD/netconf.log
+<INFO> 5-Jun-2017::17:05:30.259 ubuntu confd[2813]: - Writing audit log to /home/nihole/CONFD/examples.confd/PSEFABRIC/CONFD/audit.log
+<INFO> 5-Jun-2017::17:05:30.259 ubuntu confd[2813]: - Writing developer log to /home/nihole/CONFD/examples.confd/PSEFABRIC/CONFD/devel.log
+<INFO> 5-Jun-2017::17:05:30.259 ubuntu confd[2813]: - Daemon logging started
+<DEBUG> 5-Jun-2017::17:05:30.279 ubuntu confd[2813]: - Loading file ../../../etc/confd/iana-crypt-hash.fxs
+<DEBUG> 5-Jun-2017::17:05:30.280 ubuntu confd[2813]: - Loading file ../../../etc/confd/ietf-netconf-monitoring.fxs
+<DEBUG> 5-Jun-2017::17:05:30.281 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-common-monitoring.fxs
+<DEBUG> 5-Jun-2017::17:05:30.282 ubuntu confd[2813]: - Loading file ../../../etc/confd/ietf-netconf-acm.fxs
+<DEBUG> 5-Jun-2017::17:05:30.283 ubuntu confd[2813]: - Loading file ./psefabric-types.fxs
+<DEBUG> 5-Jun-2017::17:05:30.283 ubuntu confd[2813]: - Loading file ./structure.fxs
+<DEBUG> 5-Jun-2017::17:05:30.284 ubuntu confd[2813]: - Loading file ../../../etc/confd/ietf-yang-library.fxs
+<DEBUG> 5-Jun-2017::17:05:30.284 ubuntu confd[2813]: - Loading file ./ietf-packet-fields.fxs
+<DEBUG> 5-Jun-2017::17:05:30.285 ubuntu confd[2813]: - Loading file ../../../etc/confd/ietf-netconf-notifications.fxs
+<DEBUG> 5-Jun-2017::17:05:30.285 ubuntu confd[2813]: - Loading file ../../../etc/confd/ietf-interfaces.fxs
+<DEBUG> 5-Jun-2017::17:05:30.286 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-netconf-monitoring.fxs
+<DEBUG> 5-Jun-2017::17:05:30.287 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-confd-monitoring.fxs
+<DEBUG> 5-Jun-2017::17:05:30.289 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-acm.fxs
+<DEBUG> 5-Jun-2017::17:05:30.291 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-rollback.fxs
+<DEBUG> 5-Jun-2017::17:05:30.291 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-kicker.fxs
+<DEBUG> 5-Jun-2017::17:05:30.292 ubuntu confd[2813]: - Loading file ../../../etc/confd/tailf-aaa.fxs
+<DEBUG> 5-Jun-2017::17:05:30.293 ubuntu confd[2813]: - Loading file ./policy.fxs
+<DEBUG> 5-Jun-2017::17:05:30.293 ubuntu confd[2813]: - Skipping file ../../../etc/confd/ietf-packet-fields.fxs: namespace already loaded
+<DEBUG> 5-Jun-2017::17:05:30.294 ubuntu confd[2813]: - Skipping file ../../../etc/confd/ietf-inet-types.fxs: namespace already loaded
+<DEBUG> 5-Jun-2017::17:05:30.301 ubuntu confd[2813]: - Loading file ../../../etc/confd/confd.ccl
+<INFO> 5-Jun-2017::17:05:30.352 ubuntu confd[2813]: - Starting to listen for Internal IPC on 127.0.0.1:4565
+<INFO> 5-Jun-2017::17:05:30.522 ubuntu confd[2813]: - CDB load: processing file: ./confd-cdb/aaa_init.xml
+<INFO> 5-Jun-2017::17:05:30.625 ubuntu confd[2813]: - Starting to listen for NETCONF SSH on 0.0.0.0:2022
+<INFO> 5-Jun-2017::17:05:30.639 ubuntu confd[2813]: - Starting to listen for NETCONF TCP on 127.0.0.1:2023
+<INFO> 5-Jun-2017::17:05:30.663 ubuntu confd[2813]: - Starting to listen for CLI SSH on 0.0.0.0:2024
+<INFO> 5-Jun-2017::17:05:30.780 ubuntu confd[2813]: - ConfD started vsn: 6.3
+<INFO> 5-Jun-2017::17:05:44.243 ubuntu confd[2813]: - ConfD stopping (confd --stop called by nihole in /home/nihole/CONFD/examples.confd/PSEFABRIC/CONFD)
+<INFO> 5-Jun-2017::17:05:44.260 ubuntu confd[2813]: - Stopping to listen for NETCONF SSH on 0.0.0.0:2022
+<INFO> 5-Jun-2017::17:05:44.260 ubuntu confd[2813]: - Stopping to listen for NETCONF TCP on 127.0.0.1:2023
+<INFO> 5-Jun-2017::17:05:44.489 ubuntu confd[2813]: - Daemon logging terminating, reason: shutdown
