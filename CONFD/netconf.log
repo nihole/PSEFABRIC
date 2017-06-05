@@ -1,6 +1,0 @@
-<INFO> 5-Jun-2017::17:05:31.239 ubuntu confd[2813]: netconf id=12 new ssh session for user "admin" from 127.0.0.1
-<INFO> 5-Jun-2017::17:05:31.362 ubuntu confd[2813]: netconf id=12 got rpc: {urn:ietf:params:xml:ns:netconf:base:1.0}get-config attrs: message-id="urn:uuid:84643559-df37-4dcd-a257-9f1fc4959b30"
-<INFO> 5-Jun-2017::17:05:31.368 ubuntu confd[2813]: netconf id=12 get-config source=running attrs: message-id="urn:uuid:84643559-df37-4dcd-a257-9f1fc4959b30"
-<INFO> 5-Jun-2017::17:05:31.378 ubuntu confd[2813]: netconf id=12 sending rpc-reply, attrs: message-id="urn:uuid:84643559-df37-4dcd-a257-9f1fc4959b30"
-<INFO> 5-Jun-2017::17:05:31.490 ubuntu confd[2813]: netconf id=12 close-session attrs: message-id="urn:uuid:0fb15e8f-ddd1-48e4-a884-3350b41f865d"
-<INFO> 5-Jun-2017::17:05:31.491 ubuntu confd[2813]: netconf id=12 sending rpc-reply, attrs: message-id="urn:uuid:0fb15e8f-ddd1-48e4-a884-3350b41f865d"

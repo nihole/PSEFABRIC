@@ -1,8 +1,0 @@
-<INFO> 5-Jun-2017::17:05:30.269 ubuntu confd[2813]: confd embedded apps in early_phase0: []
-<INFO> 5-Jun-2017::17:05:30.373 ubuntu confd[2813]: confd mmap_schema handle_info got msg: timeout
-<INFO> 5-Jun-2017::17:05:30.379 ubuntu confd[2813]: confd embedded apps in phase0: []
-<INFO> 5-Jun-2017::17:05:30.522 ubuntu confd[2813]: devel-cdb init files found in ./confd-cdb: aaa_init.xml
-<INFO> 5-Jun-2017::17:05:30.558 ubuntu confd[2813]: devel-cdb Compacted CDB journal file: 0 ms (87 nodes in memory, disk size 1.43 KiB -> 1.39 KiB)
-<INFO> 5-Jun-2017::17:05:30.562 ubuntu confd[2813]: confd embedded apps in phase1: []
-<ERR> 5-Jun-2017::17:05:30.608 ubuntu confd[2813]: devel-aaa Module "tailf-webui" in access rule "any-group/tailf-webui-user" does not exist - ignoring rule
-<INFO> 5-Jun-2017::17:05:30.617 ubuntu confd[2813]: confd embedded apps in phase2: []
