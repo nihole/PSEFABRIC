@@ -61,10 +61,13 @@ elif os.path.isfile('../PSEF_CONF/pse-config-initial.xml'):
     fd1.close()
 else:
 #    if (os.system("python create_pse_config_initial.py 2>/dev/null")):
-    if (os.system("python create_pse_config_initial.py")):
+    if (os.system("python ../PSEF_SCRIPTS/create_pse_config_initial.py")):
         print "Failed to create pse-config-initial.xml"
     else:
         print "pse-config-initial.xml has been created"
+        with open('../PSEF_CONF/pse-config-initial.xml') as fd1:
+            psef_conf_old_  = xmltodict.parse(fd1.read())
+        fd1.close()
 
 # correct these dictionaries with the def cda.dict_correct (see the description of the dict_correct)
 

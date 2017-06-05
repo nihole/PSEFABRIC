@@ -5,7 +5,7 @@ We need something to compare our new config with. So the next config will be com
 
 from ncclient import manager
 
-filename = 'pse-config-initial.xml'
+filename = '../PSEF_CONF/pse-config-initial.xml'
 
 with manager.connect(host='127.0.0.1', port=2022, username='admin', password='admin', hostkey_verify=False) as m:
     c = m.get_config(source='running').data_xml
