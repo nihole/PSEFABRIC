@@ -55,7 +55,7 @@ if os.path.isfile('../PSEF_CONF/pse-config.xml'):
     with open('../PSEF_CONF/pse-config.xml') as fd2:
         psef_conf_old_  = xmltodict.parse(fd2.read())
     fd2.close() 
-elif os.path.isfile('../PSEF_CONF/pse-config-initial.xml')::
+elif os.path.isfile('../PSEF_CONF/pse-config-initial.xml'):
     with open('../PSEF_CONF/pse-config-initial.xml') as fd1:
         psef_conf_old_  = xmltodict.parse(fd1.read())
     fd1.close()
