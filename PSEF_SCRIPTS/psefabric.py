@@ -60,7 +60,8 @@ elif os.path.isfile('../PSEF_CONF/pse-config-initial.xml'):
         psef_conf_old_  = xmltodict.parse(fd1.read())
     fd1.close()
 else:
-    if (os.system("python create_pse_config_initial.py 2>/dev/null")):
+#    if (os.system("python create_pse_config_initial.py 2>/dev/null")):
+    if (os.system("python create_pse_config_initial.py")):
         print "Failed to create pse-config-initial.xml"
     else:
         print "pse-config-initial.xml has been created"
