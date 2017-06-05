@@ -31,7 +31,7 @@ def version_file(flg_ok_):
             if (os.system("cp ../PSEF_CONF/pse-config-initial.xml ../PSEF_CONF/pse-config.xml.000 2>/dev/null")):
                 print ("cp pse-config-initial.xml pse-config.xml failed")
             else:
-                with open('CONF/pse-config.xml', 'w') as f4:
+                with open('../PSEF_CONF/pse-config.xml', 'w') as f4:
                     f4.write(c)
                     f4.flush()
                 print("OK")
