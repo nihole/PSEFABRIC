@@ -16,22 +16,23 @@ import cfg
 import mult_cfg
 import json
 import psef_debug
+PSEFABRIC =os.environ['PSEFABRIC']
 
 def version_file(flg_ok_):
     if (re.search (flg_ok_, "OK")):
-        if os.path.isfile('../PSEF_CONF/pse-config.xml'):
-            if (vrs.VersionFile('../PSEF_CONF/pse-config.xml')):
-                with open('../PSEF_CONF/pse-config.xml', 'w') as f3:
+        if os.path.isfile("%s/PSEF_CONF/pse-config.xml" % PSEFABRIC):
+            if (vrs.VersionFile("%s/PSEF_CONF/pse-config.xml" % PSEFABRIC)):
+                with open('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC, 'w') as f3:
                     f3.write(c)
                     f3.flush()
                 print ("OK")
             else:
                 print ("Versioning file failed")
         else:
-            if (os.system("cp ../PSEF_CONF/pse-config-initial.xml ../PSEF_CONF/pse-config.xml.000 2>/dev/null")):
+            if (os.system("cp $PSEFABRIC/PSEF_CONF/pse-config-initial.xml $PSEFABRIC/PSEF_CONF/pse-config.xml.000 2>/dev/null")):
                 print ("cp pse-config-initial.xml pse-config.xml failed")
             else:
-                with open('../PSEF_CONF/pse-config.xml', 'w') as f4:
+                with open('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC, 'w') as f4:
                     f4.write(c)
                     f4.flush()
                 print("OK")
@@ -51,21 +52,21 @@ with manager.connect(host = '127.0.0.1', port = 2022, username = 'admin', passwo
     c = m.get_config(source='running').data_xml
     psef_conf_new_ = xmltodict.parse(c)
 
-if os.path.isfile('../PSEF_CONF/pse-config.xml'):
-    with open('../PSEF_CONF/pse-config.xml') as fd2:
+if os.path.isfile('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC):
+    with open('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC) as fd2:
         psef_conf_old_  = xmltodict.parse(fd2.read())
     fd2.close() 
-elif os.path.isfile('../PSEF_CONF/pse-config-initial.xml'):
-    with open('../PSEF_CONF/pse-config-initial.xml') as fd1:
+elif os.path.isfile('%s/PSEF_CONF/pse-config-initial.xml' % PSEFABRIC):
+    with open('%s/PSEF_CONF/pse-config-initial.xml' % PSEFABRIC) as fd1:
         psef_conf_old_  = xmltodict.parse(fd1.read())
     fd1.close()
 else:
 #    if (os.system("python create_pse_config_initial.py 2>/dev/null")):
-    if (os.system("python ../PSEF_SCRIPTS/create_pse_config_initial.py")):
+    if (os.system("python $PSEFABRIC/PSEF_SCRIPTS/create_pse_config_initial.py")):
         print "Failed to create pse-config-initial.xml"
     else:
         print "pse-config-initial.xml has been created"
-        with open('../PSEF_CONF/pse-config-initial.xml') as fd1:
+        with open('%s/PSEF_CONF/pse-config-initial.xml' % PSEFABRIC) as fd1:
             psef_conf_old_  = xmltodict.parse(fd1.read())
         fd1.close()
 

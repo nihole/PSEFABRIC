@@ -8,6 +8,7 @@ import json
 import os
 import versionfile as vrs
 import copy
+PSEFABRIC =os.environ['PSEFABRIC']
 
 deb = True # globaly turns on/off the debuging 
 
@@ -32,7 +33,7 @@ def version_file(dict_name, dict_debug):
     '''
 #############  BODY ############
 
-    path_ = '../PSEF_LOGS/%s.txt' % dict_name
+    path_ = '%s/PSEF_LOGS/%s.txt' % (PSEFABRIC , dict_name)
     if not  os.path.isfile(path_):
         open(path_, 'a+')
     if (vrs.VersionFile(path_)):

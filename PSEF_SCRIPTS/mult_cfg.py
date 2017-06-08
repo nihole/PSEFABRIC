@@ -1,6 +1,6 @@
 '''
 The aim of this layer is encapsulation or adaptation of data to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.).
-Files are written to a folder ../PSEF_CONF/EQ_CONF/.
+Files are written to a folder $PSEFABRIC/PSEF_CONF/EQ_CONF/.
 '''
 
 import versionfile as vrs
@@ -9,6 +9,7 @@ import host_to_type
 import re
 import str_annihilation
 import copy
+PSEFABRIC = os.environ['PSEFABRIC']
 
 def version_file(eq_addr_, conf_, ext_):
 
@@ -17,7 +18,7 @@ def version_file(eq_addr_, conf_, ext_):
     '''
 #############  BODY ############
 
-    path_ = '../PSEF_CONF/EQ_CONF/%s.%s'   % (eq_addr_, ext_)
+    path_ = '%s/PSEF_CONF/EQ_CONF/%s.%s'   % (PSEFABRIC, eq_addr_, ext_)
     if not  os.path.isfile(path_):
         open(path_, 'a')
     if (vrs.VersionFile(path_)):
