@@ -29,7 +29,7 @@ def version_file(flg_ok_):
             else:
                 print ("Versioning file failed")
         else:
-            if (os.system("cp $PSEFABRIC/PSEFABRIC/PSEF_CONF/pse-config-initial.xml $PSEFABRIC/PSEF_CONF/pse-config.xml.000 2>/dev/null")):
+            if (os.system("cp $PSEFABRIC/PSEFABRIC/PSEF_CONF/pse-config-initial.xml $PSEFABRIC/PSEFABRIC/PSEF_CONF/pse-config.xml.000 2>/dev/null")):
                 print ("cp pse-config-initial.xml pse-config.xml failed")
             else:
                 with open('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC, 'w') as f4:
