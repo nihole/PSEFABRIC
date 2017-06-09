@@ -8,7 +8,7 @@ import json
 import os
 import versionfile as vrs
 import copy
-PSEFABRIC =os.environ['PSEFABRIC']
+PSEFABRIC =os.environ['PSEFABRIC'] + "/PSEFABRIC"
 
 deb = True # globaly turns on/off the debuging 
 

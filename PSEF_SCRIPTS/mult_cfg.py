@@ -9,7 +9,7 @@ import host_to_type
 import re
 import str_annihilation
 import copy
-PSEFABRIC = os.environ['PSEFABRIC']
+PSEFABRIC = os.environ['PSEFABRIC'] + "/PSEFABRIC"
 
 def version_file(eq_addr_, conf_, ext_):
 
