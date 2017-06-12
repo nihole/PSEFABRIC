@@ -285,7 +285,7 @@ def cisco_create_access (name, source_address_set_list, destination_address_set_
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
+            for application_element in application_list:
                 config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
@@ -300,7 +300,7 @@ def cisco_delete_access (name, source_address_set_list, destination_address_set_
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
+            for application_element in application_list:
                 config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''
@@ -343,7 +343,7 @@ def asa_create_access (name, source_address_set_list, destination_address_set_li
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
+            for application_element in application_list:
                 config_access = config_access +  'access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
@@ -357,7 +357,7 @@ def asa_delete_access (name, source_address_set_list, destination_address_set_li
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
+            for application_element in application_list:
                 config_access = config_access +  'no access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''

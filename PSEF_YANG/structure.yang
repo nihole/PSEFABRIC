@@ -13,7 +13,7 @@ module structure {
 	  leaf-list data-centers {
 		  type types:dc;
 	  }
-	  leaf-list equipments {
+	  leaf-list equipment {
 		  type types:eq;
 	  }
 	  leaf-list interfaces {

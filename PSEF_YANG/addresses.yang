@@ -38,7 +38,7 @@ submodule addresses {
 		  }
 		  leaf device {
 			  type leafref {
-				  path "/structure:structure/structure:equipments";
+				  path "/structure:structure/structure:equipment";
 			  }
 			  mandatory true;
 		  }

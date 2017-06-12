@@ -48,22 +48,22 @@ def dict_correct(psef_conf_):
                 application_el_list = applications_set_el_['applications']
                 psef_conf_['data']['application-sets'][i]['applications'] = []
                 psef_conf_['data']['application-sets'][i]['applications'].append(application_el_list)
-    if (('policies' in psef_conf_['data']) and ('policy' in psef_conf_['data']['policies'])):
-        if not isinstance (psef_conf_['data']['policies']['policy'],list):
-            application_element_ = psef_conf_['data']['policies']['policy']
-            psef_conf_['data']['policies']['policy'] = []
-            psef_conf_['data']['policies']['policy'].append(application_element_)
-        for policy_element_ in psef_conf_['data']['policies']['policy']:
-            if 'source-addresses' in policy_element_['match']:
-                if not isinstance (policy_element_['match']['source-addresses']['address-set'],list):
-                    source_addresses_set_element_ = policy_element_['match']['source-addresses']['address-set']
-		    policy_element_['match']['source-addresses']['address-set']=[]
-                    policy_element_['match']['source-addresses']['address-set'].append(source_addresses_set_element_)
-            if 'destination-addresses' in policy_element_['match']:
-                if not isinstance (policy_element_['match']['destination-addresses']['address-set'],list):
-                    destination_addresses_set_element_ = policy_element_['match']['destination-addresses']['address-set']
-                    policy_element_['match']['destination-addresses']['address-set']=[]
-                    policy_element_['match']['destination-addresses']['address-set'].append(destination_addresses_set_element_)
+    if ('policies' in psef_conf_['data']):
+        if not isinstance (psef_conf_['data']['policies'],list):
+            application_element_ = psef_conf_['data']['policies']
+            psef_conf_['data']['policies'] = []
+            psef_conf_['data']['policies'].append(application_element_)
+        for policy_element_ in psef_conf_['data']['policies']:
+            if 'source-address-sets' in policy_element_['match']:
+                if not isinstance (policy_element_['match']['source-address-sets'],list):
+                    source_addresses_set_element_ = policy_element_['match']['source-address-sets']
+		    policy_element_['match']['source-address-sets']=[]
+                    policy_element_['match']['source-address-sets'].append(source_addresses_set_element_)
+            if 'destination-address-sets' in policy_element_['match']:
+                if not isinstance (policy_element_['match']['destination-address-sets'],list):
+                    destination_addresses_set_element_ = policy_element_['match']['destination-address-sets']
+                    policy_element_['match']['destination-address-sets']=[]
+                    policy_element_['match']['destination-address-sets'].append(destination_addresses_set_element_)
             if 'applications' in policy_element_['match']:
                 if not isinstance (policy_element_['match']['applications']['application-set'],list):
                     application_set_element_ = policy_element_['match']['applications']['application-set']
@@ -86,7 +86,7 @@ def ddiff_dict(ddiff_):
     regex_addr_set = "\['data'\]\['address-sets'\]"
     regex_app_set = "\['data'\]\['application-sets'\]"
     regex_policies = "\['data'\]\['policies'\]"
-    regex_policies_policy = "\['data'\]\['policies'\]\['policy'\]"
+#    regex_policies_policy = "\['data'\]\['policies'\]\['policy'\]"
     addresses_rm = []
     address_sets_rm = []
     addresses_ad = []
@@ -121,10 +121,11 @@ def ddiff_dict(ddiff_):
                         application_sets_rm.append(ddiff_[key][key_rm])
                     else:
                         application_sets_rm = ddiff_[key][key_rm]
-                if (re.search(regex_policies_policy, key_rm)):
-                    policies_rm.append(ddiff_[key][key_rm])
-                elif (re.search(regex_policies, key_rm)):
-                    policies_rm = ddiff_[key][key_rm]['policy']
+                if (re.search(regex_policies, key_rm)):
+                    if not isinstance (ddiff_[key][key_rm],list):
+                        policies_rm.append(ddiff_[key][key_rm])
+                    else:
+                        policies_rm = ddiff_[key][key_rm]
         if (re.search(r'item_added', key)):
             for key_ad in ddiff_[key]:
                 if (re.search(regex_addr, key_ad)):
@@ -147,11 +148,11 @@ def ddiff_dict(ddiff_):
                         application_sets_ad.append(ddiff_[key][key_ad])
                     else:
                         application_sets_ad = ddiff_[key][key_ad]
-                if (re.search(regex_policies_policy, key_ad)):
-                    policies_ad.append(ddiff_[key][key_ad])
-                elif (re.search(regex_policies, key_ad)):            
-                    policies_ad = ddiff_[key][key_ad]['policy']
-
+                if (re.search(regex_policies, key_ad)):
+                    if not isinstance (ddiff_[key][key_ad],list):
+                        policies_ad.append(ddiff_[key][key_ad])
+                    else:
+                        policies_ad = ddiff_[key][key_ad]
     diff_dict_['addresses_ad'] = addresses_ad
     diff_dict_['address_sets_ad'] = address_sets_ad
     diff_dict_['applications_ad'] = applications_ad

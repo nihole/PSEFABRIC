@@ -143,7 +143,7 @@ def cmd_list_policy (action_, pol_):
     mult_dict_pol = psef_logic.mult_dict_policy()
     src_address_set_list = []
     name_ = pol_['policy-name']
-    application_set_list = pol_['match']['applications'] 
+    application_set_list = pol_['match']['application-sets'] 
     act = 'permit'
     for src_dc_src_vrf in pol_['match']['source-addresses']:
         src_address_set_list = pol_['match']['source-addresses'][src_dc_src_vrf]

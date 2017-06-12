@@ -25,10 +25,10 @@ def policy_index (policy_, add_):
     destination_address_set_list = []
 
 # Create a list of all dictionaries of source address-sets for policy_
-    source_address_set_list = policy_['match']['source-addresses']['address-set']
+    source_address_set_list = policy_['match']['source-address-sets']
 
 # Create a list of all dictionaries of destination address-sets for policy_
-    destination_address_set_list = policy_['match']['destination-addresses']['address-set']
+    destination_address_set_list = policy_['match']['destination-address-sets']
 
     for source_address_set_ in source_address_set_list:
         if (add_=='ad'):
@@ -39,7 +39,9 @@ def policy_index (policy_, add_):
                     struct_to_source_el_['address-set-name'] = source_address_set_
                     struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_source[key_s_to_p].append(struct_to_source_el_)
+                    del struct_to_source_el_ 
                 else:
+                    struct_to_source_el_ = {}
                     struct_to_source_el_['address-set-name'] = source_address_set_
                     struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_source[key_s_to_p].append(struct_to_source_el_)
@@ -51,7 +53,9 @@ def policy_index (policy_, add_):
                     struct_to_source_el_['address-set-name'] = source_address_set_
                     struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_source[key_s_to_p].append(struct_to_source_el_)
+                    del struct_to_source_el_
                 else:
+                    struct_to_source_el_ = {}
                     struct_to_source_el_['address-set-name'] = source_address_set_
                     struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_source[key_s_to_p].append(struct_to_source_el_)
@@ -66,7 +70,9 @@ def policy_index (policy_, add_):
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_new[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+                    del struct_to_source_el_
                 else:
+                    struct_to_source_el_ = {}
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
@@ -78,7 +84,9 @@ def policy_index (policy_, add_):
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+                    del struct_to_source_el_
                 else:
+                    struct_to_source_el_ = {}
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
@@ -89,6 +97,7 @@ def policy_index (policy_, add_):
     policy_index['match']['source-addresses'] = struct_to_source
     policy_index['match']['destination-addresses'] = {}
     policy_index['match']['destination-addresses'] = struct_to_destination
+
 
     return (policy_index)
 
