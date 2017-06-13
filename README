@@ -8,7 +8,7 @@ This gives you the opportunity to see and manage your network as a single whole,
 
 This implementation of psefabric is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
 
-But the factory is more than this single implementation. This is an approach, new concept. And in the framework of this approach, if it is possible to automate something on the network, you can build it into a psefabric.
+But psefabric is more than this single implementation. This is an approach, new concept. And in the framework of this approach, if it is possible to automate something on the network, you can build it into a psefabric.
 
 In general, psefabric implementation does not require any purchase of new equipment or software. 
 
