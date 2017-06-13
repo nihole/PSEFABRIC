@@ -2,7 +2,7 @@ Psefabric is a new approach in automation and network management.
 
 It provides a single point of network management with a simple and intuitive interface, and on the other hand this solution is very flexible and can work with a wide range of network architectures, with different types of equipment and vendors.
 
-This implementation of the facility is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
+This implementation of the psefabric is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
 
 But psefabric is not a separate implementation. This is the approach. And in the framework of this approach, if it is possible to automate something on the network, you can build it into a psefabric.
 
