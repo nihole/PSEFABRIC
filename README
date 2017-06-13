@@ -8,7 +8,7 @@ This implementation of psefabric is designed to manage networks, accesses, servi
 
 But the factory is more than this single implementation. This is an approach, new concept. And in the framework of this approach, if it is possible to automate something on the network, you can build it into a psefabric.
 
-In general, this approach does not require the purchase of new equipment or software. 
+In general, psefabric implementation does not require the purchase of new equipment or software. 
 
 For more information, see
 https://github.com/nihole/PSEFABRIC/wiki
