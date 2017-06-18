@@ -1,4 +1,4 @@
-Psefabric is a new approach to network automation and management.
+PSEFABRIC is a new approach to network automation and management.
 
 It is not an sdn solution or a network fabric. It is also not a usual network management system and it is something more than a common automation.
 
@@ -6,9 +6,9 @@ It provides a single point of network management with a simple and intuitive int
 
 This gives you the opportunity to see you network as a hole and manage it as a single device, and at the same time to preserve all the strengths of your network (different architectures, vendors and equipment).
 
-This implementation of psefabric is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
+This implementation of PSEFABRIC is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
 
-But psefabric is more than this single implementation. This is an approach, a new concept. And in the framework of this approach, if it is possible to automate something in your network, you can build it into a psefabric.
+But PSEFABRIC is more than this single implementation. This is an approach, a new concept. And in the framework of this approach, if it is possible to automate something in your network, you can build it into a PSEFABRIC.
 
 In general, psefabric implementation does not require any purchase of new equipment or software. 
 
