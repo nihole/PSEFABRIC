@@ -10,7 +10,7 @@ This implementation of PSEFABRIC is designed to manage networks, accesses, servi
 
 But PSEFABRIC is more than this single implementation. This is an approach, a new concept. And in the framework of this approach, if it is possible to automate something in your network, you can build it into a PSEFABRIC.
 
-In general, psefabric implementation does not require any purchase of new equipment or software. 
+In general, psefabric implementation does not require the purchase of any new equipment or software. 
 
 For more information, see
 https://github.com/nihole/PSEFABRIC/wiki
