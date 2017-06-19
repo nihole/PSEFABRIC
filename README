@@ -4,7 +4,7 @@ It is not an sdn solution or a network fabric. It is also not a usual network ma
 
 It provides a single point of network management with a simple and intuitive interface, and on the other hand, this solution is very flexible and can work with a wide range of network architectures, with different types of equipment and vendors.
 
-This allows you to see the entire network as a whole and manage it as a single device and at the same time preserve all the strengths of your network (different architectures, suppliers and equipment).
+This allows you to see the entire network as a whole and manage it as a single device and at the same time preserve all the strengths of your network (different architectures, vendors and equipment).
 
 This implementation of PSEFABRIC is designed to manage networks, accesses, service chains and can be useful for datacenters and offices.
 
