@@ -70,9 +70,9 @@ def policy_index (policy_, add_):
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_new[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-                    del struct_to_source_el_
+                    del struct_to_destination_el_
                 else:
-                    struct_to_source_el_ = {}
+                    struct_to_destination_el_ = {}
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
@@ -84,9 +84,9 @@ def policy_index (policy_, add_):
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-                    del struct_to_source_el_
+                    del struct_to_destination_el_
                 else:
-                    struct_to_source_el_ = {}
+                    struct_to__el_ = {}
                     struct_to_destination_el_['address-set-name'] = destination_address_set_
                     struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                     struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
