@@ -64,11 +64,11 @@ def dict_correct(psef_conf_):
                     destination_addresses_set_element_ = policy_element_['match']['destination-address-sets']
                     policy_element_['match']['destination-address-sets']=[]
                     policy_element_['match']['destination-address-sets'].append(destination_addresses_set_element_)
-            if 'applications' in policy_element_['match']:
-                if not isinstance (policy_element_['match']['applications']['application-set'],list):
-                    application_set_element_ = policy_element_['match']['applications']['application-set']
-                    policy_element_['match']['applications']['application-set'] = []
-                    policy_element_['match']['applications']['application-set'].append(application_set_element_)
+            if 'application-sets' in policy_element_['match']:
+                if not isinstance (policy_element_['match']['application-sets'],list):
+                    application_set_element_ = policy_element_['match']['application-sets']
+                    policy_element_['match']['application-sets'] = []
+                    policy_element_['match']['application-sets'].append(application_set_element_)
        
     return psef_conf_
 
