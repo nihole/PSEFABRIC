@@ -21,7 +21,6 @@ submodule addresses {
 		  description
 			  "ipv4 prefix";
   	  }
-
 	  container structure {
 		  leaf dc {
 			  type leafref {
@@ -35,23 +34,23 @@ submodule addresses {
 			  }
 			  mandatory true;
 		  }
-		  leaf device {
+		  leaf area {
 			  type leafref {
-				  path "/structure:structure/structure:equipment";
+				  path "/structure:structure/structure:area";
 			  }
 			  mandatory true;
 		  }
-		  leaf interface {
+		  leaf tag {
 			  type leafref {
-				  path "/structure:structure/structure:interfaces";
+				  path "/structure:structure/structure:tag";
 			  }
-			  mandatory true;
+			  mandatory false;
 		  }
 		  leaf vlan {
 			  type leafref {
 				  path "/structure:structure/structure:vlans/structure:vlan-number";
 			  }
-			  mandatory true;
+			  mandatory false;
 		  }
 		  leaf vrf {
 			  type leafref {
@@ -59,10 +58,17 @@ submodule addresses {
 			  }
 			  mandatory true;
 		  }
+		  leaf sub-zone {
+			  type leafref {
+				  path "/structure:structure/structure:sub-zone";
+			  }
+			  mandatory true;
+		  }
 	  }
+
   }
   
-	list address-sets {
+  list address-sets {
 	  key address-set-name;
 	  leaf address-set-name {
 		  mandatory true;
@@ -72,8 +78,31 @@ submodule addresses {
  		  min-elements 1;
 		  type leafref {
 			  path "/addresses/address-name";
-		  }		  
+		  }
 	  }
+	  container presentation {
+          description
+            "Use as a list or as address-set";
+          choice packet-handling {
+            default "address-set";
+            description
+              "Address-set will be created";
+            case address-set {
+              leaf address-set {
+                type empty;
+                description
+                  "address-set wil be created and used";
+              }
+            }
+            case list {
+              leaf list {
+                type empty;
+                description
+                  "List of addresses will be used";
+              }
+            }
+          }  
+      }
 	  
   }
   

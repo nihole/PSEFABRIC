@@ -68,7 +68,7 @@ def srx_delete_policy(name, source_address_set_list, destination_address_set_lis
 
 ###############  address  ###############################
 
-def srx_create_address (name, ipv4_prefix, vlan, vrf, interface):
+def srx_create_address (name, ipv4_prefix, vlan, vrf):
     config_xml = '''
 <security>
 <address-book>
@@ -81,7 +81,7 @@ def srx_create_address (name, ipv4_prefix, vlan, vrf, interface):
 </security>''' % (name, ipv4_prefix)
     return config_xml
 
-def srx_delete_address (name, ipv4_prefix, vlan, vrf, interface):
+def srx_delete_address (name, ipv4_prefix, vlan, vrf):
     config_xml = '''
 <security>
 <address-book>

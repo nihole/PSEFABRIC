@@ -8,6 +8,8 @@ indexes the configuration by policies and returns the structure policy_
 More details see in the descriptions of the functions
 '''
 
+import psef_debug
+
 def policy_index (policy_, add_):
 
 ##########  Description  #######
@@ -98,6 +100,7 @@ def policy_index (policy_, add_):
     policy_index['match']['destination-addresses'] = {}
     policy_index['match']['destination-addresses'] = struct_to_destination
 
+    psef_debug.WriteDebug('psef_index', policy_index)
 
     return (policy_index)
 

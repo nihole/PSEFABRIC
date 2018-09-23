@@ -6,11 +6,9 @@ The mul_cfg.py script uses them in the deciding how to process the data.
 
 def host_to_type():
     host = {}
-    host['dc1_sw1'] = 'cisco_l3sw'
-    host['dc1_fw1'] = 'juniper_srx'
-    host['dc2_fw1'] = 'cisco_asa'
-    host['dc2_sw1'] = 'cisco_l3sw'
-    host['dc3_sw1'] = 'cisco_l2sw'
-    host['dc3_r1'] = 'cisco_router'
+    host['OSS_AA'] = 'pa_panorama'
+    host['OSS_INTERNET'] = 'pa_panorama'
+    host['INTERNAL_AA'] = 'pa_panorama'
+    host['EXTERNAL_AA'] = 'pa_panorama'
+    host['CORPO_INTERNET'] = 'pa_panorama'
     return host
-

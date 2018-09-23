@@ -68,7 +68,7 @@ def cmd_list_address (action_, address_):
     mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address())
  
     for cmd_element in mult_dict_add[(dc_, vlan_flag)]:
-        address_attributes = {'name':address_['address-name'], 'ipv4-prefix':address_['ipv4-prefix'], 'structure':address_['structure']}
+        address_attributes = {'eq':cmd_element['eq_addr'], 'name':address_['address-name'], 'ipv4-prefix':address_['ipv4-prefix'], 'structure':address_['structure']}
         address_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address'].append(address_attributes)
     return cmd_for_host
@@ -87,7 +87,7 @@ def cmd_list_address_set (action_, address_set_):
     mult_dict_add_set = psef_logic.mult_dict_address_set()
 
     for cmd_element in mult_dict_add_set:
-        address_set_attributes = {'name':address_set_['address-set-name'], 'address':address_set_['addresses']}
+        address_set_attributes = {'eq':cmd_element['eq_addr'], 'name':address_set_['address-set-name'], 'address':address_set_['addresses']}
         address_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address-set'].append(address_set_attributes)
     return cmd_for_host
@@ -106,7 +106,7 @@ def cmd_list_application (action_, application_):
     mult_dict_app = psef_logic.mult_dict_application()
 
     for cmd_element in mult_dict_app:
-        application_attributes = {'name':application_['application-name'], 'prot':application_['prot']}
+        application_attributes = {'eq':cmd_element['eq_addr'], 'name':application_['application-name'], 'prot':application_['prot']}
         if 'ports' in application_:
             application_attributes['ports'] = application_['ports']
         application_attributes['command-list'] = cmd_element['cmd'][action_]
@@ -126,7 +126,7 @@ def cmd_list_application_set (action_, application_set_):
     mult_dict_add_set = psef_logic.mult_dict_application_set()
 
     for cmd_element in mult_dict_add_set:
-        application_set_attributes = {'name':application_set_['application-set-name'], 'application':application_set_['applications']}
+        application_set_attributes = {'eq':cmd_element['eq_addr'], 'name':application_set_['application-set-name'], 'application':application_set_['applications']}
         application_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['application-set'].append(application_set_attributes)
     return cmd_for_host
@@ -140,11 +140,14 @@ def cmd_list_policy (action_, pol_):
     
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
-    mult_dict_pol = psef_logic.mult_dict_policy()
+#    mult_dict_pol = psef_logic.mult_dict_policy()
     src_address_set_list = []
     name_ = pol_['policy-name']
     application_set_list = pol_['match']['application-sets'] 
     act = 'permit'
+
+####### all sorce or destination addresses/address-sets should be from the same dc,vrf,area,zone  ########
+
     for src_dc_src_vrf in pol_['match']['source-addresses']:
         src_address_set_list = pol_['match']['source-addresses'][src_dc_src_vrf]
         dst_address_set_list = []
@@ -152,25 +155,41 @@ def cmd_list_policy (action_, pol_):
             dst_address_set_list = pol_['match']['destination-addresses'][dst_dc_dst_vrf]
             src_dc_ = src_dc_src_vrf[0]
             src_vrf_ = src_dc_src_vrf[1]
+            src_area_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['area']
+            src_zone_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['zone']
+            src_sub_zone_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['sub-zone']
             dst_dc_ = dst_dc_dst_vrf[0]
             dst_vrf_ = dst_dc_dst_vrf[1]
+            dst_area_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['area']
+            dst_zone_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['zone']
+            dst_sub_zone_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['sub-zone']
             
-            if (re.match(src_dc_, dst_dc_)):
-                source_dest_dc_flag = 'same_dc'
-                if (re.match(src_vrf_, dst_vrf_)):
-                    source_dest_vrf_flag = 'same_vrf'
-                else:
-                    source_dest_vrf_flag = 'diff_vrf'
-            else: 
-                source_dest_dc_flag = 'diff_dc'
-                source_dest_vrf_flag = 'diff_vrf'
-    
+            message = '''
+            VVVVVVVVVVVVVVVVV
+            src_dc: %s
+            src_vrf: %s
+            src_area: %s
+            src_zone: %s
+            src_sub_zone: %s
+            dsr_dc: %s
+            dst_vrf: %s
+            dst_area: %s
+            dst_zone: %s
+            dst_sub_zone: %s 
+            AAAAAAAAAAAAAAAAAA
+            '''  % (src_dc_, src_vrf_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_, dst_sub_zone_) 
+
+#            print message
+
             policy_attributes = {}
-            if (source_dest_dc_flag, source_dest_vrf_flag, dst_dc_) in  mult_dict_pol:
-                for cmd_element in mult_dict_pol[(source_dest_dc_flag, source_dest_vrf_flag, dst_dc_)]:
-                    policy_attributes = {'name':name_, 'source-addresses':src_address_set_list, 'destination-addresses':dst_address_set_list, 'applications':application_set_list, 'action':act}
-                    policy_attributes['command-list'] = cmd_element['cmd'][action_]
-                    cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
+            mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_vrf_, src_area_, src_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_)
+
+            for cmd_element in mult_dict_pol:
+                policy_attributes = {'eq':cmd_element['eq_addr'], 'name':name_, 'source-addresses':src_address_set_list, 'destination-addresses':dst_address_set_list, 'applications':application_set_list, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'src_sub_zone': src_sub_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':src_zone_, 'dst_sub_zone': dst_sub_zone_, 'action':act }
+                policy_attributes['command-list'] = cmd_element['cmd'][action_]
+                cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
+
+
     return cmd_for_host
 
 def multiplex(diff_list):

@@ -12,10 +12,7 @@ module psefabric-types {
   typedef dc {
 	  type string;
   }
-  typedef eq {
-	  type inettypes:host;
-  }
-  typedef interface {
+  typedef area {
 	  type string;
   }
   typedef zone {
@@ -23,5 +20,11 @@ module psefabric-types {
   }
   typedef vrf {
 	  type string;
+  }
+  typedef sub-zone {
+	  type string;
+  }
+  typedef tag {
+          type string;
   }
 } 

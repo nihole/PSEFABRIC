@@ -13,17 +13,20 @@ module structure {
 	  leaf-list data-centers {
 		  type types:dc;
 	  }
-	  leaf-list equipment {
-		  type types:eq;
-	  }
-	  leaf-list interfaces {
-		  type types:interface;
+	  leaf-list area {
+		  type types:area;
 	  }
 	  leaf-list zones {
 		  type types:zone;
 	  }
 	  leaf-list vrf {
 		  type types:vrf;
+	  }
+	  leaf-list sub-zone {
+		  type types:sub-zone;
+	  }
+	  leaf-list tag {
+		  type types:tag;
 	  }
 	  list vlans {
 		  key vlan-name;
