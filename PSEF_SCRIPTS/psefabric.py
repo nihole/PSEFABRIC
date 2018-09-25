@@ -100,9 +100,6 @@ if psef_debug.deb:   # if debuging is on then:
 
 # transform the structure of the ddiff dictionary to more convinient view
 cda.diff_dict = cda.ddiff_dict(ddiff)
-print '######'
-print cda.diff_dict
-print '#####'
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('diff_dict', cda.diff_dict)
 

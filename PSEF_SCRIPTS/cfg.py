@@ -133,7 +133,6 @@ def create_configs (cmd_for_host):
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
-    print cfg
     return cfg
 
 def remove_doubled_names(mylist):

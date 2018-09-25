@@ -1,10 +1,8 @@
 import re
 import cidr_to_netmask
 
+'''The list of templates for pan
 '''
-The list of templates for pan
-'''
-
 ######## vlan ###########
 
 
@@ -15,14 +13,12 @@ The list of templates for pan
 
 def pan_create_address (device_group, name, ipv4_prefix, vlan, vrf):
     network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
-    config_txt = '''
-set %s address %s ip-netwask %s/%s''' % (device_group, name, network, netmask)
+    config_txt = '''set %s address %s ip-netwask %s/%s''' % (device_group, name, network, netmask)
     return config_txt
 
 def pan_delete_address (device_group, name, ipv4_prefix, vlan, vrf):
     network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
-    config_txt = '''
-delete %s address %s''' % (device_group, name)
+    config_txt = '''delete %s address %s''' % (device_group, name)
     return config_txt
 
 ######## address-set  ##########
@@ -37,8 +33,7 @@ def pan_create_address_set (device_group, name,addresses):
 
     config_addresses = '[ ' + config_addresses + ' ]'
 
-    config_txt = '''
-set %s address-group %s static %s''' % (device_group, name, config_addresses)
+    config_txt = '''set %s address-group %s static %s''' % (device_group, name, config_addresses)
     return config_txt
 
 def pan_delete_address_set (device_group, name, addresses):
@@ -51,8 +46,7 @@ def pan_delete_address_set (device_group, name, addresses):
 
     config_addresses = '[ ' + config_addresses + ' ]'
 
-    config_txt = '''
-delete %s address-group %s static %s''' % (device_group, name, config_addresses)
+    config_txt = '''delete %s address-group %s static %s''' % (device_group, name, config_addresses)
     return config_txt
 
 
@@ -71,14 +65,12 @@ def pan_create_application (device_group, name, prot, ports):
         ports_range = '%s-%s' % (ports['lower-port'], ports['upper-port'])
     else:
         ports_range = ''
-    config_txt = '''
-set %s services %s protocol %s port %s''' % (device_group, name, prot_, ports_range)
+    config_txt = '''set %s services %s protocol %s port %s''' % (device_group, name, prot_, ports_range)
 
     return config_txt
 
 def pan_delete_application (device_group, name, prot, ports):
-    config_txt = '''
-delete %s services %s''' % (device_group, name)
+    config_txt = '''delete %s services %s''' % (device_group, name)
     return config_txt
 
 
@@ -97,8 +89,7 @@ def pan_create_application_set (device_group, name, application):
     config_applications = '[ ' + config_applications + ' ]'
 
 
-    config_txt='''
-set %s service-group %s member %s''' % (device_group, name, config_applications)
+    config_txt='''set %s service-group %s member %s''' % (device_group, name, config_applications)
 
     return config_txt
 
@@ -114,8 +105,7 @@ def pan_delete_application_set (device_group, name, application):
     config_applications = '[ ' + config_applications + ' ]'
 
 
-    config_txt='''
-delete %s service-group %s member %s''' % (device_group, name, config_applications)
+    config_txt='''delete %s service-group %s member %s''' % (device_group, name, config_applications)
 
     return config_txt
 
