@@ -7,7 +7,7 @@ import versionfile as vrs
 import os
 import host_to_type
 import re
-import str_annihilation
+import pa_config_correction
 import copy
 PSEFABRIC = os.environ['PSEFABRIC'] + "/PSEFABRIC"
 
@@ -45,7 +45,9 @@ def mult_cfg(cfg_):
         elif re.search('panorama', host_[eq_addr]):
             config_ = 'conf t' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
             # We need to make some reduction in the case of cli configuration. For more informatiom see str_annihilation.py
-            config = str_annihilation.str_annihilation(config_)
+#            config = str_annihilation.str_annihilation(config_)
+#            config = pa_config_correction.pa_config_correction(config_)
+            config = config_
             version_file(eq_addr, config,'txt')
         del host_[eq_addr]
     for rest_hosts in  host_:

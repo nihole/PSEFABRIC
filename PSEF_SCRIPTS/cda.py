@@ -164,5 +164,74 @@ def ddiff_dict(ddiff_):
     diff_dict_['application_sets_rm'] = application_sets_rm
     diff_dict_['policies_rm'] = policies_rm
 
-    return (diff_dict_)
+    diff_dictt_ = diff_opt (diff_dict_)
+
+    return (diff_dictt_)
+
+def diff_opt (dict_diff):
+
+    '''
+    If we change addresses in address-set, then it looks like we remove this address-set and after that add new one with the final set of addresses.
+    It results in some problems. This function is used to solve it. We compare the lists in both cases (old adderss-set and new one) and stay only one operation (add or rm)
+
+    The same situation is for application/application-set
+    '''
+    addresses_sets_list_rm = dict_diff["address_sets_rm"]
+    addresses_sets_list_add = dict_diff["address_sets_ad"]
+    if (True and dict_diff["address_sets_rm"] and dict_diff["address_sets_ad"]):
+        i = 0
+        while i < len(addresses_sets_list_rm):
+            j = 0
+            while j < len(addresses_sets_list_add):
+                m = ''
+                if (addresses_sets_list_rm[i]["address-set-name"] == addresses_sets_list_add[j]["address-set-name"]):
+                    address_rm_list = addresses_sets_list_rm[i]["addresses"]
+                    address_add_list = addresses_sets_list_add[j]["addresses"]
+                    m = set(address_rm_list) & set(address_add_list)
+                    address_rm_list = list(set(address_rm_list) - m)
+                    address_add_list = list(set(address_add_list) - m)
+                    if not address_rm_list:
+                        del addresses_sets_list_rm[i]
+                        i = i - 1 
+                    else:
+                        addresses_sets_list_rm[i]["addresses"] = address_rm_list
+                    if not address_add_list:
+                        del addresses_sets_list_add[j]
+                        j = j - 1
+                    else:
+                        addresses_sets_list_add[j]["addresses"] = address_add_list
+                    break
+                j = j + 1
+            i = i + 1
+
+    application_sets_list_rm = dict_diff["application_sets_rm"]
+    application_sets_list_add = dict_diff["application_sets_ad"]
+    if (True and dict_diff["application_sets_rm"] and dict_diff["application_sets_ad"]):
+        i = 0
+        while i < len(application_sets_list_rm):
+            j = 0
+            while j < len(application_sets_list_add):
+                m = ''
+                if (application_sets_list_rm[i]["application-set-name"] == application_sets_list_add[j]["application-set-name"]):
+                    application_rm_list = application_sets_list_rm[i]["applications"]
+                    application_add_list = application_sets_list_add[j]["applications"]
+                    m = set(application_rm_list) & set(application_add_list)
+                    application_rm_list = list(set(application_rm_list) - m)
+                    application_add_list = list(set(application_add_list) - m)
+                    if not application_rm_list:
+                        del application_sets_list_rm[i]
+                        i = i - 1
+                    else:
+                        application_sets_list_rm[i]["applications"] = application_rm_list
+                    if not application_add_list:
+                        del application_sets_list_add[j]
+                        j = j - 1
+                    else:
+                        application_sets_list_add[i]["applications"] = application_add_list
+                    break
+                j = j + 1
+            i = i + 1
+
+    return (dict_diff)
+
 

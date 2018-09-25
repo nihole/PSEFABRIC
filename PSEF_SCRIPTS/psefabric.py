@@ -92,7 +92,9 @@ if psef_debug.deb:   # if debuging is on then:
 
 # make the difference between new and old configs
 
-ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=2, ignore_order=True, report_repetition=True)
+ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=4, ignore_order=True, report_repetition=True)
+
+
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('ddiff', ddiff)
 

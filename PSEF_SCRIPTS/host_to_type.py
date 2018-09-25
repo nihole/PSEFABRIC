@@ -11,4 +11,5 @@ def host_to_type():
     host['INTERNAL_AA'] = 'pa_panorama'
     host['EXTERNAL_AA'] = 'pa_panorama'
     host['CORPO_INTERNET'] = 'pa_panorama'
+    host['shared'] = 'pa_panorama'
     return host
