@@ -166,5 +166,27 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy')
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
 
+
+    if ((not same_vrf_flag) and (re.match(src_area, 'INTERNAL_AA')) and (re.match(dst_area, 'OSS_AA'))):
+        mult = []
+        mult.append({})
+        mult[0]['eq_addr'] = 'INTERNAL_AA'
+        mult[0]['cmd'] = {}
+        mult[0]['cmd']['ad'] = []
+        mult[0]['cmd']['rm'] = []
+        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy')
+        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_allapp_dst_inter_area')
+        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
+        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_inter_area')
+        mult.append({})
+        mult[1]['eq_addr'] = 'OSS_AA'
+        mult[1]['cmd'] = {}
+        mult[1]['cmd']['ad'] = []
+        mult[1]['cmd']['rm'] = []
+        mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy')
+        mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_inter_area')
+        mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy')
+        mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
+
     return (mult)
 

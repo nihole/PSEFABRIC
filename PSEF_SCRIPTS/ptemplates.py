@@ -217,7 +217,7 @@ def pan_create_policy (device_group, name, source_address_set_list, destination_
 
     config_txt_zone = '''
 set device-group %s pre-rulebase security rules %s to %s
-set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, src_zone, device_group, name, dst_zone)
+set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, dst_zone, device_group, name, src_zone)
 
     config_txt_addresses = '''
 set device-group %s pre-rulebase security rules %s source %s

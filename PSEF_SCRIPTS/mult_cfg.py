@@ -43,7 +43,8 @@ def mult_cfg(cfg_):
             config_ = '<configuration>' + '\n' + cfg_[eq_addr]  + '\n' + '</configuration>'
             version_file(eq_addr, config_,'xml')
         elif re.search('panorama', host_[eq_addr]):
-            config_ = 'configure' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
+            config_ = cfg_[eq_addr]
+#            config_ = 'configure' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
             # We need to make some reduction in the case of cli configuration. For more informatiom see str_annihilation.py
 #            config = str_annihilation.str_annihilation(config_)
 #            config = pa_config_correction.pa_config_correction(config_)
