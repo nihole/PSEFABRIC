@@ -57,7 +57,8 @@ def cmd_list_address (action_, address_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
     
-
+#    vlan_ = '0'
+#    if 'vlan' in address_['structure']:
     vlan_ = address_['structure']['vlan']
     if (vlan_ == '0'):
         vlan_flag = 'no_vlan'
