@@ -33,26 +33,26 @@ def dict_correct(psef_conf_):
                 address_el_list = address_set_el_['addresses']
                 psef_conf_['data']['address-sets'][n]['addresses'] = []
                 psef_conf_['data']['address-sets'][n]['addresses'].append(address_el_list)
-    if 'applications' in psef_conf_['data']:
-        if not isinstance (psef_conf_['data']['applications'],list):
-            application_element_ = psef_conf_['data']['applications']
-            psef_conf_['data']['applications'] = []
-            psef_conf_['data']['applications'].append(application_element_)
-    if 'application-sets' in psef_conf_['data']:
-        if not isinstance (psef_conf_['data']['application-sets'],list):
-            application_set_element_ = psef_conf_['data']['application-sets']
-            psef_conf_['data']['application-sets'] = []
-            psef_conf_['data']['application-sets'].append(application_set_element_)
-        for i, applications_set_el_ in enumerate(psef_conf_['data']['application-sets']):
-            if not isinstance (applications_set_el_['applications'],list):
-                application_el_list = applications_set_el_['applications']
-                psef_conf_['data']['application-sets'][i]['applications'] = []
-                psef_conf_['data']['application-sets'][i]['applications'].append(application_el_list)
+    if 'services' in psef_conf_['data']:
+        if not isinstance (psef_conf_['data']['services'],list):
+            service_element_ = psef_conf_['data']['services']
+            psef_conf_['data']['services'] = []
+            psef_conf_['data']['services'].append(service_element_)
+    if 'service-sets' in psef_conf_['data']:
+        if not isinstance (psef_conf_['data']['service-sets'],list):
+            service_set_element_ = psef_conf_['data']['service-sets']
+            psef_conf_['data']['service-sets'] = []
+            psef_conf_['data']['service-sets'].append(service_set_element_)
+        for i, services_set_el_ in enumerate(psef_conf_['data']['service-sets']):
+            if not isinstance (services_set_el_['services'],list):
+                service_el_list = services_set_el_['services']
+                psef_conf_['data']['service-sets'][i]['services'] = []
+                psef_conf_['data']['service-sets'][i]['services'].append(service_el_list)
     if ('policies' in psef_conf_['data']):
         if not isinstance (psef_conf_['data']['policies'],list):
-            application_element_ = psef_conf_['data']['policies']
+            service_element_ = psef_conf_['data']['policies']
             psef_conf_['data']['policies'] = []
-            psef_conf_['data']['policies'].append(application_element_)
+            psef_conf_['data']['policies'].append(service_element_)
         for policy_element_ in psef_conf_['data']['policies']:
             if 'source-address-sets' in policy_element_['match']:
                 if not isinstance (policy_element_['match']['source-address-sets'],list):
@@ -64,11 +64,11 @@ def dict_correct(psef_conf_):
                     destination_addresses_set_element_ = policy_element_['match']['destination-address-sets']
                     policy_element_['match']['destination-address-sets']=[]
                     policy_element_['match']['destination-address-sets'].append(destination_addresses_set_element_)
-            if 'application-sets' in policy_element_['match']:
-                if not isinstance (policy_element_['match']['application-sets'],list):
-                    application_set_element_ = policy_element_['match']['application-sets']
-                    policy_element_['match']['application-sets'] = []
-                    policy_element_['match']['application-sets'].append(application_set_element_)
+            if 'service-sets' in policy_element_['match']:
+                if not isinstance (policy_element_['match']['service-sets'],list):
+                    service_set_element_ = policy_element_['match']['service-sets']
+                    policy_element_['match']['service-sets'] = []
+                    policy_element_['match']['service-sets'].append(service_set_element_)
        
     return psef_conf_
 
@@ -82,19 +82,19 @@ def ddiff_dict(ddiff_):
 
     diff_dict_ = {}
     regex_addr = "\['data'\]\['addresses'\]"
-    regex_app = "\['data'\]\['applications'\]"
+    regex_app = "\['data'\]\['services'\]"
     regex_addr_set = "\['data'\]\['address-sets'\]"
-    regex_app_set = "\['data'\]\['application-sets'\]"
+    regex_app_set = "\['data'\]\['service-sets'\]"
     regex_policies = "\['data'\]\['policies'\]"
 #    regex_policies_policy = "\['data'\]\['policies'\]\['policy'\]"
     addresses_rm = []
     address_sets_rm = []
     addresses_ad = []
     address_sets_ad = []
-    applications_rm = []
-    application_sets_rm = []
-    applications_ad = []
-    application_sets_ad = []
+    services_rm = []
+    service_sets_rm = []
+    services_ad = []
+    service_sets_ad = []
     policies_rm = []
     policies_ad = []
 
@@ -113,14 +113,14 @@ def ddiff_dict(ddiff_):
                         address_sets_rm = ddiff_[key][key_rm]
                 if (re.search(regex_app, key_rm)):
                     if not isinstance (ddiff_[key][key_rm],list):
-                        applications_rm.append(ddiff_[key][key_rm])
+                        services_rm.append(ddiff_[key][key_rm])
                     else:
-                        applications_rm = ddiff_[key][key_rm]
+                        services_rm = ddiff_[key][key_rm]
                 if (re.search(regex_app_set, key_rm)):
                     if not isinstance (ddiff_[key][key_rm],list):
-                        application_sets_rm.append(ddiff_[key][key_rm])
+                        service_sets_rm.append(ddiff_[key][key_rm])
                     else:
-                        application_sets_rm = ddiff_[key][key_rm]
+                        service_sets_rm = ddiff_[key][key_rm]
                 if (re.search(regex_policies, key_rm)):
                     if not isinstance (ddiff_[key][key_rm],list):
                         policies_rm.append(ddiff_[key][key_rm])
@@ -140,14 +140,14 @@ def ddiff_dict(ddiff_):
                         address_sets_ad = ddiff_[key][key_ad]
                 if (re.search(regex_app, key_ad)):
                     if not isinstance (ddiff_[key][key_ad],list):
-                        applications_ad.append(ddiff_[key][key_ad])
+                        services_ad.append(ddiff_[key][key_ad])
                     else:
-                        applications_ad = ddiff_[key][key_ad]
+                        services_ad = ddiff_[key][key_ad]
                 if (re.search(regex_app_set, key_ad)):
                     if not isinstance (ddiff_[key][key_ad],list):
-                        application_sets_ad.append(ddiff_[key][key_ad])
+                        service_sets_ad.append(ddiff_[key][key_ad])
                     else:
-                        application_sets_ad = ddiff_[key][key_ad]
+                        service_sets_ad = ddiff_[key][key_ad]
                 if (re.search(regex_policies, key_ad)):
                     if not isinstance (ddiff_[key][key_ad],list):
                         policies_ad.append(ddiff_[key][key_ad])
@@ -155,13 +155,13 @@ def ddiff_dict(ddiff_):
                         policies_ad = ddiff_[key][key_ad]
     diff_dict_['addresses_ad'] = addresses_ad
     diff_dict_['address_sets_ad'] = address_sets_ad
-    diff_dict_['applications_ad'] = applications_ad
-    diff_dict_['application_sets_ad'] = application_sets_ad
+    diff_dict_['services_ad'] = services_ad
+    diff_dict_['service_sets_ad'] = service_sets_ad
     diff_dict_['policies_ad'] = policies_ad
     diff_dict_['addresses_rm'] = addresses_rm
     diff_dict_['address_sets_rm'] = address_sets_rm
-    diff_dict_['applications_rm'] = applications_rm
-    diff_dict_['application_sets_rm'] = application_sets_rm
+    diff_dict_['services_rm'] = services_rm
+    diff_dict_['service_sets_rm'] = service_sets_rm
     diff_dict_['policies_rm'] = policies_rm
 
     diff_dictt_ = diff_opt (diff_dict_)
@@ -174,7 +174,7 @@ def diff_opt (dict_diff):
     If we change addresses in address-set, then it looks like we remove this address-set and after that add new one with the final set of addresses.
     It results in some problems. This function is used to solve it. We compare the lists in both cases (old adderss-set and new one) and stay only one operation (add or rm)
 
-    The same situation is for application/application-set
+    The same situation is for service/service-set
     '''
     addresses_sets_list_rm = dict_diff["address_sets_rm"]
     addresses_sets_list_add = dict_diff["address_sets_ad"]
@@ -204,30 +204,30 @@ def diff_opt (dict_diff):
                 j = j + 1
             i = i + 1
 
-    application_sets_list_rm = dict_diff["application_sets_rm"]
-    application_sets_list_add = dict_diff["application_sets_ad"]
-    if (True and dict_diff["application_sets_rm"] and dict_diff["application_sets_ad"]):
+    service_sets_list_rm = dict_diff["service_sets_rm"]
+    service_sets_list_add = dict_diff["service_sets_ad"]
+    if (True and dict_diff["service_sets_rm"] and dict_diff["service_sets_ad"]):
         i = 0
-        while i < len(application_sets_list_rm):
+        while i < len(service_sets_list_rm):
             j = 0
-            while j < len(application_sets_list_add):
+            while j < len(service_sets_list_add):
                 m = ''
-                if (application_sets_list_rm[i]["application-set-name"] == application_sets_list_add[j]["application-set-name"]):
-                    application_rm_list = application_sets_list_rm[i]["applications"]
-                    application_add_list = application_sets_list_add[j]["applications"]
-                    m = set(application_rm_list) & set(application_add_list)
-                    application_rm_list = list(set(application_rm_list) - m)
-                    application_add_list = list(set(application_add_list) - m)
-                    if not application_rm_list:
-                        del application_sets_list_rm[i]
+                if (service_sets_list_rm[i]["service-set-name"] == service_sets_list_add[j]["service-set-name"]):
+                    service_rm_list = service_sets_list_rm[i]["services"]
+                    service_add_list = service_sets_list_add[j]["services"]
+                    m = set(service_rm_list) & set(service_add_list)
+                    service_rm_list = list(set(service_rm_list) - m)
+                    service_add_list = list(set(service_add_list) - m)
+                    if not service_rm_list:
+                        del service_sets_list_rm[i]
                         i = i - 1
                     else:
-                        application_sets_list_rm[i]["applications"] = application_rm_list
-                    if not application_add_list:
-                        del application_sets_list_add[j]
+                        service_sets_list_rm[i]["services"] = service_rm_list
+                    if not service_add_list:
+                        del service_sets_list_add[j]
                         j = j - 1
                     else:
-                        application_sets_list_add[i]["applications"] = application_add_list
+                        service_sets_list_add[i]["services"] = service_add_list
                     break
                 j = j + 1
             i = i + 1

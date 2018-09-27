@@ -6,10 +6,10 @@ The list of templates for juniper srx
 
 ###################   policy   ###########################
 
-def srx_create_policy (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def srx_create_policy (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_match_source = ''
     config_match_destination = ''
-    config_match_application = ''
+    config_match_service = ''
     
 
     for source_address_set_element in source_address_set_list:
@@ -24,13 +24,13 @@ def srx_create_policy (name, source_address_set_list, destination_address_set_li
         else:
             config_match_destination = config_match_destination + '\n<destination-address>%s</destination-address>' % destination_address_set_element['address-set-name']
                             
-    for application_element in application_list['application-set']:
-        if re.match(config_match_application, ''):
-            config_match_application = '<application>%s</application>' % application_element
+    for service_element in service_list['service-set']:
+        if re.match(config_match_service, ''):
+            config_match_service = '<service>%s</service>' % service_element
         else:
-            config_match_application = config_match_application + '\n<application>%s</application>' % application_element
+            config_match_service = config_match_service + '\n<service>%s</service>' % service_element
 
-    config_match = config_match_source + '\n' + config_match_destination + '\n' + config_match_application   
+    config_match = config_match_source + '\n' + config_match_destination + '\n' + config_match_service   
     
     config_xml = '''
 <security>
@@ -52,7 +52,7 @@ def srx_create_policy (name, source_address_set_list, destination_address_set_li
     return config_xml
 
 
-def srx_delete_policy(name, source_address_set_list, destination_address_set_list, application_list, action ):
+def srx_delete_policy(name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_xml ='''
 <security>
 <policies> 
@@ -132,62 +132,62 @@ def srx_delete_address_set (name, addresses):
 </security>''' % name
     return config_xml
 
-############  application #############################
+############  service #############################
 
-def srx_create_application (name, prot, ports):
+def srx_create_service (name, prot, ports):
     if 'lower-port' in ports:
         ports_range = '<destination-port>%s-%s</destination-port>' % (ports['lower-port'], ports['upper-port'])
     else:
         ports_range = ''
     config_xml = '''
-<applications>
-<application>
+<services>
+<service>
 <name>%s</name>
 <protocol>%s</protocol>
 %s
-</application>
-</applications>''' % (name, prot, ports_range)
+</service>
+</services>''' % (name, prot, ports_range)
     return config_xml
 
-def srx_delete_application (name, prot, ports):
+def srx_delete_service (name, prot, ports):
     config_xml = '''
-<applications>
-<application operation='delete'>
+<services>
+<service operation='delete'>
 <name>%s</name>
-</application>
-</applications>''' % name
+</service>
+</services>''' % name
     return config_xml
 
 
 
-##############  application-set ########################
+##############  service-set ########################
 
-def srx_create_application_set (name, application):
+def srx_create_service_set (name, service):
 
-    config_applications = ''
+    config_services = ''
 
-    for application_element in application:
-        if re.match(config_applications, ''):
-            config_applications = '<application>\n<name>%s</name>\n</application>' % application_element
+    for service_element in service:
+        if re.match(config_services, ''):
+            config_services = '<service>\n<name>%s</name>\n</service>' % service_element
         else:
-            config_applications = config_applications + '\n' + '<application>\n<name>%s</name>\n</application>' % application_element
+            config_services = config_services + '\n' + '<service>\n<name>%s</name>\n</service>' % service_element
 
 
     config_xml='''
-<applications>
-<application-set>       
+<services>
+<service-set>       
 <name>%s</name>
 %s
-</application-set>
-</applications>''' % (name, config_applications)
+</service-set>
+</services>''' % (name, config_services)
     return config_xml
 
 
-def srx_delete_application_set (name, application):
+def srx_delete_service_set (name, service):
     config_xml = '''
-<applications>
-<application-set operation='delete'>
+<services>
+<service-set operation='delete'>
 <name>%s</name>
-</application-set>
-</applications>''' % name
+</service-set>
+</services>''' % name
     return config_xml

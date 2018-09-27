@@ -1,4 +1,4 @@
-submodule applications {
+submodule services {
   belongs-to policy {
     prefix policy;
   }
@@ -8,9 +8,9 @@ submodule applications {
   import ietf-inet-types { prefix ietf; }
   import ietf-packet-fields { prefix fields; }
   
-  list applications {
-	  key application-name;
-	  leaf application-name {
+  list services {
+	  key service-name;
+	  leaf service-name {
 		  mandatory true;
 		  type string;
 	  }
@@ -67,16 +67,16 @@ submodule applications {
 		    }
 	  }
    }
-  list application-sets {
-	 key application-set-name;
-	 leaf application-set-name {
+  list service-sets {
+	 key service-set-name;
+	 leaf service-set-name {
 		 mandatory true;
 		  type string;
 	  }
-	  leaf-list applications {
+	  leaf-list services {
           min-elements 1;
 		  type leafref {
-			  path "/applications/application-name";
+			  path "/services/service-name";
 		  }
 	 }
 	  

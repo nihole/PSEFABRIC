@@ -1,8 +1,6 @@
 '''
 '''
 import mult_cfg
-import ctemplates
-import jtemplates
 import ptemplates
 
 cfg = {}
@@ -21,14 +19,14 @@ def create_configs (cmd_for_host):
         Sequence is important. This sequence we will have in our configuration files.
        
         rm policy
-        add application
-        add application-set
+        add service
+        add service-set
         add address
         add address-set
         rm address-set
         rm address
-        rm application-set
-        rm application
+        rm service-set
+        rm service
         add policy
         '''
 
@@ -44,8 +42,8 @@ def create_configs (cmd_for_host):
 
 # add applcation
 
-        if len(cmd_for_host[eq_name]['ad']['application']):
-            for el in cmd_for_host[eq_name]['ad']['application']:
+        if len(cmd_for_host[eq_name]['ad']['service']):
+            for el in cmd_for_host[eq_name]['ad']['service']:
                 for command_element in el['command-list']:
                     if 'ports' in el:
                         cfg_new = eval (command_element + "(el['eq'], el['name'],el['prot'],el['ports']['destination-port-range'])")
@@ -54,12 +52,12 @@ def create_configs (cmd_for_host):
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
-# add application-set
+# add service-set
 
-        if len(cmd_for_host[eq_name]['ad']['application-set']):
-            for el in cmd_for_host[eq_name]['ad']['application-set']:
+        if len(cmd_for_host[eq_name]['ad']['service-set']):
+            for el in cmd_for_host[eq_name]['ad']['service-set']:
                 for command_element in el['command-list']:
-                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['application'])")
+                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['service'])")
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
@@ -101,19 +99,19 @@ def create_configs (cmd_for_host):
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
-# rm application-set
+# rm service-set
 
-        if len(cmd_for_host[eq_name]['rm']['application-set']):
-            for el in cmd_for_host[eq_name]['rm']['application-set']:
+        if len(cmd_for_host[eq_name]['rm']['service-set']):
+            for el in cmd_for_host[eq_name]['rm']['service-set']:
                 for command_element in el['command-list']:
-                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['application'])")
+                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['service'])")
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
-# rm application
+# rm service
 
-        if len(cmd_for_host[eq_name]['rm']['application']):
-            for el in cmd_for_host[eq_name]['rm']['application']:
+        if len(cmd_for_host[eq_name]['rm']['service']):
+            for el in cmd_for_host[eq_name]['rm']['service']:
                 for command_element in el['command-list']:
                     if 'ports' in el:
                         cfg_new = eval (command_element + "(el['eq'], el['name'],el['prot'],el['ports']['destination-port-range'])")
@@ -129,7 +127,7 @@ def create_configs (cmd_for_host):
             policy_list = cmd_for_host[eq_name]['ad']['policy']
             for el in policy_list:
                 for command_element in el['command-list']:
-                    cfg_new = eval(command_element + "(el['eq'], el['name'],el['source-addresses'],el['destination-addresses'],el['applications'],el['src_dc'], el['src_area'], el['src_zone'], el['src_sub_zone'], el['dst_dc'], el['dst_area'], el['dst_zone'], el['dst_sub_zone'], 'permit')")
+                    cfg_new = eval(command_element + "(el['eq'], el['name'],el['source-addresses'],el['destination-addresses'],el['services'],el['src_dc'], el['src_area'], el['src_zone'], el['src_sub_zone'], el['dst_dc'], el['dst_area'], el['dst_zone'], el['dst_sub_zone'], 'permit')")
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 

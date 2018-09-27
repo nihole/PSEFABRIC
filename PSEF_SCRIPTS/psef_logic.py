@@ -3,11 +3,11 @@ This is essential element of the demultiplexer layes of Psefabric Dataflow Model
 The python dictionaries created here are used in multiplexer.py.
 The matter is that depending on the values of the structural elements (for networks in this realization) we have to program a specific set of commands for different MOs.
 And we need some algorithm for that. So these dictionaries describe this logic.
-We need to program logic for the adding/removal of addresses, address_sets, applications, application_sets, policies. So we have:
+We need to program logic for the adding/removal of addresses, address_sets, services, service_sets, policies. So we have:
 def mult_dict_address()
 def mult_dict_address_set()
-def mult_dict_application()
-def mult_dict_application_set()
+def mult_dict_service()
+def mult_dict_service_set()
 def mult_dict_policy()
 '''
 
@@ -55,7 +55,7 @@ def mult_dict_address_set():
 
     return (mult)
 
-def mult_dict_application(): 
+def mult_dict_service(): 
 
 ##########  Description  #######
     '''
@@ -68,12 +68,12 @@ def mult_dict_application():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
-    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_application')
-    mult[0]['cmd']['ad'].append('ptemplates.pan_create_application')
+    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service')
+    mult[0]['cmd']['ad'].append('ptemplates.pan_create_service')
     
     return (mult)
 
-def mult_dict_application_set():
+def mult_dict_service_set():
 
 ##########  Description  #######
     '''
@@ -86,8 +86,8 @@ def mult_dict_application_set():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
-    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_application_set')
-    mult[0]['cmd']['ad'].append('ptemplates.pan_create_application_set')
+    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service_set')
+    mult[0]['cmd']['ad'].append('ptemplates.pan_create_service_set')
 
     return (mult)
 

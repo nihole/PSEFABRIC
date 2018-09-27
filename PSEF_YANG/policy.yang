@@ -8,7 +8,7 @@ module policy {
   prefix "policy";
 
   include addresses;
-  include applications;
+  include services;
   
   list policies {
 	  key policy-name;
@@ -29,10 +29,10 @@ module policy {
 					  path "/address-sets/address-set-name";
 				  }
 			  }  
-			  leaf-list application-sets {
+			  leaf-list service-sets {
 				  min-elements 1;
 				  type leafref {
-					  path "/application-sets/application-set-name";
+					  path "/service-sets/service-set-name";
 				  }
 			  }
 		  }
