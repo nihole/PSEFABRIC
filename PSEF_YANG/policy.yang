@@ -9,6 +9,7 @@ module policy {
 
   include addresses;
   include services;
+  include applications;
   
   list policies {
 	  key policy-name;
@@ -33,6 +34,12 @@ module policy {
 				  min-elements 1;
 				  type leafref {
 					  path "/service-sets/service-set-name";
+				  }
+			  }
+			  leaf-list application-sets {
+				  min-elements 1;
+				  type leafref {
+					  path "/application-sets/application-set-name";
 				  }
 			  }
 		  }

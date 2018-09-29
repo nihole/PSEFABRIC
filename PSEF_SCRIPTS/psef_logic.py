@@ -91,6 +91,41 @@ def mult_dict_service_set():
 
     return (mult)
 
+def mult_dict_application():
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+    mult=[]
+    mult.append({})
+    mult[0]['eq_addr'] = 'shared'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+
+    return (mult)
+
+def mult_dict_application_set():
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+    mult=[]
+    mult.append({})
+    mult[0]['eq_addr'] = 'shared'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_application_set')
+    mult[0]['cmd']['ad'].append('ptemplates.pan_create_application_set')
+
+    return (mult)
+
+
 def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_area, dst_zone):
 
 ##########  Description  #######

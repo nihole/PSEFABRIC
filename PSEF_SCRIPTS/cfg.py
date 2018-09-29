@@ -21,12 +21,16 @@ def create_configs (cmd_for_host):
         rm policy
         add service
         add service-set
+        add application
+        add application-set
         add address
         add address-set
         rm address-set
         rm address
         rm service-set
         rm service
+        rm application
+        rm application-set
         add policy
         '''
 
@@ -40,7 +44,7 @@ def create_configs (cmd_for_host):
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
-# add applcation
+# add service
 
         if len(cmd_for_host[eq_name]['ad']['service']):
             for el in cmd_for_host[eq_name]['ad']['service']:
@@ -60,6 +64,17 @@ def create_configs (cmd_for_host):
                     cfg_new = eval (command_element + "(el['eq'], el['name'],el['service'])")
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
+
+# add application-set
+
+
+        if len(cmd_for_host[eq_name]['ad']['application-set']):
+            for el in cmd_for_host[eq_name]['ad']['application-set']:
+                for command_element in el['command-list']:
+                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['application'])")
+                    cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                    cfg_new = ''
+
 
 # add address
 
@@ -120,6 +135,17 @@ def create_configs (cmd_for_host):
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
+
+# rm application-set
+
+        if len(cmd_for_host[eq_name]['rm']['application-set']):
+            for el in cmd_for_host[eq_name]['rm']['application-set']:
+                for command_element in el['command-list']:
+                    cfg_new = eval (command_element + "(el['eq'], el['name'],el['application'])")
+                    cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                    cfg_new = ''
+
+
 # add policy
 
 
@@ -127,7 +153,7 @@ def create_configs (cmd_for_host):
             policy_list = cmd_for_host[eq_name]['ad']['policy']
             for el in policy_list:
                 for command_element in el['command-list']:
-                    cfg_new = eval(command_element + "(el['eq'], el['name'],el['source-addresses'],el['destination-addresses'],el['services'],el['src_dc'], el['src_area'], el['src_zone'], el['src_sub_zone'], el['dst_dc'], el['dst_area'], el['dst_zone'], el['dst_sub_zone'], 'permit')")
+                    cfg_new = eval(command_element + "(el['eq'], el['name'],el['source-addresses'],el['destination-addresses'],el['applications'],el['services'],el['src_dc'], el['src_area'], el['src_zone'], el['src_sub_zone'], el['dst_dc'], el['dst_area'], el['dst_zone'], el['dst_sub_zone'], 'permit')")
                     cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                     cfg_new = ''
 
