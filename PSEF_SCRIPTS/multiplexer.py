@@ -62,18 +62,9 @@ def cmd_list_address (action_, address_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
     
-#    vlan_ = '0'
-#    if 'vlan' in address_['structure']:
-    vlan_ = address_['structure']['vlan']
-    if (vlan_ == '0'):
-        vlan_flag = 'no_vlan'
-        dc_ = 'DC'
-    else:
-        vlan_flag = 'vlan'
-        dc_ = address_['structure']['dc']
     mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address())
  
-    for cmd_element in mult_dict_add[(dc_, vlan_flag)]:
+    for cmd_element in mult_dict_add:
         address_attributes = {'eq':cmd_element['eq_addr'], 'name':address_['address-name'], 'ipv4-prefix':address_['ipv4-prefix'], 'structure':address_['structure']}
         address_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address'].append(address_attributes)
@@ -227,7 +218,7 @@ def cmd_list_policy (action_, pol_):
             AAAAAAAAAAAAAAAAAA
             '''  % (src_dc_, src_vrf_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_, dst_sub_zone_) 
 
-            print message
+#            print message
 
             policy_attributes = {}
             mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_vrf_, src_area_, src_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_)

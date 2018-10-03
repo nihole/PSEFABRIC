@@ -19,21 +19,17 @@ def mult_dict_address():
 
 ##########  Description  #######
     '''
-    key 'DC' meens any dc.
-    key 'no_vlan' corresponds vlan = 0
-    key 'vlan' meens any vlan not equal 0
     '''
 #############  BODY ############
 
-    mult = {}
-    mult[('DC', 'no_vlan')]=[]
-    mult[('DC', 'no_vlan')].append({})
-    mult[('DC', 'no_vlan')][0]['eq_addr'] = 'shared'
-    mult[('DC', 'no_vlan')][0]['cmd'] = {}
-    mult[('DC', 'no_vlan')][0]['cmd']['ad'] = []
-    mult[('DC', 'no_vlan')][0]['cmd']['rm'] = []
-    mult[('DC', 'no_vlan')][0]['cmd']['ad'].append('ptemplates.pan_create_address')
-    mult[('DC', 'no_vlan')][0]['cmd']['rm'].append('ptemplates.pan_delete_address')
+    mult = []
+    mult.append({})
+    mult[0]['eq_addr'] = 'shared'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('ptemplates.pan_create_address')
+    mult[0]['cmd']['rm'].append('ptemplates.pan_delete_address')
 
     return (mult)
 
@@ -152,7 +148,7 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
     else:
         same_zone_flag = False
 
-    if ((not same_vrf_flag) and same_area_flag and (re.match(dst_area, 'OSS_AA'))):
+    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'OSS_AA'))):
         mult = []
         mult.append({})
         mult[0]['eq_addr'] = 'OSS_AA'
@@ -166,7 +162,7 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_oss_transit')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_src_oss_transit')
 
-    if ((not same_vrf_flag) and same_area_flag and (re.match(dst_area, 'INTERNAL_AA'))):
+    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'INTERNAL_AA'))):
         mult = []
         mult.append({})
         mult[0]['eq_addr'] = 'INTERNAL_AA'
@@ -180,7 +176,7 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_inter_area')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
 
-    if ((not same_vrf_flag) and (re.match(src_area, 'OSS_AA')) and (re.match(dst_area, 'INTERNAL_AA'))):
+    if ((not same_zone_flag) and (re.match(src_area, 'OSS_AA')) and (re.match(dst_area, 'INTERNAL_AA'))):
         mult = []
         mult.append({})
         mult[0]['eq_addr'] = 'OSS_AA'
@@ -202,7 +198,7 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
 
 
-    if ((not same_vrf_flag) and (re.match(src_area, 'INTERNAL_AA')) and (re.match(dst_area, 'OSS_AA'))):
+    if ((not same_zone_flag) and (re.match(src_area, 'INTERNAL_AA')) and (re.match(dst_area, 'OSS_AA'))):
         mult = []
         mult.append({})
         mult[0]['eq_addr'] = 'INTERNAL_AA'
