@@ -126,7 +126,7 @@ def address_index (psef_conf_):
             address_set_index_[address_set_element['address-set-name']]['structure-to-addresses'] = {}
             structure_to_addresses_el_= address_set_index_[address_set_element['address-set-name']]['structure-to-addresses']
             for addr_element in address_set_element['addresses']:
-                struct_el_ = (address_index_[addr_element]['structure']['dc'], address_index_[addr_element]['structure']['vrf'])
+                struct_el_ = (address_index_[addr_element]['structure']['zone'], address_index_[addr_element]['structure']['area'])
                 if not struct_el_ in structure_to_addresses_el_:
                     structure_to_addresses_el_[struct_el_] = []
                     structure_to_addresses_el_[struct_el_].append(address_index_[addr_element])

@@ -196,21 +196,20 @@ def cmd_list_policy (action_, pol_):
     act = 'permit'
 
 ####### all sorce or destination addresses/address-sets should be from the same dc,vrf,area,zone  ########
-
-    for src_dc_src_vrf in pol_['match']['source-addresses']:
-        src_address_set_list = pol_['match']['source-addresses'][src_dc_src_vrf]
+    for src_resolve_element in pol_['match']['source-addresses']:
+        src_address_set_list = pol_['match']['source-addresses'][src_resolve_element]
         dst_address_set_list = []
-        for dst_dc_dst_vrf in pol_['match']['destination-addresses']: 
-            dst_address_set_list = pol_['match']['destination-addresses'][dst_dc_dst_vrf]
-            src_dc_ = src_dc_src_vrf[0]
-            src_vrf_ = src_dc_src_vrf[1]
-            src_area_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['area']
-            src_zone_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['zone']
+        for dst_resolve_element in pol_['match']['destination-addresses']: 
+            dst_address_set_list = pol_['match']['destination-addresses'][dst_resolve_element]
+            src_zone_ = src_resolve_element[0]
+            src_area_ = src_resolve_element[1]
+            src_dc_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
+            src_vrf_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['vrf']
             src_sub_zone_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['sub-zone']
-            dst_dc_ = dst_dc_dst_vrf[0]
-            dst_vrf_ = dst_dc_dst_vrf[1]
-            dst_area_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['area']
-            dst_zone_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['zone']
+            dst_zone_ = dst_resolve_element[0]
+            dst_area_ = dst_resolve_element[1]
+            dst_dc_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
+            dst_vrf_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['vrf']
             dst_sub_zone_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['sub-zone']
             
             message = '''
@@ -228,7 +227,7 @@ def cmd_list_policy (action_, pol_):
             AAAAAAAAAAAAAAAAAA
             '''  % (src_dc_, src_vrf_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_, dst_sub_zone_) 
 
-#            print message
+            print message
 
             policy_attributes = {}
             mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_vrf_, src_area_, src_zone_, dst_dc_, dst_vrf_, dst_area_, dst_zone_)
