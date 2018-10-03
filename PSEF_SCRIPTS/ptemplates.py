@@ -170,8 +170,9 @@ def pan_create_policy_allapp_dst_inter_area (device_group, name, source_address_
 
     name = name + '_to_transit'
     config_txt = ''
+    svc_any = ['any']
     app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, 'inter-area-transit', dst_sub_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, 'inter-area-transit', dst_sub_zone, action )
 
     return config_txt
 

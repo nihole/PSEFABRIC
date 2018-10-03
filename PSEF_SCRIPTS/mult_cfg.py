@@ -17,7 +17,7 @@ def version_file(eq_addr_, conf_, ext_):
     '''
     '''
 #############  BODY ############
-
+    
     path_ = '%s/PSEF_CONF/EQ_CONF/%s.%s'   % (PSEFABRIC, eq_addr_, ext_)
     if not  os.path.isfile(path_):
         open(path_, 'a')

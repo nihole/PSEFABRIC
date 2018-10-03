@@ -16,6 +16,8 @@ deb = True # globaly turns on/off the debuging
 debug   = {}
 debug['psef_conf_new'] = True
 debug['psef_conf_old'] = True
+debug['psef_conf_policy_full_new'] = True
+debug['psef_conf_policy_full_old'] = True
 debug['address_index_new'] = True
 debug['address_index_old'] = True
 debug['address_set_index_new'] = True
@@ -95,6 +97,8 @@ def WriteDebug (dict_name, dict_):
             dict_ = ChangeType(dict_, 'policy')
         elif (dict_name == 'address_set_index_new' or dict_name == 'address_set_index_old'): 
             dict_ = ChangeType(dict_, 'address_set')
+        elif (dict_name == 'ddiff'):
+            None
         if debug[dict_name]:
             dict_context = json.dumps(dict_, skipkeys=False, indent=2)
             version_file(dict_name, dict_context)

@@ -279,9 +279,11 @@ def multiplex(diff_list):
     for application_set_rm_element in diff_list['application_sets_rm']:
         cmd_list_application_set ('rm', application_set_rm_element)
     for application_rm_element in diff_list['applications_rm']:
-        cmd_list_application ('rm', application_rm_element)
+        None
+#        cmd_list_application ('rm', application_rm_element)
     for application_ad_element in diff_list['applications_ad']:
-        cmd_list_application ('ad', application_ad_element)
+        None
+#        cmd_list_application ('ad', application_ad_element)
     for application_set_ad_element in diff_list['application_sets_ad']:
         cmd_list_application_set ('ad', application_set_ad_element)
     

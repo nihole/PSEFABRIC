@@ -1,8 +1,8 @@
 '''
-def address_index()
+address_index()
 indexes the configuration by address and address-set and returns the structures address_set_to_struct, address_to_struct
 
-def policy_index()
+policy_index()
 indexes the configuration by policies and returns the structure policy_
 
 More details see in the descriptions of the functions
@@ -14,12 +14,13 @@ def policy_index (policy_, add_):
 
 ##########  Description  #######
     '''
+    
     Transforms the dictionary of the policy to convinient format.
+
     '''
 #############  BODY ############
 
-# add_ = 'ad' - add
-# add_ = 'rm' - delete
+    
     struct_to_policy = {}
     struct_to_source = {}
     struct_to_destination = {}
@@ -32,68 +33,70 @@ def policy_index (policy_, add_):
 # Create a list of all dictionaries of destination address-sets for policy_
     destination_address_set_list = policy_['match']['destination-address-sets']
 
-    for source_address_set_ in source_address_set_list:
-        if (add_=='ad'):
-            for key_s_to_p in address_set_index_new[source_address_set_]['structure-to-addresses']:
-                if key_s_to_p not in struct_to_source:
-                    struct_to_source[key_s_to_p] = []
-                    struct_to_source_el_ = {}
-                    struct_to_source_el_['address-set-name'] = source_address_set_
-                    struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_source[key_s_to_p].append(struct_to_source_el_)
-                    del struct_to_source_el_ 
-                else:
-                    struct_to_source_el_ = {}
-                    struct_to_source_el_['address-set-name'] = source_address_set_
-                    struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_source[key_s_to_p].append(struct_to_source_el_)
-        elif (add_ == 'rm'):
-            for key_s_to_p in address_set_index_old[source_address_set_]['structure-to-addresses']:
-                if key_s_to_p not in struct_to_source:
-                    struct_to_source[key_s_to_p] = []
-                    struct_to_source_el_ = {}
-                    struct_to_source_el_['address-set-name'] = source_address_set_
-                    struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_source[key_s_to_p].append(struct_to_source_el_)
-                    del struct_to_source_el_
-                else:
-                    struct_to_source_el_ = {}
-                    struct_to_source_el_['address-set-name'] = source_address_set_
-                    struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_source[key_s_to_p].append(struct_to_source_el_)
-        else:
-            print "Incorect value of add_ in  policy_index"
-    for destination_address_set_ in destination_address_set_list:
-        if (add_=='ad'):
-            for key_s_to_p in address_set_index_new[destination_address_set_]['structure-to-addresses']:
-                if key_s_to_p not in struct_to_destination:
-                    struct_to_destination[key_s_to_p] = []
-                    struct_to_destination_el_ = {}
-                    struct_to_destination_el_['address-set-name'] = destination_address_set_
-                    struct_to_destination_el_['structure-to-addresses'] = address_set_index_new[destination_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-                    del struct_to_destination_el_
-                else:
-                    struct_to_destination_el_ = {}
-                    struct_to_destination_el_['address-set-name'] = destination_address_set_
-                    struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-        elif (add_ == 'rm'):
-            for key_s_to_p in address_set_index_old[destination_address_set_]['structure-to-addresses']:
-                if key_s_to_p not in struct_to_destination:
-                    struct_to_destination[key_s_to_p] = []
-                    struct_to_destination_el_ = {}
-                    struct_to_destination_el_['address-set-name'] = destination_address_set_
-                    struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-                    del struct_to_destination_el_
-                else:
-                    struct_to__el_ = {}
-                    struct_to_destination_el_['address-set-name'] = destination_address_set_
-                    struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
-                    struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
-        else:
-            print "Incorect value of add_ in  policy_index"
+    for source_address_set_dict in source_address_set_list:
+        for source_address_set_ in source_address_set_dict:
+            if (add_=='ad'):
+                for key_s_to_p in address_set_index_new[source_address_set_]['structure-to-addresses']:
+                    if key_s_to_p not in struct_to_source:
+                        struct_to_source[key_s_to_p] = []
+                        struct_to_source_el_ = {}
+                        struct_to_source_el_['address-set-name'] = source_address_set_
+                        struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_source[key_s_to_p].append(struct_to_source_el_)
+                        del struct_to_source_el_ 
+                    else:
+                        struct_to_source_el_ = {}
+                        struct_to_source_el_['address-set-name'] = source_address_set_
+                        struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_source[key_s_to_p].append(struct_to_source_el_)
+            elif (add_ == 'rm'):
+                for key_s_to_p in address_set_index_old[source_address_set_]['structure-to-addresses']:
+                    if key_s_to_p not in struct_to_source:
+                        struct_to_source[key_s_to_p] = []
+                        struct_to_source_el_ = {}
+                        struct_to_source_el_['address-set-name'] = source_address_set_
+                        struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_source[key_s_to_p].append(struct_to_source_el_)
+                        del struct_to_source_el_
+                    else:
+                        struct_to_source_el_ = {}
+                        struct_to_source_el_['address-set-name'] = source_address_set_
+                        struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_source[key_s_to_p].append(struct_to_source_el_)
+            else:
+                print "Incorect value of add_ in  policy_index"
+    for destination_address_set_dict in destination_address_set_list:
+        for destination_address_set_ in destination_address_set_dict:
+            if (add_=='ad'):
+                for key_s_to_p in address_set_index_new[destination_address_set_]['structure-to-addresses']:
+                    if key_s_to_p not in struct_to_destination:
+                        struct_to_destination[key_s_to_p] = []
+                        struct_to_destination_el_ = {}
+                        struct_to_destination_el_['address-set-name'] = destination_address_set_
+                        struct_to_destination_el_['structure-to-addresses'] = address_set_index_new[destination_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+                        del struct_to_destination_el_
+                    else:
+                        struct_to_destination_el_ = {}
+                        struct_to_destination_el_['address-set-name'] = destination_address_set_
+                        struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+            elif (add_ == 'rm'):
+                for key_s_to_p in address_set_index_old[destination_address_set_]['structure-to-addresses']:
+                    if key_s_to_p not in struct_to_destination:
+                        struct_to_destination[key_s_to_p] = []
+                        struct_to_destination_el_ = {}
+                        struct_to_destination_el_['address-set-name'] = destination_address_set_
+                        struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+                        del struct_to_destination_el_
+                    else:
+                        struct_to__el_ = {}
+                        struct_to_destination_el_['address-set-name'] = destination_address_set_
+                        struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
+                        struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
+            else:
+                print "Incorect value of add_ in  policy_index"
     policy_index = policy_
     policy_index['match']['source-addresses'] = {}
     policy_index['match']['source-addresses'] = struct_to_source

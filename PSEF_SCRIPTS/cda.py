@@ -7,6 +7,7 @@ takes the difference between new and old psefabric configurations (type dict) an
 '''
 
 import re
+import copy
 
 def dict_correct(psef_conf_):
 
@@ -236,6 +237,37 @@ def diff_opt (dict_diff):
 
     The same situation is for service/service-set
     '''
+    
+    addresses_list_rm = dict_diff["addresses_rm"]
+    addresses_list_add = dict_diff["addresses_ad"]
+
+    if (dict_diff["addresses_rm"] and dict_diff["addresses_ad"]):
+        i = 0
+        while i < len(addresses_list_rm):
+            j = 0
+            while j < len(addresses_list_add):
+                if (addresses_list_rm[i]["address-name"] == addresses_list_add[j]["address-name"]):
+                    del addresses_list_rm[i]
+                    i = i - 1
+                    break
+                j = j + 1
+            i = i + 1
+
+    services_list_rm = dict_diff["services_rm"]
+    services_list_add = dict_diff["services_ad"]
+
+    if (dict_diff["services_rm"] and dict_diff["services_ad"]):
+        i = 0
+        while i < len(services_list_rm):
+            j = 0
+            while j < len(services_list_add):
+                if (services_list_rm[i]["service-name"] == services_list_add[j]["service-name"]):
+                    del services_list_rm[i]
+                    i = i - 1
+                    break
+                j = j + 1
+            i = i + 1
+    
     addresses_sets_list_rm = dict_diff["address_sets_rm"]
     addresses_sets_list_add = dict_diff["address_sets_ad"]
     if (True and dict_diff["address_sets_rm"] and dict_diff["address_sets_ad"]):
@@ -322,4 +354,37 @@ def diff_opt (dict_diff):
 
     return (dict_diff)
 
+def dict_full_policy (psef_conf, address_set_index):
+
+    psef_conf_ = copy.deepcopy(psef_conf)
+    address_set_index_ = copy.deepcopy(address_set_index)
+
+    if ('policies' in psef_conf_['data']):
+        for policy_ in psef_conf_['data']['policies']:
+            for source_address_set_ in policy_["match"]["source-address-sets"]:
+                policy_["match"]["source-address-sets"].remove(source_address_set_)
+                address_set_dict_ = {}
+                address_set_index_dict = address_set_index_[source_address_set_]
+                for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
+                    if isinstance(struct_key, tuple):
+                        new_str_key = "(%s,%s)" % struct_key
+                        address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
+                        del address_set_index_dict['structure-to-addresses'][struct_key]
+                address_set_dict_ = { source_address_set_:address_set_index_dict }
+                policy_["match"]["source-address-sets"].append(address_set_dict_)
+
+            for destination_address_set_ in policy_["match"]["destination-address-sets"]:
+                policy_["match"]["destination-address-sets"].remove(destination_address_set_)
+                address_set_dict_ = {}
+                address_set_index_dict = address_set_index_[destination_address_set_]
+                for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
+                    if isinstance(struct_key, tuple):
+                        new_str_key = "(%s,%s)" % struct_key
+                        address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
+                        del address_set_index_dict['structure-to-addresses'][struct_key]
+                address_set_dict_ = { destination_address_set_:address_set_index_dict }
+                policy_["match"]["destination-address-sets"].append(address_set_dict_)
+
+
+        return (psef_conf_)
 
