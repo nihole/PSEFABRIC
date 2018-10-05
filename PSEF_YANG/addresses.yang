@@ -15,6 +15,10 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
+	  leaf configure {
+		  mandatory true;
+		  type boolean;
+	  }
 	  leaf ipv4-prefix {
 		  mandatory true;
 		  type ietf:ipv4-prefix;
@@ -74,34 +78,15 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
+	  leaf configure {
+		  mandatory true;
+		  type boolean;
+	  }
  	  leaf-list addresses {
  		  min-elements 1;
 		  type leafref {
 			  path "/addresses/address-name";
 		  }
-	  }
-	  container presentation {
-          description
-            "Use as a list or as address-set";
-          choice packet-handling {
-            default "address-set";
-            description
-              "Address-set will be created";
-            case address-set {
-              leaf address-set {
-                type empty;
-                description
-                  "address-set wil be created and used";
-              }
-            }
-            case list {
-              leaf list {
-                type empty;
-                description
-                  "List of addresses will be used";
-              }
-            }
-          }  
       }
 	  
   }

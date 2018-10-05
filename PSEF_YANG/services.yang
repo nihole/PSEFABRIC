@@ -14,6 +14,10 @@ submodule services {
 		  mandatory true;
 		  type string;
 	  }
+	  leaf configure {
+		  mandatory true;
+		  type boolean;
+	  }
 	  leaf prot {
 		  type int8;
 		  description
@@ -72,6 +76,10 @@ submodule services {
 	 leaf service-set-name {
 		 mandatory true;
 		  type string;
+	  }
+	 leaf configure {
+		 mandatory true;
+		  type boolean;
 	  }
 	  leaf-list services {
           min-elements 1;

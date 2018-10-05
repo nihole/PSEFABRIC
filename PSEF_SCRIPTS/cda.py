@@ -8,6 +8,7 @@ takes the difference between new and old psefabric configurations (type dict) an
 
 import re
 import copy
+from deepdiff import DeepDiff
 
 def dict_correct(psef_conf_):
 
@@ -349,6 +350,37 @@ def diff_opt (dict_diff):
                     else:
                         application_sets_list_add[i]["applications"] = application_add_list
                     break
+                j = j + 1
+            i = i + 1
+
+    policies_list_add = dict_diff["policies_ad"]
+    policies_list_rm = dict_diff["policies_rm"]
+
+    if (True and dict_diff["policies_rm"] and dict_diff["policies_ad"]):
+        i = 0
+        while i < len(policies_list_rm):
+            j = 0
+            while j < len(policies_list_add):
+                if (policies_list_rm[i]["policy-name"] == policies_list_add[j]["policy-name"]):
+                    ddiff = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=False, report_repetition=True)
+                    print ddiff 
+                    if ddiff['values_changed']:
+                        changes_dict = ddiff['values_changed']
+                        if len (changes_dict) == 1:
+                            for key_changes_dict in changes_dict:
+                                print key_changes_dict
+                                if (re.search(r'configure', key_changes_dict)):
+                                    del policies_list_rm[i]
+                                    del policies_list_add[j]
+                                    i = i - 1
+                                    j = j - 1
+                                    break
+                    else:
+                        del policies_list_rm[i]
+                        del policies_list_add[j]
+                        i = i - 1
+                        j = j - 1
+                        break
                 j = j + 1
             i = i + 1
 

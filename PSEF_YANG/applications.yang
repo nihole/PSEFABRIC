@@ -14,13 +14,20 @@ submodule applications {
 		  mandatory true;
 		  type string;
 	  }
-	  
+	  leaf configure {
+		  mandatory true;
+		  type boolean;
+	  }
    }
   list application-sets {
 	 key application-set-name;
 	 leaf application-set-name {
 		 mandatory true;
 		  type string;
+	  }
+	 leaf configure {
+		  mandatory true;
+		  type boolean;
 	  }
 	  leaf-list applications {
           min-elements 1;

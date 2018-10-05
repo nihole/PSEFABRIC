@@ -61,8 +61,7 @@ def cmd_list_address (action_, address_):
  
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
-    
-    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address())
+    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address(address_['configure']))
  
     for cmd_element in mult_dict_add:
         address_attributes = {'eq':cmd_element['eq_addr'], 'name':address_['address-name'], 'ipv4-prefix':address_['ipv4-prefix'], 'structure':address_['structure']}
@@ -81,7 +80,7 @@ def cmd_list_address_set (action_, address_set_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    mult_dict_add_set = psef_logic.mult_dict_address_set()
+    mult_dict_add_set = psef_logic.mult_dict_address_set(address_set_['configure'])
 
     for cmd_element in mult_dict_add_set:
         address_set_attributes = {'eq':cmd_element['eq_addr'], 'name':address_set_['address-set-name'], 'address':address_set_['addresses']}
@@ -100,7 +99,7 @@ def cmd_list_service (action_, service_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    mult_dict_app = psef_logic.mult_dict_service()
+    mult_dict_app = psef_logic.mult_dict_service(service_['configure'])
 
     for cmd_element in mult_dict_app:
         service_attributes = {'eq':cmd_element['eq_addr'], 'name':service_['service-name'], 'prot':service_['prot']}
@@ -120,7 +119,7 @@ def cmd_list_service_set (action_, service_set_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    mult_dict_add_set = psef_logic.mult_dict_service_set()
+    mult_dict_add_set = psef_logic.mult_dict_service_set(service_set_['configure'])
 
     for cmd_element in mult_dict_add_set:
         service_set_attributes = {'eq':cmd_element['eq_addr'], 'name':service_set_['service-set-name'], 'service':service_set_['services']}
@@ -139,7 +138,7 @@ def cmd_list_applciation (action_, applciation_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    mult_dict_app = psef_logic.mult_dict_applciation()
+    mult_dict_app = psef_logic.mult_dict_applciation(application_['configure'])
 
     for cmd_element in mult_dict_app:
         applciation_attributes = {'eq':cmd_element['eq_addr'], 'name':applciation_['applciation-name'], 'prot':applciation_['prot']}
@@ -160,7 +159,7 @@ def cmd_list_application_set (action_, application_set_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    mult_dict_add_set = psef_logic.mult_dict_application_set()
+    mult_dict_add_set = psef_logic.mult_dict_application_set(application_set_['configure'])
 
     for cmd_element in mult_dict_add_set:
         application_set_attributes = {'eq':cmd_element['eq_addr'], 'name':application_set_['application-set-name'], 'application':application_set_['applications']}
