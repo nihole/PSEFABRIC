@@ -362,13 +362,12 @@ def diff_opt (dict_diff):
             j = 0
             while j < len(policies_list_add):
                 if (policies_list_rm[i]["policy-name"] == policies_list_add[j]["policy-name"]):
-                    ddiff = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=False, report_repetition=True)
-                    print ddiff 
-                    if ddiff['values_changed']:
-                        changes_dict = ddiff['values_changed']
+                    delta = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=False, report_repetition=True)
+                    delta2 = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=True, report_repetition=True)
+                    if delta['values_changed']:
+                        changes_dict = delta['values_changed']
                         if len (changes_dict) == 1:
                             for key_changes_dict in changes_dict:
-                                print key_changes_dict
                                 if (re.search(r'configure', key_changes_dict)):
                                     del policies_list_rm[i]
                                     del policies_list_add[j]
@@ -386,10 +385,11 @@ def diff_opt (dict_diff):
 
     return (dict_diff)
 
-def dict_full_policy (psef_conf, address_set_index):
+def dict_full_policy (psef_conf, address_set_index, service_set_index):
 
     psef_conf_ = copy.deepcopy(psef_conf)
     address_set_index_ = copy.deepcopy(address_set_index)
+    service_set_index_ = copy.deepcopy(service_set_index)
 
     if ('policies' in psef_conf_['data']):
         for policy_ in psef_conf_['data']['policies']:
@@ -417,6 +417,12 @@ def dict_full_policy (psef_conf, address_set_index):
                 address_set_dict_ = { destination_address_set_:address_set_index_dict }
                 policy_["match"]["destination-address-sets"].append(address_set_dict_)
 
+            for service_set_ in policy_["match"]["service-sets"]:
+                policy_["match"]["service-sets"].remove(service_set_)
+                service_set_dict_ = {}
+                service_set_index_dict = {}
+                service_set_index_dict = service_set_index_[service_set_]
+                policy_["match"]["service-sets"].append(service_set_index_dict)
 
-        return (psef_conf_)
+    return (psef_conf_)
 

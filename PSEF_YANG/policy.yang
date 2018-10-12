@@ -17,6 +17,12 @@ module policy {
 			  type string;
 			  mandatory true;
 		  }
+		  leaf policy-alias-1 {
+			  type string;
+		  }
+		  leaf policy-alias-2 {
+			  type string;
+		  }
 		  container match {
 			  leaf-list source-address-sets {
 				  min-elements 1;

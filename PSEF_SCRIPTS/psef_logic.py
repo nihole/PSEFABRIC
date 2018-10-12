@@ -25,7 +25,8 @@ def mult_dict_address(ifcfg):
     mult = []
     if (ifcfg == 'true'):
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -44,7 +45,8 @@ def mult_dict_address_set(ifcfg):
     mult = []
     if (ifcfg == 'true'):
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -63,7 +65,8 @@ def mult_dict_service(ifcfg):
     mult=[]
     if (ifcfg == 'true'):
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['ad'] = []
@@ -82,7 +85,8 @@ def mult_dict_service_set(ifcfg):
     mult=[]
     if (ifcfg == 'true'):
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['ad'] = []
@@ -101,7 +105,8 @@ def mult_dict_application(ifcfg):
     mult=[]
     if (ifcfg == 'true'):   
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['ad'] = []
@@ -118,7 +123,8 @@ def mult_dict_application_set(ifcfg):
     mult=[]
     if (ifcfg == 'true'):   
         mult.append({})
-        mult[0]['eq_addr'] = 'shared'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'shared'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['ad'] = []
@@ -128,7 +134,7 @@ def mult_dict_application_set(ifcfg):
     return (mult)
 
 
-def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_area, dst_zone):
+def mult_dict_policy(src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, service_sets_dict):
 
 ##########  Description  #######
 
@@ -138,11 +144,6 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         same_dc_flag = True
     else:
         same_dc_flag = False
-
-    if (re.match(src_vrf, dst_vrf)):
-        same_vrf_flag = True
-    else:
-        same_vrf_flag = False
 
     if (re.match(src_area, dst_area)):
         same_area_flag = True
@@ -154,10 +155,22 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
     else:
         same_zone_flag = False
 
-    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'OSS_AA'))):
+    if (same_zone_flag and same_area_flag):
+        
         mult = []
         mult.append({})
-        mult[0]['eq_addr'] = 'OSS_AA'
+        mult[0]['eq_addr'] = src_area
+        mult[0]['cmd'] = {}
+        mult[0]['cmd']['ad'] = []
+        mult[0]['cmd']['rm'] = []
+        mult[0]['cmd']['rm'].append('acitemplates.aci_delete_policy')
+        mult[0]['cmd']['ad'].append('acitemplates.aci_create_policy')
+
+    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'oss_aa'))):
+        mult = []
+        mult.append({})
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'OSS_AA'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -168,10 +181,11 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_oss_transit')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_src_oss_transit')
 
-    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'INTERNAL_AA'))):
+    if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'internal_aa'))):
         mult = []
         mult.append({})
-        mult[0]['eq_addr'] = 'INTERNAL_AA'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'INTERNAL_AA'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -182,10 +196,11 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_inter_area')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
 
-    if ((not same_zone_flag) and (re.match(src_area, 'OSS_AA')) and (re.match(dst_area, 'INTERNAL_AA'))):
+    if ((not same_zone_flag) and (re.match(src_area, 'oss_aa')) and (re.match(dst_area, 'int_aa'))):
         mult = []
         mult.append({})
-        mult[0]['eq_addr'] = 'OSS_AA'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'OSS_AA'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -194,7 +209,8 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_inter_area')
         mult.append({})
-        mult[1]['eq_addr'] = 'INTERNAL_AA'
+        mult[1]['eq_addr'] = 'panorama'
+        mult[1]['eq_parameter'] = 'INTERNAL_AA'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
@@ -204,10 +220,11 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_inter_area')
 
 
-    if ((not same_zone_flag) and (re.match(src_area, 'INTERNAL_AA')) and (re.match(dst_area, 'OSS_AA'))):
+    if ((not same_zone_flag) and (re.match(src_area, 'int_aa')) and (re.match(dst_area, 'oss_aa'))):
         mult = []
         mult.append({})
-        mult[0]['eq_addr'] = 'INTERNAL_AA'
+        mult[0]['eq_addr'] = 'panorama'
+        mult[0]['eq_parameter'] = 'INTERNAL_AA'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -216,7 +233,8 @@ def mult_dict_policy(src_dc, src_vrf, src_area, src_zone, dst_dc, dst_vrf, dst_a
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_inter_area')
         mult.append({})
-        mult[1]['eq_addr'] = 'OSS_AA'
+        mult[1]['eq_addr'] = 'panorama'
+        mult[1]['eq_parameter'] = 'OSS_AA'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []

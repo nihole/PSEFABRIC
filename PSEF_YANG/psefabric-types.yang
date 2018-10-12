@@ -24,6 +24,9 @@ module psefabric-types {
   typedef sub-zone {
 	  type string;
   }
+  typedef app {
+	  type string;
+  }
   typedef tag {
           type string;
   }

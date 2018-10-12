@@ -81,6 +81,8 @@ cda.psef_conf_old =  cda.dict_correct(psef_conf_old_)
 (psef_index.address_index_new, psef_index.address_set_index_new)  = psef_index.address_index (cda.psef_conf_new)
 (psef_index.address_index_old, psef_index.address_set_index_old)  = psef_index.address_index (cda.psef_conf_old)
 
+(psef_index.service_index_new, psef_index.service_set_index_new)  = psef_index.service_index (cda.psef_conf_new)
+(psef_index.service_index_old, psef_index.service_set_index_old)  = psef_index.service_index (cda.psef_conf_old)
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('psef_conf_new', cda.psef_conf_new)
@@ -91,19 +93,24 @@ if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('address_index_old', psef_index.address_index_old)
     psef_debug.WriteDebug('address_set_index_new', psef_index.address_set_index_new)
     psef_debug.WriteDebug('address_set_index_old', psef_index.address_set_index_old)
+    psef_debug.WriteDebug('service_index_new', psef_index.service_index_new)
+    psef_debug.WriteDebug('service_index_old', psef_index.service_index_old)
+    psef_debug.WriteDebug('service_set_index_new', psef_index.service_set_index_new)
+    psef_debug.WriteDebug('service_set_index_old', psef_index.service_set_index_old)
+
+
 
 # make the difference between new and old configs
 
 
-cda.psef_conf_new = cda.dict_full_policy(cda.psef_conf_new, psef_index.address_set_index_new)
-cda.psef_conf_old = cda.dict_full_policy(cda.psef_conf_old, psef_index.address_set_index_old)
+cda.psef_conf_new = cda.dict_full_policy(cda.psef_conf_new, psef_index.address_set_index_new, psef_index.service_set_index_new)
+cda.psef_conf_old = cda.dict_full_policy(cda.psef_conf_old, psef_index.address_set_index_old, psef_index.service_set_index_old)
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('psef_conf_policy_full_new', cda.psef_conf_new)
     psef_debug.WriteDebug('psef_conf_policy_full_old', cda.psef_conf_old)
 
-ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=2, ignore_order=True, report_repetition=True)
-
+ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=2, ignore_order=True, report_repetition=False)
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('ddiff', ddiff)

@@ -11,12 +11,12 @@ import cidr_to_netmask
 
 ######## addresses  ###########
 
-def pan_create_address (device_group, name, ipv4_prefix, vlan, vrf):
+def pan_create_address (device_group, name, ipv4_prefix):
     network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
     config_txt = '''set %s address %s ip-netwask %s/%s''' % (device_group, name, network, netmask)
     return config_txt
 
-def pan_delete_address (device_group, name, ipv4_prefix, vlan, vrf):
+def pan_delete_address (device_group, name, ipv4_prefix):
     network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
     config_txt = '''delete %s address %s''' % (device_group, name)
     return config_txt
@@ -148,39 +148,39 @@ def pan_delete_application_set (device_group, name, application):
 ######### access ###########
 
 
-def pan_create_policy_allapp_dst_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action ):
+def pan_create_policy_allapp_dst_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
 
     name = name + '_to_transit'
     config_txt = ''
     svc_any = ['any']
     app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, 'oss-transit', dst_sub_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'oss-transit', action )
     
     return config_txt
 
-def pan_create_policy_src_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action ):
+def pan_create_policy_src_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone,  action ):
 
     name = name + '_from_transit'
     config_txt = ''
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'oss-transit', src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'oss-transit', dst_dc, dst_area, dst_zone, action )
 
     return config_txt
 
-def pan_create_policy_allapp_dst_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action ):
+def pan_create_policy_allapp_dst_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
 
     name = name + '_to_transit'
     config_txt = ''
     svc_any = ['any']
     app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, 'inter-area-transit', dst_sub_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'inter-area-transit',  action )
 
     return config_txt
 
-def pan_create_policy_src_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action ):
+def pan_create_policy_src_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
 
     name = name + '_from_transit'
     config_txt = ''
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'inter-area-transit', src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'inter-area-transit', dst_dc, dst_area, dst_zone, action )
 
     return config_txt
 
@@ -218,7 +218,7 @@ def pan_delete_policy_src_inter_area (device_group, name):
 
     return config_txt
 
-def pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, action ):
+def pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
     config_access = ''
     config_match_source= ''
     config_match_destination = ''

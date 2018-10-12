@@ -15,6 +15,12 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
+	  leaf address-alias-1 {
+		  type string;
+	  }
+	  leaf address-alias-2 {
+		  type string;
+	  }
 	  leaf configure {
 		  mandatory true;
 		  type boolean;
@@ -50,21 +56,9 @@ submodule addresses {
 			  }
 			  mandatory false;
 		  }
-		  leaf vlan {
+		  leaf app {
 			  type leafref {
-				  path "/structure:structure/structure:vlans/structure:vlan-number";
-			  }
-			  mandatory false;
-		  }
-		  leaf vrf {
-			  type leafref {
-				  path "/structure:structure/structure:vrf";
-			  }
-			  mandatory true;
-		  }
-		  leaf sub-zone {
-			  type leafref {
-				  path "/structure:structure/structure:sub-zone";
+				  path "/structure:structure/structure:app";
 			  }
 			  mandatory true;
 		  }
@@ -76,6 +70,12 @@ submodule addresses {
 	  key address-set-name;
 	  leaf address-set-name {
 		  mandatory true;
+		  type string;
+	  }
+	  leaf address-set-alias-1 {
+		  type string;
+	  }
+	  leaf address-set-alias-2 {
 		  type string;
 	  }
 	  leaf configure {

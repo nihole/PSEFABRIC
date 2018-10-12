@@ -22,6 +22,12 @@ debug['address_index_new'] = True
 debug['address_index_old'] = True
 debug['address_set_index_new'] = True
 debug['address_set_index_old'] = True
+
+debug['service_index_new'] = True
+debug['service_index_old'] = True
+debug['service_set_index_new'] = True
+debug['service_set_index_old'] = True
+
 debug['policy_index'] = True
 debug['ddiff'] = True
 debug['diff_dict'] = True

@@ -25,6 +25,9 @@ module structure {
 	  leaf-list sub-zone {
 		  type types:sub-zone;
 	  }
+	  leaf-list app {
+		  type types:app;
+	  }		
 	  leaf-list tag {
 		  type types:tag;
 	  }
