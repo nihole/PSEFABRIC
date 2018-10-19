@@ -31,26 +31,27 @@ def initiate_cmd_for_host():
     Create empty dict cmd_for_host[host_el_] for each MO in our infrastrucrure.
     '''
 #############  BODY ############
+    cmd_for_host_ = {}
     host_to_type_ = host_to_type.host_to_type()
     for host_el_ in host_to_type_:
-            cmd_for_host[host_el_] = {}
-            cmd_for_host[host_el_]['rm'] = {}
-            cmd_for_host[host_el_]['ad'] = {}
-            cmd_for_host[host_el_]['rm']['policy'] = []
-            cmd_for_host[host_el_]['rm']['address-set'] = []
-            cmd_for_host[host_el_]['rm']['address'] = []
-            cmd_for_host[host_el_]['rm']['service-set'] = []
-            cmd_for_host[host_el_]['rm']['service'] = []
-            cmd_for_host[host_el_]['rm']['application-set'] = []
-            cmd_for_host[host_el_]['rm']['application'] = []
-            cmd_for_host[host_el_]['ad']['policy'] = []
-            cmd_for_host[host_el_]['ad']['address-set'] = []
-            cmd_for_host[host_el_]['ad']['address'] = []
-            cmd_for_host[host_el_]['ad']['service-set'] = []
-            cmd_for_host[host_el_]['ad']['service'] = []
-            cmd_for_host[host_el_]['ad']['application-set'] = []
-            cmd_for_host[host_el_]['ad']['application'] = []
-    return cmd_for_host
+            cmd_for_host_[host_el_] = {}
+            cmd_for_host_[host_el_]['rm'] = {}
+            cmd_for_host_[host_el_]['ad'] = {}
+            cmd_for_host_[host_el_]['rm']['policy'] = []
+            cmd_for_host_[host_el_]['rm']['address-set'] = []
+            cmd_for_host_[host_el_]['rm']['address'] = []
+            cmd_for_host_[host_el_]['rm']['service-set'] = []
+            cmd_for_host_[host_el_]['rm']['service'] = []
+            cmd_for_host_[host_el_]['rm']['application-set'] = []
+            cmd_for_host_[host_el_]['rm']['application'] = []
+            cmd_for_host_[host_el_]['ad']['policy'] = []
+            cmd_for_host_[host_el_]['ad']['address-set'] = []
+            cmd_for_host_[host_el_]['ad']['address'] = []
+            cmd_for_host_[host_el_]['ad']['service-set'] = []
+            cmd_for_host_[host_el_]['ad']['service'] = []
+            cmd_for_host_[host_el_]['ad']['application-set'] = []
+            cmd_for_host_[host_el_]['ad']['application'] = []
+    return cmd_for_host_
 
 def cmd_list_address (action_, address_):
 
@@ -175,10 +176,12 @@ def cmd_list_policy (action_, pol_):
     '''
     '''
 #############  BODY ############
+
     
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 #    mult_dict_pol = psef_logic.mult_dict_policy()
+    
     src_address_set_list = []
     name_ = pol_['policy-name']
     policy_alias_1 = pol_['policy-alias-1']
@@ -187,9 +190,10 @@ def cmd_list_policy (action_, pol_):
     application_set_list = pol_['match']['application-sets']
     act = 'permit'
     service_set_list = []
+    service_set_lst = []
     for service_set_el in pol_['match']['service-sets']:
-        service_set_list.append(service_set_el['service-set-alias-1'])
-
+        service_set_list.append(service_set_el)
+        service_set_lst.append(service_set_el['service-set-alias-1'])
 ####### all sorce or destination addresses/address-sets should be from the same dc,vrf,area,zone  ########
     for src_resolve_element in pol_['match']['source-addresses']:
         src_address_set_list = pol_['match']['source-addresses'][src_resolve_element]
@@ -205,6 +209,8 @@ def cmd_list_policy (action_, pol_):
             
             message = '''
             VVVVVVVVVVVVVVVVV
+            src_resolve_element: %s
+            dst_resolve_element: %s
             src_dc: %s
             src_area: %s
             src_zone: %s
@@ -212,14 +218,14 @@ def cmd_list_policy (action_, pol_):
             dst_area: %s
             dst_zone: %s
             AAAAAAAAAAAAAAAAAA
-            '''  % (src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_) 
+            '''  % (src_resolve_element, dst_resolve_element, src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_) 
 
 #            print message
 
             policy_attributes = {}
             mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_, pol_['match']['service-sets'])
             for cmd_element in mult_dict_pol:
-                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-addresses':src_address_set_list, 'destination-addresses':dst_address_set_list, 'applications':application_set_list, 'services':service_set_list, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
+                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-address-sets':src_address_set_list, 'destination-address-sets':dst_address_set_list, 'application-sets':application_set_list, 'service-set-dicts':service_set_list, 'service-sets':service_set_lst, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
                 policy_attributes['command-list'] = cmd_element['cmd'][action_]
                 cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
 
@@ -233,6 +239,7 @@ def multiplex(diff_list):
     '''
 #############  BODY ############
 
+    cmd_for_host = initiate_cmd_for_host()
     policy_index_ = {'ad':[], 'rm':[]} 
 
     for policy_rm_element in diff_list['policies_rm']:
@@ -277,6 +284,5 @@ def multiplex(diff_list):
 
     return cmd_for_host
 
-cmd_for_host = {}
-cmd_for_host = initiate_cmd_for_host()  
-
+cmd_for_host = initiate_cmd_for_host()
+cmd_for_host_full = initiate_cmd_for_host()

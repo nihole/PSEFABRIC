@@ -137,6 +137,9 @@ def mult_dict_application_set(ifcfg):
 def mult_dict_policy(src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, service_sets_dict):
 
 ##########  Description  #######
+########## End of description #####
+
+    map_aci_ = host_to_type.area_to_eq_aci()
 
     mult = []
 
@@ -159,12 +162,21 @@ def mult_dict_policy(src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, ser
         
         mult = []
         mult.append({})
-        mult[0]['eq_addr'] = src_area
+        mult[0]['eq_addr'] = map_aci_['dc1'][src_area]
+        mult[0]['eq_parameter'] = ''
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['rm'].append('acitemplates.aci_delete_policy')
         mult[0]['cmd']['ad'].append('acitemplates.aci_create_policy')
+        mult.append({})
+        mult[1]['eq_addr'] = map_aci_['dc2'][src_area]
+        mult[1]['eq_parameter'] = ''
+        mult[1]['cmd'] = {}
+        mult[1]['cmd']['ad'] = []
+        mult[1]['cmd']['rm'] = []
+        mult[1]['cmd']['rm'].append('acitemplates.aci_delete_policy')
+        mult[1]['cmd']['ad'].append('acitemplates.aci_create_policy')
 
     if ((not same_zone_flag) and same_area_flag and (re.match(dst_area, 'oss_aa'))):
         mult = []

@@ -31,7 +31,9 @@ debug['service_set_index_old'] = True
 debug['policy_index'] = True
 debug['ddiff'] = True
 debug['diff_dict'] = True
+debug['diff_dict_full'] = True
 debug['cmd_for_host'] = True
+debug['cmd_for_host_full'] = True
 debug['cfg'] = True
 
 def version_file(dict_name, dict_debug):

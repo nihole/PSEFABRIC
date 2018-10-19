@@ -1,8 +1,8 @@
 '''
-def dict_correct() 
+dict_correct() 
 takes configuration dictionary and corrects some elements in it
 
-def ddiff_dict()
+ddiff_dict()
 takes the difference between new and old psefabric configurations (type dict) and transforms it to the dict convenient for further operations
 '''
 
@@ -226,19 +226,29 @@ def ddiff_dict(ddiff_):
     diff_dict_['application_sets_rm'] = application_sets_rm
     diff_dict_['policies_rm'] = policies_rm
 
-    diff_dictt_ = diff_opt (diff_dict_)
-
+#    diff_dictt_ = diff_opt (diff_dict_)
+    diff_dictt_ = diff_dict_
+    
     return (diff_dictt_)
 
-def diff_opt (dict_diff):
+def diff_opt (dict_diff_):
 
     '''
-    If we change addresses in address-set, then it looks like we remove this address-set and after that add new one with the final set of addresses.
-    It results in some problems. This function is used to solve it. We compare the lists in both cases (old adderss-set and new one) and stay only one operation (add or rm)
-
-    The same situation is for service/service-set
+    if we have some object removed and created we exclude it from the list (as for removed as for added lists):
+    addresses
+    address-sets
+    services
+    service-sets
+    applications
+    application-sets
+    address-sets in policy
+    service-sets in policy
+    application-sets in policy
     '''
-    
+    dict_diff = copy.deepcopy(dict_diff_)
+   
+    # addresses optimization
+
     addresses_list_rm = dict_diff["addresses_rm"]
     addresses_list_add = dict_diff["addresses_ad"]
 
@@ -249,10 +259,13 @@ def diff_opt (dict_diff):
             while j < len(addresses_list_add):
                 if (addresses_list_rm[i]["address-name"] == addresses_list_add[j]["address-name"]):
                     del addresses_list_rm[i]
+                    del addresses_list_ad[j]
                     i = i - 1
                     break
                 j = j + 1
             i = i + 1
+
+    # services optimization
 
     services_list_rm = dict_diff["services_rm"]
     services_list_add = dict_diff["services_ad"]
@@ -264,19 +277,21 @@ def diff_opt (dict_diff):
             while j < len(services_list_add):
                 if (services_list_rm[i]["service-name"] == services_list_add[j]["service-name"]):
                     del services_list_rm[i]
+                    del services_list_ad[j]
                     i = i - 1
                     break
                 j = j + 1
             i = i + 1
+
+    # address-set optimization
     
     addresses_sets_list_rm = dict_diff["address_sets_rm"]
     addresses_sets_list_add = dict_diff["address_sets_ad"]
-    if (True and dict_diff["address_sets_rm"] and dict_diff["address_sets_ad"]):
+    if (dict_diff["address_sets_rm"] and dict_diff["address_sets_ad"]):
         i = 0
         while i < len(addresses_sets_list_rm):
             j = 0
             while j < len(addresses_sets_list_add):
-                m = ''
                 if (addresses_sets_list_rm[i]["address-set-name"] == addresses_sets_list_add[j]["address-set-name"]):
                     address_rm_list = addresses_sets_list_rm[i]["addresses"]
                     address_add_list = addresses_sets_list_add[j]["addresses"]
@@ -284,18 +299,22 @@ def diff_opt (dict_diff):
                     address_rm_list = list(set(address_rm_list) - m)
                     address_add_list = list(set(address_add_list) - m)
                     if not address_rm_list:
-                        del addresses_sets_list_rm[i]
-                        i = i - 1 
+#                        del addresses_sets_list_rm[i]
+#                        i = i - 1 
+                        continue
                     else:
                         addresses_sets_list_rm[i]["addresses"] = address_rm_list
                     if not address_add_list:
-                        del addresses_sets_list_add[j]
-                        j = j - 1
+#                        del addresses_sets_list_add[j]
+#                        j = j - 1
+                        continue
                     else:
                         addresses_sets_list_add[j]["addresses"] = address_add_list
                     break
                 j = j + 1
             i = i + 1
+
+    # service-set optimization
 
     service_sets_list_rm = dict_diff["service_sets_rm"]
     service_sets_list_add = dict_diff["service_sets_ad"]
@@ -312,18 +331,22 @@ def diff_opt (dict_diff):
                     service_rm_list = list(set(service_rm_list) - m)
                     service_add_list = list(set(service_add_list) - m)
                     if not service_rm_list:
-                        del service_sets_list_rm[i]
-                        i = i - 1
+#                        del service_sets_list_rm[i]
+#                        i = i - 1
+                        continue
                     else:
                         service_sets_list_rm[i]["services"] = service_rm_list
                     if not service_add_list:
-                        del service_sets_list_add[j]
-                        j = j - 1
+#                        del service_sets_list_add[j]
+#                        j = j - 1
+                        continue
                     else:
                         service_sets_list_add[i]["services"] = service_add_list
                     break
                 j = j + 1
             i = i + 1
+
+    # application-set optimization
 
     application_sets_list_rm = dict_diff["application_sets_rm"]
     application_sets_list_add = dict_diff["application_sets_ad"]
@@ -340,48 +363,148 @@ def diff_opt (dict_diff):
                     application_rm_list = list(set(application_rm_list) - m)
                     application_add_list = list(set(application_add_list) - m)
                     if not application_rm_list:
-                        del application_sets_list_rm[i]
-                        i = i - 1
+#                        del application_sets_list_rm[i]
+#                        i = i - 1
+                        continue
                     else:
                         application_sets_list_rm[i]["applications"] = application_rm_list
                     if not application_add_list:
-                        del application_sets_list_add[j]
-                        j = j - 1
+#                        del application_sets_list_add[j]
+#                        j = j - 1
+                        continue
                     else:
                         application_sets_list_add[i]["applications"] = application_add_list
                     break
                 j = j + 1
             i = i + 1
 
+    # policy optimization
+
     policies_list_add = dict_diff["policies_ad"]
     policies_list_rm = dict_diff["policies_rm"]
 
-    if (True and dict_diff["policies_rm"] and dict_diff["policies_ad"]):
+    if (dict_diff["policies_rm"] and dict_diff["policies_ad"]):
         i = 0
         while i < len(policies_list_rm):
             j = 0
             while j < len(policies_list_add):
                 if (policies_list_rm[i]["policy-name"] == policies_list_add[j]["policy-name"]):
-                    delta = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=False, report_repetition=True)
-                    delta2 = DeepDiff(policies_list_rm[i], policies_list_add[j], verbose_level=2, ignore_order=True, report_repetition=True)
-                    if delta['values_changed']:
-                        changes_dict = delta['values_changed']
-                        if len (changes_dict) == 1:
-                            for key_changes_dict in changes_dict:
-                                if (re.search(r'configure', key_changes_dict)):
-                                    del policies_list_rm[i]
-                                    del policies_list_add[j]
-                                    i = i - 1
+                # address-sets in policy optimization 
+
+                    src_address_set_list_rm = []
+                    src_address_set_list_ad = []
+                    dst_address_set_list_rm = []
+                    dst_address_set_list_ad = []
+
+                    src_addr_set_list_rm = policies_list_rm[i]['match']['source-address-sets']
+                    src_addr_set_list_ad = policies_list_add[j]['match']['source-address-sets']
+                    dst_addr_set_list_rm = policies_list_rm[i]['match']['destination-address-sets']
+                    dst_addr_set_list_ad = policies_list_add[j]['match']['destination-address-sets']
+                    
+                    for src_addr_set_dict_rm in src_addr_set_list_rm:
+                        for src_addr_set_rm in src_addr_set_dict_rm:
+                            src_address_set_list_rm.append(src_addr_set_rm)
+
+                    for src_addr_set_dict_ad in src_addr_set_list_ad:
+                        for src_addr_set_ad in src_addr_set_dict_ad:
+                            src_address_set_list_ad.append(src_addr_set_ad)
+
+                    for dst_addr_set_dict_rm in dst_addr_set_list_rm:
+                        for dst_addr_set_rm in dst_addr_set_dict_rm:
+                            dst_address_set_list_rm.append(dst_addr_set_rm)
+
+                    for dst_addr_set_dict_ad in dst_addr_set_list_ad:
+                        for dst_addr_set_ad in dst_addr_set_dict_ad:
+                            dst_address_set_list_ad.append(dst_addr_set_ad)
+                    
+                    m_src = set(src_address_set_list_ad) & set(src_address_set_list_rm)
+                    if m_src:
+                        for src_addr_set_dict_rm in src_addr_set_list_rm:
+                            for src_addr_set_rm in src_addr_set_dict_rm:
+                                for m in m_src:
+                                    if (m == src_addr_set_rm):
+                                        src_addr_set_list_rm.remove(src_addr_set_dict_rm)
+                                        break
+                        for src_addr_set_dict_ad in src_addr_set_list_ad:
+                            for src_addr_set_ad in src_addr_set_dict_ad:
+                                for m in m_src:
+                                    if (m == src_addr_set_ad):
+                                        src_addr_set_list_ad.remove(src_addr_set_dict_ad)
+                                        break
+
+                    m_dst = set(dst_address_set_list_ad) & set(dst_address_set_list_rm)
+                    if m_dst:
+                        for dst_addr_set_dict_rm in dst_addr_set_list_rm:
+                            for dst_addr_set_rm in dst_addr_set_dict_rm:
+                                for m in m_dst:
+                                    if (m == dst_addr_set_rm):
+                                        dst_addr_set_list_rm.remove(dst_addr_set_dict_rm)
+                                        break
+                        for dst_addr_set_dict_ad in dst_addr_set_list_ad:
+                            for dst_addr_set_ad in dst_addr_set_dict_ad:
+                                for m in m_dst:
+                                    if (m == dst_addr_set_ad):
+                                        dst_addr_set_list_ad.remove(dst_addr_set_dict_ad)
+                                        break
+
+                    # service-set in policy iptimization
+
+                    service_set_list_rm = []
+                    service_set_list_ad = []
+
+                    svc_set_list_rm = policies_list_rm[i]['match']['service-sets']
+                    svc_set_list_ad = policies_list_add[j]['match']['service-sets']
+
+                    for svc_set_dict_rm in svc_set_list_rm:
+                        service_set_list_rm.append(svc_set_dict_rm["service-set-name"])
+
+                    for svc_set_dict_ad in svc_set_list_ad:
+                        service_set_list_ad.append(svc_set_dict_ad["service-set-name"])
+
+                    m_svc = list(set(service_set_list_ad) & set(service_set_list_rm))
+                    if m_svc:
+                        j = 0
+                        while j < len(svc_set_list_rm):
+                            service_set_dict_rm = svc_set_list_rm[j]
+                            for m in m_svc:
+                                if (m == service_set_dict_rm["service-set-name"]):
+                                    svc_set_list_rm.remove(service_set_dict_rm)
                                     j = j - 1
                                     break
-                    else:
+                            j = j + 1
+                        j = 0
+                        while j < len(svc_set_list_ad):
+                            service_set_dict_ad = svc_set_list_ad[j]
+                            print service_set_dict_ad["service-set-name"]
+                            for m in m_svc:
+                                if (m == service_set_dict_ad["service-set-name"]):
+                                    svc_set_list_ad.remove(service_set_dict_ad)
+                                    j = j - 1
+                                    break
+                            j = j + 1
+                    # application-set in policy iptimization
+
+                    app_set_list_rm = policies_list_rm[i]['match']['application-sets']
+                    app_set_list_ad = policies_list_add[j]['match']['application-sets']
+
+                    m_app = list(set(app_set_list_ad) & set(app_set_list_rm))
+                    
+                    if m_app:
+                        for m in m_app:
+                            app_set_list_rm.remove(m)
+                            app_set_list_ad.remove(m)
+                    flag_rm = (policies_list_rm[i]['match']['source-address-sets'] or policies_list_rm[i]['match']['destination-address-sets'] or policies_list_rm[i]['match']['service-sets'] or policies_list_rm[i]['match']['application-sets'] )
+                    if not flag_rm:
                         del policies_list_rm[i]
-                        del policies_list_add[j]
                         i = i - 1
+                    flag_ad = (policies_list_add[j]['match']['source-address-sets'] or policies_list_add[j]['match']['destination-address-sets'] or policies_list_add[j]['match']['service-sets'] or policies_list_add[j]['match']['application-sets'] )
+                    if not flag_ad:
+                        del policies_list_add[j]
                         j = j - 1
-                        break
+
                 j = j + 1
             i = i + 1
+
 
     return (dict_diff)
 
@@ -391,10 +514,11 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index):
     address_set_index_ = copy.deepcopy(address_set_index)
     service_set_index_ = copy.deepcopy(service_set_index)
 
-    if ('policies' in psef_conf_['data']):
-        for policy_ in psef_conf_['data']['policies']:
+    if ('policies' in psef_conf['data']):
+        j = 0
+        for policy_ in psef_conf['data']['policies']:
+            i = 0
             for source_address_set_ in policy_["match"]["source-address-sets"]:
-                policy_["match"]["source-address-sets"].remove(source_address_set_)
                 address_set_dict_ = {}
                 address_set_index_dict = address_set_index_[source_address_set_]
                 for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
@@ -403,10 +527,10 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index):
                         address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
                         del address_set_index_dict['structure-to-addresses'][struct_key]
                 address_set_dict_ = { source_address_set_:address_set_index_dict }
-                policy_["match"]["source-address-sets"].append(address_set_dict_)
-
+                psef_conf_['data']['policies'][j]["match"]["source-address-sets"][i] = address_set_dict_
+                i = i + 1
+            i = 0
             for destination_address_set_ in policy_["match"]["destination-address-sets"]:
-                policy_["match"]["destination-address-sets"].remove(destination_address_set_)
                 address_set_dict_ = {}
                 address_set_index_dict = address_set_index_[destination_address_set_]
                 for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
@@ -415,14 +539,16 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index):
                         address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
                         del address_set_index_dict['structure-to-addresses'][struct_key]
                 address_set_dict_ = { destination_address_set_:address_set_index_dict }
-                policy_["match"]["destination-address-sets"].append(address_set_dict_)
-
+                psef_conf_['data']['policies'][j]["match"]["destination-address-sets"][i] = address_set_dict_
+                i = i + 1
+            i = 0
             for service_set_ in policy_["match"]["service-sets"]:
-                policy_["match"]["service-sets"].remove(service_set_)
                 service_set_dict_ = {}
                 service_set_index_dict = {}
                 service_set_index_dict = service_set_index_[service_set_]
-                policy_["match"]["service-sets"].append(service_set_index_dict)
+                psef_conf_['data']['policies'][j]["match"]["service-sets"][i] = service_set_index_dict
+                i = i + 1
+            j = j + 1
 
     return (psef_conf_)
 

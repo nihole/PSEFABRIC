@@ -82,6 +82,13 @@ submodule addresses {
 		  mandatory true;
 		  type boolean;
 	  }
+	  leaf epg {
+		  mandatory true;
+		  type boolean;  
+	  }
+	  leaf parameters {
+		  type string;
+	  }
  	  leaf-list addresses {
  		  min-elements 1;
 		  type leafref {

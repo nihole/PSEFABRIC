@@ -1,37 +1,31 @@
 '''
-Administrator has to describe the equipment of psefabric.
-In this realisation of psefabric the words 'cisco'  and 'juniper' are essential.
-The mul_cfg.py script uses them in the deciding how to process the data.
+Adminstrator has to describe the equipment of psefabric.
+The mult_cfg.py script uses these dicts in the deciding of how to process the data.
 '''
 
 def host_to_type():
     host = {}
     host['panorama'] = 'pa_panorama'
-    host['OSS_AA'] = 'pa_panorama'
-    host['OSS_INTERNET'] = 'pa_panorama'
-    host['INTERNAL_AA'] = 'pa_panorama'
-    host['EXTERNAL_AA'] = 'pa_panorama'
-    host['CORPO_INTERNET'] = 'pa_panorama'
-    host['shared'] = 'pa_panorama'
+    host['aci_dc1_oss'] = 'cisco_aci'
+    host['aci_dc1_corpo'] = 'cisco_aci'
+    host['aci_dc2_oss'] = 'cisco_aci'
+    host['aci_dc2_corpo'] = 'cisco_aci'
     return host
 
-def map():
-    map = {}
-    map['pan'] = {}
-    map['pan']['area'] = {}
-    map['pan']['area']['EXTERNAL_AA'] = 'EXTERNAL_AA'
-    map['pan']['area']['INTERNAL_AA'] = 'INTERNAL_AA'
-    map['pan']['area']['OSS_AA'] = 'OSS_AA'
-    map['pan']['eq']['EXTERNAL_AA'] = 'panorama'
-    map['pan']['eq']['INTERNAL_AA'] = 'panorama'
-    map['pan']['eq']['OSS_AA'] = 'panorama'
-
-    map['aci'] = {}
-    map['aci']['area'] = {}
-    map['aci']['area']['EXTERNAL_AA'] = 'ext-stg'
-    map['aci']['area']['INTERNAL_AA'] = 'int-stg'
-    map['aci']['area']['OSS_AA'] = 'oss-stg'
+def area_to_eq_aci():
     
-    map['aci']['eq']['EXTERNAL_AA'] = 'panorama'
-    map['aci']['eq']['INTERNAL_AA'] = 'panorama'
-    map['aci']['eq']['OSS_AA'] = 'panorama'
+    map_aci = {}
+
+    map_aci['dc1'] = {}
+    map_aci['dc2'] = {}
+    map_aci['dc1']['oss_aa'] = 'aci_dc1_oss'
+    map_aci['dc1']['int_aa'] = 'aci_dc1_corpo'
+    map_aci['dc1']['ext_aa'] = 'aci_dc1_corpo'
+    map_aci['dc1']['corpo_internet'] = 'aci_dc1_corpo'
+    map_aci['dc1']['oss_internet'] = 'aci_dc1_oss'
+    map_aci['dc2']['oss_aa'] = 'aci_dc2_oss'
+    map_aci['dc2']['int_aa'] = 'aci_dc2_corpo'
+    map_aci['dc2']['ext_aa'] = 'aci_dc2_corpo'
+    map_aci['dc2']['corpo_internet'] = 'aci_dc2_corpo'
+    map_aci['dc2']['oss_internet'] = 'aci_dc2_oss'
+    return map_aci

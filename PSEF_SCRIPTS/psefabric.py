@@ -45,6 +45,8 @@ username='admin'
 password='admin'
 host='127.0.0.1'
 port = 2022
+diff_dict_full =''
+diff_dict = ''
 
 # take new and old xml config files and transfirm them to the dictionaries
 
@@ -112,22 +114,35 @@ if psef_debug.deb:   # if debuging is on then:
 
 ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=2, ignore_order=True, report_repetition=False)
 
+
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('ddiff', ddiff)
 
 # transform the structure of the ddiff dictionary to more convinient view
-cda.diff_dict = cda.ddiff_dict(ddiff)
+diff_dict_full = cda.ddiff_dict(ddiff)
+
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('diff_dict', cda.diff_dict)
+    psef_debug.WriteDebug('diff_dict_full', diff_dict_full)
+
+diff_dict = cda.diff_opt(diff_dict_full)
+
+
+if psef_debug.deb:   # if debuging is on then:
+    psef_debug.WriteDebug('diff_dict', diff_dict)
 
 # Extract set of commands for each MO
-multiplexer.cmd_for_host = multiplexer.multiplex(cda.diff_dict)
+multiplexer.cmd_for_host = multiplexer.multiplex(diff_dict)
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('cmd_for_host', multiplexer.cmd_for_host)
 
+multiplexer.cmd_for_host_full = multiplexer.multiplex(diff_dict_full)
+
+if psef_debug.deb:   # if debuging is on then:
+    psef_debug.WriteDebug('cmd_for_host_full', multiplexer.cmd_for_host_full)
+
 # Create configyration
-cfg.cfg = cfg.create_configs(multiplexer.cmd_for_host)
+cfg.cfg = cfg.create_configs(multiplexer.cmd_for_host, multiplexer.cmd_for_host_full)
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('cfg', cfg.cfg)
 

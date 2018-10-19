@@ -39,9 +39,9 @@ def mult_cfg(cfg_):
 
     host_ = copy.deepcopy(host_to_type.host_to_type())
     for eq_addr in cfg_:
-        if re.search('juniper', host_[eq_addr]):
-            config_ = '<configuration>' + '\n' + cfg_[eq_addr]  + '\n' + '</configuration>'
-            version_file(eq_addr, config_,'xml')
+        if re.search('aci', host_[eq_addr]):
+            config_ = cfg_[eq_addr]
+            version_file(eq_addr, config_,'json')
         elif re.search('panorama', host_[eq_addr]):
             config_ = cfg_[eq_addr]
 #            config_ = 'configure' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
@@ -52,9 +52,9 @@ def mult_cfg(cfg_):
             version_file(eq_addr, config,'txt')
         del host_[eq_addr]
     for rest_hosts in  host_:
-        if re.search('juniper', host_[rest_hosts]): 
+        if re.search('aci_', host_[rest_hosts]): 
             config = ''
-            version_file(rest_hosts, config,'xml')
+            version_file(rest_hosts, config,'json')
         elif re.search('panorama', host_[rest_hosts]):
             config = ''
             version_file(rest_hosts, config,'txt') 
