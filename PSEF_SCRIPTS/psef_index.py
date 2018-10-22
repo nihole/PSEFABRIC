@@ -9,6 +9,7 @@ More details see in the descriptions of the functions
 '''
 
 import psef_debug
+import copy
 
 def policy_index (policy_, add_):
 
@@ -121,11 +122,14 @@ def policy_index (policy_, add_):
                         struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
             else:
                 print "Incorect value of add_ in  policy_index"
-    policy_index = policy_
-    policy_index['match']['source-addresses'] = {}
-    policy_index['match']['source-addresses'] = struct_to_source
-    policy_index['match']['destination-addresses'] = {}
-    policy_index['match']['destination-addresses'] = struct_to_destination
+
+    policy_index = copy.deepcopy(policy_)
+    del policy_index['match']['source-address-sets']
+    del policy_index['match']['destination-address-sets']
+    policy_index['match']['source-address-sets'] = {}
+    policy_index['match']['source-address-sets'] = struct_to_source
+    policy_index['match']['destination-address-sets'] = {}
+    policy_index['match']['destination-address-sets'] = struct_to_destination
 
     psef_debug.WriteDebug('psef_index', policy_index)
 

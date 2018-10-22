@@ -14,7 +14,6 @@ def create_configs (cmd_for_host, cmd_for_host_full):
     Extracts data from dict cmd_for_host and transforms it into configuration lines using templates.
     '''
 #############  BODY ############ 
-    print cmd_for_host
 
     for eq_name in cmd_for_host_full:
         cfg[eq_name] = ''
@@ -40,8 +39,8 @@ def create_configs (cmd_for_host, cmd_for_host_full):
 
 # rm policy
         if (eq_name == 'panorama'):
-            if (cmd_for_host[eq_name]['rm']['policy']):
-                policy_list = cmd_for_host[eq_name]['rm']['policy']
+            if (cmd_for_host_full[eq_name]['rm']['policy']):
+                policy_list = cmd_for_host_full[eq_name]['rm']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
                         cfg_new = eval(command_element + "(el['eq_parameter'], el['policy-alias-1'])")

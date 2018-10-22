@@ -16,6 +16,7 @@ def VersionFile(file_spec, vtype='copy'):
              root = file_spec
 
         # Find next available file version
+        last_ = 0
         for i in xrange(1000):
             file_ = '%s.%03d' % (root, i)
             if not os.path.isfile(file_):

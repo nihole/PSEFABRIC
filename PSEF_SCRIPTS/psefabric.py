@@ -16,6 +16,8 @@ import cfg
 import mult_cfg
 import json
 import psef_debug
+import copy
+
 PSEFABRIC =os.environ['PSEFABRIC'] + "/PSEFABRIC"
 
 def version_file(flg_ok_):
@@ -126,23 +128,31 @@ if psef_debug.deb:   # if debuging is on then:
 
 diff_dict = cda.diff_opt(diff_dict_full)
 
-
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('diff_dict', diff_dict)
 
 # Extract set of commands for each MO
-multiplexer.cmd_for_host = multiplexer.multiplex(diff_dict)
+
+multiplexer.cmd_for_host = {}
+multiplexer.policy_index_ = {}
+multiplexer.initiate_cmd_for_host()
+multiplexer.policy_index_ = {'ad':[], 'rm':[]}
+multiplexer.multiplex(diff_dict_full)
+
+cmd_for_host_full = copy.deepcopy(multiplexer.cmd_for_host)
+policy_index_full = copy.deepcopy(multiplexer.policy_index_)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('cmd_for_host', multiplexer.cmd_for_host)
+    psef_debug.WriteDebug('cmd_for_host', cmd_for_host_full)
+    psef_debug.WriteDebug('policy_index', policy_index_full)
 
-multiplexer.cmd_for_host_full = multiplexer.multiplex(diff_dict_full)
+cmd_for_host = multiplexer.policy_opt(cmd_for_host_full)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('cmd_for_host_full', multiplexer.cmd_for_host_full)
+    psef_debug.WriteDebug('cmd_for_host', cmd_for_host)
 
 # Create configyration
-cfg.cfg = cfg.create_configs(multiplexer.cmd_for_host, multiplexer.cmd_for_host_full)
+cfg.cfg = cfg.create_configs(cmd_for_host, cmd_for_host_full)
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('cfg', cfg.cfg)
 

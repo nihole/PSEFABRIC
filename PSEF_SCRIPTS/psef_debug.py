@@ -29,6 +29,7 @@ debug['service_set_index_new'] = True
 debug['service_set_index_old'] = True
 
 debug['policy_index'] = True
+debug['policy_index_full'] = True
 debug['ddiff'] = True
 debug['diff_dict'] = True
 debug['diff_dict_full'] = True
@@ -64,23 +65,23 @@ def ChangeType (dict_, type_):
     if (type_ == "policy"):
         policy_ = copy.deepcopy(dict_)
         for policy_element in policy_['rm']:
-            for struct_key in policy_element['match']['source-addresses'].keys():
+            for struct_key in policy_element['match']['source-address-sets'].keys():
                 new_str_key = "(%s,%s)" % struct_key
-                policy_element['match']['source-addresses'][new_str_key] = policy_element['match']['source-addresses'][struct_key]
-                del policy_element['match']['source-addresses'][struct_key]
-            for struct_key in policy_element['match']['destination-addresses'].keys():
+                policy_element['match']['source-address-sets'][new_str_key] = policy_element['match']['source-address-sets'][struct_key]
+                del policy_element['match']['source-address-sets'][struct_key]
+            for struct_key in policy_element['match']['destination-address-sets'].keys():
                 new_str_key = "(%s,%s)" % struct_key
-                policy_element['match']['destination-addresses'][new_str_key] = policy_element['match']['destination-addresses'][struct_key]
-                del policy_element['match']['destination-addresses'][struct_key]
+                policy_element['match']['destination-address-sets'][new_str_key] = policy_element['match']['destination-address-sets'][struct_key]
+                del policy_element['match']['destination-address-sets'][struct_key]
         for policy_element in policy_['ad']:
-            for struct_key in policy_element['match']['source-addresses'].keys():
+            for struct_key in policy_element['match']['source-address-sets'].keys():
                 new_str_key = "(%s,%s)" % struct_key
-                policy_element['match']['source-addresses'][new_str_key] = policy_element['match']['source-addresses'][struct_key]
-                del policy_element['match']['source-addresses'][struct_key]
-            for struct_key in policy_element['match']['destination-addresses'].keys():
+                policy_element['match']['source-address-sets'][new_str_key] = policy_element['match']['source-address-sets'][struct_key]
+                del policy_element['match']['source-address-sets'][struct_key]
+            for struct_key in policy_element['match']['destination-address-sets'].keys():
                 new_str_key = "(%s,%s)" % struct_key
-                policy_element['match']['destination-addresses'][new_str_key] = policy_element['match']['destination-addresses'][struct_key]
-                del policy_element['match']['destination-addresses'][struct_key]
+                policy_element['match']['destination-address-sets'][new_str_key] = policy_element['match']['destination-address-sets'][struct_key]
+                del policy_element['match']['destination-address-sets'][struct_key]
         return policy_
     elif (type_ == "address_set"):
         address_set_ = copy.deepcopy(dict_)
@@ -101,7 +102,7 @@ def WriteDebug (dict_name, dict_):
 #############  BODY ############
 
     if dict_name in debug.keys():
-        if (dict_name == 'policy_index'):
+        if (dict_name == 'policy_index') or (dict_name == 'policy_index_full'):
             dict_ = ChangeType(dict_, 'policy')
         elif (dict_name == 'address_set_index_new' or dict_name == 'address_set_index_old'): 
             dict_ = ChangeType(dict_, 'address_set')
