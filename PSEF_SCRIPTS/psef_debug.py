@@ -33,7 +33,7 @@ debug['policy_index_full'] = True
 debug['ddiff'] = True
 debug['diff_dict'] = True
 debug['diff_dict_full'] = True
-debug['cmd_for_host'] = True
+debug['cmd_for_host_diff'] = True
 debug['cmd_for_host_full'] = True
 debug['cfg'] = True
 

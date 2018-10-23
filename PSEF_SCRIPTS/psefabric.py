@@ -143,16 +143,16 @@ cmd_for_host_full = copy.deepcopy(multiplexer.cmd_for_host)
 policy_index_full = copy.deepcopy(multiplexer.policy_index_)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('cmd_for_host', cmd_for_host_full)
+    psef_debug.WriteDebug('cmd_for_host_full', cmd_for_host_full)
     psef_debug.WriteDebug('policy_index', policy_index_full)
 
-cmd_for_host = multiplexer.policy_opt(cmd_for_host_full)
+cmd_for_host_diff = multiplexer.policy_opt(cmd_for_host_full)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('cmd_for_host', cmd_for_host)
+    psef_debug.WriteDebug('cmd_for_host_diff', cmd_for_host_diff)
 
 # Create configyration
-cfg.cfg = cfg.create_configs(cmd_for_host, cmd_for_host_full)
+cfg.cfg = cfg.create_configs(cmd_for_host_diff, cmd_for_host_full)
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('cfg', cfg.cfg)
 

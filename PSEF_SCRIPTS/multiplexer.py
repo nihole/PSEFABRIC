@@ -51,7 +51,6 @@ def initiate_cmd_for_host():
         cmd_for_host[host_el_]['ad']['service'] = []
         cmd_for_host[host_el_]['ad']['application-set'] = []
         cmd_for_host[host_el_]['ad']['application'] = []
-#    print "222VVVVVVVVVVVVVVVV\n%s\n222AAAAAAAAAAAAA" % cmd_for_host
     return cmd_for_host
 
 def cmd_list_address (action_, address_):
@@ -195,14 +194,14 @@ def policy_opt(cmd_for_host_full_):
         addresses_list_rm = cmd_for_host_[eq_el]["rm"]["address"]
         addresses_list_add = cmd_for_host_[eq_el]["ad"]["address"]
 
-        if (bool(addresses_list_rm) and bool(addresses_list_ad)):
+        if (bool(addresses_list_rm) and bool(addresses_list_add)):
             i = 0
             while i < len(addresses_list_rm):
                 j = 0
                 while j < len(addresses_list_add):
                     if (addresses_list_rm[i]["name"] == addresses_list_add[j]["name"]):
                         del addresses_list_rm[i]
-                        del addresses_list_ad[j]
+                        del addresses_list_add[j]
                         i = i - 1
                         break
                     j = j + 1
@@ -220,7 +219,7 @@ def policy_opt(cmd_for_host_full_):
                 while j < len(services_list_add):
                     if (services_list_rm[i]["name"] == services_list_add[j]["name"]):
                         del services_list_rm[i]
-                        del services_list_ad[j]
+                        del services_list_add[j]
                         i = i - 1
                         break
                     j = j + 1
@@ -232,7 +231,7 @@ def policy_opt(cmd_for_host_full_):
         addresses_sets_list_add = cmd_for_host_[eq_el]["ad"]["address-set"]
 
 
-        if (bool(addresses_sets_list_rm) and bool(addresses_sets_list_ad)):
+        if (bool(addresses_sets_list_rm) and bool(addresses_sets_list_add)):
             i = 0
             while i < len(addresses_sets_list_rm):
                 j = 0
@@ -263,7 +262,7 @@ def policy_opt(cmd_for_host_full_):
         service_sets_list_rm = cmd_for_host_[eq_el]["rm"]["service-set"]
         service_sets_list_add = cmd_for_host_[eq_el]["ad"]["service-set"]
 
-        if (bool(service_sets_list_rm) and bool(service_sets_list_ad)):
+        if (bool(service_sets_list_rm) and bool(service_sets_list_add)):
             i = 0
             while i < len(service_sets_list_rm):
                 j = 0
@@ -292,9 +291,9 @@ def policy_opt(cmd_for_host_full_):
     # application-set optimization
 
         application_sets_list_rm = cmd_for_host_[eq_el]["rm"]["application-set"]
-        application_sets_list_rm = cmd_for_host_[eq_el]["ad"]["application-set"]
+        application_sets_list_add = cmd_for_host_[eq_el]["ad"]["application-set"]
 
-        if (bool(application_sets_list_rm) and bool(application_sets_list_ad)):
+        if (bool(application_sets_list_rm) and bool(application_sets_list_add)):
             i = 0
             while i < len(application_sets_list_rm):
                 j = 0
@@ -329,7 +328,6 @@ def policy_opt(cmd_for_host_full_):
             while i < len(policies_list_rm):
                 j = 0
                 while j < len(policies_list_add):
-                    print (i,j)
                     if (policies_list_rm[i]["name"] == policies_list_add[j]["name"]):
                     # address-sets in policy optimization
 
@@ -355,61 +353,46 @@ def policy_opt(cmd_for_host_full_):
                         for dst_addr_set_dict_ad in dst_addr_set_list_ad:
                             dst_address_set_list_ad.append(dst_addr_set_dict_ad["address-set-name"])
 
+#                        print "RMRMRMRMRMR VVVV\n%s\nSRCSRCSRCSRCAAAAA" % src_addr_set_list_rm
+#                        print "ADADADADAAD  VVVV\n%s\nSRCSRCSRCSRCAAAAA" % src_addr_set_list_ad
+
                         m_src = set(src_address_set_list_ad) & set(src_address_set_list_rm)
-                        print src_address_set_list_ad
-                        print src_address_set_list_rm
-                        print m_src
                         if m_src:
-                            l = 0
-                            while l < len(src_addr_set_list_rm):
-                                for m in m_src:
-                                    for src_addr_set_rm in src_addr_set_list_rm[l]:
-                                        if (m == src_addr_set_rm):
-                                            src_addr_set_list_rm.remove(src_addr_set_list_rm[l])
-                                            l = l - 1
-                                            break
-                                    if (l < 0):
+                            for m in list(m_src):
+                                l = 0
+                                while l < len(src_addr_set_list_rm):
+#                                    print "l = %s, m = %s, name = %s" % (l, m, src_addr_set_list_rm[l]["address-set-name"])
+                                    if (m == src_addr_set_list_rm[l]["address-set-name"]):
+                                        src_addr_set_list_rm.remove(src_addr_set_list_rm[l])
                                         break
-
-                                l = l + 1
-                            l = 0
-                            while l < len(src_addr_set_list_ad):
-                                for src_addr_set_ad in src_addr_set_list_ad[l]:
-                                    for m in m_src:
-                                        if (m == src_addr_set_ad):
-                                            src_addr_set_list_ad.remove(src_addr_set_list_ad[l])
-                                            l = l - 1
-                                            break
-                                    if (l < 0):
+                                    l = l + 1
+                            for m in list(m_src):
+                                l = 0
+                                while l < len(src_addr_set_list_ad):
+#                                    print "l = %s, m = %s, name = %s" % (l, m, src_addr_set_list_ad[l]["address-set-name"])
+                                    if (m == src_addr_set_list_ad[l]["address-set-name"]):
+                                        src_addr_set_list_ad.remove(src_addr_set_list_ad[l])
                                         break
+                                    l = l + 1
 
-                                l = l + 1
                         m_dst = set(dst_address_set_list_ad) & set(dst_address_set_list_rm)
                         if m_dst:
-                            l = 0
-                            while l < len(dst_addr_set_list_rm):
-                                for dst_addr_set_rm in dst_addr_set_list_rm[l]:
-                                    for m in m_dst:
-                                        if (m == dst_addr_set_rm):
-                                            dst_addr_set_list_rm.remove(dst_addr_set_list_rm[l])
-                                            l = l - 1
-                                            break
-                                    if (l < 0):
+                            for m in list(m_dst):
+                                l = 0
+                                while l < len(dst_addr_set_list_rm):
+#                                    print "l = %s, m = %s, name = %s" % (l, m, dst_addr_set_list_rm[l]["address-set-name"])
+                                    if (m == dst_addr_set_list_rm[l]["address-set-name"]):
+                                        dst_addr_set_list_rm.remove(dst_addr_set_list_rm[l])
                                         break
-
-                                l = l + 1
-                            l = 0
-                            while l < len(dst_addr_set_list_ad):
-                                for dst_addr_set_ad in dst_addr_set_list_ad[l]:
-                                    for m in m_dst:
-                                        if (m == dst_addr_set_ad):
-                                            dst_addr_set_list_ad.remove(dst_addr_set_list_ad[l])
-                                            l = l - 1
-                                            break
-                                    if (l < 0):
+                                    l = l + 1
+                            for m in list(m_dst):
+                                l = 0
+                                while l < len(dst_addr_set_list_ad):
+#                                    print "l = %s, m = %s, name = %s" % (l, m, dst_addr_set_list_ad[l]["address-set-name"])
+                                    if (m == dst_addr_set_list_ad[l]["address-set-name"]):
+                                        dst_addr_set_list_ad.remove(dst_addr_set_list_ad[l])
                                         break
-
-                                l = l + 1
+                                    l = l + 1
 
                         # service-set in policy iptimization
 
@@ -525,7 +508,6 @@ def cmd_list_policy (action_, pol_):
             AAAAAAAAAAAAAAAAAA
             '''  % (src_resolve_element, dst_resolve_element, src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_) 
 
-#            print message
 
             policy_attributes = {}
             mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_, pol_['match']['service-sets'])
