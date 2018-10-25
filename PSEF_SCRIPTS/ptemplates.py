@@ -12,8 +12,9 @@ import cidr_to_netmask
 ######## addresses  ###########
 
 def pan_create_address (device_group, name, ipv4_prefix):
-    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
-    config_txt = '''set %s address %s ip-netwask %s/%s''' % (device_group, name, network, netmask)
+#    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
+#    config_txt = '''set %s address %s ip-netmask %s/%s''' % (device_group, name, network, netmask)
+    config_txt = '''set %s address %s ip-netmask %s''' % (device_group, name, ipv4_prefix)
     return config_txt
 
 def pan_delete_address (device_group, name, ipv4_prefix):
@@ -46,7 +47,7 @@ def pan_delete_address_set (device_group, name, addresses):
 
     config_addresses = '[ ' + config_addresses + ' ]'
 
-    config_txt = '''delete %s address-group %s static %s''' % (device_group, name, config_addresses)
+    config_txt = '''delete %s address-group %s''' % (device_group, name)
     return config_txt
 
 
@@ -62,15 +63,18 @@ def pan_create_service (device_group, name, prot, ports):
     else:
         prot_ = prot
     if 'lower-port' in ports:
-        ports_range = '%s-%s' % (ports['lower-port'], ports['upper-port'])
+        if (ports['lower-port'] < ports['upper-port']):
+            ports_range = '%s-%s' % (ports['lower-port'], ports['upper-port'])
+        else:
+            ports_range = '%s' % ports['lower-port']
     else:
         ports_range = ''
-    config_txt = '''set %s services %s protocol %s port %s''' % (device_group, name, prot_, ports_range)
+    config_txt = '''set %s service %s protocol %s port %s''' % (device_group, name, prot_, ports_range)
 
     return config_txt
 
 def pan_delete_service (device_group, name, prot, ports):
-    config_txt = '''delete %s services %s''' % (device_group, name)
+    config_txt = '''delete %s service %s''' % (device_group, name)
     return config_txt
 
 
@@ -105,7 +109,7 @@ def pan_delete_service_set (device_group, name, service):
     config_services = '[ ' + config_services + ' ]'
 
 
-    config_txt='''delete %s service-group %s member %s''' % (device_group, name, config_services)
+    config_txt='''delete %s service-group %s ''' % (device_group, name)
 
     return config_txt
 
@@ -140,7 +144,7 @@ def pan_delete_application_set (device_group, name, application):
     config_applications = '[ ' + config_applications + ' ]'
 
 
-    config_txt='''delete %s application-group %s member %s''' % (device_group, name, config_applications)
+    config_txt='''delete %s application-group %s''' % (device_group, name)
 
     return config_txt
 
@@ -227,17 +231,17 @@ def pan_create_policy (device_group, name, source_address_set_list, destination_
 
     for source_address_set_element in source_address_set_list:
         if re.match(config_match_source, ''):
-            config_match_source = '%s' % source_address_set_element['address-set-name']
+            config_match_source = '%s' % source_address_set_element["address-set-alias-1"]
         else:
-            config_match_source = config_match_source + ' %s' % source_address_set_element['address-set-name']
+            config_match_source = config_match_source + ' %s' % source_address_set_element["address-set-alias-1"]
 
     config_match_source = '[ ' + config_match_source + ' ]'
 
     for destination_address_set_element in destination_address_set_list:
         if re.match(config_match_destination, ''):
-            config_match_destination = '%s' % destination_address_set_element['address-set-name']
+            config_match_destination = '%s' % destination_address_set_element["address-set-alias-1"]
         else:
-            config_match_destination = config_match_destination + ' %s' % destination_address_set_element['address-set-name']
+            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["address-set-alias-1"]
 
     config_match_destination = '[ ' + config_match_destination + ' ]'
 

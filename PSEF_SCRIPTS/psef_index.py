@@ -62,18 +62,18 @@ def policy_index (policy_, add_):
                         struct_to_source[key_s_to_p] = []
                         struct_to_source_el_ = {}
                         struct_to_source_el_['address-set-name'] = source_address_set_
-                        struct_to_source_el_['address-set-alias-1'] = address_set_index_new[source_address_set_]['address-set-alias-1']
-                        struct_to_source_el_['address-set-alias-2'] = address_set_index_new[source_address_set_]['address-set-alias-2']
-                        struct_to_source_el_['acipath'] = address_set_index_new[source_address_set_]['parameters']
+                        struct_to_source_el_['address-set-alias-1'] = address_set_index_old[source_address_set_]['address-set-alias-1']
+                        struct_to_source_el_['address-set-alias-2'] = address_set_index_old[source_address_set_]['address-set-alias-2']
+                        struct_to_source_el_['acipath'] = address_set_index_old[source_address_set_]['parameters']
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
                         struct_to_source[key_s_to_p].append(struct_to_source_el_)
                         del struct_to_source_el_
                     else:
                         struct_to_source_el_ = {}
                         struct_to_source_el_['address-set-name'] = source_address_set_
-                        struct_to_source_el_['address-set-alias-1'] = address_set_index_new[source_address_set_]['address-set-alias-1']
-                        struct_to_source_el_['address-set-alias-2'] = address_set_index_new[source_address_set_]['address-set-alias-2']
-                        struct_to_source_el_['acipath'] = address_set_index_new[source_address_set_]['parameters']
+                        struct_to_source_el_['address-set-alias-1'] = address_set_index_old[source_address_set_]['address-set-alias-1']
+                        struct_to_source_el_['address-set-alias-2'] = address_set_index_old[source_address_set_]['address-set-alias-2']
+                        struct_to_source_el_['acipath'] = address_set_index_old[source_address_set_]['parameters']
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][key_s_to_p]
                         struct_to_source[key_s_to_p].append(struct_to_source_el_)
             else:
@@ -106,18 +106,18 @@ def policy_index (policy_, add_):
                         struct_to_destination[key_s_to_p] = []
                         struct_to_destination_el_ = {}
                         struct_to_destination_el_['address-set-name'] = destination_address_set_
-                        struct_to_destination_el_['address-set-alias-1'] = address_set_index_new[destination_address_set_]['address-set-alias-1']
-                        struct_to_destination_el_['address-set-alias-2'] = address_set_index_new[destination_address_set_]['address-set-alias-2']
-                        struct_to_destination_el_['acipath'] = address_set_index_new[destination_address_set_]['parameters']
+                        struct_to_destination_el_['address-set-alias-1'] = address_set_index_old[destination_address_set_]['address-set-alias-1']
+                        struct_to_destination_el_['address-set-alias-2'] = address_set_index_old[destination_address_set_]['address-set-alias-2']
+                        struct_to_destination_el_['acipath'] = address_set_index_old[destination_address_set_]['parameters']
                         struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                         struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
                         del struct_to_destination_el_
                     else:
                         struct_to_destination_el_ = {}
                         struct_to_destination_el_['address-set-name'] = destination_address_set_
-                        struct_to_destination_el_['address-set-alias-1'] = address_set_index_new[destination_address_set_]['address-set-alias-1']
-                        struct_to_destination_el_['address-set-alias-2'] = address_set_index_new[destination_address_set_]['address-set-alias-2']
-                        struct_to_destination_el_['acipath'] = address_set_index_new[destination_address_set_]['parameters']
+                        struct_to_destination_el_['address-set-alias-1'] = address_set_index_old[destination_address_set_]['address-set-alias-1']
+                        struct_to_destination_el_['address-set-alias-2'] = address_set_index_old[destination_address_set_]['address-set-alias-2']
+                        struct_to_destination_el_['acipath'] = address_set_index_old[destination_address_set_]['parameters']
                         struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][key_s_to_p]
                         struct_to_destination[key_s_to_p].append(struct_to_destination_el_)
             else:
@@ -163,6 +163,8 @@ def address_index (psef_conf_):
                 address_set_index_[address_set_element['address-set-name']]['parameters'] = address_set_element['parameters']
             else:
                 address_set_index_[address_set_element['address-set-name']]['parameters'] = ''
+
+            address_set_index_[address_set_element['address-set-name']]['configure'] = address_set_element['configure']
 
             address_set_index_[address_set_element['address-set-name']]['address-set-alias-2'] = address_set_element['address-set-alias-2']
             address_set_index_[address_set_element['address-set-name']]['structure-to-addresses'] = {}

@@ -82,9 +82,13 @@ def cmd_list_address_set (action_, address_set_):
         sys.exit("Incorrect action!!")
 
     mult_dict_add_set = psef_logic.mult_dict_address_set(address_set_['configure'])
-
+    address_list = []
+    j = 0
+    for address_dict_el in address_set_['addresses']:
+        address_list.append(address_set_['addresses'][j]["address-alias-1"])
+        j = j + 1
     for cmd_element in mult_dict_add_set:
-        address_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':address_set_['address-set-name'], 'address-set-alias-1':address_set_['address-set-alias-1'], 'address-set-alias-2':address_set_['address-set-alias-2'], 'address':address_set_['addresses']}
+        address_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':address_set_['address-set-name'], 'address-set-alias-1':address_set_['address-set-alias-1'], 'address-set-alias-2':address_set_['address-set-alias-2'], 'address-list':address_list}
         address_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address-set'].append(address_set_attributes)
     return cmd_for_host
@@ -121,9 +125,13 @@ def cmd_list_service_set (action_, service_set_):
         sys.exit("Incorrect action!!")
 
     mult_dict_add_set = psef_logic.mult_dict_service_set(service_set_['configure'])
-
+    service_list = []
+    j = 0
+    for service_dict_el in service_set_['services']:
+        service_list.append(service_set_['services'][j]["service-alias-1"])
+        j = j + 1
     for cmd_element in mult_dict_add_set:
-        service_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':service_set_['service-set-name'], 'service-set-alias-1':service_set_['service-set-alias-1'], 'service-set-alias-2':service_set_['service-set-alias-2'], 'service':service_set_['services']}
+        service_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':service_set_['service-set-name'], 'service-set-alias-1':service_set_['service-set-alias-1'], 'service-set-alias-2':service_set_['service-set-alias-2'], 'service-list':service_list}
         service_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['service-set'].append(service_set_attributes)
     return cmd_for_host
@@ -353,15 +361,12 @@ def policy_opt(cmd_for_host_full_):
                         for dst_addr_set_dict_ad in dst_addr_set_list_ad:
                             dst_address_set_list_ad.append(dst_addr_set_dict_ad["address-set-name"])
 
-#                        print "RMRMRMRMRMR VVVV\n%s\nSRCSRCSRCSRCAAAAA" % src_addr_set_list_rm
-#                        print "ADADADADAAD  VVVV\n%s\nSRCSRCSRCSRCAAAAA" % src_addr_set_list_ad
 
                         m_src = set(src_address_set_list_ad) & set(src_address_set_list_rm)
                         if m_src:
                             for m in list(m_src):
                                 l = 0
                                 while l < len(src_addr_set_list_rm):
-#                                    print "l = %s, m = %s, name = %s" % (l, m, src_addr_set_list_rm[l]["address-set-name"])
                                     if (m == src_addr_set_list_rm[l]["address-set-name"]):
                                         src_addr_set_list_rm.remove(src_addr_set_list_rm[l])
                                         break
@@ -369,7 +374,6 @@ def policy_opt(cmd_for_host_full_):
                             for m in list(m_src):
                                 l = 0
                                 while l < len(src_addr_set_list_ad):
-#                                    print "l = %s, m = %s, name = %s" % (l, m, src_addr_set_list_ad[l]["address-set-name"])
                                     if (m == src_addr_set_list_ad[l]["address-set-name"]):
                                         src_addr_set_list_ad.remove(src_addr_set_list_ad[l])
                                         break
@@ -380,7 +384,6 @@ def policy_opt(cmd_for_host_full_):
                             for m in list(m_dst):
                                 l = 0
                                 while l < len(dst_addr_set_list_rm):
-#                                    print "l = %s, m = %s, name = %s" % (l, m, dst_addr_set_list_rm[l]["address-set-name"])
                                     if (m == dst_addr_set_list_rm[l]["address-set-name"]):
                                         dst_addr_set_list_rm.remove(dst_addr_set_list_rm[l])
                                         break
@@ -388,7 +391,6 @@ def policy_opt(cmd_for_host_full_):
                             for m in list(m_dst):
                                 l = 0
                                 while l < len(dst_addr_set_list_ad):
-#                                    print "l = %s, m = %s, name = %s" % (l, m, dst_addr_set_list_ad[l]["address-set-name"])
                                     if (m == dst_addr_set_list_ad[l]["address-set-name"]):
                                         dst_addr_set_list_ad.remove(dst_addr_set_list_ad[l])
                                         break

@@ -84,7 +84,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['service-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -112,7 +112,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['address-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -120,9 +120,9 @@ def create_configs (cmd_for_host, cmd_for_host_full):
 # rm address-set
         if (eq_name == 'panorama'):
             if (cmd_for_host[eq_name]['rm']['address-set']):
-                for el in cmd_for_host[eq_name]['rm']['address-set']:
+                for el in cmd_for_host_full[eq_name]['rm']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -138,9 +138,9 @@ def create_configs (cmd_for_host, cmd_for_host_full):
 # rm service-set
         if (eq_name == 'panorama'):
             if (cmd_for_host[eq_name]['rm']['service-set']):
-                for el in cmd_for_host[eq_name]['rm']['service-set']:
+                for el in cmd_for_host_full[eq_name]['rm']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 # rm service
@@ -159,7 +159,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
 # rm application-set
         if (eq_name == 'panorama'):
             if (cmd_for_host[eq_name]['rm']['application-set']):
-                for el in cmd_for_host[eq_name]['rm']['application-set']:
+                for el in cmd_for_host_full[eq_name]['rm']['application-set']:
                     for command_element in el['command-list']:
                         cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new

@@ -107,8 +107,8 @@ if psef_debug.deb:   # if debuging is on then:
 # make the difference between new and old configs
 
 
-cda.psef_conf_new = cda.dict_full_policy(cda.psef_conf_new, psef_index.address_set_index_new, psef_index.service_set_index_new)
-cda.psef_conf_old = cda.dict_full_policy(cda.psef_conf_old, psef_index.address_set_index_old, psef_index.service_set_index_old)
+cda.psef_conf_new = cda.dict_full_policy(cda.psef_conf_new, psef_index.address_set_index_new, psef_index.service_set_index_new, psef_index.address_index_new, psef_index.service_index_new)
+cda.psef_conf_old = cda.dict_full_policy(cda.psef_conf_old, psef_index.address_set_index_old, psef_index.service_set_index_old, psef_index.address_index_old, psef_index.service_index_old)
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('psef_conf_policy_full_new', cda.psef_conf_new)
@@ -126,10 +126,10 @@ diff_dict_full = cda.ddiff_dict(ddiff)
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('diff_dict_full', diff_dict_full)
 
-diff_dict = cda.diff_opt(diff_dict_full)
+#diff_dict = cda.diff_opt(diff_dict_full)
 
-if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('diff_dict', diff_dict)
+#if psef_debug.deb:   # if debuging is on then:
+#    psef_debug.WriteDebug('diff_dict', diff_dict)
 
 # Extract set of commands for each MO
 

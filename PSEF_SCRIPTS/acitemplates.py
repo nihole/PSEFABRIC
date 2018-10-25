@@ -13,7 +13,6 @@ def aci_attach_epg (epg_name, contract_name, path, relation):
         contract_path = epg_path + '/' + 'rsprov-%s' % contract_name
 
     config_json = '{"fvTenant":{"attributes":{"dn":%s,"status":"modified"},"children":[{"fvAp":{"attributes":{"dn":%s,"name":%s, "status":"modified"},"children":[{"fvAEPg":{"attributes":{"dn":%s,"status":"modified"},"children":[{"fvRsCons":{"attributes":{"dn":%s,"status":"created,modified"},"children":[]}}]}}]}}]}}' % (tenant_path,path,app,epg_path,contract_path)
-    config_json = 'aci_attach_epg "tenant_path":%s, "path":%s, "app":%s, "epg_path":%s, "contract_path":%s, create' % (tenant_path,path,app,epg_path,contract_path)
     
     return (config_json)
 
@@ -31,7 +30,6 @@ def aci_detach_epg (epg_name, contract_name, path, relation):
 
     config_json = '{"fvTenant":{"attributes":{"dn":%s,"status":"modified"},"children":[{"fvAp":{"attributes":{"dn":%s,"name":%s, "status":"deleted"},"children":[{"fvAEPg":{"attributes":{"dn":%s,"status":"modified"},"children":[{"fvRsCons":{"attributes":{"dn":%s,"status":"created,modified"},"children":[]}}]}}]}}]}}' % (tenant_path,path,app,epg_path,contract_path)
 
-    config_json = '{aci_detach_epg "tenant_path":%s, "path":%s, "app":%s, "epg_path":%s, "contract_path":%s, delete}' % (tenant_path,path,app,epg_path,contract_path)
 
     return (config_json)
 
@@ -44,7 +42,6 @@ def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action 
         config_fltr_ = ''
         for filter_el in subject_el['services']:
             config_fltr_el = '{"vzRsSubjFiltAtt":{"attributes":{"action":"permit","priorityOverride":"default","tnVzFilterName":"%s"}}}' % filter_el["service-alias-2"] 
-            config_fltr_el = '{"filter":%s}' % filter_el["service-alias-2"]
             if (config_fltr_ == ''):
                 config_fltr_ = config_fltr_el
             else:
@@ -52,19 +49,15 @@ def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action 
         config_fltr = '[' + config_fltr_ + ']'
         if (config_sbj == ''):
             config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el["service-set-alias-2"]
-            config_sbj_part = '{"Subj":{"sbjname":%s, "children":' % subject_el["service-set-alias-2"]
             config_sbj = config_sbj_part + config_fltr
         else:
             config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el["service-set-alias-2"]
-            config_sbj_part = '{"Subj":{"sbjname":%s, "children":' % subject_el["service-set-alias-2"]
             config_sbj = config_sbj + ',' + config_sbj_part + config_fltr
         config_sbj = '[' + config_sbj + '}}]'
 
 # Contracts creation:    
-    config_cntr_part = '{"fvTenant":{"attributes":{"dn":"uni/tn-common","status":"modified"},"children":[{"vzBrCP":{"attributes":{"dn":"uni/tn-common/brc-%s","name":"%s","scope":"context"},"children:"' % (subject_el['service-set-alias-2'], subject_el['service-set-alias-2'])
-    config_cntr_part = '{"Tenant":{"contracts":[%s, "subjects"' % subject_el['service-set-alias-2'] 
+    config_cntr_part = '{"fvTenant":{"attributes":{"dn":"uni/tn-common","status":"modified"},"children":[{"vzBrCP":{"attributes":{"dn":"uni/tn-common/brc-%s","name":"%s","scope":"context"},"children":' % (subject_el['service-set-alias-2'], subject_el['service-set-alias-2'])
     config_cntr = config_cntr_part + config_sbj + '}}]}}'
-    onfig_cntr = config_cntr_part + config_sbj + ']}}'
 
 # EPGs attachment
     config_epg = ''

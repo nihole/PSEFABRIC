@@ -31,7 +31,7 @@ debug['service_set_index_old'] = True
 debug['policy_index'] = True
 debug['policy_index_full'] = True
 debug['ddiff'] = True
-debug['diff_dict'] = True
+#debug['diff_dict'] = True
 debug['diff_dict_full'] = True
 debug['cmd_for_host_diff'] = True
 debug['cmd_for_host_full'] = True
@@ -111,7 +111,7 @@ def WriteDebug (dict_name, dict_):
         if debug[dict_name]:
             dict_context = json.dumps(dict_, skipkeys=False, indent=2)
             version_file(dict_name, dict_context)
-    else:
-        print "If you need to debug this dict add to the dict debug in file debug.py"    
+#    else:
+#        print "If you need to debug this dict add to the dict debug in file debug.py"    
 
 
