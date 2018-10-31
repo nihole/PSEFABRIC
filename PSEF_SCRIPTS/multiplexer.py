@@ -245,8 +245,8 @@ def policy_opt(cmd_for_host_full_):
                 j = 0
                 while j < len(addresses_sets_list_add):
                     if (addresses_sets_list_rm[i]["name"] == addresses_sets_list_add[j]["name"]):
-                        address_rm_list = addresses_sets_list_rm[i]["address"]
-                        address_add_list = addresses_sets_list_add[j]["address"]
+                        address_rm_list = addresses_sets_list_rm[i]["address-list"]
+                        address_add_list = addresses_sets_list_add[j]["address-list"]
                         m = set(address_rm_list) & set(address_add_list)
                         address_rm_list = list(set(address_rm_list) - m)
                         address_add_list = list(set(address_add_list) - m)
@@ -276,8 +276,8 @@ def policy_opt(cmd_for_host_full_):
                 j = 0
                 while j < len(service_sets_list_add):
                     if (service_sets_list_rm[i]["name"] == service_sets_list_add[j]["name"]):
-                        service_rm_list = service_sets_list_rm[i]["service"]
-                        service_add_list = service_sets_list_add[j]["service"]
+                        service_rm_list = service_sets_list_rm[i]["service-list"]
+                        service_add_list = service_sets_list_add[j]["service-list"]
                         m = set(service_rm_list) & set(service_add_list)
                         service_rm_list = list(set(service_rm_list) - m)
                         service_add_list = list(set(service_add_list) - m)
@@ -286,12 +286,12 @@ def policy_opt(cmd_for_host_full_):
                             i = i - 1
                             break
                         else:
-                            service_sets_list_rm[i]["service"] = service_rm_list
+                            service_sets_list_rm[i]["service-list"] = service_rm_list
                         if not service_add_list:
                             del service_sets_list_add[j]
                             break
                         else:
-                            service_sets_list_add[i]["service"] = service_add_list
+                            service_sets_list_add[i]["service-list"] = service_add_list
                         break
                     j = j + 1
                 i = i + 1
@@ -476,6 +476,7 @@ def cmd_list_policy (action_, pol_):
     name_ = pol_['policy-name']
     policy_alias_1 = pol_['policy-alias-1']
     policy_alias_2 = pol_['policy-alias-2']
+    epg = pol_['epg']
 #    service_set_list = pol_['match']['service-sets'] 
     application_set_list = pol_['match']['application-sets']
     act = 'permit'
@@ -492,9 +493,11 @@ def cmd_list_policy (action_, pol_):
             dst_address_set_list = pol_['match']['destination-address-sets'][dst_resolve_element]
             src_zone_ = src_resolve_element[0]
             src_area_ = src_resolve_element[1]
+            src_sub_zone_ = src_resolve_element[2]
             src_dc_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
             dst_zone_ = dst_resolve_element[0]
             dst_area_ = dst_resolve_element[1]
+            dst_sub_zone_ = dst_resolve_element[2]
             dst_dc_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
             
             message = '''
@@ -512,14 +515,15 @@ def cmd_list_policy (action_, pol_):
 
 
             policy_attributes = {}
-            mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_, pol_['match']['service-sets'])
+            mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_area_, dst_zone_, dst_sub_zone_, pol_['match']['service-sets'])
             for cmd_element in mult_dict_pol:
-                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-address-sets':src_address_set_list, 'destination-address-sets':dst_address_set_list, 'application-sets':application_set_list, 'service-set-dicts':service_set_list, 'service-sets':service_set_lst, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
+                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "epg":epg, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-address-sets':src_address_set_list, 'destination-address-sets':dst_address_set_list, 'application-sets':application_set_list, 'service-set-dicts':service_set_list, 'service-sets':service_set_lst, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
                 policy_attributes['command-list'] = cmd_element['cmd'][action_]
                 cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
 
 
 #    return cmd_for_host
+
 
 def multiplex(diff_list):
 
@@ -568,8 +572,8 @@ def multiplex(diff_list):
     for application_set_ad_element in diff_list['application_sets_ad']:
         cmd_list_application_set ('ad', application_set_ad_element)
     
-#    if psef_debug.deb:   # if debuging is on then:
-#            psef_debug.WriteDebug('policy_index', policy_index_)
+    if psef_debug.deb:   # if debuging is on then:
+            psef_debug.WriteDebug('policy_index_full', policy_index_)
 
 #    return cmd_for_host
 

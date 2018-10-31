@@ -19,18 +19,32 @@ module policy {
 		  }
 		  leaf policy-alias-1 {
 			  type string;
+			  default "";
+		  }
+		  leaf epg {
+			  mandatory true;
+			  type boolean;  
 		  }
 		  leaf policy-alias-2 {
 			  type string;
+			  default "";
 		  }
 		  container match {
 			  leaf-list source-address-sets {
+				  must "boolean(/address-sets[address-set-name=current()]/epg=../../epg)" {
+				      error-message
+					"All address-sets in policies shoul be with the same epg flag";
+				  } 
 				  min-elements 1;
 				  type leafref {
 					  path "/address-sets/address-set-name";
 				  }
 			   }
 			  leaf-list destination-address-sets {
+				  must "boolean(/address-sets[address-set-name=current()]/epg=../../epg)" {
+				      error-message
+					"All address-sets in policies shoul be with the same epg flag";
+				  }	
 				  min-elements 1;
 				  type leafref {
 					  path "/address-sets/address-set-name";

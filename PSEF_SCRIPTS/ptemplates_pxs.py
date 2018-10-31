@@ -152,21 +152,21 @@ def pan_delete_application_set (device_group, name, application):
 ######### access ###########
 
 
-def pan_create_policy_allapp_dst_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
+def pan_create_policy_allapp_dst_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
 
-#    name = name + '_dtrns'
+    name = name + '_to_transit'
     config_txt = ''
     svc_any = ['any']
     app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'sz_outside', action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'oss-transit', action )
     
     return config_txt
 
-def pan_create_policy_src_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone,  action ):
+def pan_create_policy_src_oss_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone,  action ):
 
-#    name = name + '_strns'
+    name = name + '_from_transit'
     config_txt = ''
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'sz_outside', dst_dc, dst_area, dst_zone, action )
+    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'oss-transit', dst_dc, dst_area, dst_zone, action )
 
     return config_txt
 
@@ -188,18 +188,18 @@ def pan_create_policy_src_inter_area (device_group, name, source_address_set_lis
 
     return config_txt
 
-def pan_delete_policy_allapp_dst_transit (device_group, name ):
+def pan_delete_policy_allapp_dst_oss_transit (device_group, name ):
     
-#    name = name + '_dtrns'
+    name = name + '_to_transit'
     config_txt = ''
 #    app_any = ['any']
     config_txt = pan_delete_policy (device_group, name)
 
     return config_txt
 
-def pan_delete_policy_src_transit (device_group, name):
+def pan_delete_policy_src_oss_transit (device_group, name):
 
-#    name = name + '_strns'
+    name = name + '_from_transit'
     config_txt = ''
     config_txt = pan_delete_policy (device_group, name)
 

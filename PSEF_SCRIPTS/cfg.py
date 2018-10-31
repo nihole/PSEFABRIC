@@ -50,20 +50,21 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if (cmd_for_host[eq_name]['rm']['policy']):
                 policy_list = cmd_for_host[eq_name]['rm']['policy']
                 j = 0
-                for el in policy_list:
-                    if (cmd_for_host[eq_name]['ad']['policy']):
-                        policy_ad_list = cmd_for_host[eq_name]['ad']['policy']
-                        for el_ad in policy_ad_list:
-                            if el['name'] in el_ad.itervalues():
-                                status = 'change'
-                            else:
-                                status = 'delete'
-                    else:
-                        status = 'delete'
-                    for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el['policy-alias-2'], el['source-address-sets'], el['destination-address-sets'], el['service-set-dicts'], 'permit', status)")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
+                if (el['epg'] == 'true'):
+                    for el in policy_list:
+                        if (cmd_for_host[eq_name]['ad']['policy']):
+                            policy_ad_list = cmd_for_host[eq_name]['ad']['policy']
+                            for el_ad in policy_ad_list:
+                                if el['name'] in el_ad.itervalues():
+                                    status = 'change'
+                                else:
+                                    status = 'delete'
+                        else:
+                            status = 'delete'
+                        for command_element in el['command-list']:
+                            cfg_new = eval(command_element + "(el['policy-alias-2'], el['source-address-sets'], el['destination-address-sets'], el['service-set-dicts'], 'permit', status)")
+                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                            cfg_new = ''
                 j = j + 1
 
 
@@ -181,10 +182,13 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 j = 0
                 for el in policy_list:
-                    for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el['policy-alias-2'], el['source-address-sets'],el['destination-address-sets'],el['service-set-dicts'], 'permit')")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
+                    if (el['epg'] == 'true'):
+                        for command_element in el['command-list']:
+                            cfg_new = eval(command_element + "(el['policy-alias-2'], el['source-address-sets'],el['destination-address-sets'],el['service-set-dicts'], 'permit')")
+                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                            cfg_new = ''
+                    else:
+                        print "Maybe conracts are needed to permit traffic between sub-zones for policy %s" % el['name']
                     j = j + 1
 
     return cfg

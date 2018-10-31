@@ -17,9 +17,7 @@ submodule addresses {
 	  }
 	  leaf address-alias-1 {
 		  type string;
-	  }
-	  leaf address-alias-2 {
-		  type string;
+		  mandatory true;
 	  }
 	  leaf configure {
 		  mandatory true;
@@ -34,13 +32,7 @@ submodule addresses {
 	  container structure {
 		  leaf dc {
 			  type leafref {
-				  path "/structure:structure/structure:data-centers";
-			  }
-			  mandatory true;
-		  }
-		  leaf zone {
-			  type leafref {
-				  path "/structure:structure/structure:zones";
+				  path "/structure:structure/structure:data-center";
 			  }
 			  mandatory true;
 		  }
@@ -50,17 +42,23 @@ submodule addresses {
 			  }
 			  mandatory true;
 		  }
+		  leaf zone {
+			  type leafref {
+				  path "/structure:structure/structure:zone";
+			  }
+			  mandatory true;
+		  }
+		  leaf sub-zone {
+			  type leafref {
+				  path "/structure:structure/structure:sub-zone";
+			  }
+			  mandatory true;
+		  }
 		  leaf tag {
 			  type leafref {
 				  path "/structure:structure/structure:tag";
 			  }
 			  mandatory false;
-		  }
-		  leaf app {
-			  type leafref {
-				  path "/structure:structure/structure:app";
-			  }
-			  mandatory true;
 		  }
 	  }
 
@@ -74,9 +72,12 @@ submodule addresses {
 	  }
 	  leaf address-set-alias-1 {
 		  type string;
+		  default '';
 	  }
 	  leaf address-set-alias-2 {
+		  when "../epg = 'true'";
 		  type string;
+		  mandatory true;
 	  }
 	  leaf configure {
 		  mandatory true;
@@ -86,9 +87,13 @@ submodule addresses {
 		  mandatory true;
 		  type boolean;  
 	  }
+	  
 	  leaf parameters {
+		  when "../epg = 'true'";
 		  type string;
+		  mandatory true;  
 	  }
+	  
  	  leaf-list addresses {
  		  min-elements 1;
 		  type leafref {

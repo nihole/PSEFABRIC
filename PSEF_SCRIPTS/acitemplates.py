@@ -1,12 +1,14 @@
 import re
 
 
-def aci_attach_epg (epg_name, contract_name, path, relation):
-    t = re.search('uni/.*', path)
+def aci_attach_epg (contract_name, epg_name, path, relation):
+    t = re.search('(uni/.*)/.*$', path)
     a = re.search('uni/.*/(.*)$', path)
-    tenant_path = t.group(0)
+    tenant_path = t.group(1)
     app = a.group(1)
     epg_path = path + '/' + epg_name 
+
+
     if (relation == 'cons'):
         contract_path = epg_path + '/' + 'rscons-%s' % contract_name
     if (relation == 'prov'):
@@ -16,11 +18,11 @@ def aci_attach_epg (epg_name, contract_name, path, relation):
     
     return (config_json)
 
-def aci_detach_epg (epg_name, contract_name, path, relation):
+def aci_detach_epg (contract_name, epg_name, path, relation):
 
-    t = re.search('uni/.*', path)
+    t = re.search('(uni/.*)/.*$', path)
     a = re.search('uni/.*/(.*)$', path)
-    tenant_path = t.group(0)
+    tenant_path = t.group(1)
     app = a.group(1)
     epg_path = path + '/' + epg_name
     if (relation == 'cons'):

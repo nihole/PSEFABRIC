@@ -10,13 +10,13 @@ module structure {
   import psefabric-types { prefix types; }
   
   container structure {
-	  leaf-list data-centers {
+	  leaf-list data-center {
 		  type types:dc;
 	  }
 	  leaf-list area {
 		  type types:area;
 	  }
-	  leaf-list zones {
+	  leaf-list zone {
 		  type types:zone;
 	  }
 	  leaf-list vrf {

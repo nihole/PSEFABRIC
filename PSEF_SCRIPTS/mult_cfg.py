@@ -1,3 +1,5 @@
+
+
 '''
 The aim of this layer is encapsulation or adaptation of data to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.).
 Files are written to a folder $PSEFABRIC/PSEF_CONF/EQ_CONF/.
@@ -9,6 +11,8 @@ import host_to_type
 import re
 import pa_config_correction
 import copy
+import pa_cfg_correction
+
 PSEFABRIC = os.environ['PSEFABRIC'] + "/PSEFABRIC"
 
 def version_file(eq_addr_, conf_, ext_):
@@ -47,8 +51,7 @@ def mult_cfg(cfg_):
 #            config_ = 'configure' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
             # We need to make some reduction in the case of cli configuration. For more informatiom see str_annihilation.py
 #            config = str_annihilation.str_annihilation(config_)
-#            config = pa_config_correction.pa_config_correction(config_)
-            config = config_
+            config = pa_cfg_correction.pa_cli_correction(config_)
             version_file(eq_addr, config,'txt')
         del host_[eq_addr]
     for rest_hosts in  host_:

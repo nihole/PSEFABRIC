@@ -79,24 +79,28 @@ else:
 cda.psef_conf_new =  cda.dict_correct(psef_conf_new_)
 cda.psef_conf_old =  cda.dict_correct(psef_conf_old_)
 
+if psef_debug.deb:   # if debuging is on then:
+    psef_debug.WriteDebug('psef_conf_new', cda.psef_conf_new)
+    psef_debug.WriteDebug('psef_conf_old', cda.psef_conf_old)
+
 
 # make indexation by addresses and address-sets with the def cda.address_index (see the description of the address_index)
 
 (psef_index.address_index_new, psef_index.address_set_index_new)  = psef_index.address_index (cda.psef_conf_new)
 (psef_index.address_index_old, psef_index.address_set_index_old)  = psef_index.address_index (cda.psef_conf_old)
 
-(psef_index.service_index_new, psef_index.service_set_index_new)  = psef_index.service_index (cda.psef_conf_new)
-(psef_index.service_index_old, psef_index.service_set_index_old)  = psef_index.service_index (cda.psef_conf_old)
-
-if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('psef_conf_new', cda.psef_conf_new)
-    psef_debug.WriteDebug('psef_conf_old', cda.psef_conf_old)
-
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('address_index_new', psef_index.address_index_new)
     psef_debug.WriteDebug('address_index_old', psef_index.address_index_old)
     psef_debug.WriteDebug('address_set_index_new', psef_index.address_set_index_new)
     psef_debug.WriteDebug('address_set_index_old', psef_index.address_set_index_old)
+
+
+(psef_index.service_index_new, psef_index.service_set_index_new)  = psef_index.service_index (cda.psef_conf_new)
+(psef_index.service_index_old, psef_index.service_set_index_old)  = psef_index.service_index (cda.psef_conf_old)
+
+
+if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('service_index_new', psef_index.service_index_new)
     psef_debug.WriteDebug('service_index_old', psef_index.service_index_old)
     psef_debug.WriteDebug('service_set_index_new', psef_index.service_set_index_new)

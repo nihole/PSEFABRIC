@@ -16,9 +16,11 @@ submodule services {
 	  }
 	  leaf service-alias-1 {
 		  type string;
+		  default '';
 	  }
 	  leaf service-alias-2 {
 		  type string;
+		  default '';
 	  }
 	  leaf configure {
 		  mandatory true;
@@ -85,9 +87,11 @@ submodule services {
 	  }
 	 leaf service-set-alias-1 {
 		  type string;
+		  default '';
 	  }
 	  leaf service-set-alias-2 {
 		  type string;
+		  default '';
 	  }
 	 leaf configure {
 		 mandatory true;

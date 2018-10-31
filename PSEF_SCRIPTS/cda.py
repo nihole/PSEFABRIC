@@ -22,7 +22,7 @@ def dict_correct(psef_conf_):
  
     if 'addresses' in psef_conf_['data']:   
         if not isinstance (psef_conf_['data']['addresses'],list):
-            address_element_ = psef_conf_['data']['addresses']
+            address_element = psef_conf_['data']['addresses']
             psef_conf_['data']['addresses'] = []
             psef_conf_['data']['addresses'].append(address_element)
     if 'address-sets' in psef_conf_['data']:
@@ -242,14 +242,19 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index, address_i
 
     if ('policies' in psef_conf['data']):
         j = 0
+
         for policy_ in psef_conf['data']['policies']:
+            if (not psef_conf_['data']['policies'][j]['policy-alias-1']):
+                psef_conf_['data']['policies'][j]['policy-alias-1'] = psef_conf_['data']['policies'][j]['policy-name']
+            if (not psef_conf_['data']['policies'][j]['policy-alias-2']):
+                psef_conf_['data']['policies'][j]['policy-alias-2'] = psef_conf_['data']['policies'][j]['policy-name']
             i = 0
             for source_address_set_ in policy_["match"]["source-address-sets"]:
                 address_set_dict_ = {}
                 address_set_index_dict = address_set_index_[source_address_set_]
                 for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
                     if isinstance(struct_key, tuple):
-                        new_str_key = "(%s,%s)" % struct_key
+                        new_str_key = "(%s,%s,%s)" % struct_key
                         address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
                         del address_set_index_dict['structure-to-addresses'][struct_key]
                 address_set_dict_ = { source_address_set_:address_set_index_dict }
@@ -261,7 +266,7 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index, address_i
                 address_set_index_dict = address_set_index_[destination_address_set_]
                 for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
                     if isinstance(struct_key, tuple):
-                        new_str_key = "(%s,%s)" % struct_key
+                        new_str_key = "(%s,%s,%s)" % struct_key
                         address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
                         del address_set_index_dict['structure-to-addresses'][struct_key]
                 address_set_dict_ = { destination_address_set_:address_set_index_dict }
@@ -282,6 +287,8 @@ def dict_full_policy (psef_conf, address_set_index, service_set_index, address_i
             for address_el in address_set_el['addresses']:
                 psef_conf_['data']['address-sets'][i]['addresses'][j] = address_index_[address_el]
                 j = j + 1
+            if (address_set_el['epg'] == 'false'):
+                psef_conf_['data']['address-sets'][i]['address-set-alias-2'] = address_set_el['address-set-name']
             i = i + 1
     if ('service-sets' in psef_conf['data']):
         i = 0
