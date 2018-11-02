@@ -86,39 +86,39 @@ if psef_debug.deb:   # if debuging is on then:
 
 # make indexation by addresses and address-sets with the def cda.address_index (see the description of the address_index)
 
-(psef_index.address_index_new, psef_index.address_set_index_new)  = psef_index.address_index (cda.psef_conf_new)
-(psef_index.address_index_old, psef_index.address_set_index_old)  = psef_index.address_index (cda.psef_conf_old)
+(cda.address_full_new, cda.address_set_full_new)  = cda.address_full (cda.psef_conf_new)
+(cda.address_full_old, cda.address_set_full_old)  = cda.address_full (cda.psef_conf_old)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('address_index_new', psef_index.address_index_new)
-    psef_debug.WriteDebug('address_index_old', psef_index.address_index_old)
-    psef_debug.WriteDebug('address_set_index_new', psef_index.address_set_index_new)
-    psef_debug.WriteDebug('address_set_index_old', psef_index.address_set_index_old)
+    psef_debug.WriteDebug('address_full_new', cda.address_full_new)
+    psef_debug.WriteDebug('address_full_old', cda.address_full_old)
+    psef_debug.WriteDebug('address_set_full_new', cda.address_set_full_new)
+    psef_debug.WriteDebug('address_set_full_old', cda.address_set_full_old)
 
 
-(psef_index.service_index_new, psef_index.service_set_index_new)  = psef_index.service_index (cda.psef_conf_new)
-(psef_index.service_index_old, psef_index.service_set_index_old)  = psef_index.service_index (cda.psef_conf_old)
+(cda.service_full_new, cda.service_set_full_new)  = cda.service_full (cda.psef_conf_new)
+(cda.service_full_old, cda.service_set_full_old)  = cda.service_full (cda.psef_conf_old)
 
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('service_index_new', psef_index.service_index_new)
-    psef_debug.WriteDebug('service_index_old', psef_index.service_index_old)
-    psef_debug.WriteDebug('service_set_index_new', psef_index.service_set_index_new)
-    psef_debug.WriteDebug('service_set_index_old', psef_index.service_set_index_old)
+    psef_debug.WriteDebug('service_full_new', cda.service_full_new)
+    psef_debug.WriteDebug('service_full_old', cda.service_full_old)
+    psef_debug.WriteDebug('service_set_full_new', cda.service_set_full_new)
+    psef_debug.WriteDebug('service_set_full_old', cda.service_set_full_old)
 
 
 
 # make the difference between new and old configs
 
 
-cda.psef_conf_new = cda.dict_full_policy(cda.psef_conf_new, psef_index.address_set_index_new, psef_index.service_set_index_new, psef_index.address_index_new, psef_index.service_index_new)
-cda.psef_conf_old = cda.dict_full_policy(cda.psef_conf_old, psef_index.address_set_index_old, psef_index.service_set_index_old, psef_index.address_index_old, psef_index.service_index_old)
+cda.psef_conf_full_new = cda.dict_full_policy(cda.psef_conf_new, cda.address_set_full_new, cda.service_set_full_new, cda.address_full_new, cda.service_full_new)
+cda.psef_conf_full_old = cda.dict_full_policy(cda.psef_conf_old, cda.address_set_full_old, cda.service_set_full_old, cda.address_full_old, cda.service_full_old)
 
 if psef_debug.deb:   # if debuging is on then:
-    psef_debug.WriteDebug('psef_conf_policy_full_new', cda.psef_conf_new)
-    psef_debug.WriteDebug('psef_conf_policy_full_old', cda.psef_conf_old)
+    psef_debug.WriteDebug('psef_conf_policy_full_new', cda.psef_conf_full_new)
+    psef_debug.WriteDebug('psef_conf_policy_full_old', cda.psef_conf_full_old)
 
-ddiff = DeepDiff(cda.psef_conf_old, cda.psef_conf_new, verbose_level=2, ignore_order=True, report_repetition=False)
+ddiff = DeepDiff(cda.psef_conf_full_old, cda.psef_conf_full_new, verbose_level=2, ignore_order=True, report_repetition=False)
 
 
 if psef_debug.deb:   # if debuging is on then:
@@ -136,6 +136,14 @@ if psef_debug.deb:   # if debuging is on then:
 #    psef_debug.WriteDebug('diff_dict', diff_dict)
 
 # Extract set of commands for each MO
+
+(psef_index.address_index_new, psef_index.address_set_index_new)  = psef_index.address_index (cda.psef_conf_new)
+(psef_index.address_index_old, psef_index.address_set_index_old)  = psef_index.address_index (cda.psef_conf_old)
+
+if psef_debug.deb:   # if debuging is on then:
+    psef_debug.WriteDebug('address_set_index_new', psef_index.address_set_index_new)
+    psef_debug.WriteDebug('address_set_index_old', psef_index.address_set_index_old)
+
 
 multiplexer.cmd_for_host = {}
 multiplexer.policy_index_ = {}

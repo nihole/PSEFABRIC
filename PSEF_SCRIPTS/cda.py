@@ -10,17 +10,18 @@ import re
 import copy
 from deepdiff import DeepDiff
 
+
 def dict_correct(psef_conf_):
 
 ##########  Description  #######
     '''
-    In case when we expect a list of child elements in xml file (new or old psefabric configuration) but we have only one element, xmltodict interprets this element as a single 
-    variable (not a list). 
-    So we want to change the type of this variable to list type. 
+    In case when we expect a list of child elements in xml file (new or old psefabric configuration) but we have only one element, xmltodict interprets this element as a single
+    variable (not a list).
+    So we want to change the type of this variable to list type.
     '''
 #############  BODY ############
- 
-    if 'addresses' in psef_conf_['data']:   
+
+    if 'addresses' in psef_conf_['data']:
         if not isinstance (psef_conf_['data']['addresses'],list):
             address_element = psef_conf_['data']['addresses']
             psef_conf_['data']['addresses'] = []
@@ -92,8 +93,9 @@ def dict_correct(psef_conf_):
                     application_set_element_ = policy_element_['match']['application-sets']
                     policy_element_['match']['application-sets'] = []
                     policy_element_['match']['application-sets'].append(application_set_element_)
-       
+
     return psef_conf_
+
 
 def ddiff_dict(ddiff_):
 
@@ -232,72 +234,131 @@ def ddiff_dict(ddiff_):
     return (diff_dictt_)
 
 
-def dict_full_policy (psef_conf, address_set_index, service_set_index, address_index, service_index):
+def dict_full_policy (psef_conf, address_set_full, service_set_full, address_full, service_full):
 
     psef_conf_ = copy.deepcopy(psef_conf)
-    address_set_index_ = copy.deepcopy(address_set_index)
-    service_set_index_ = copy.deepcopy(service_set_index)
-    address_index_ = copy.deepcopy(address_index)
-    service_index_ = copy.deepcopy(service_index)
+    address_set_full_ = copy.deepcopy(address_set_full)
+    service_set_full_ = copy.deepcopy(service_set_full)
+    address_full_ = copy.deepcopy(address_full)
+    service_full_ = copy.deepcopy(service_full)
 
-    if ('policies' in psef_conf['data']):
+    if ('policies' in psef_conf_['data']):
         j = 0
 
-        for policy_ in psef_conf['data']['policies']:
+        for policy_ in psef_conf_['data']['policies']:
             if (not psef_conf_['data']['policies'][j]['policy-alias-1']):
                 psef_conf_['data']['policies'][j]['policy-alias-1'] = psef_conf_['data']['policies'][j]['policy-name']
             if (not psef_conf_['data']['policies'][j]['policy-alias-2']):
                 psef_conf_['data']['policies'][j]['policy-alias-2'] = psef_conf_['data']['policies'][j]['policy-name']
             i = 0
             for source_address_set_ in policy_["match"]["source-address-sets"]:
-                address_set_dict_ = {}
-                address_set_index_dict = address_set_index_[source_address_set_]
-                for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
-                    if isinstance(struct_key, tuple):
-                        new_str_key = "(%s,%s,%s)" % struct_key
-                        address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
-                        del address_set_index_dict['structure-to-addresses'][struct_key]
-                address_set_dict_ = { source_address_set_:address_set_index_dict }
-                psef_conf_['data']['policies'][j]["match"]["source-address-sets"][i] = address_set_dict_
+                source_address_set_dict = {source_address_set_:address_set_full_[source_address_set_]}
+                psef_conf_['data']['policies'][j]["match"]["source-address-sets"][i] = source_address_set_dict
                 i = i + 1
             i = 0
             for destination_address_set_ in policy_["match"]["destination-address-sets"]:
-                address_set_dict_ = {}
-                address_set_index_dict = address_set_index_[destination_address_set_]
-                for struct_key, struct_value in address_set_index_dict['structure-to-addresses'].items():
-                    if isinstance(struct_key, tuple):
-                        new_str_key = "(%s,%s,%s)" % struct_key
-                        address_set_index_dict['structure-to-addresses'][new_str_key] = struct_value
-                        del address_set_index_dict['structure-to-addresses'][struct_key]
-                address_set_dict_ = { destination_address_set_:address_set_index_dict }
-                psef_conf_['data']['policies'][j]["match"]["destination-address-sets"][i] = address_set_dict_
+                destination_address_set_dict = {destination_address_set_:address_set_full_[destination_address_set_]}
+                psef_conf_['data']['policies'][j]["match"]["destination-address-sets"][i] = destination_address_set_dict
                 i = i + 1
             i = 0
             for service_set_ in policy_["match"]["service-sets"]:
                 service_set_dict_ = {}
-                service_set_index_dict = {}
-                service_set_index_dict = service_set_index_[service_set_]
-                psef_conf_['data']['policies'][j]["match"]["service-sets"][i] = service_set_index_dict
+                service_set_full_dict = {}
+                service_set_full_dict = service_set_full_[service_set_]
+                psef_conf_['data']['policies'][j]["match"]["service-sets"][i] = service_set_full_dict
                 i = i + 1
             j = j + 1
-    if ('address-sets' in psef_conf['data']):
+    if ('address-sets' in psef_conf_['data']):
         i = 0
-        for address_set_el in psef_conf['data']['address-sets']:
+        for address_set_el in psef_conf_['data']['address-sets']:
             j = 0
             for address_el in address_set_el['addresses']:
-                psef_conf_['data']['address-sets'][i]['addresses'][j] = address_index_[address_el]
+                psef_conf_['data']['address-sets'][i]['addresses'][j] = address_full_[address_el]
                 j = j + 1
             if (address_set_el['epg'] == 'false'):
                 psef_conf_['data']['address-sets'][i]['address-set-alias-2'] = address_set_el['address-set-name']
             i = i + 1
-    if ('service-sets' in psef_conf['data']):
+    if ('service-sets' in psef_conf_['data']):
         i = 0
-        for service_set_el in psef_conf['data']['service-sets']:
+        for service_set_el in psef_conf_['data']['service-sets']:
             j = 0
             for service_el in service_set_el['services']:
-                psef_conf_['data']['service-sets'][i]['services'][j] = service_index_[service_el]
+                psef_conf_['data']['service-sets'][i]['services'][j] = service_full_[service_el]
                 j = j + 1
             i = i + 1
 
     return (psef_conf_)
+
+def service_full (psef_conf_):
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+    service_full_ = {}
+    service_set_full_ = {}
+    if 'services' in psef_conf_['data']:
+        for service_element_ in psef_conf_['data']['services']:
+            service_full_[service_element_['service-name']] = service_element_
+    if 'service-sets' in psef_conf_['data']:
+        for service_set_element in psef_conf_['data']['service-sets']:
+            service_set_full_el_ = []
+            service_set_full_[service_set_element['service-set-name']] = {}
+            service_set_full_[service_set_element['service-set-name']]['service-set-name'] = service_set_element['service-set-name']
+            service_set_full_[service_set_element['service-set-name']]['service-set-alias-1'] = service_set_element['service-set-alias-1']
+            service_set_full_[service_set_element['service-set-name']]['service-set-alias-2'] = service_set_element['service-set-alias-2']
+            for service_ in service_set_element['services']:
+                service_set_full_el_.append(service_full_[service_])
+            service_set_full_[service_set_element['service-set-name']]['services'] = service_set_full_el_
+    return (service_full_, service_set_full_)
+
+def address_full (psef_conf_):
+
+##########  Description  #######
+#############  BODY ############
+
+    address_full_ = {}
+    address_set_full_ = {}
+    if 'addresses' in psef_conf_['data']:
+        for address_element_ in psef_conf_['data']['addresses']:
+            address_full_[address_element_['address-name']] = address_element_
+    if 'address-sets' in psef_conf_['data']:
+        for address_set_element in psef_conf_['data']['address-sets']:
+            address_set_full_[address_set_element['address-set-name']] = {}
+            address_set_full_[address_set_element['address-set-name']]['address-set-name'] = address_set_element['address-set-name']
+            if (address_set_element['address-set-alias-1']):
+                address_set_full_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-alias-1']
+            else:
+                address_set_full_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-name']
+
+            if (address_set_element['epg'] == 'true'):
+                address_set_full_[address_set_element['address-set-name']]['address-set-alias-2'] = address_set_element['address-set-alias-2']
+                address_set_full_[address_set_element['address-set-name']]['parameters'] = address_set_element['parameters']
+            else:
+                address_set_full_[address_set_element['address-set-name']]['address-set-alias-2'] = address_set_element['address-set-name']
+                address_set_full_[address_set_element['address-set-name']]['parameters'] = ''
+
+            address_set_full_[address_set_element['address-set-name']]['configure'] = address_set_element['configure']
+            address_set_full_[address_set_element['address-set-name']]['epg'] = address_set_element['epg']
+            address_set_full_el_ = []
+            for addr_element in address_set_element['addresses']:
+                address_set_full_el_.append(address_full_[addr_element])
+            address_set_full_[address_set_element['address-set-name']]['addresses'] = address_set_full_el_
+
+    return (address_full_, address_set_full_)
+
+def default_change (psef_conf_):
+
+    psef_conf_parameters = copy.deepcopy(psef_conf_)
+    if 'address-sets' in psef_conf_parameters['data']:
+        for address_set_element in psef_con_parameters['data']['address-sets']:
+            if (not address_set_element['address-set-alias-1']):
+                address_set_element['address-set-alias-1'] = address_set_element['address-set-name']
+            if (address_set_element['epg'] != 'true'):
+                address_set_element['address-set-alias-2'] = address_set_element['address-set-name']
+                address_set_element['parameters'] = ''
+
+    return psef_conf_parameters
+
 

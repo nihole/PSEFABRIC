@@ -146,8 +146,6 @@ def policy_index (policy_, add_):
 def address_index (psef_conf_):
 
 ##########  Description  #######
-    '''
-    '''
 #############  BODY ############
 
     address_index_ = {}
@@ -159,21 +157,18 @@ def address_index (psef_conf_):
         for address_set_element in psef_conf_['data']['address-sets']:
             address_set_index_[address_set_element['address-set-name']] = {}
             address_set_index_[address_set_element['address-set-name']]['address-set-name'] = address_set_element['address-set-name']
-#            if (address_set_element['address-set-alias-1']):
-            address_set_index_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-alias-1']
-#            else: 
-#            address_set_index_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-name']
+            if (address_set_element['address-set-alias-1']):
+                address_set_index_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-alias-1']
+            else: 
+                address_set_index_[address_set_element['address-set-name']]['address-set-alias-1'] = address_set_element['address-set-name']
             
             if (address_set_element['epg'] == 'true'):
                 address_set_index_[address_set_element['address-set-name']]['address-set-alias-2'] = address_set_element['address-set-alias-2']
+                address_set_index_[address_set_element['address-set-name']]['parameters'] = address_set_element['parameters']
             else: 
                 address_set_index_[address_set_element['address-set-name']]['address-set-alias-2'] = address_set_element['address-set-name']
+                address_set_index_[address_set_element['address-set-name']]['parameters'] = '' 
                 
-                
-            if (address_set_element['epg'] == 'true'):
-                address_set_index_[address_set_element['address-set-name']]['parameters'] = address_set_element['parameters']
-            else:
-                address_set_index_[address_set_element['address-set-name']]['parameters'] = ''
             address_set_index_[address_set_element['address-set-name']]['configure'] = address_set_element['configure']
             address_set_index_[address_set_element['address-set-name']]['epg'] = address_set_element['epg']
             address_set_index_[address_set_element['address-set-name']]['structure-to-addresses'] = {}
@@ -185,33 +180,4 @@ def address_index (psef_conf_):
                     structure_to_addresses_el_[struct_el_].append(address_index_[addr_element])
                 else:
                     structure_to_addresses_el_[struct_el_].append(address_index_[addr_element])
-    
     return (address_index_, address_set_index_)
-
-
-
-def service_index (psef_conf_):
-
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-    service_index_ = {}
-    service_set_index_ = {}
-    if 'services' in psef_conf_['data']:
-        for service_element_ in psef_conf_['data']['services']:
-            service_index_[service_element_['service-name']] = service_element_
-    if 'service-sets' in psef_conf_['data']:
-        for service_set_element in psef_conf_['data']['service-sets']:
-            service_set_index_el_ = []
-            service_set_index_[service_set_element['service-set-name']] = {}
-            service_set_index_[service_set_element['service-set-name']]['service-set-name'] = service_set_element['service-set-name']
-            service_set_index_[service_set_element['service-set-name']]['service-set-alias-1'] = service_set_element['service-set-alias-1']
-            service_set_index_[service_set_element['service-set-name']]['service-set-alias-2'] = service_set_element['service-set-alias-2']
-            for service_ in service_set_element['services']:
-                service_set_index_el_.append(service_index_[service_])
-            service_set_index_[service_set_element['service-set-name']]['services'] = service_set_index_el_
-#    print service_index_
-#    print service_set_index_
-    return (service_index_, service_set_index_)

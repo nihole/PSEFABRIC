@@ -18,15 +18,17 @@ debug['psef_conf_new'] = True
 debug['psef_conf_old'] = True
 debug['psef_conf_policy_full_new'] = True
 debug['psef_conf_policy_full_old'] = True
-debug['address_index_new'] = True
-debug['address_index_old'] = True
+debug['address_full_new'] = True
+debug['address_full_old'] = True
+debug['address_set_full_new'] = True
+debug['address_set_full_old'] = True
 debug['address_set_index_new'] = True
 debug['address_set_index_old'] = True
 
-debug['service_index_new'] = True
-debug['service_index_old'] = True
-debug['service_set_index_new'] = True
-debug['service_set_index_old'] = True
+debug['service_full_new'] = True
+debug['service_full_old'] = True
+debug['service_set_full_new'] = True
+debug['service_set_full_old'] = True
 
 debug['policy_index'] = True
 debug['policy_index_full'] = True

@@ -19,7 +19,7 @@ module policy {
 		  }
 		  leaf policy-alias-1 {
 			  type string;
-			  default "";
+			  default "../policy-name";
 		  }
 		  leaf epg {
 			  mandatory true;
