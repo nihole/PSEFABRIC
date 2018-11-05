@@ -4,18 +4,19 @@
         Sequence is important. This sequence we will have in our configuration files.
        
         rm policy
-        add service
-        add service-set
-        add application
-        add application-set
-        add address
-        add address-set
         rm address-set
         rm address
         rm service-set
         rm service
         rm application
         rm application-set
+        rm policy
+        add service
+        add service-set
+        add application
+        add application-set
+        add address
+        add address-set
         add policy
 '''
 
@@ -23,7 +24,12 @@ import re
 
 def pa_cli_correction(cfg_txt):
 
+    # remove dublicated lines:
+    
     cmd_list = sorted(set(cfg_txt.splitlines()))
+
+# restore correct order:
+
     cmd_seq = {}
     cmd_seq['rm_policy'] = []
     cmd_seq['rm_address_set'] = []

@@ -1,15 +1,27 @@
+    ######################################
+    #                                    #
+    #                  5.                #
+    #     configuration encapsulator     #
+    #                layer               #
+    #                                    #
+    ######################################
 
 
 '''
-The aim of this layer is encapsulation or adaptation of data to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.).
-Files are written to a folder $PSEFABRIC/PSEF_CONF/EQ_CONF/.
+Three purposes of this layer:
+    - some additional configuration manipulation, for example:
+      (additional modules may be used for this purposes)
+        - removing of duplicated lines
+        - restoring of correct order of commnads if necessary
+    - encapsulation or adaptation of the configuration files to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.)
+    - saving of configuration files (folder $PSEFABRIC/PSEF_CONF/EQ_CONF/)
+
 '''
 
 import versionfile as vrs
 import os
 import host_to_type
 import re
-import pa_config_correction
 import copy
 import pa_cfg_correction
 
@@ -47,11 +59,7 @@ def mult_cfg(cfg_):
             config_ = cfg_[eq_addr]
             version_file(eq_addr, config_,'json')
         elif re.search('panorama', host_[eq_addr]):
-            config_ = cfg_[eq_addr]
-#            config_ = 'configure' + '\n' + cfg_[eq_addr] + '\n' + 'exit' + '\n'
-            # We need to make some reduction in the case of cli configuration. For more informatiom see str_annihilation.py
-#            config = str_annihilation.str_annihilation(config_)
-            config = pa_cfg_correction.pa_cli_correction(config_)
+            config = pa_cfg_correction.pa_cli_correction(cfg_[eq_addr])
             version_file(eq_addr, config,'txt')
         del host_[eq_addr]
     for rest_hosts in  host_:

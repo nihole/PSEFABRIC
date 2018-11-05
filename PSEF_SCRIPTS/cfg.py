@@ -1,4 +1,31 @@
+    ######################################
+    #                                    #
+    #                  4.                #
+    #        configurator layer          #
+    #                                    #
+    ######################################
+
+
+
 '''
+For different MOs (Management Objects) different configuration formats may be used. 
+For example:
+
+- api: json/xml/netconf/..
+- cli: text
+- without candidate config (for example cisco-like interface)
+- with candidate config (for example juniper or palo-alto interface)
+- ...
+
+To provide correct configuration for different cases 2 dictionaries are taken from demultiplexer layer (3):
+
+- cmd_for_host_diff
+- cmd_for_host_full
+
+If we have candidate configuration feature (changes are implemented only after committing the configuration) then cmd_for_host_full is enough. For each changed object we may remove it and implement a new configuration for this object.
+
+But if we don't have candidate configuration feature then we have to remove only objects we are going to remove (not to change). For this purpose cmd_for_host_diff is used for removing and cmd_for_host_full for creation.
+
 '''
 
 import re
@@ -19,21 +46,21 @@ def create_configs (cmd_for_host, cmd_for_host_full):
         cfg[eq_name] = ''
 
         '''
-        Sequence is important. This sequence we will have in our configuration files.
+        Sequence is important. But it also can be changed if necessary on "configuration excapsulator laer". This sequence we will have in our configuration files.
        
         rm policy
-        add service
-        add service-set
-        add application
-        add application-set
-        add address
-        add address-set
         rm address-set
         rm address
         rm service-set
         rm service
         rm application
         rm application-set
+        add service
+        add service-set
+        add application
+        add application-set
+        add address
+        add address-set
         add policy
         '''
 
@@ -66,56 +93,6 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                             cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                             cfg_new = ''
                 j = j + 1
-
-
-# add service
-        if (eq_name == 'panorama'):
-            if len(cmd_for_host_full[eq_name]['ad']['service']):
-                for el in cmd_for_host_full[eq_name]['ad']['service']:
-                    for command_element in el['command-list']:
-                        if 'ports' in el:
-                            cfg_new = eval (command_element + "(el['eq_parameter'], el['service-alias-1'],el['prot'],el['ports']['destination-port-range'])")
-                        else:
-                            cfg_new = eval(command_element + "(el['eq_parameter'], el['service-alias-1'],el['prot'],{})")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-# add service-set
-        if (eq_name == 'panorama'):
-            if len(cmd_for_host_full[eq_name]['ad']['service-set']):
-                for el in cmd_for_host_full[eq_name]['ad']['service-set']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service-list'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-# add application-set
-        if (eq_name == 'panorama'):
-            if len(cmd_for_host_full[eq_name]['ad']['application-set']):
-                for el in cmd_for_host_full[eq_name]['ad']['application-set']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-
-# add address
-        if (eq_name == 'panorama'):
-            if len(cmd_for_host_full[eq_name]['ad']['address']):
-                for el in cmd_for_host_full[eq_name]['ad']['address']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-alias-1'],el['ipv4-prefix'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-# add address-set
-        if (eq_name == 'panorama'):
-            if len(cmd_for_host_full[eq_name]['ad']['address-set']):
-                for el in cmd_for_host_full[eq_name]['ad']['address-set']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address-list'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
 
 
 # rm address-set
@@ -166,6 +143,66 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
+## rm application
+#        if (eq_name == 'panorama'):
+#            if (cmd_for_host[eq_name]['rm']['application']):
+#                for el in cmd_for_host[eq_name]['rm']['application']:
+#                    for command_element in el['command-list']:
+#                        if 'ports' in el:
+#                            cfg_new = eval (command_element + "(el['eq_parameter'], el['application-alias-1'],el['prot'],el['ports']['destination-port-range'])")
+#                        else:
+#                            cfg_new = eval(command_element + "(el['eq_parameter'], el['application-alias-1'],el['prot'],{})")
+#                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+#                        cfg_new = ''
+
+# add service
+        if (eq_name == 'panorama'):
+            if len(cmd_for_host_full[eq_name]['ad']['service']):
+                for el in cmd_for_host_full[eq_name]['ad']['service']:
+                    for command_element in el['command-list']:
+                        if 'ports' in el:
+                            cfg_new = eval (command_element + "(el['eq_parameter'], el['service-alias-1'],el['prot'],el['ports']['destination-port-range'])")
+                        else:
+                            cfg_new = eval(command_element + "(el['eq_parameter'], el['service-alias-1'],el['prot'],{})")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
+
+# add service-set
+        if (eq_name == 'panorama'):
+            if len(cmd_for_host_full[eq_name]['ad']['service-set']):
+                for el in cmd_for_host_full[eq_name]['ad']['service-set']:
+                    for command_element in el['command-list']:
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['service-set-alias-1'],el['service-list'])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
+
+# add application-set
+        if (eq_name == 'panorama'):
+            if len(cmd_for_host_full[eq_name]['ad']['application-set']):
+                for el in cmd_for_host_full[eq_name]['ad']['application-set']:
+                    for command_element in el['command-list']:
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application'])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
+
+
+# add address
+        if (eq_name == 'panorama'):
+            if len(cmd_for_host_full[eq_name]['ad']['address']):
+                for el in cmd_for_host_full[eq_name]['ad']['address']:
+                    for command_element in el['command-list']:
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-alias-1'],el['ipv4-prefix'])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
+
+# add address-set
+        if (eq_name == 'panorama'):
+            if len(cmd_for_host_full[eq_name]['ad']['address-set']):
+                for el in cmd_for_host_full[eq_name]['ad']['address-set']:
+                    for command_element in el['command-list']:
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['address-set-alias-1'],el['address-list'])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
 
 # add policy
 

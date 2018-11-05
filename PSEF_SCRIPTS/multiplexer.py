@@ -1,18 +1,30 @@
+
+    ######################################
+    #                                    #
+    #                 3.                 #
+    #         demultiplexing layer       #
+    #                                    #
+    ######################################
+
+
 '''
 This is a core part of Demultiplexer Layer of our Psefabric Dataflow Model.
-The point is to create a list of commands for each MO in our infrastructure in accordance to the global logic described in psef_logic.
+The goal is to create a list of configuration commands for each MO.
 
 We need to create these lists for the next cases: address creation/removal, address-set creation/removal, service creation/removal,
-service-set creation/removal, policy creation/removal. So we have:
+service-set creation/removal, application creation/removal, application-set creation/removal, policy creation/removal. So we have:
 
 cmd_list_address (action_, address_)
 cmd_list_address_set (action_, address_set_)
 cmd_list_service (action_, service_)
 cmd_list_service_set (action_, service_set_)
+cmd_list_application (action_, application_)
+cmd_list_application_set (action_, application_set_)
 cmd_list_policy (action_, pol_)
 
-As a reult we have a dict {cmd_for_host}
-
+Two dictionaries are initiated from psefabric.py module:
+    cmd_for_host
+    policy_index_
 '''
 
 import re
@@ -57,7 +69,12 @@ def cmd_list_address (action_, address_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to addresses configuration to a new dict (cmd_for_host)
     '''
+
 #############  BODY ############
  
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
@@ -68,13 +85,16 @@ def cmd_list_address (action_, address_):
         address_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':address_['address-name'], 'address-alias-1':address_['address-alias-1'], 'ipv4-prefix':address_['ipv4-prefix'], 'structure':address_['structure']}
         address_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address'].append(address_attributes)
-    return cmd_for_host
 
 
 def cmd_list_address_set (action_, address_set_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to address-sets configuration to a new dict (cmd_for_host)
     '''
 #############  BODY ############
 
@@ -91,13 +111,16 @@ def cmd_list_address_set (action_, address_set_):
         address_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':address_set_['address-set-name'], 'address-set-alias-1':address_set_['address-set-alias-1'], 'address-set-alias-2':address_set_['address-set-alias-2'], 'address-list':address_list}
         address_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address-set'].append(address_set_attributes)
-    return cmd_for_host
 
 
 def cmd_list_service (action_, service_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to services configuration to a new dict (cmd_for_host)
     '''
 #############  BODY ############
 
@@ -112,12 +135,15 @@ def cmd_list_service (action_, service_):
             service_attributes['ports'] = service_['ports']
         service_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['service'].append(service_attributes)
-    return cmd_for_host
 
 def cmd_list_service_set (action_, service_set_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to service-sets configuration to a new dict (cmd_for_host)
     '''
 #############  BODY ############
 
@@ -134,13 +160,16 @@ def cmd_list_service_set (action_, service_set_):
         service_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':service_set_['service-set-name'], 'service-set-alias-1':service_set_['service-set-alias-1'], 'service-set-alias-2':service_set_['service-set-alias-2'], 'service-list':service_list}
         service_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['service-set'].append(service_set_attributes)
-    return cmd_for_host
 
 
 def cmd_list_applciation (action_, applciation_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to application configuration to a new dict (cmd_for_host)
     '''
 #############  BODY ############
 
@@ -155,13 +184,16 @@ def cmd_list_applciation (action_, applciation_):
             applciation_attributes['ports'] = applciation_['ports']
         applciation_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['applciation'].append(applciation_attributes)
-    return cmd_for_host
 
 
 def cmd_list_application_set (action_, application_set_):
 
 ##########  Description  #######
     '''
+    This function:
+    - extracts all necessary parameters (only 'configure' in our case)
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to application-sets configuration to a new dict (cmd_for_host)
     '''
 #############  BODY ############
 
@@ -174,13 +206,129 @@ def cmd_list_application_set (action_, application_set_):
         application_set_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':application_set_['application-set-name'], 'application':application_set_['applications']}
         application_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['application-set'].append(application_set_attributes)
+
+
+
+def cmd_list_policy (action_, pol_):
+
+##########  Description  #######
+    '''
+    This function:
+    - extracts all necessary parameters
+    - transmit them to psef_logic and get a dict with MOs as keys and a lists of configuration commands as values
+    - add information related to policy configuration to a new dict (cmd_for_host)
+    '''
+#############  BODY ############
+
+    
+    if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
+        sys.exit("Incorrect action!!")
+
+### Extract parameters ############
+
+    src_address_set_list = []
+    name_ = pol_['policy-name']
+    policy_alias_1 = pol_['policy-alias-1']
+    policy_alias_2 = pol_['policy-alias-2']
+    epg = pol_['epg']
+    application_set_list = pol_['match']['application-sets']
+    act = 'permit'
+    service_set_list = []
+    service_set_lst = []
+    for service_set_el in pol_['match']['service-sets']:
+        service_set_list.append(service_set_el)
+        service_set_lst.append(service_set_el['service-set-alias-1'])
+
+    for src_resolve_element in pol_['match']['source-address-sets']:
+        src_address_set_list = pol_['match']['source-address-sets'][src_resolve_element]
+        dst_address_set_list = []
+        for dst_resolve_element in pol_['match']['destination-address-sets']: 
+            dst_address_set_list = pol_['match']['destination-address-sets'][dst_resolve_element]
+            src_zone_ = src_resolve_element[0]
+            src_area_ = src_resolve_element[1]
+            src_sub_zone_ = src_resolve_element[2]
+            src_dc_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
+            src_dc_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
+            dst_zone_ = dst_resolve_element[0]
+            dst_area_ = dst_resolve_element[1]
+            dst_sub_zone_ = dst_resolve_element[2]
+            dst_dc_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
+            
+            policy_attributes = {}
+
+            ### get a dict with MOs as keys and a lists of configuration commands as values ####
+            mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_area_, dst_zone_, dst_sub_zone_, pol_['match']['service-sets'])
+            
+            ### add information related to policy configuration to a new dict (cmd_for_host) ###
+            for cmd_element in mult_dict_pol:
+                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "epg":epg, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-address-sets':src_address_set_list, 'destination-address-sets':dst_address_set_list, 'application-sets':application_set_list, 'service-set-dicts':service_set_list, 'service-sets':service_set_lst, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
+                policy_attributes['command-list'] = cmd_element['cmd'][action_]
+                cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
+
+
+def multiplex(diff_list):
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+
+#    policy_index_ = {'ad':[], 'rm':[]} 
+
+    for policy_rm_element in diff_list['policies_rm']:
+        pol_index_rm = policy_index(policy_rm_element, 'rm')
+        policy_index_['rm'].append(pol_index_rm)
+        policy_attributes = cmd_list_policy ('rm', pol_index_rm )
+
+    for policy_ad_element in diff_list['policies_ad']:
+        pol_index_ad = policy_index(policy_ad_element, 'ad')
+        policy_index_['ad'].append(pol_index_ad)
+        cmd_list_policy ('ad', pol_index_ad)
+
+    for address_set_rm_element in diff_list['address_sets_rm']:
+        cmd_list_address_set ('rm', address_set_rm_element)
+    for address_rm_element in diff_list['addresses_rm']:
+        cmd_list_address ('rm', address_rm_element)
+    for address_ad_element in diff_list['addresses_ad']:
+        cmd_list_address ('ad', address_ad_element)
+    for address_set_ad_element in diff_list['address_sets_ad']:
+        cmd_list_address_set ('ad', address_set_ad_element)
+
+    for service_set_rm_element in diff_list['service_sets_rm']:
+        cmd_list_service_set ('rm', service_set_rm_element)
+    for service_rm_element in diff_list['services_rm']:
+        cmd_list_service ('rm', service_rm_element)
+    for service_ad_element in diff_list['services_ad']:
+        cmd_list_service ('ad', service_ad_element)
+    for service_set_ad_element in diff_list['service_sets_ad']:
+        cmd_list_service_set ('ad', service_set_ad_element)
+    
+    for application_set_rm_element in diff_list['application_sets_rm']:
+        cmd_list_application_set ('rm', application_set_rm_element)
+    for application_rm_element in diff_list['applications_rm']:
+        None
+#        cmd_list_application ('rm', application_rm_element)
+    for application_ad_element in diff_list['applications_ad']:
+        None
+#        cmd_list_application ('ad', application_ad_element)
+    for application_set_ad_element in diff_list['application_sets_ad']:
+        cmd_list_application_set ('ad', application_set_ad_element)
+    
+    if psef_debug.deb:   # if debuging is on then:
+            psef_debug.WriteDebug('policy_index_full', policy_index_)
+
     return cmd_for_host
 
 
 def policy_opt(cmd_for_host_full_):
 
     '''
-    if we have some object removed and created we exclude it from the list (as for removed as for added lists):
+    Changing of an object is realiased as two operations: remove & creation in the cmd_for_host dict. It means that this changing object is persent in both lists (as creation as deleting).
+    The purpose of this function is to exclude such objects from the both lists.
+    New dictionary (cmd_for_host_diff) will be used together with the old one (cmd_for_host_full) in configuration decision process.
+    We have to take into account the next objects:
+
     addresses
     address-sets
     services
@@ -396,7 +544,7 @@ def policy_opt(cmd_for_host_full_):
                                         break
                                     l = l + 1
 
-                        # service-set in policy iptimization
+                        # service-set in policy optimization
 
                         service_set_list_rm = []
                         service_set_list_ad = []
@@ -431,7 +579,7 @@ def policy_opt(cmd_for_host_full_):
                                         break
                                 j = j + 1
 
-                        # application-set in policy iptimization
+                        # application-set in policy optimization
 
                         app_set_list_rm = policies_list_rm[i]['application-sets']
                         app_set_list_ad = policies_list_add[j]['application-sets']
@@ -444,7 +592,7 @@ def policy_opt(cmd_for_host_full_):
                                 app_set_list_ad.remove(m)
 
 
-                        flag_ad = (policies_list_add[j]['source-address-sets'] or policies_list_add[j]['destination-address-sets'] or policies_list_add[j]["service-set-dicts"] or policies_list_add[j]['application-sets'] )
+                        flag_ad = (policies_list_add[j]['source-address-sets'] or policies_list_add[j]['destination-address-sets'] or policies_list_add[j]["service-set-dicts"] or  policies_list_add[j]['application-sets'] )
                         if not flag_ad:
                             del policies_list_add[j]
                             j = j - 1
@@ -456,129 +604,7 @@ def policy_opt(cmd_for_host_full_):
                     i = i - 1
                 i = i + 1
     return (cmd_for_host_)
-    
 
 
 
-def cmd_list_policy (action_, pol_):
-
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-    
-    if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
-        sys.exit("Incorrect action!!")
-#    mult_dict_pol = psef_logic.mult_dict_policy()
-    
-    src_address_set_list = []
-    name_ = pol_['policy-name']
-    policy_alias_1 = pol_['policy-alias-1']
-    policy_alias_2 = pol_['policy-alias-2']
-    epg = pol_['epg']
-#    service_set_list = pol_['match']['service-sets'] 
-    application_set_list = pol_['match']['application-sets']
-    act = 'permit'
-    service_set_list = []
-    service_set_lst = []
-    for service_set_el in pol_['match']['service-sets']:
-        service_set_list.append(service_set_el)
-        service_set_lst.append(service_set_el['service-set-alias-1'])
-####### all sorce or destination addresses/address-sets should be from the same dc,vrf,area,zone  ########
-    for src_resolve_element in pol_['match']['source-address-sets']:
-        src_address_set_list = pol_['match']['source-address-sets'][src_resolve_element]
-        dst_address_set_list = []
-        for dst_resolve_element in pol_['match']['destination-address-sets']: 
-            dst_address_set_list = pol_['match']['destination-address-sets'][dst_resolve_element]
-            src_zone_ = src_resolve_element[0]
-            src_area_ = src_resolve_element[1]
-            src_sub_zone_ = src_resolve_element[2]
-            src_dc_ = src_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
-            dst_zone_ = dst_resolve_element[0]
-            dst_area_ = dst_resolve_element[1]
-            dst_sub_zone_ = dst_resolve_element[2]
-            dst_dc_ = dst_address_set_list[0]['structure-to-addresses'][0]['structure']['dc']
-            
-            message = '''
-            VVVVVVVVVVVVVVVVV
-            src_resolve_element: %s
-            dst_resolve_element: %s
-            src_dc: %s
-            src_area: %s
-            src_zone: %s
-            dsr_dc: %s
-            dst_area: %s
-            dst_zone: %s
-            AAAAAAAAAAAAAAAAAA
-            '''  % (src_resolve_element, dst_resolve_element, src_dc_, src_area_, src_zone_, dst_dc_, dst_area_, dst_zone_) 
-
-
-            policy_attributes = {}
-            mult_dict_pol = psef_logic.mult_dict_policy(src_dc_, src_area_, src_zone_, src_sub_zone_, dst_dc_, dst_area_, dst_zone_, dst_sub_zone_, pol_['match']['service-sets'])
-            for cmd_element in mult_dict_pol:
-                policy_attributes = {'eq':cmd_element['eq_addr'], 'eq_parameter':cmd_element['eq_parameter'], 'name':name_, "epg":epg, "policy-alias-1":policy_alias_1, "policy-alias-2":policy_alias_2, 'source-address-sets':src_address_set_list, 'destination-address-sets':dst_address_set_list, 'application-sets':application_set_list, 'service-set-dicts':service_set_list, 'service-sets':service_set_lst, 'src_dc':src_dc_, 'src_area':src_area_, 'src_zone':src_zone_, 'dst_dc':src_dc_, 'dst_area':src_area_, 'dst_zone':dst_zone_, 'action':act }
-                policy_attributes['command-list'] = cmd_element['cmd'][action_]
-                cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
-
-
-#    return cmd_for_host
-
-
-def multiplex(diff_list):
-
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-
-#    policy_index_ = {'ad':[], 'rm':[]} 
-
-    for policy_rm_element in diff_list['policies_rm']:
-        pol_index_rm = policy_index(policy_rm_element, 'rm')
-        policy_index_['rm'].append(pol_index_rm)
-        cmd_list_policy ('rm', pol_index_rm )
-    for policy_ad_element in diff_list['policies_ad']:
-        pol_index_ad = policy_index(policy_ad_element, 'ad')
-        policy_index_['ad'].append(pol_index_ad)
-        cmd_list_policy ('ad', pol_index_ad)
-    for address_set_rm_element in diff_list['address_sets_rm']:
-        cmd_list_address_set ('rm', address_set_rm_element)
-    for address_rm_element in diff_list['addresses_rm']:
-        cmd_list_address ('rm', address_rm_element)
-    for address_ad_element in diff_list['addresses_ad']:
-        cmd_list_address ('ad', address_ad_element)
-    for address_set_ad_element in diff_list['address_sets_ad']:
-        cmd_list_address_set ('ad', address_set_ad_element)
-
-    for service_set_rm_element in diff_list['service_sets_rm']:
-        cmd_list_service_set ('rm', service_set_rm_element)
-    for service_rm_element in diff_list['services_rm']:
-        cmd_list_service ('rm', service_rm_element)
-    for service_ad_element in diff_list['services_ad']:
-        cmd_list_service ('ad', service_ad_element)
-    for service_set_ad_element in diff_list['service_sets_ad']:
-        cmd_list_service_set ('ad', service_set_ad_element)
-    
-    for application_set_rm_element in diff_list['application_sets_rm']:
-        cmd_list_application_set ('rm', application_set_rm_element)
-    for application_rm_element in diff_list['applications_rm']:
-        None
-#        cmd_list_application ('rm', application_rm_element)
-    for application_ad_element in diff_list['applications_ad']:
-        None
-#        cmd_list_application ('ad', application_ad_element)
-    for application_set_ad_element in diff_list['application_sets_ad']:
-        cmd_list_application_set ('ad', application_set_ad_element)
-    
-    if psef_debug.deb:   # if debuging is on then:
-            psef_debug.WriteDebug('policy_index_full', policy_index_)
-
-#    return cmd_for_host
-
-
-
-#cmd_for_host = {}
-#initiate_cmd_for_host()
 

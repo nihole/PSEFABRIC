@@ -30,6 +30,11 @@ debug['service_full_old'] = True
 debug['service_set_full_new'] = True
 debug['service_set_full_old'] = True
 
+debug['application_full_new'] = True
+debug['application_full_old'] = True
+debug['application_set_full_new'] = True
+debug['application_set_full_old'] = True
+
 debug['policy_index'] = True
 debug['policy_index_full'] = True
 debug['ddiff'] = True
