@@ -1,5 +1,0 @@
-more ../PSEF_CONF/EQ_CONF/shared.txt
-for file in ../PSEF_CONF/EQ_CONF/*.txt
-do
-  more "$file" | grep -v shared
-done
