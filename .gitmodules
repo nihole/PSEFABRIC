@@ -1,0 +1,3 @@
+[submodule "PSEFABRIC.wiki"]
+	path = PSEFABRIC.wiki
+	url = https://github.com/nihole/PSEFABRIC.wiki.git
