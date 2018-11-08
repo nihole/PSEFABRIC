@@ -9,25 +9,31 @@ module psefabric-types {
 
   import ietf-inet-types { prefix inettypes; }
  
-  typedef dc {
+  typedef str_1 {
 	  type string;
   }
-  typedef area {
+  typedef str_2 {
 	  type string;
   }
-  typedef zone {
+  typedef str_3 {
 	  type string;
   }
-  typedef vrf {
+  typedef str_4 {
 	  type string;
   }
-  typedef sub-zone {
+  typedef str_5 {
 	  type string;
   }
-  typedef app {
+  typedef str_6 {
 	  type string;
   }
-  typedef tag {
-          type string;
+  typedef str_7 {
+      type string;
+  }
+  typedef str_8 {
+      type string;
+  }
+  typedef str_9 {
+      type string;
   }
 } 

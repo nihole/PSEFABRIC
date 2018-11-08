@@ -14,17 +14,31 @@ submodule services {
 		  mandatory true;
 		  type string;
 	  }
-	  leaf service-alias-1 {
-		  type string;
-		  default '';
-	  }
-	  leaf service-alias-2 {
-		  type string;
-		  default '';
-	  }
-	  leaf configure {
-		  mandatory true;
+	  leaf  svc_par_1 {
+//		  mandatory true;
+		  default false;
 		  type boolean;
+	  }
+	  leaf  svc_par_2 {
+//		  mandatory true;
+		  default false;
+		  type boolean;
+	  }
+	  leaf svc_par_3 {
+		  type string;
+		  default '';
+	  }
+	  leaf svc_par_4 {
+		  type string;
+		  default '';
+	  }
+	  leaf svc_par_5 {
+		  type string;
+		  default '';
+	  }
+	  leaf svc_par_6 {
+		  type string;
+		  default '';
 	  }
 	  leaf prot {
 		  type int8;
@@ -85,17 +99,31 @@ submodule services {
 		 mandatory true;
 		  type string;
 	  }
-	 leaf service-set-alias-1 {
-		  type string;
-		  default '';
-	  }
-	  leaf service-set-alias-2 {
-		  type string;
-		  default '';
-	  }
-	 leaf configure {
-		 mandatory true;
+	 leaf svcset_par_1 {
+//		  mandatory true;
+		  default false;
 		  type boolean;
+	  }
+	 leaf svcset_par_2 {
+//		  mandatory true;
+		  default false;
+		  type boolean;
+	  }
+	 leaf svcset_par_3 {
+		  type string;
+		  default '';
+	  }
+	  leaf svcset_par_4 {
+		  type string;
+		  default '';
+	  }
+	  leaf svcset_par_5 {
+		  type string;
+		  default '';
+	  }
+	  leaf svcset_par_6 {
+		  type string;
+		  default '';
 	  }
 	  leaf-list services {
           min-elements 1;

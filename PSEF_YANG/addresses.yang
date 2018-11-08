@@ -15,13 +15,35 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
-	  leaf address-alias-1 {
-		  type string;
-		  mandatory true;
-	  }
-	  leaf configure {
-		  mandatory true;
+	  leaf addr_par_1 {
+//		  mandatory true;
+		  default false;
 		  type boolean;
+	  }
+	  leaf addr_par_2 {
+//		  mandatory true;
+		  default false;
+		  type boolean;
+	  }
+	  leaf addr_par_3 {
+		  type string;
+//		  mandatory true;
+		  default '';
+	  }
+	  leaf addr_par_4 {
+		  type string;
+//		  mandatory true;
+		  default '';
+	  }
+	  leaf addr_par_5 {
+		  type string;
+//		  mandatory true;
+		  default '';
+	  }
+	  leaf addr_par_6 {
+		  type string;
+//		  mandatory true;
+		  default '';
 	  }
 	  leaf ipv4-prefix {
 		  mandatory true;
@@ -30,35 +52,65 @@ submodule addresses {
 			  "ipv4 prefix";
   	  }
 	  container structure {
-		  leaf dc {
+		  leaf str_1 {
 			  type leafref {
-				  path "/structure:structure/structure:data-center";
+				  path "/structure:structure/structure:str_1";
 			  }
 			  mandatory true;
 		  }
-		  leaf area {
+		  leaf str_2 {
 			  type leafref {
-				  path "/structure:structure/structure:area";
+				  path "/structure:structure/structure:str_2";
 			  }
 			  mandatory true;
 		  }
-		  leaf zone {
+		  leaf str_3 {
 			  type leafref {
-				  path "/structure:structure/structure:zone";
+				  path "/structure:structure/structure:str_3";
 			  }
-			  mandatory true;
+//			  mandatory true;
 		  }
-		  leaf sub-zone {
+		  leaf str_4 {
 			  type leafref {
-				  path "/structure:structure/structure:sub-zone";
+				  path "/structure:structure/structure:str_4";
 			  }
-			  mandatory true;
+//			  mandatory true;
 		  }
-		  leaf tag {
+		  leaf str_5 {
 			  type leafref {
-				  path "/structure:structure/structure:tag";
+				  path "/structure:structure/structure:str_5";
 			  }
-			  mandatory false;
+//			  mandatory true;
+		  }
+		  leaf str_6 {
+			  type leafref {
+				  path "/structure:structure/structure:str_6";
+			  }
+//			  mandatory true;
+		  }
+		  leaf str_7 {
+			  type leafref {
+				  path "/structure:structure/structure:str_7";
+			  }
+//			  mandatory true;
+		  }
+		  leaf str_8 {
+			  type leafref {
+				  path "/structure:structure/structure:str_8";
+			  }
+//			  mandatory true;
+		  }
+		  leaf str_9 {
+			  type leafref {
+				  path "/structure:structure/structure:str_9";
+			  }
+//			  mandatory true;
+		  }
+		  leaf vlan {
+			  type leafref {
+				  path "/structure:structure/structure:vlans/structure:vlan-number";
+			  }
+//			  mandatory false;
 		  }
 	  }
 
@@ -70,30 +122,35 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
-	  leaf address-set-alias-1 {
+	  leaf addrset_par_1 {
+//		  mandatory true;
+		  default false;
+		  type boolean;
+	  }
+	  leaf addrset_par_2 {
+//		  mandatory true;
+		  default false;
+		  type boolean;  
+	  }
+	  leaf addrset_par_3 {
 		  type string;
 		  default '';
 	  }
-	  leaf address-set-alias-2 {
-		  when "../epg = 'true'";
+	  leaf addrset_par_4 {
 		  type string;
-		  mandatory true;
+		  default '';
+//		  mandatory true;
 	  }
-	  leaf configure {
-		  mandatory true;
-		  type boolean;
-	  }
-	  leaf epg {
-		  mandatory true;
-		  type boolean;  
-	  }
-	  
-	  leaf parameters {
-		  when "../epg = 'true'";
+	  leaf addrset_par_5 {
 		  type string;
-		  mandatory true;  
+		  default '';
+//		  mandatory true;
 	  }
-	  
+	  leaf addrset_par_6 {
+		  type string;
+		  default '';
+//		  mandatory true;
+	  }
  	  leaf-list addresses {
  		  min-elements 1;
 		  type leafref {

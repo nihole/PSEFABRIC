@@ -10,26 +10,32 @@ module structure {
   import psefabric-types { prefix types; }
   
   container structure {
-	  leaf-list data-center {
-		  type types:dc;
+	  leaf-list str_1 {
+		  type types:str_1;
 	  }
-	  leaf-list area {
-		  type types:area;
+	  leaf-list str_2 {
+		  type types:str_2;
 	  }
-	  leaf-list zone {
-		  type types:zone;
+	  leaf-list str_3 {
+		  type types:str_3;
 	  }
-	  leaf-list vrf {
-		  type types:vrf;
+	  leaf-list str_4 {
+		  type types:str_4;
 	  }
-	  leaf-list sub-zone {
-		  type types:sub-zone;
+	  leaf-list str_5 {
+		  type types:str_5;
 	  }
-	  leaf-list app {
-		  type types:app;
+	  leaf-list str_6 {
+		  type types:str_6;
 	  }		
-	  leaf-list tag {
-		  type types:tag;
+	  leaf-list str_7 {
+		  type types:str_7;
+	  }
+	  leaf-list str_8 {
+		  type types:str_8;
+	  }
+	  leaf-list str_9 {
+		  type types:str_9;
 	  }
 	  list vlans {
 		  key vlan-name;

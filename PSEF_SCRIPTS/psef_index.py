@@ -53,9 +53,10 @@ def policy_index (policy_, add_):
                         struct_to_source_el_ = copy.deepcopy(address_set_index_new[source_address_set_])
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_source[resolving_element_].append(struct_to_source_el_)
-                        del struct_to_source_el_ 
+#                        del struct_to_source_el_ 
                     else:
                         struct_to_source_el_ = {}
+                        struct_to_source_el_ = copy.deepcopy(address_set_index_new[source_address_set_])
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_new[source_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_source[resolving_element_].append(struct_to_source_el_)
             elif (add_ == 'rm'):
@@ -63,12 +64,12 @@ def policy_index (policy_, add_):
                     if resolving_element_ not in struct_to_source:
                         struct_to_source[resolving_element_] = []
                         struct_to_source_el_ = {}
-                        struct_to_source_el_ = copy.deepcopy(address_set_index_new[source_address_set_])
+                        struct_to_source_el_ = copy.deepcopy(address_set_index_old[source_address_set_])
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_source[resolving_element_].append(struct_to_source_el_)
-                        del struct_to_source_el_
                     else:
                         struct_to_source_el_ = {}
+                        struct_to_source_el_ = copy.deepcopy(address_set_index_old[source_address_set_])
                         struct_to_source_el_['structure-to-addresses'] = address_set_index_old[source_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_source[resolving_element_].append(struct_to_source_el_)
             else:
@@ -86,6 +87,7 @@ def policy_index (policy_, add_):
                         del struct_to_destination_el_
                     else:
                         struct_to_destination_el_ = {}
+                        struct_to_destination_el_ = copy.deepcopy(address_set_index_new[destination_address_set_])
                         struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_destination[resolving_element_].append(struct_to_destination_el_)
             elif (add_ == 'rm'):
@@ -93,12 +95,13 @@ def policy_index (policy_, add_):
                     if resolving_element_ not in struct_to_destination:
                         struct_to_destination[resolving_element_] = []
                         struct_to_destination_el_ = {}
-                        struct_to_destination_el_ = copy.deepcopy(address_set_index_new[destination_address_set_])
+                        struct_to_destination_el_ = copy.deepcopy(address_set_index_old[destination_address_set_])
                         struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_destination[resolving_element_].append(struct_to_destination_el_)
                         del struct_to_destination_el_
                     else:
                         struct_to_destination_el_ = {}
+                        struct_to_destination_el_ = copy.deepcopy(address_set_index_old[destination_address_set_])
                         struct_to_destination_el_['structure-to-addresses'] = address_set_index_old[destination_address_set_]['structure-to-addresses'][resolving_element_]
                         struct_to_destination[resolving_element_].append(struct_to_destination_el_)
             else:
@@ -142,7 +145,7 @@ def address_index (psef_conf):
             address_set_index_[address_set_element['address-set-name']]['structure-to-addresses'] = {}
             structure_to_addresses_el_= address_set_index_[address_set_element['address-set-name']]['structure-to-addresses']
             for addr_element in address_set_element['addresses']:
-                resolving_element = (address_index_[addr_element]['structure']['zone'], address_index_[addr_element]['structure']['area'], address_index_[addr_element]['structure']['sub-zone'])
+                resolving_element = (address_index_[addr_element]['structure']['str_1'], address_index_[addr_element]['structure']['str_2'], address_index_[addr_element]['structure']['str_3'], address_index_[addr_element]['structure']['str_4'])
                 if not resolving_element in structure_to_addresses_el_:
                     structure_to_addresses_el_[resolving_element] = []
                     structure_to_addresses_el_[resolving_element].append(address_index_[addr_element])

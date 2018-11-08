@@ -13,29 +13,10 @@ mult_dict_policy()
 
 import re
 import copy
-import host_to_type
 
-def mult_dict_address(ifcfg):
 
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-    mult = []
-    if (ifcfg == 'true'):
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_address')
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_address')
-
-    return (mult)
-
-def mult_dict_address_set(ifcfg):
+# Change the list of parameters if needed
+def mult_dict_address(str1, str2, par1, par2):
 
 ##########  Description  #######
     '''
@@ -43,180 +24,236 @@ def mult_dict_address_set(ifcfg):
 #############  BODY ############
 
     mult = []
-    if (ifcfg == 'true'):
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_address_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_address_set')
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates.create_address')
+    mult[0]['cmd']['rm'].append('extemplates.delete_address')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates.create_address')
+    mult[1]['cmd']['rm'].append('extemplates.delete_address')
 
     return (mult)
 
-def mult_dict_service(ifcfg): 
+# Change the list of parameters if needed
+def mult_dict_address_set(par1, par2):
 
 ##########  Description  #######
     '''
     '''
 #############  BODY ############
 
-    mult=[]
-    if (ifcfg == 'true'):
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_service')
-    
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates.create_address_set')
+    mult[0]['cmd']['rm'].append('extemplates.delete_address_set')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates.create_address_set')
+    mult[1]['cmd']['rm'].append('extemplates.delete_address_set')
+
     return (mult)
 
-def mult_dict_service_set(ifcfg):
+# Change the list of parameters if needed
+def mult_dict_service(par1, par2):
 
 ##########  Description  #######
     '''
     '''
 #############  BODY ############
 
-    mult=[]
-    if (ifcfg == 'true'):
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_service_set')
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates.create_service')
+    mult[0]['cmd']['rm'].append('extemplates.delete_service')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates.create_service')
+    mult[1]['cmd']['rm'].append('extemplates.delete_service')
 
     return (mult)
 
-def mult_dict_application(ifcfg):
+# Change the list of parameters if needed
+def mult_dict_service_set(par1, par2):
 
 ##########  Description  #######
     '''
     '''
 #############  BODY ############
 
-    mult=[]
-    if (ifcfg == 'true'):   
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates.create_service_set')
+    mult[0]['cmd']['rm'].append('extemplates.delete_service_set')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates.create_service_set')
+    mult[1]['cmd']['rm'].append('extemplates.delete_service_set')
 
     return (mult)
 
-def mult_dict_application_set(ifcfg):
+# Change the list of parameters if needed
+def mult_dict_application(par1, par2):
+
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+
+    return (mult)
+
+
+# Change the list of parameters if needed
+def mult_dict_application_set(par1, par2):
 
 ##########  Description  #######
     '''
     '''
 #############  BODY ############
 
-    mult=[]
-    if (ifcfg == 'true'):   
-        mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_application_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_application_set')
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates.create_application_set')
+    mult[0]['cmd']['rm'].append('extemplates.delete_application_set')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates.create_application_set')
+    mult[1]['cmd']['rm'].append('extemplates.delete_application_set')
 
     return (mult)
 
 
-def mult_dict_policy(src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, service_sets_dict):
+def mult_dict_policy(src_str_1, src_str_2, src_str_3, src_str_4, dst_str_1, dst_str_2, dst_str_3, dst_str_4, service_sets_dict):
 
 ##########  Description  #######
 ########## End of description #####
 
-    map_aci_ = host_to_type.area_to_eq_aci()
-    map_pa_ = host_to_type.area_to_eq_pa()
-
     mult = []
 
-    if (re.match(src_dc, dst_dc)):
-        same_dc_flag = True
-    else:
-        same_dc_flag = False
+    # Some logical variables may be defined
+    # For example:
 
-    if (re.match(src_area, dst_area)):
-        same_area_flag = True
+    if (re.match(src_str_1, dst_str_2)):
+        same_str_1_flag = True
     else:
-        same_area_flag = False
+        same_str_1_flag = False
 
-    if (re.match(src_zone, dst_zone)):
-        same_zone_flag = True
+    if (re.match(src_str_2, dst_str_2)):
+        same_str_2_flag = True
     else:
-        same_zone_flag = False
+        same_str_2_flag = False
 
-    if (re.match(src_sub_zone, dst_sub_zone)):
-        same_sub_zone_flag = True
+    if (re.match(src_str_3, dst_str_3)):
+        same_str_3_flag = True
     else:
-        same_sub_zone_flag = False
+        same_str_3_flag = False
 
-    if (same_zone_flag and same_area_flag and not same_sub_zone_flag):
-        
+    if (re.match(src_str_4, dst_str_4)):
+        same_str_4_flag = True
+    else:
+        same_str_4_flag = False
+
+# Then depending on these values we may program psefabric actions.
+    # For example:
+
+    if (same_str_1_flag and same_str_2_flag and not same_str_3_flag):
         mult = []
+        # May be some logic based on par1, par2, ... value
         mult.append({})
-        mult[0]['eq_addr'] = map_aci_['dc1'][src_area]
-        mult[0]['eq_parameter'] = ''
+        mult[0]['eq_addr'] = 'example_device1'
+        mult[0]['eq_parameter'] = 'some_parameter'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('acitemplates.aci_delete_policy')
-        mult[0]['cmd']['ad'].append('acitemplates.aci_create_policy')
+        mult[0]['cmd']['ad'].append('extemplates.create_policy')
+        mult[0]['cmd']['rm'].append('extemplates.delete_policy')
         mult.append({})
-        mult[1]['eq_addr'] = map_aci_['dc2'][src_area]
-        mult[1]['eq_parameter'] = ''
+        mult[1]['eq_addr'] = 'example_device2'
+        mult[1]['eq_parameter'] = 'some_parameter'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['rm'].append('acitemplates.aci_delete_policy')
-        mult[1]['cmd']['ad'].append('acitemplates.aci_create_policy')
+        mult[1]['cmd']['ad'].append('extemplates.create_policy')
+        mult[1]['cmd']['rm'].append('extemplates.delete_policy')
 
-    if (not same_zone_flag and same_area_flag):
+    else:
         mult = []
+        # May be some logic based on par1, par2, ... value
         mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = map_pa_['dc1'][src_area]
+        mult[0]['eq_addr'] = 'example_device1'
+        mult[0]['eq_parameter'] = 'some_parameter'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy')
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_allapp_dst_transit')
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_transit')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
-
-    if (not same_area_flag):
-        mult = []
+        mult[0]['cmd']['ad'].append('extemplates.create_policy')
+        mult[0]['cmd']['rm'].append('extemplates.delete_policy')
         mult.append({})
-        mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = map_pa_['dc1'][src_area]
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_allapp_dst_transit')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_transit')
-        mult.append({})
-        mult[1]['eq_addr'] = 'panorama'
-        mult[1]['eq_parameter'] = map_pa_['dc1'][dst_area]
+        mult[1]['eq_addr'] = 'example_device2'
+        mult[1]['eq_parameter'] = 'some_parameter'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
-        mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
+        mult[1]['cmd']['ad'].append('extemplates.create_policy')
+        mult[1]['cmd']['rm'].append('extemplates.delete_policy')
 
     return (mult)
 

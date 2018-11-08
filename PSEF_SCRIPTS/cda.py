@@ -294,8 +294,6 @@ def psef_full (psef_conf, address_set_full, service_set_full, application_set_fu
             for address_el in address_set_el['addresses']:
                 psef_conf_['data']['address-sets'][i]['addresses'][j] = address_full_[address_el]
                 j = j + 1
-            if (address_set_el['epg'] == 'false'):
-                psef_conf_['data']['address-sets'][i]['address-set-alias-2'] = address_set_el['address-set-name']
             i = i + 1
     # full service-sets
     if ('service-sets' in psef_conf_['data']):
@@ -413,49 +411,152 @@ def default_change (psef_conf_):
     
     if 'addresses' in psef_conf_parameters['data']:
         for addresses_element in psef_conf_parameters['data']['addresses']:
-            if (not addresses_element['address-alias-1']):
-                address_element['address-alias-1'] = addresses_element['address-set-name']
+            if (addresses_element['addr_par_1'] == 'false'):
+#                address_element['addr_par_1'] =
+                continue
+            if (addresses_element['addr_par_2'] == 'false'):
+#                address_element['addr_par_2'] =
+                continue
+            if (not addresses_element['addr_par_3']):
+#                address_element['addr_par_3'] =
+                continue
+            if (not addresses_element['addr_par_4']):
+#                address_element['addr_par_4'] =
+                continue
+            if (not addresses_element['addr_par_5']):
+#                address_element['addr_par_5'] =
+                continue
+            if (not addresses_element['addr_par_6']):
+#                address_element['addr_par_6'] = 
+                continue
 
     if 'address-sets' in psef_conf_parameters['data']:
         for address_set_element in psef_conf_parameters['data']['address-sets']:
-            if (not address_set_element['address-set-alias-1']):
-                address_set_element['address-set-alias-1'] = address_set_element['address-set-name']
-            if (address_set_element['epg'] != 'true'):
-                address_set_element['address-set-alias-2'] = address_set_element['address-set-name']
-                address_set_element['parameters'] = ''
+            if (address_set_element['addrset_par_1'] == 'false'):
+#                address_set_element['addrset_par_1'] =
+                continue
+            if (address_set_element['addrset_par_2'] == 'false'):
+#                address_set_element['addrset_par_2'] =
+                continue
+            if (not address_set_element['addrset_par_3']):
+#                address_set_element['addrset_par_3'] =
+                continue
+            if (not address_set_element['addrset_par_4']):
+#                address_set_element['addrset_par_4'] =
+                continue
+            if (not address_set_element['addrset_par_5']):
+#                address_set_element['addrset_par_5'] =
+                continue
+            if (not address_set_element['addrset_par_6']):
+#                address_set_element['addrset_par_6'] = 
+                continue
 
     if 'services' in psef_conf_parameters['data']:
         for services_element in psef_conf_parameters['data']['services']:
-            if (not services_element['service-alias-1']):
-                address_element['service-alias-1'] = services_element['service-set-name']
+            if (services_element['svc_par_1'] == 'false'):
+#                services_element['svc_par_1'] =
+                continue
+            if (services_element['svc_par_2'] == 'false'):
+#                services_element['svc_par_2'] =
+                continue
+            if (not services_element['svc_par_3']):
+#                services_element['svc_par_3'] =
+                continue
+            if (not services_element['svc_par_4']):
+#                services_element['svc_par_4'] =
+                continue
+            if (not services_element['svc_par_5']):
+#                services_element['svc_par_5'] =
+                continue
+            if (not services_element['svc_par_6']):
+#                services_element['svc_par_6'] = 
+                continue
 
     if 'service-sets' in psef_conf_parameters['data']:
-        for address_set_element in psef_conf_parameters['data']['service-sets']:
-            if (not address_set_element['service-set-alias-1']):
-                address_set_element['service-set-alias-1'] = address_set_element['service-set-name']
-            if (not address_set_element['service-set-alias-2']):
-                address_set_element['service-set-alias-2'] = address_set_element['service-set-name']
+        for service_set_element in psef_conf_parameters['data']['service-sets']:
+            if (service_set_element['svcset_par_1'] == 'false'):
+#                service_set_element['svcset_par_1'] =
+                continue
+            if (service_set_element['svcset_par_2'] == 'false'):
+#                service_set_element['svcset_par_2'] =
+                continue
+            if (not service_set_element['svcset_par_3']):
+#                service_set_element['svcset_par_3'] =
+                continue
+            if (not service_set_element['svcset_par_4']):
+#                service_set_element['svcset_par_4'] =
+                continue
+            if (not service_set_element['svcset_par_5']):
+#                service_set_element['svcset_par_5'] =
+                continue
+            if (not service_set_element['svcset_par_6']):
+#                service_set_element['svcset_par_6'] = 
+                continue
+
 
     if 'applications' in psef_conf_parameters['data']:
         for applications_element in psef_conf_parameters['data']['applications']:
-#            if (not applications_element['application-alias-1']):
-#                address_element['application-alias-1'] = applications_element['application-set-name']
-            continue
+            if (applications_element['app_par_1'] == 'false'):
+#                applications_element['app_par_1'] =
+                continue
+            if (applications_element['app_par_2'] == 'false'):
+#                applications_element['app_par_2'] =
+                continue
+            if (not applications_element['app_par_3']):
+#                applications_element['app_par_3'] =
+                continue
+            if (not applications_element['app_par_4']):
+#                applications_element['app_par_4'] =
+                continue
+            if (not applications_element['app_par_5']):
+#                applications_element['app_par_5'] =
+                continue
+            if (not applications_element['app_par_6']):
+#                applications_element['app_par_6'] = 
+                continue
 
     if 'application-sets' in psef_conf_parameters['data']:
-        for address_set_element in psef_conf_parameters['data']['application-sets']:
-#            if (not address_set_element['application-set-alias-1']):
-#                address_set_element['application-set-alias-1'] = address_set_element['application-set-name']
-#            if (not address_set_element['application-set-alias-2']):
-#                address_set_element['application-set-alias-2'] = address_set_element['application-set-name']
-            continue
+        for application_set_element in psef_conf_parameters['data']['application-sets']:
+            if (application_set_element['appset_par_1'] == 'false'):
+#                application_set_element['appset_par_1'] =
+                continue
+            if (not application_set_element['appset_par_2'] == 'false'):
+#                application_set_element['appset_par_2'] =
+                continue
+            if (not application_set_element['appset_par_3']):
+#                application_set_element['appset_par_3'] =
+                continue
+            if (not application_set_element['appset_par_4']):
+#                application_set_element['appset_par_4'] =
+                continue
+            if (not application_set_element['appset_par_5']):
+#                application_set_element['appset_par_5'] =
+                continue
+            if (not application_set_element['appset_par_6']):
+#                application_set_element['appset_par_6'] = 
+                continue
+
 
     if ('policies' in psef_conf_parameters['data']):
         for policy_element in psef_conf_parameters['data']['policies']:
-            if (not policy_element['policy-alias-1']):
-                policy_element['policy-alias-1'] = policy_element['policy-name']
-            if (not policy_element['policy-alias-2']):
-                policy_element['policy-alias-2'] = policy_element['policy-name']
+            if (not policy_element['plc_par_1'] == 'false'):
+#                policy_element['plc_par_1'] =
+                continue
+            if (not policy_element['plc_par_2'] == 'false'):
+#                policy_element['plc_par_2'] =
+                continue
+            if (not policy_element['plc_par_3']):
+#                policy_element['plc_par_3'] =
+                continue
+            if (not policy_element['plc_par_4']):
+#                policy_element['plc_par_4'] =
+                continue
+            if (not policy_element['plc_par_5']):
+#                policy_element['plc_par_5'] =
+                continue
+            if (not policy_element['plc_par_6']):
+#                policy_element['plc_par_6'] = 
+                continue
 
 
     return psef_conf_parameters

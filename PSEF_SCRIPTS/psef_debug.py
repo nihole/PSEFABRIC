@@ -73,20 +73,20 @@ def ChangeType (dict_, type_):
         policy_ = copy.deepcopy(dict_)
         for policy_element in policy_['rm']:
             for struct_key in policy_element['match']['source-address-sets'].keys():
-                new_str_key = "(%s,%s,%s)" % struct_key
+                new_str_key = "(%s,%s,%s,%s)" % struct_key
                 policy_element['match']['source-address-sets'][new_str_key] = policy_element['match']['source-address-sets'][struct_key]
                 del policy_element['match']['source-address-sets'][struct_key]
             for struct_key in policy_element['match']['destination-address-sets'].keys():
-                new_str_key = "(%s,%s,%s)" % struct_key
+                new_str_key = "(%s,%s,%s,%s)" % struct_key
                 policy_element['match']['destination-address-sets'][new_str_key] = policy_element['match']['destination-address-sets'][struct_key]
                 del policy_element['match']['destination-address-sets'][struct_key]
         for policy_element in policy_['ad']:
             for struct_key in policy_element['match']['source-address-sets'].keys():
-                new_str_key = "(%s,%s,%s)" % struct_key
+                new_str_key = "(%s,%s,%s,%s)" % struct_key
                 policy_element['match']['source-address-sets'][new_str_key] = policy_element['match']['source-address-sets'][struct_key]
                 del policy_element['match']['source-address-sets'][struct_key]
             for struct_key in policy_element['match']['destination-address-sets'].keys():
-                new_str_key = "(%s,%s,%s)" % struct_key
+                new_str_key = "(%s,%s,%s,%s)" % struct_key
                 policy_element['match']['destination-address-sets'][new_str_key] = policy_element['match']['destination-address-sets'][struct_key]
                 del policy_element['match']['destination-address-sets'][struct_key]
         return policy_
@@ -94,7 +94,7 @@ def ChangeType (dict_, type_):
         address_set_ = copy.deepcopy(dict_)
         for address_set_element in address_set_.keys():
             for struct_key in address_set_[address_set_element]["structure-to-addresses"].keys():
-                new_str_key = "(%s,%s,%s)" % struct_key
+                new_str_key = "(%s,%s,%s,%s)" % struct_key
                 address_set_[address_set_element]["structure-to-addresses"][new_str_key]= address_set_[address_set_element]["structure-to-addresses"][struct_key]
                 del address_set_[address_set_element]["structure-to-addresses"][struct_key]
         return address_set_
