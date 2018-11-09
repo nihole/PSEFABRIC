@@ -16,7 +16,7 @@ import copy
 
 
 # Change the list of parameters if needed
-def mult_dict_address(str1, str2, par1, par2):
+def mult_dict_address(str_list):
 
 ##########  Description  #######
     '''
@@ -45,7 +45,7 @@ def mult_dict_address(str1, str2, par1, par2):
     return (mult)
 
 # Change the list of parameters if needed
-def mult_dict_address_set(par1, par2):
+def mult_dict_address_set():
 
 ##########  Description  #######
     '''
@@ -74,7 +74,7 @@ def mult_dict_address_set(par1, par2):
     return (mult)
 
 # Change the list of parameters if needed
-def mult_dict_service(par1, par2):
+def mult_dict_service():
 
 ##########  Description  #######
     '''
@@ -102,8 +102,8 @@ def mult_dict_service(par1, par2):
 
     return (mult)
 
-# Change the list of parameters if needed
-def mult_dict_service_set(par1, par2):
+# Add the list of parameters if needed
+def mult_dict_service_set():
 
 ##########  Description  #######
     '''
@@ -131,8 +131,8 @@ def mult_dict_service_set(par1, par2):
 
     return (mult)
 
-# Change the list of parameters if needed
-def mult_dict_application(par1, par2):
+# Add the list of parameters if needed
+def mult_dict_application():
 
     mult = []
     # May be some logic based on par1, par2, ... value
@@ -153,7 +153,7 @@ def mult_dict_application(par1, par2):
 
 
 # Change the list of parameters if needed
-def mult_dict_application_set(par1, par2):
+def mult_dict_application_set():
 
 ##########  Description  #######
     '''
@@ -182,7 +182,7 @@ def mult_dict_application_set(par1, par2):
     return (mult)
 
 
-def mult_dict_policy(src_str_1, src_str_2, src_str_3, src_str_4, dst_str_1, dst_str_2, dst_str_3, dst_str_4, service_sets_dict):
+def mult_dict_policy(src_str, dst_str, service_sets_dict):
 
 ##########  Description  #######
 ########## End of description #####
@@ -192,22 +192,22 @@ def mult_dict_policy(src_str_1, src_str_2, src_str_3, src_str_4, dst_str_1, dst_
     # Some logical variables may be defined
     # For example:
 
-    if (re.match(src_str_1, dst_str_2)):
+    if (re.match(src_str[0], dst_str[0])):
         same_str_1_flag = True
     else:
         same_str_1_flag = False
 
-    if (re.match(src_str_2, dst_str_2)):
+    if (re.match(src_str[1], dst_str[1])):
         same_str_2_flag = True
     else:
         same_str_2_flag = False
 
-    if (re.match(src_str_3, dst_str_3)):
+    if (re.match(src_str[2], dst_str[2])):
         same_str_3_flag = True
     else:
         same_str_3_flag = False
 
-    if (re.match(src_str_4, dst_str_4)):
+    if (re.match(src_str[3], dst_str[3])):
         same_str_4_flag = True
     else:
         same_str_4_flag = False

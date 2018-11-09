@@ -119,13 +119,18 @@ else:
 # correct dictionaries psef_conf_new/psef_conf_old (see the description of the dict_correct)
 # chabge default values of some parameters if necessary
 
-cda.psef_conf_new =  cda.default_change(cda.dict_correct(psef_conf_new_))
-cda.psef_conf_old =  cda.default_change(cda.dict_correct(psef_conf_old_))
+cda.psef_conf_new =  cda.dict_correct(psef_conf_new_)
+cda.psef_conf_old =  cda.dict_correct(psef_conf_old_)
+
+#cda.psef_conf_new =  cda.default_change(cda.dict_correct(psef_conf_new_))
+#cda.psef_conf_old =  cda.default_change(cda.dict_correct(psef_conf_old_))
 
 if psef_debug.deb:   # if debuging is on then:
     psef_debug.WriteDebug('psef_conf_new', cda.psef_conf_new)
     psef_debug.WriteDebug('psef_conf_old', cda.psef_conf_old)
 
+cda.psef_conf_new =  cda.default_change(cda.psef_conf_new)
+cda.psef_conf_old =  cda.default_change(cda.psef_conf_old)
 
 # create separate dictionaries for addresses and 
 # create separate full (with addresses information) dictionaries for address-sets

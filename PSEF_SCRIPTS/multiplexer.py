@@ -81,7 +81,7 @@ def cmd_list_address (action_, address_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters and structure elements if needed 
-    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address(address_['structure']['str_1'], address_['structure']['str_2'], address_['addr_par_1'], address_['addr_par_2']))
+    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address(address_['structure']))
  
     for cmd_element in mult_dict_add:
         address_attributes = {}
@@ -90,12 +90,7 @@ def cmd_list_address (action_, address_):
         address_attributes['name'] = address_['address-name']
         address_attributes['ipv4-prefix'] = address_['ipv4-prefix']
         address_attributes['structure'] = address_['structure']
-        address_attributes['addr_par_1'] = address_['addr_par_1']
-        address_attributes['addr_par_2'] = address_['addr_par_2']
-        address_attributes['addr_par_3'] = address_['addr_par_3']
-        address_attributes['addr_par_4'] = address_['addr_par_4']
-        address_attributes['addr_par_5'] = address_['addr_par_5']
-        address_attributes['addr_par_6'] = address_['addr_par_6']
+        address_attributes['parameters'] = address_['parameters']
 
         address_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address'].append(address_attributes)
@@ -116,7 +111,8 @@ def cmd_list_address_set (action_, address_set_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters if needed 
-    mult_dict_add_set = psef_logic.mult_dict_address_set(address_set_['addrset_par_1'], address_set_['addrset_par_2'])
+    # If structure elemets are needed address_set index_new/old should be used
+    mult_dict_add_set = psef_logic.mult_dict_address_set()
     address_list = []
     j = 0
     for address_dict_el in address_set_['addresses']:
@@ -129,12 +125,7 @@ def cmd_list_address_set (action_, address_set_):
         address_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         address_set_attributes['name'] = address_set_['address-set-name']
         address_set_attributes['address-list'] = address_list
-        address_set_attributes['addrset_par_1'] = address_set_['addrset_par_1']
-        address_set_attributes['addrset_par_2'] = address_set_['addrset_par_2']
-        address_set_attributes['addrset_par_3'] = address_set_['addrset_par_3']
-        address_set_attributes['addrset_par_4'] = address_set_['addrset_par_4']
-        address_set_attributes['addrset_par_5'] = address_set_['addrset_par_5']
-        address_set_attributes['addrset_par_6'] = address_set_['addrset_par_6']
+        address_set_attributes['parameters'] = address_set_['parameters']
 
         address_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address-set'].append(address_set_attributes)
@@ -154,8 +145,8 @@ def cmd_list_service (action_, service_):
     if not (re.match(action_, 'rm') or re.match(action_, 'ad')):
         sys.exit("Incorrect action!!")
 
-    # Change the list of parameters if needed 
-    mult_dict_app = psef_logic.mult_dict_service(service_['svc_par_1'], service_['svc_par_2'])
+    # Add the list of parameters if needed 
+    mult_dict_app = psef_logic.mult_dict_service()
 
     for cmd_element in mult_dict_app:
         service_attributes = {}
@@ -163,12 +154,7 @@ def cmd_list_service (action_, service_):
         service_attributes['eq_parameter'] = cmd_element['eq_parameter']
         service_attributes['name'] = service_['service-name']
         service_attributes['prot'] = service_['prot']
-        service_attributes['svc_par_1'] = service_['svc_par_1']
-        service_attributes['svc_par_2'] = service_['svc_par_2']
-        service_attributes['svc_par_3'] = service_['svc_par_3']
-        service_attributes['svc_par_4'] = service_['svc_par_4']
-        service_attributes['svc_par_5'] = service_['svc_par_5']
-        service_attributes['svc_par_6'] = service_['svc_par_6']
+        service_attributes['parameters'] = service_['parameters']
 
         if 'ports' in service_:
             service_attributes['ports'] = service_['ports']
@@ -190,8 +176,8 @@ def cmd_list_service_set (action_, service_set_):
         sys.exit("Incorrect action!!")
 
 
-    # Change the list of parameters if needed 
-    mult_dict_add_set = psef_logic.mult_dict_service_set(service_set_['svcset_par_1'], service_set_['svcset_par_2'])
+    # Add the list of parameters if needed 
+    mult_dict_add_set = psef_logic.mult_dict_service_set()
     service_list = []
     j = 0
     for service_dict_el in service_set_['services']:
@@ -204,12 +190,7 @@ def cmd_list_service_set (action_, service_set_):
         service_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         service_set_attributes['name'] = service_set_['service-set-name']
         service_set_attributes['service-list'] = service_list
-        service_set_attributes['svcset_par_1'] = service_set_['svcset_par_1']
-        service_set_attributes['svcset_par_2'] = service_set_['svcset_par_2']
-        service_set_attributes['svcset_par_3'] = service_set_['svcset_par_3']
-        service_set_attributes['svcset_par_4'] = service_set_['svcset_par_4']
-        service_set_attributes['svcset_par_5'] = service_set_['svcset_par_5']
-        service_set_attributes['svcset_par_6'] = service_set_['svcset_par_6']
+        service_set_attributes['parameters'] = service_set_['parameters']
 
         service_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['service-set'].append(service_set_attributes)
@@ -237,12 +218,7 @@ def cmd_list_applciation (action_, applciation_):
         application_attributes['eq'] = cmd_element['eq_addr']
         application_attributes['eq_parameter'] = cmd_element['eq_parameter']
         application_attributes['name'] = application_['application-name']
-        application_attributes['app_par_1'] = application_['app_par_1']
-        application_attributes['app_par_2'] = application_['app_par_2']
-        application_attributes['app_par_3'] = application_['app_par_3']
-        application_attributes['app_par_4'] = application_['app_par_4']
-        application_attributes['app_par_5'] = application_['app_par_5']
-        application_attributes['app_par_6'] = application_['app_par_6']
+        application_attributes['parameters'] = application_['parameters']
 
         applciation_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['applciation'].append(applciation_attributes)
@@ -263,7 +239,7 @@ def cmd_list_application_set (action_, application_set_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters if needed 
-    mult_dict_add_set = psef_logic.mult_dict_application_set(application_set_['appset_par_1'], application_set_['appset_par_2'])
+    mult_dict_add_set = psef_logic.mult_dict_application_set()
  
     application_list = []
 
@@ -276,12 +252,7 @@ def cmd_list_application_set (action_, application_set_):
         application_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         application_set_attributes['name'] = application_set_['application-set-name']
         application_set_attributes['application-list'] = application_list
-        application_set_attributes['appset_par_1'] = application_set_['appset_par_1']
-        application_set_attributes['appset_par_2'] = application_set_['appset_par_2']
-        application_set_attributes['appset_par_3'] = application_set_['appset_par_3']
-        application_set_attributes['appset_par_4'] = application_set_['appset_par_4']
-        application_set_attributes['appset_par_5'] = application_set_['appset_par_5']
-        application_set_attributes['appset_par_6'] = application_set_['appset_par_6']
+        application_set_attributes['parameters'] = application_set_['parameters']
 
         application_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['application-set'].append(application_set_attributes)
@@ -309,12 +280,6 @@ def cmd_list_policy (action_, pol_):
     src_address_set_list = []
     name_ = pol_['policy-name']
 
-    plc_par_1 = pol_['plc_par_1']
-    plc_par_2 = pol_['plc_par_2']
-    plc_par_3 = pol_['plc_par_3']
-    plc_par_4 = pol_['plc_par_4']
-    plc_par_5 = pol_['plc_par_5']
-    plc_par_6 = pol_['plc_par_6']
     application_set_list = pol_['match']['application-sets']
     act = 'permit'
     service_set_list = []
@@ -340,7 +305,7 @@ def cmd_list_policy (action_, pol_):
             policy_attributes = {}
 
             ### get a dict with MOs as keys and a lists of configuration commands as values ####
-            mult_dict_pol = psef_logic.mult_dict_policy(src_str_1, src_str_2, src_str_3, src_str_4, dst_str_1, dst_str_2, dst_str_3, dst_str_4, pol_['match']['service-sets'])
+            mult_dict_pol = psef_logic.mult_dict_policy(list(src_resolve_element), list(dst_resolve_element), pol_['match']['service-sets'])
             
             ### add information related to policy configuration to a new dict (cmd_for_host) ###
             for cmd_element in mult_dict_pol:
@@ -353,20 +318,9 @@ def cmd_list_policy (action_, pol_):
                 policy_attributes['application-sets'] = application_set_list
                 policy_attributes['service-set-dicts'] = service_set_list
                 policy_attributes['service-sets'] = service_set_lst
-                policy_attributes['src_str_1'] = src_str_1
-                policy_attributes['src_str_2'] = src_str_2
-                policy_attributes['src_str_3'] = src_str_3
-                policy_attributes['src_str_4'] = src_str_4
-                policy_attributes['dst_str_1'] = dst_str_1
-                policy_attributes['dst_str_2'] = dst_str_2
-                policy_attributes['dst_str_3'] = dst_str_3
-                policy_attributes['dst_str_4'] = dst_str_4
-                policy_attributes['plc_par_1'] = pol_['plc_par_1']
-                policy_attributes['plc_par_2'] = pol_['plc_par_2']
-                policy_attributes['plc_par_3'] = pol_['plc_par_3']
-                policy_attributes['plc_par_4'] = pol_['plc_par_4']
-                policy_attributes['plc_par_5'] = pol_['plc_par_5']
-                policy_attributes['plc_par_6'] = pol_['plc_par_6']
+                policy_attributes['src_str'] = list(src_resolve_element)
+                policy_attributes['dst_str'] = list(dst_resolve_element)
+                policy_attributes['parameters'] = pol_['parameters']
 
                 policy_attributes['command-list'] = cmd_element['cmd'][action_]
                 cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)

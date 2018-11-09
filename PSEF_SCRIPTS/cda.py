@@ -403,6 +403,7 @@ def address_full (psef_conf):
 
 def default_change (psef_conf_):
 
+
     '''
     change the value of default parameters if necessary
     '''
@@ -411,151 +412,151 @@ def default_change (psef_conf_):
     
     if 'addresses' in psef_conf_parameters['data']:
         for addresses_element in psef_conf_parameters['data']['addresses']:
-            if (addresses_element['addr_par_1'] == 'false'):
-#                address_element['addr_par_1'] =
+            if (addresses_element['parameters']['addr_par_1'] == 'false'):
+#                address_element['parameters']['addr_par_1'] =
                 continue
-            if (addresses_element['addr_par_2'] == 'false'):
-#                address_element['addr_par_2'] =
+            if (addresses_element['parameters']['addr_par_2'] == 'false'):
+#                address_element['parameters']['addr_par_2'] =
                 continue
-            if (not addresses_element['addr_par_3']):
-#                address_element['addr_par_3'] =
+            if (not addresses_element['parameters']['addr_par_3']):
+#                address_element['parameters']['addr_par_3'] =
                 continue
-            if (not addresses_element['addr_par_4']):
-#                address_element['addr_par_4'] =
+            if (not addresses_element['parameters']['addr_par_4']):
+#                address_element['parameters']['addr_par_4'] =
                 continue
-            if (not addresses_element['addr_par_5']):
-#                address_element['addr_par_5'] =
+            if (not addresses_element['parameters']['addr_par_5']):
+#                address_element['parameters']['addr_par_5'] =
                 continue
-            if (not addresses_element['addr_par_6']):
-#                address_element['addr_par_6'] = 
+            if (not addresses_element['parameters']['addr_par_6']):
+#                address_element['parameters']['addr_par_6'] = 
                 continue
 
     if 'address-sets' in psef_conf_parameters['data']:
         for address_set_element in psef_conf_parameters['data']['address-sets']:
-            if (address_set_element['addrset_par_1'] == 'false'):
-#                address_set_element['addrset_par_1'] =
+            if (address_set_element['parameters']['addrset_par_1'] == 'false'):
+#                address_set_element['parameters']['addrset_par_1'] =
                 continue
-            if (address_set_element['addrset_par_2'] == 'false'):
-#                address_set_element['addrset_par_2'] =
+            if (address_set_element['parameters']['addrset_par_2'] == 'false'):
+#                address_set_element['parameters']['addrset_par_2'] =
                 continue
-            if (not address_set_element['addrset_par_3']):
-#                address_set_element['addrset_par_3'] =
+            if (not address_set_element['parameters']['addrset_par_3']):
+#                address_set_element['parameters']['addrset_par_3'] =
                 continue
-            if (not address_set_element['addrset_par_4']):
-#                address_set_element['addrset_par_4'] =
+            if (not address_set_element['parameters']['addrset_par_4']):
+#                address_set_element['parameters']['addrset_par_4'] =
                 continue
-            if (not address_set_element['addrset_par_5']):
-#                address_set_element['addrset_par_5'] =
+            if (not address_set_element['parameters']['addrset_par_5']):
+#                address_set_element['parameters']['addrset_par_5'] =
                 continue
-            if (not address_set_element['addrset_par_6']):
-#                address_set_element['addrset_par_6'] = 
+            if (not address_set_element['parameters']['addrset_par_6']):
+#                address_set_element['parameters']['addrset_par_6'] = 
                 continue
 
     if 'services' in psef_conf_parameters['data']:
         for services_element in psef_conf_parameters['data']['services']:
-            if (services_element['svc_par_1'] == 'false'):
-#                services_element['svc_par_1'] =
+            if (services_element['parameters']['svc_par_1'] == 'false'):
+#                services_element['parameters']['svc_par_1'] =
                 continue
-            if (services_element['svc_par_2'] == 'false'):
-#                services_element['svc_par_2'] =
+            if (services_element['parameters']['svc_par_2'] == 'false'):
+#                services_element['parameters']['svc_par_2'] =
                 continue
-            if (not services_element['svc_par_3']):
-#                services_element['svc_par_3'] =
+            if (not services_element['parameters']['svc_par_3']):
+#                services_element['parameters']['svc_par_3'] =
                 continue
-            if (not services_element['svc_par_4']):
-#                services_element['svc_par_4'] =
+            if (not services_element['parameters']['svc_par_4']):
+#                services_element['parameters']['svc_par_4'] =
                 continue
-            if (not services_element['svc_par_5']):
-#                services_element['svc_par_5'] =
+            if (not services_element['parameters']['svc_par_5']):
+#                services_element['parameters']['svc_par_5'] =
                 continue
-            if (not services_element['svc_par_6']):
-#                services_element['svc_par_6'] = 
+            if (not services_element['parameters']['svc_par_6']):
+#                services_element['parameters']['svc_par_6'] = 
                 continue
 
     if 'service-sets' in psef_conf_parameters['data']:
         for service_set_element in psef_conf_parameters['data']['service-sets']:
-            if (service_set_element['svcset_par_1'] == 'false'):
-#                service_set_element['svcset_par_1'] =
+            if (service_set_element['parameters']['svcset_par_1'] == 'false'):
+#                service_set_element['parameters']['svcset_par_1'] =
                 continue
-            if (service_set_element['svcset_par_2'] == 'false'):
-#                service_set_element['svcset_par_2'] =
+            if (service_set_element['parameters']['svcset_par_2'] == 'false'):
+#                service_set_element['parameters']['svcset_par_2'] =
                 continue
-            if (not service_set_element['svcset_par_3']):
-#                service_set_element['svcset_par_3'] =
+            if (not service_set_element['parameters']['svcset_par_3']):
+#                service_set_element['parameters']['svcset_par_3'] =
                 continue
-            if (not service_set_element['svcset_par_4']):
-#                service_set_element['svcset_par_4'] =
+            if (not service_set_element['parameters']['svcset_par_4']):
+#                service_set_element['parameters']['svcset_par_4'] =
                 continue
-            if (not service_set_element['svcset_par_5']):
-#                service_set_element['svcset_par_5'] =
+            if (not service_set_element['parameters']['svcset_par_5']):
+#                service_set_element['parameters']['svcset_par_5'] =
                 continue
-            if (not service_set_element['svcset_par_6']):
-#                service_set_element['svcset_par_6'] = 
+            if (not service_set_element['parameters']['svcset_par_6']):
+#                service_set_element['parameters']['svcset_par_6'] = 
                 continue
 
 
     if 'applications' in psef_conf_parameters['data']:
         for applications_element in psef_conf_parameters['data']['applications']:
-            if (applications_element['app_par_1'] == 'false'):
-#                applications_element['app_par_1'] =
+            if (applications_element['parameters']['app_par_1'] == 'false'):
+#                applications_element['parameters']['app_par_1'] =
                 continue
-            if (applications_element['app_par_2'] == 'false'):
-#                applications_element['app_par_2'] =
+            if (applications_element['parameters']['app_par_2'] == 'false'):
+#                applications_element['parameters']['app_par_2'] =
                 continue
-            if (not applications_element['app_par_3']):
-#                applications_element['app_par_3'] =
+            if (not applications_element['parameters']['app_par_3']):
+#                applications_element['parameters']['app_par_3'] =
                 continue
-            if (not applications_element['app_par_4']):
-#                applications_element['app_par_4'] =
+            if (not applications_element['parameters']['app_par_4']):
+#                applications_element['parameters']['app_par_4'] =
                 continue
-            if (not applications_element['app_par_5']):
-#                applications_element['app_par_5'] =
+            if (not applications_element['parameters']['app_par_5']):
+#                applications_element['parameters']['app_par_5'] =
                 continue
-            if (not applications_element['app_par_6']):
-#                applications_element['app_par_6'] = 
+            if (not applications_element['parameters']['app_par_6']):
+#                applications_element['parameters']['app_par_6'] = 
                 continue
 
     if 'application-sets' in psef_conf_parameters['data']:
         for application_set_element in psef_conf_parameters['data']['application-sets']:
-            if (application_set_element['appset_par_1'] == 'false'):
-#                application_set_element['appset_par_1'] =
+            if (application_set_element['parameters']['appset_par_1'] == 'false'):
+#                application_set_element['parameters']['appset_par_1'] =
                 continue
-            if (not application_set_element['appset_par_2'] == 'false'):
-#                application_set_element['appset_par_2'] =
+            if (not application_set_element['parameters']['appset_par_2'] == 'false'):
+#                application_set_element['parameters']['appset_par_2'] =
                 continue
-            if (not application_set_element['appset_par_3']):
-#                application_set_element['appset_par_3'] =
+            if (not application_set_element['parameters']['appset_par_3']):
+#                application_set_element['parameters']['appset_par_3'] =
                 continue
-            if (not application_set_element['appset_par_4']):
-#                application_set_element['appset_par_4'] =
+            if (not application_set_element['parameters']['appset_par_4']):
+#                application_set_element['parameters']['appset_par_4'] =
                 continue
-            if (not application_set_element['appset_par_5']):
-#                application_set_element['appset_par_5'] =
+            if (not application_set_element['parameters']['appset_par_5']):
+#                application_set_element['parameters']['appset_par_5'] =
                 continue
-            if (not application_set_element['appset_par_6']):
-#                application_set_element['appset_par_6'] = 
+            if (not application_set_element['parameters']['appset_par_6']):
+#                application_set_element['parameters']['appset_par_6'] = 
                 continue
 
 
     if ('policies' in psef_conf_parameters['data']):
         for policy_element in psef_conf_parameters['data']['policies']:
-            if (not policy_element['plc_par_1'] == 'false'):
-#                policy_element['plc_par_1'] =
+            if (not policy_element['parameters']['plc_par_1'] == 'false'):
+#                policy_element['parameters']['plc_par_1'] =
                 continue
-            if (not policy_element['plc_par_2'] == 'false'):
-#                policy_element['plc_par_2'] =
+            if (not policy_element['parameters']['plc_par_2'] == 'false'):
+#                policy_element['parameters']['plc_par_2'] =
                 continue
-            if (not policy_element['plc_par_3']):
-#                policy_element['plc_par_3'] =
+            if (not policy_element['parameters']['plc_par_3']):
+#                policy_element['parameters']['plc_par_3'] =
                 continue
-            if (not policy_element['plc_par_4']):
-#                policy_element['plc_par_4'] =
+            if (not policy_element['parameters']['plc_par_4']):
+#                policy_element['parameters']['plc_par_4'] =
                 continue
-            if (not policy_element['plc_par_5']):
-#                policy_element['plc_par_5'] =
+            if (not policy_element['parameters']['plc_par_5']):
+#                policy_element['parameters']['plc_par_5'] =
                 continue
-            if (not policy_element['plc_par_6']):
-#                policy_element['plc_par_6'] = 
+            if (not policy_element['parameters']['plc_par_6']):
+#                policy_element['parameters']['plc_par_6'] = 
                 continue
 
 

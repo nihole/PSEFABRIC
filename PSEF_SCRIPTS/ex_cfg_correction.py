@@ -26,7 +26,8 @@ def ex_cli_correction(cfg_txt):
 
     # remove dublicated lines:
     
-    cmd_list = sorted(set(cfg_txt.splitlines()))
+#    cmd_list = sorted(set(cfg_txt.splitlines()))
+    cmd_list = set(cfg_txt.splitlines())
 
 # restore correct order:
 
@@ -51,7 +52,6 @@ def ex_cli_correction(cfg_txt):
             cmd_seq['rm_policy'].append(line)
         elif (re.search('^create policy', line)):
             cmd_seq['add_policy'].append(line)
-
         elif (re.search('^delete service-set', line)):
             cmd_seq['rm_service_set'].append(line)
         elif (re.search('^create service-set', line)):

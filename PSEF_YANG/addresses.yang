@@ -15,42 +15,44 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
-	  leaf addr_par_1 {
-//		  mandatory true;
-		  default false;
-		  type boolean;
-	  }
-	  leaf addr_par_2 {
-//		  mandatory true;
-		  default false;
-		  type boolean;
-	  }
-	  leaf addr_par_3 {
-		  type string;
-//		  mandatory true;
-		  default '';
-	  }
-	  leaf addr_par_4 {
-		  type string;
-//		  mandatory true;
-		  default '';
-	  }
-	  leaf addr_par_5 {
-		  type string;
-//		  mandatory true;
-		  default '';
-	  }
-	  leaf addr_par_6 {
-		  type string;
-//		  mandatory true;
-		  default '';
-	  }
 	  leaf ipv4-prefix {
 		  mandatory true;
 		  type ietf:ipv4-prefix;
 		  description
 			  "ipv4 prefix";
   	  }
+	  container parameters {
+		  leaf addr_par_1 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		  leaf addr_par_2 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		  leaf addr_par_3 {
+			  type string;
+//			  mandatory true;
+			  default '';
+		  }
+		  leaf addr_par_4 {
+			  type string;
+//			  mandatory true;
+			  default '';
+		  }
+		  leaf addr_par_5 {
+			  type string;
+//			  mandatory true;
+			  default '';
+		  }
+		  leaf addr_par_6 {
+			  type string;
+//			  mandatory true;
+			  default '';
+		  }
+	  }
 	  container structure {
 		  leaf str_1 {
 			  type leafref {
@@ -122,34 +124,36 @@ submodule addresses {
 		  mandatory true;
 		  type string;
 	  }
-	  leaf addrset_par_1 {
-//		  mandatory true;
-		  default false;
-		  type boolean;
-	  }
-	  leaf addrset_par_2 {
-//		  mandatory true;
-		  default false;
-		  type boolean;  
-	  }
-	  leaf addrset_par_3 {
-		  type string;
-		  default '';
-	  }
-	  leaf addrset_par_4 {
-		  type string;
-		  default '';
-//		  mandatory true;
-	  }
-	  leaf addrset_par_5 {
-		  type string;
-		  default '';
-//		  mandatory true;
-	  }
-	  leaf addrset_par_6 {
-		  type string;
-		  default '';
-//		  mandatory true;
+	  container parameters {
+		  leaf addrset_par_1 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		  leaf addrset_par_2 {
+//			  mandatory true;
+			  default false;
+			  type boolean;  
+		  }
+		  leaf addrset_par_3 {
+			  type string;
+			  default '';
+		  }
+		  leaf addrset_par_4 {
+			  type string;
+			  default '';
+//			  mandatory true;
+		  }
+		  leaf addrset_par_5 {
+			  type string;
+			  default '';
+//			  mandatory true;
+		  }
+		  leaf addrset_par_6 {
+			  type string;
+			  default '';
+//			  mandatory true;
+		  }
 	  }
  	  leaf-list addresses {
  		  min-elements 1;

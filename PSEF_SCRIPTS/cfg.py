@@ -73,7 +73,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                 policy_list = cmd_for_host_full[eq_name]['rm']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el['eq_parameter'], el['name'])")
+                        cfg_new = eval(command_element + "(el['eq_parameter'], el['name'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -82,7 +82,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if (cmd_for_host[eq_name]['rm']['address-set']):
                 for el in cmd_for_host_full[eq_name]['rm']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['address-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['address-list'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -91,7 +91,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if (cmd_for_host[eq_name]['rm']['address']):
                 for el in cmd_for_host[eq_name]['rm']['address']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['ipv4-prefix'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['ipv4-prefix'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
     
@@ -100,7 +100,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if (cmd_for_host[eq_name]['rm']['service-set']):
                 for el in cmd_for_host_full[eq_name]['rm']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['service-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['service-list'],el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 # rm service
@@ -109,9 +109,9 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                 for el in cmd_for_host[eq_name]['rm']['service']:
                     for command_element in el['command-list']:
                         if 'ports' in el:
-                            cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['prot'],el['ports']['destination-port-range'])")
+                            cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['prot'],el['ports']['destination-port-range'], el['parameters'])")
                         else:
-                            cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['prot'],{})")
+                            cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['prot'],{},el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -121,7 +121,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if (cmd_for_host[eq_name]['rm']['application-set']):
                 for el in cmd_for_host_full[eq_name]['rm']['application-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application-list'],el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -143,9 +143,9 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                 for el in cmd_for_host_full[eq_name]['ad']['service']:
                     for command_element in el['command-list']:
                         if 'ports' in el:
-                            cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['prot'],el['ports']['destination-port-range'])")
+                            cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['prot'],el['ports']['destination-port-range'],el['parameters'])")
                         else:
-                            cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['prot'],{})")
+                            cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['prot'],{},el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -154,7 +154,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['service-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['service-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['service-list'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -163,7 +163,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['application-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['application-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['application-list'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -173,7 +173,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['address']):
                 for el in cmd_for_host_full[eq_name]['ad']['address']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['ipv4-prefix'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['ipv4-prefix'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -182,7 +182,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['address-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['address-list'])")
+                        cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['address-list'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -193,7 +193,7 @@ def create_configs (cmd_for_host, cmd_for_host_full):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-sets'],el['src_str_1'], el['src_str_2'], el['src_str_3'], el['src_str_4'], el['dst_str_1'], el['dst_str_2'],  el['dst_str_3'],  el['dst_str_4'], 'permit')")
+                        cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-sets'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
     return cfg
