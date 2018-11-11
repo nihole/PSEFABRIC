@@ -31,16 +31,16 @@ def mult_dict_address(str_list):
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates.create_address')
-    mult[0]['cmd']['rm'].append('extemplates.delete_address')
+    mult[0]['cmd']['ad'].append('extemplates_1.create_address')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_address')
     mult.append({})
     mult[1]['eq_addr'] = 'example_device2'
     mult[1]['eq_parameter'] = 'some_parameter'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates.create_address')
-    mult[1]['cmd']['rm'].append('extemplates.delete_address')
+    mult[1]['cmd']['ad'].append('extemplates_2.create_address')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_address')
 
     return (mult)
 
@@ -60,16 +60,16 @@ def mult_dict_address_set():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates.create_address_set')
-    mult[0]['cmd']['rm'].append('extemplates.delete_address_set')
+    mult[0]['cmd']['ad'].append('extemplates_1.create_address_set')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_address_set')
     mult.append({})
     mult[1]['eq_addr'] = 'example_device2'
     mult[1]['eq_parameter'] = 'some_parameter'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates.create_address_set')
-    mult[1]['cmd']['rm'].append('extemplates.delete_address_set')
+    mult[1]['cmd']['ad'].append('extemplates_2.create_address_set')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_address_set')
 
     return (mult)
 
@@ -89,16 +89,16 @@ def mult_dict_service():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates.create_service')
-    mult[0]['cmd']['rm'].append('extemplates.delete_service')
+    mult[0]['cmd']['ad'].append('extemplates_1.create_service')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_service')
     mult.append({})
     mult[1]['eq_addr'] = 'example_device2'
     mult[1]['eq_parameter'] = 'some_parameter'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates.create_service')
-    mult[1]['cmd']['rm'].append('extemplates.delete_service')
+    mult[1]['cmd']['ad'].append('extemplates_2.create_service')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_service')
 
     return (mult)
 
@@ -118,16 +118,16 @@ def mult_dict_service_set():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates.create_service_set')
-    mult[0]['cmd']['rm'].append('extemplates.delete_service_set')
+    mult[0]['cmd']['ad'].append('extemplates_1.create_service_set')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_service_set')
     mult.append({})
     mult[1]['eq_addr'] = 'example_device2'
     mult[1]['eq_parameter'] = 'some_parameter'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates.create_service_set')
-    mult[1]['cmd']['rm'].append('extemplates.delete_service_set')
+    mult[1]['cmd']['ad'].append('extemplates_2.create_service_set')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_service_set')
 
     return (mult)
 
@@ -168,16 +168,16 @@ def mult_dict_application_set():
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates.create_application_set')
-    mult[0]['cmd']['rm'].append('extemplates.delete_application_set')
+    mult[0]['cmd']['ad'].append('extemplates_1.create_application_set')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_application_set')
     mult.append({})
     mult[1]['eq_addr'] = 'example_device2'
     mult[1]['eq_parameter'] = 'some_parameter'
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates.create_application_set')
-    mult[1]['cmd']['rm'].append('extemplates.delete_application_set')
+    mult[1]['cmd']['ad'].append('extemplates_2.create_application_set')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_application_set')
 
     return (mult)
 
@@ -224,16 +224,16 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict):
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'].append('extemplates.create_policy')
-        mult[0]['cmd']['rm'].append('extemplates.delete_policy')
+        mult[0]['cmd']['ad'].append('extemplates_1.create_policy')
+        mult[0]['cmd']['rm'].append('extemplates_1.delete_policy')
         mult.append({})
         mult[1]['eq_addr'] = 'example_device2'
         mult[1]['eq_parameter'] = 'some_parameter'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['ad'].append('extemplates.create_policy')
-        mult[1]['cmd']['rm'].append('extemplates.delete_policy')
+        mult[1]['cmd']['ad'].append('extemplates_2.create_policy')
+        mult[1]['cmd']['rm'].append('extemplates_2.delete_policy')
 
     else:
         mult = []
@@ -244,16 +244,16 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict):
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'].append('extemplates.create_policy')
-        mult[0]['cmd']['rm'].append('extemplates.delete_policy')
+        mult[0]['cmd']['ad'].append('extemplates_1.create_policy')
+        mult[0]['cmd']['rm'].append('extemplates_1.delete_policy')
         mult.append({})
         mult[1]['eq_addr'] = 'example_device2'
         mult[1]['eq_parameter'] = 'some_parameter'
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['ad'].append('extemplates.create_policy')
-        mult[1]['cmd']['rm'].append('extemplates.delete_policy')
+        mult[1]['cmd']['ad'].append('extemplates_2.create_policy')
+        mult[1]['cmd']['rm'].append('extemplates_2.delete_policy')
 
     return (mult)
 

@@ -326,7 +326,7 @@ def cmd_list_policy (action_, pol_):
                 cmd_for_host[cmd_element['eq_addr']][action_]['policy'].append(policy_attributes)
 
 
-def multiplex(diff_list):
+def demultiplex(diff_list):
 
 ##########  Description  #######
     '''
@@ -665,6 +665,106 @@ def policy_opt(cmd_for_host_full_):
                 i = i + 1
     return (cmd_for_host_)
 
+def multiplex (cmd_for_host_demult_):
+# If for the same device we have the same policies with the same lists of commands then we assemble them in one policy with assembqled lists of address-sets
+    cmd_for_host_demult = copy.deepcopy(cmd_for_host_demult_)
+    cmd_for_host_mult = copy.deepcopy(cmd_for_host_demult_)
 
+    for eq_element in cmd_for_host_demult:
+        # some templorary dictionary for assistence
+        policy_mult_rm = {} 
+        policy_mult_ad = {}        
+        if (cmd_for_host_demult[eq_element]['rm']['policy']):
+            for policy_dict_el in cmd_for_host_demult[eq_element]['rm']['policy']:
+                # if policy with this name has already been checked and as result presents in our dict
+                if ((policy_dict_el['name'] in policy_mult_rm)):
+                    # this flag is used to verify if we have the policy with the same list of commands
+                    flag_cmd_exist = 0
+                    for el_policy in policy_mult_rm[policy_dict_el['name']]:
+                        # if list of commants is the same, then we assemble address-sets
+                        if (policy_dict_el["command-list"] == el_policy["command-list"]):
+                            el_policy["source-address-sets"] = el_policy["source-address-sets"] + policy_dict_el["source-address-sets"]
+                            el_policy["destination-address-sets"] = el_policy["destination-address-sets"] + policy_dict_el["destination-address-sets"]
+                            flag_cmd_exist = 1
+                    # If all policies in the list have not the same list of commands then we create additional element with in the list
+                    if flag_cmd_exist == 0:
+                        policy_mult_rm[policy_dict_el['name']].append(policy_dict_el)
+                # if we don't have policy with this name then create new doct pare 
+                else:
+                    policy_mult_rm[policy_dict_el['name']] =[]
+                    policy_mult_rm[policy_dict_el['name']].append(policy_dict_el)
+        
+        if (cmd_for_host_demult[eq_element]['ad']['policy']):
+            for policy_dict_el in cmd_for_host_demult[eq_element]['ad']['policy']:
+                # if policy with this name has already been checked and as result presents in our dict
+                if ((policy_dict_el['name'] in policy_mult_ad)):
+                    # this flag is used to verify if we have the policy with the same list of commands
+                    flag_cmd_exist = 0
+                    for el_policy in policy_mult_ad[policy_dict_el['name']]:
+                        # if list of commants is the same, then we assemble address-sets
+                        if (policy_dict_el["command-list"] == el_policy["command-list"]):
+                            el_policy["source-address-sets"] = el_policy["source-address-sets"] + policy_dict_el["source-address-sets"]
+                            el_policy["destination-address-sets"] = el_policy["destination-address-sets"] + policy_dict_el["destination-address-sets"]
+                            flag_cmd_exist = 1
+                    # If all policies in the list have not the same list of commands then we create additional element with in the list
+                    if flag_cmd_exist == 0:
+                        policy_mult_ad[policy_dict_el['name']].append(policy_dict_el)
+                # if we don't have policy with this name then create new doct pare 
+                else:
+                    policy_mult_ad[policy_dict_el['name']] =[]
+                    policy_mult_ad[policy_dict_el['name']].append(policy_dict_el)
 
+ 
+        for policy_name in policy_mult_rm:
+            for el_policy in policy_mult_rm[policy_name]:
+                src_address_set_list = []
+                dst_address_set_list = []
+                i = 0
+                while i < len(el_policy["source-address-sets"]): 
+                    if el_policy["source-address-sets"][i]["address-set-name"] in src_address_set_list:
+                        del el_policy["source-address-sets"][i]
+                        i = i - 1
+                    else:
+                        src_address_set_list.append(el_policy["source-address-sets"][i]["address-set-name"])
+                    i = i + 1
+                i = 0
+                while i < len(el_policy["destination-address-sets"]):
+                    if el_policy["destination-address-sets"][i]["address-set-name"] in dst_address_set_list:
+                        del el_policy["destination-address-sets"][i]
+                        i = i - 1
+                    else:
+                        dst_address_set_list.append(el_policy["destination-address-sets"][i]["address-set-name"])
+                    i = i + 1
+        
+        for policy_name in policy_mult_ad:
+            for el_policy in policy_mult_ad[policy_name]:
+                src_address_set_list = []
+                dst_address_set_list = []
+                i = 0
+                while i < len(el_policy["source-address-sets"]):
+                    if el_policy["source-address-sets"][i]["address-set-name"] in src_address_set_list:
+                        del el_policy["source-address-sets"][i]
+                        i = i - 1
+                    else:
+                        src_address_set_list.append(el_policy["source-address-sets"][i]["address-set-name"])
+                    i = i + 1
+                i = 0
+                while i < len(el_policy["destination-address-sets"]):
+                    if el_policy["destination-address-sets"][i]["address-set-name"] in dst_address_set_list:
+                        del el_policy["destination-address-sets"][i]
+                        i = i - 1
+                    else:
+                        dst_address_set_list.append(el_policy["destination-address-sets"][i]["address-set-name"])
+                    i = i + 1 
+     
+        cmd_for_host_mult[eq_element]['rm']['policy'] = []
+        cmd_for_host_mult[eq_element]['ad']['policy'] = []
+        
+        for policy_name in policy_mult_rm:
+            cmd_for_host_mult[eq_element]['rm']['policy'] = cmd_for_host_mult[eq_element]['rm']['policy'] + policy_mult_rm[policy_name]
 
+        for policy_name in policy_mult_ad:
+            cmd_for_host_mult[eq_element]['ad']['policy'] = cmd_for_host_mult[eq_element]['ad']['policy'] + policy_mult_ad[policy_name]
+                    
+            
+    return cmd_for_host_mult

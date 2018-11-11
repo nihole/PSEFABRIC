@@ -57,6 +57,7 @@ def mult_cfg(cfg_):
     for eq_addr in cfg_:
         if re.search('example', host_[eq_addr]):
             config = ex_cfg_correction.ex_cli_correction(cfg_[eq_addr])
+            config = cfg_[eq_addr]
             version_file(eq_addr, config,'txt')
 #        elif 
 #        elif

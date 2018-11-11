@@ -44,6 +44,8 @@ debug['cmd_for_host_diff'] = True
 debug['cmd_for_host_full'] = True
 debug['cfg'] = True
 
+debug['cmd_for_host_mult'] = True
+
 def version_file(dict_name, dict_debug):
 
 ##########  Description  #######
