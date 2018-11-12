@@ -1,0 +1,12 @@
+Project speficific information is located in the child folders:
+
+Projects descriptions:
+
+p000 - root project with examples of configuration.
+p001 - projects with Cisco Routers/Switches/ASA and Juniper Firewalls equipment.
+p002 - project with PA/ACI equipment.
+
+See details on 
+https://github.com/nihole/PSEFABRIC/wiki
+https://github.com/nihole/PSEFABRIC_P001/wiki
+https://github.com/nihole/PSEFABRIC_P002/wiki

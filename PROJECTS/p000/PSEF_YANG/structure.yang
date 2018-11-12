@@ -1,0 +1,61 @@
+module structure {
+
+  yang-version "1.1";
+
+  // namespace
+  namespace "http://psefabric/structure";
+
+  prefix "structure";
+
+  import psefabric-types { prefix types; }
+  
+  container structure {
+	  leaf-list str_1 {
+		  type types:str_1;
+		  default 'none';
+	  }
+	  leaf-list str_2 {
+		  type types:str_2;
+		  default 'none';
+	  }
+	  leaf-list str_3 {
+		  type types:str_3;
+		  default 'none';
+	  }
+	  leaf-list str_4 {
+		  type types:str_4;
+		  default 'none';
+	  }
+	  leaf-list str_5 {
+		  type types:str_5;
+		  default 'none';
+	  }
+	  leaf-list str_6 {
+		  type types:str_6;
+		  default 'none';
+	  }		
+	  leaf-list str_7 {
+		  type types:str_7;
+		  default 'none';
+	  }
+	  leaf-list str_8 {
+		  type types:str_8;
+		  default 'none';
+	  }
+	  leaf-list str_9 {
+		  type types:str_9;
+		  default 'none';
+	  }
+	  list vlans {
+		  key vlan-name;
+		  leaf vlan-name {
+			  type string;
+		  }
+		  leaf vlan-number {
+			  type int16 {
+			  range "0..4095";  
+			  }
+		  }
+	  }
+  }
+} 

@@ -1,0 +1,140 @@
+submodule services {
+  belongs-to policy {
+    prefix policy;
+  }
+	  
+  yang-version "1.1";
+
+  import ietf-inet-types { prefix ietf; }
+  import ietf-packet-fields { prefix fields; }
+  
+  list services {
+	  key service-name;
+	  leaf service-name {
+		  mandatory true;
+		  type string;
+	  }
+	  leaf prot {
+		  type int8;
+		  description
+			  "Protocol number";
+	  }
+	  container parameters {
+		  leaf  svc_par_1 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		  leaf  svc_par_2 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		  leaf svc_par_3 {
+			  type string;
+			  default '';
+		  }
+		  leaf svc_par_4 {
+			  type string;
+			  default '';
+		  }
+		  leaf svc_par_5 {
+			  type string;
+			  default '';
+		  }
+		  leaf svc_par_6 {
+			  type string;
+			  default '';
+		  }
+	  }
+	  container ports {
+		  container source-port-range {
+		      presence "Enables setting source port range";
+		      description
+		        "Inclusive range representing source ports to be used.
+		        When only lower-port is present, it represents a single port.";
+		      leaf lower-port {
+		        type int16;
+		        mandatory true;
+		        description
+		          "Lower boundary for port.";
+		      }
+		      leaf upper-port {
+		        type int16;
+		        must ". >= ../lower-port" {
+		          error-message
+		          "The upper-port must be greater than or equal to lower-port";
+		        }
+		        description
+		          "Upper boundary for port . If existing, the upper port
+		          must be greater or equal to lower-port.";
+		      }
+		    }
+		    container destination-port-range {
+		      presence "Enables setting destination port range";
+		      description
+		        "Inclusive range representing destination ports to be used. When
+		        only lower-port is present, it represents a single port.";
+		      leaf lower-port {
+		        type int16;
+		        mandatory true;
+		        description
+		          "Lower boundary for port.";
+		      }
+		      leaf upper-port {
+		        type int16;
+		        must ". >= ../lower-port" {
+		          error-message
+		            "The upper-port must be greater than or equal to lower-port";
+		        }
+
+		        description
+		          "Upper boundary for port. If existing, the upper port must
+		          be greater or equal to lower-port";
+		      }
+		    }
+	  }
+   }
+  list service-sets {
+	 key service-set-name;
+	 leaf service-set-name {
+		 mandatory true;
+		  type string;
+	  }
+	  container parameters {
+		  leaf svcset_par_1 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		 leaf svcset_par_2 {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+		 leaf svcset_par_3 {
+			  type string;
+			  default '';
+		  }
+		  leaf svcset_par_4 {
+			  type string;
+			  default '';
+		  }
+		  leaf svcset_par_5 {
+			  type string;
+			  default '';
+		  }
+		  leaf svcset_par_6 {
+			  type string;
+			  default '';
+		  }
+	  }
+	  leaf-list services {
+          min-elements 1;
+		  type leafref {
+			  path "/services/service-name";
+		  }
+	 }
+	  
+ }
+}  

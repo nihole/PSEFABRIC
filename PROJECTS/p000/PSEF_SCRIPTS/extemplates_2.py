@@ -1,7 +1,7 @@
-# This template is for cli configuration of the equipment with "candidate config" feature
+# This template is for cli configuration of the equipment without "candidate config" feature
 
 import re
-import cidr_to_netmask
+# import cidr_to_netmask
 
 '''The list of templates for pan
 '''
@@ -219,9 +219,19 @@ create policy with eq_parameter: %s name: %s action allow''' % (eq_parameter, na
 
     return config_txt
 
-def delete_policy (eq_parameter, name, parameters):
-
-    config_txt = '''
-delete policy with eq_parameter: %s name: %s parameters: %s''' % (eq_parameter, name, parameters)
+def delete_policy (name, eq_parameter, parameters, source_address_set_list, destination_address_set_list, service_set_dicts,  status):
+    config_txt = ''
+    if (status == 'delete'):
+        config_txt = '''
+delete policy with eq_parameter: %s name: %s parameters: %s ''' % (eq_parameter, name, parameters)
+    else:
+        for source_address_set_element in source_address_set_list:
+            config_txt_add = '''
+delete policy with eq_parameter: %s name: %s parameters: %s src_address_set %s''' % (eq_parameter, name, parameters, source_address_set_element['address-set-name'])
+            config_txt = config_txt + config_txt_add
+        for destination_address_set_element in destination_address_set_list:
+            config_txt_add = '''
+delete policy with eq_parameter: %s name: %s parameters: %s dst_address_set %s''' % (eq_parameter, name, parameters, destination_address_set_element['address-set-name'])
+            config_txt = config_txt+ config_txt_add
 
     return config_txt

@@ -4,11 +4,18 @@ The psefabric.py is the dataflow manager
 - responsible for data exchanging between them.
 '''
 
+import os
+import sys
+
+PSEFABRIC =os.environ['PSEFABRIC']
+PROJECT = os.environ['PROJECT']
+sys.path.append(PROJECT + '/PSEF_SCRIPTS')
+sys.path.append(PSEFABRIC + '/PSEF_SCRIPTS')
+
 import xmltodict
 from deepdiff import DeepDiff
 import re
 from ncclient import manager
-import os
 import versionfile as vrs
 
 import cda
@@ -22,8 +29,6 @@ import copy
 
 
 
-PSEFABRIC =os.environ['PSEFABRIC'] + "/PSEFABRIC"
-
 def version_file(flg_ok_):
     if (re.search (flg_ok_, "OK")):
         if os.path.isfile("%s/PSEF_CONF/pse-config.xml" % PSEFABRIC):
@@ -35,7 +40,7 @@ def version_file(flg_ok_):
             else:
                 print ("Versioning file failed")
         else:
-            if (os.system("cp $PSEFABRIC/PSEFABRIC/PSEF_CONF/pse-config-initial.xml $PSEFABRIC/PSEFABRIC/PSEF_CONF/pse-config.xml.000 2>/dev/null")):
+            if (os.system("cp $PSEFABRIC/PSEF_CONF/pse-config-initial.xml $PSEFABRIC/PSEF_CONF/pse-config.xml.000 2>/dev/null")):
                 print ("cp pse-config-initial.xml pse-config.xml failed")
             else:
                 with open('%s/PSEF_CONF/pse-config.xml' % PSEFABRIC, 'w') as f4:
@@ -85,7 +90,7 @@ elif os.path.isfile('%s/PSEF_CONF/pse-config-initial.xml' % PSEFABRIC):
     fd1.close()
 else:
 #    if (os.system("python create_pse_config_initial.py 2>/dev/null")):
-    if (os.system("python $PSEFABRIC/PSEFABRIC/PSEF_SCRIPTS/create_pse_config_initial.py")):
+    if (os.system("python $PSEFABRIC/PSEF_SCRIPTS/create_pse_config_initial.py")):
         print "Failed to create pse-config-initial.xml"
     else:
         print "pse-config-initial.xml has been created"

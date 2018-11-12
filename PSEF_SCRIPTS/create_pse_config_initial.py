@@ -5,7 +5,7 @@ We need something to compare our new config with. So the next config will be com
 
 import os
 
-PSEFABRIC = os.environ['PSEFABRIC'] + "/PSEFABRIC"
+PSEFABRIC = os.environ['PSEFABRIC']
 
 from ncclient import manager
 

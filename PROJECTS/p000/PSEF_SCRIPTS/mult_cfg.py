@@ -25,7 +25,7 @@ import re
 import copy
 import ex_cfg_correction
 
-PSEFABRIC = os.environ['PSEFABRIC'] + "/PSEFABRIC"
+PSEFABRIC = os.environ['PSEFABRIC']
 
 def version_file(eq_addr_, conf_, ext_):
 

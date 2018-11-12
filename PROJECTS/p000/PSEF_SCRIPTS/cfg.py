@@ -32,7 +32,6 @@ import re
 import mult_cfg
 import extemplates_1
 import extemplates_2
-import acitemplates
 import host_to_type
 
 cfg = {}

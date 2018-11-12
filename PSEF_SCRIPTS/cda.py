@@ -23,6 +23,7 @@
 import re
 import copy
 from deepdiff import DeepDiff
+import vocabulary
 
 
 def dict_correct(psef_conf_):
@@ -409,9 +410,26 @@ def default_change (psef_conf_):
     '''
 
     psef_conf_parameters = copy.deepcopy(psef_conf_)
-    
+
     if 'addresses' in psef_conf_parameters['data']:
         for addresses_element in psef_conf_parameters['data']['addresses']:
+            addresses_element['parameters']['addr_par_1'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_1'])
+            addresses_element['parameters']['addr_par_2'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_2'])
+            addresses_element['parameters']['addr_par_3'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_3'])
+            addresses_element['parameters']['addr_par_4'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_4'])
+            addresses_element['parameters']['addr_par_5'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_5'])
+            addresses_element['parameters']['addr_par_6'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_6'])
+
+            addresses_element['structure']['str_1'] = addresses_element['structure'].pop(vocabulary.str_voc['str_1'])
+            addresses_element['structure']['str_2'] = addresses_element['structure'].pop(vocabulary.str_voc['str_2'])
+            addresses_element['structure']['str_3'] = addresses_element['structure'].pop(vocabulary.str_voc['str_3'])
+            addresses_element['structure']['str_4'] = addresses_element['structure'].pop(vocabulary.str_voc['str_4'])
+            addresses_element['structure']['str_5'] = addresses_element['structure'].pop(vocabulary.str_voc['str_5'])
+            addresses_element['structure']['str_6'] = addresses_element['structure'].pop(vocabulary.str_voc['str_6'])
+            addresses_element['structure']['str_7'] = addresses_element['structure'].pop(vocabulary.str_voc['str_7'])
+            addresses_element['structure']['str_8'] = addresses_element['structure'].pop(vocabulary.str_voc['str_8'])
+            addresses_element['structure']['str_9'] = addresses_element['structure'].pop(vocabulary.str_voc['str_9'])
+
             if (addresses_element['parameters']['addr_par_1'] == 'false'):
 #                address_element['parameters']['addr_par_1'] =
                 continue
@@ -433,6 +451,13 @@ def default_change (psef_conf_):
 
     if 'address-sets' in psef_conf_parameters['data']:
         for address_set_element in psef_conf_parameters['data']['address-sets']:
+            address_set_element['parameters']['addrset_par_1'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_1'])
+            address_set_element['parameters']['addrset_par_2'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_2'])
+            address_set_element['parameters']['addrset_par_3'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_3'])
+            address_set_element['parameters']['addrset_par_4'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_4'])
+            address_set_element['parameters']['addrset_par_5'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_5'])
+            address_set_element['parameters']['addrset_par_6'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_6'])
+
             if (address_set_element['parameters']['addrset_par_1'] == 'false'):
 #                address_set_element['parameters']['addrset_par_1'] =
                 continue
@@ -454,6 +479,13 @@ def default_change (psef_conf_):
 
     if 'services' in psef_conf_parameters['data']:
         for services_element in psef_conf_parameters['data']['services']:
+            services_element['parameters']['svc_par_1'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_1'])
+            services_element['parameters']['svc_par_2'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_2'])
+            services_element['parameters']['svc_par_3'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_3'])
+            services_element['parameters']['svc_par_4'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_4'])
+            services_element['parameters']['svc_par_5'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_5'])
+            services_element['parameters']['svc_par_6'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_6'])
+
             if (services_element['parameters']['svc_par_1'] == 'false'):
 #                services_element['parameters']['svc_par_1'] =
                 continue
@@ -475,6 +507,13 @@ def default_change (psef_conf_):
 
     if 'service-sets' in psef_conf_parameters['data']:
         for service_set_element in psef_conf_parameters['data']['service-sets']:
+            service_set_element['parameters']['svcset_par_1'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_1'])
+            service_set_element['parameters']['svcset_par_2'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_2'])
+            service_set_element['parameters']['svcset_par_3'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_3'])
+            service_set_element['parameters']['svcset_par_4'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_4'])
+            service_set_element['parameters']['svcset_par_5'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_5'])
+            service_set_element['parameters']['svcset_par_6'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_6'])
+
             if (service_set_element['parameters']['svcset_par_1'] == 'false'):
 #                service_set_element['parameters']['svcset_par_1'] =
                 continue
@@ -497,6 +536,13 @@ def default_change (psef_conf_):
 
     if 'applications' in psef_conf_parameters['data']:
         for applications_element in psef_conf_parameters['data']['applications']:
+            applications_element['parameters']['app_par_1'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_1'])
+            applications_element['parameters']['app_par_2'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_2'])
+            applications_element['parameters']['app_par_3'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_3'])
+            applications_element['parameters']['app_par_4'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_4'])
+            applications_element['parameters']['app_par_5'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_5'])
+            applications_element['parameters']['app_par_6'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_6'])
+
             if (applications_element['parameters']['app_par_1'] == 'false'):
 #                applications_element['parameters']['app_par_1'] =
                 continue
@@ -518,6 +564,13 @@ def default_change (psef_conf_):
 
     if 'application-sets' in psef_conf_parameters['data']:
         for application_set_element in psef_conf_parameters['data']['application-sets']:
+            application_set_element['parameters']['appset_par_1'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_1'])
+            application_set_element['parameters']['appset_par_2'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_2'])
+            application_set_element['parameters']['appset_par_3'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_3'])
+            application_set_element['parameters']['appset_par_4'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_4'])
+            application_set_element['parameters']['appset_par_5'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_5'])
+            application_set_element['parameters']['appset_par_6'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_6'])
+
             if (application_set_element['parameters']['appset_par_1'] == 'false'):
 #                application_set_element['parameters']['appset_par_1'] =
                 continue
@@ -540,6 +593,13 @@ def default_change (psef_conf_):
 
     if ('policies' in psef_conf_parameters['data']):
         for policy_element in psef_conf_parameters['data']['policies']:
+            policy_element['parameters']['plc_par_1'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_1'])
+            policy_element['parameters']['plc_par_2'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_2'])
+            policy_element['parameters']['plc_par_3'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_3'])
+            policy_element['parameters']['plc_par_4'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_4'])
+            policy_element['parameters']['plc_par_5'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_5'])
+            policy_element['parameters']['plc_par_6'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_6'])
+
             if (not policy_element['parameters']['plc_par_1'] == 'false'):
 #                policy_element['parameters']['plc_par_1'] =
                 continue
