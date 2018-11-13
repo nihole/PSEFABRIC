@@ -1,4 +1,5 @@
 import re
+import vocabulary
 
 '''The list of templates for pan
 '''
@@ -13,10 +14,10 @@ import re
 def pan_create_address (device_group, psefname, ipv4_prefix, parameters):
 
 # psefname is not used
-    if parameters['addr_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-addr']] == 'false':
         return None
 
-    name = parameters['addr_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-address-obj-name']]
 
 #    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
 #    config_txt = '''set %s address %s ip-netmask %s/%s''' % (device_group, name, network, netmask)
@@ -26,10 +27,10 @@ def pan_create_address (device_group, psefname, ipv4_prefix, parameters):
 def pan_delete_address (device_group, psefname, ipv4_prefixi, parameters):
 
 # psefname is not used
-    if parameters['addr_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-addr']] == 'false':
         return None
 
-    name = parameters['addr_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-address-obj-name']]
 
 #    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
     config_txt = '''delete %s address %s''' % (device_group, name)
@@ -40,10 +41,10 @@ def pan_delete_address (device_group, psefname, ipv4_prefixi, parameters):
 def pan_create_address_set (device_group, psefname, addresses, parameters):
 
 # psefname is not used
-    if parameters['addrset_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-addrset']] == 'false':
         return None
 
-    name = parameters['addrset_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-address-grp-name']]
 
     config_addresses = ''
     for address_element in addresses:
@@ -61,11 +62,11 @@ def pan_delete_address_set (device_group, psefname, addresses, parameters):
 
 
 # psefname is not used
-    if parameters['addrset_par_2'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-addrset']] == 'false':
         return None
 
-    name = parameters['addrset_par_3']
-
+    name = parameters[vocabulary.par_rvoc['pa-address-grp-name']]
+    
     config_addresses = ''
     for address_element in addresses:
         if ( config_addresses == ''):
@@ -84,10 +85,10 @@ def pan_delete_address_set (device_group, psefname, addresses, parameters):
 def pan_create_service (device_group, psefname, prot, ports, parameters):
 
 # psefname is not used
-    if parameters['svc_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-svc']] == 'false':
         return None
 
-    name = parameters['svc_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-service-name']]
 
     if (prot == '6'):
         prot_ = 'tcp'
@@ -110,11 +111,12 @@ def pan_create_service (device_group, psefname, prot, ports, parameters):
 
 def pan_delete_service (device_group, psefname, prot, ports, parameters):
 
+
 # psefname is not used
-    if parameters['svc_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-svc']] == 'false':
         return None
 
-    name = parameters['svc_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-service-name']]
 
     config_txt = '''delete %s service %s''' % (device_group, name)
     return config_txt
@@ -125,10 +127,10 @@ def pan_delete_service (device_group, psefname, prot, ports, parameters):
 def pan_create_service_set (device_group, psefname, service, parameters):
 
 # psefname is not used
-    if parameters['svcset_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-svcset']] == 'false':
         return None
 
-    name = parameters['svcset_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-service-grp-name']]
 
     config_services = ''
 
@@ -148,10 +150,10 @@ def pan_create_service_set (device_group, psefname, service, parameters):
 def pan_delete_service_set (device_group, psefname, service, parameters):
     
 # psefname is not used
-    if parameters['svcset_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-svcset']] == 'false':
         return None
 
-    name = parameters['svcset_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-service-grp-name']]
 
 
     config_services = ''
@@ -174,10 +176,10 @@ def pan_delete_service_set (device_group, psefname, service, parameters):
 def pan_create_application_set (device_group, psefname, application, parameters):
 
 # psefname is not used
-    if parameters['appset_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-appset']] == 'false':
         return None
 
-    name = parameters['appset_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-application-grp-name']]    
     
     config_applications = ''
 
@@ -197,10 +199,10 @@ def pan_create_application_set (device_group, psefname, application, parameters)
 def pan_delete_application_set (device_group, psefname, application, parameters):
 
 # psefname is not used
-    if parameters['appset_par_1'] == 'false':
+    if parameters[vocabulary.par_rvoc['configure-appset']] == 'false':
         return None
 
-    name = parameters['appset_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-application-grp-name']]
 
     config_applications = ''
 

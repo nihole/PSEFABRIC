@@ -1,13 +1,16 @@
 '''
 This is essential element of the demultiplexer layes of Psefabric Dataflow Model and one of the key elements of the psefabric concept.
 The python dictionaries created here are used in multiplexer.py.
-The matter is that depending on the values of the structural elements (for networks in this realization) we have to program a specific set of commands for different MOs.
+The matter is that depending on the values of the structural elements (for adrresses in this realization) we have to program a specific set of commands for different MOs.
 And we need some algorithm for that. So these dictionaries describe this logic.
 We need to program logic for the adding/removal of addresses, address_sets, services, service_sets, policies. So we have:
+
 mult_dict_address()
 mult_dict_address_set()
 mult_dict_service()
 mult_dict_service_set()
+mult_dict_sapplication()
+mult_dict_application_set()
 mult_dict_policy()
 '''
 

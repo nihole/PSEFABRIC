@@ -24,9 +24,10 @@ module policy {
 				  type string;
 				  default '';
 			  }
-			  leaf epg {
-				  mandatory true;
+			  leaf epg-plc {
+//				  mandatory true;
 				  type boolean;  
+				  default 'false';
 			  }
 			  leaf aci-contract-name {
 				  type string;
@@ -35,7 +36,7 @@ module policy {
 		  }
 		  container match {
 			  leaf-list source-address-sets {
-				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg=../../parameters/epg)" {
+				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg-addrset=../../parameters/epg-plc)" {
 				      error-message
 					"All address-sets in policies shoul be with the same epg flag";
 				  } 
@@ -45,7 +46,7 @@ module policy {
 				  }
 			   }
 			  leaf-list destination-address-sets {
-				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg=../../parameters/epg)" {
+				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg-addrset=../../parameters/epg-plc)" {
 				      error-message
 					"All address-sets in policies shoul be with the same epg flag";
 				  }	

@@ -25,7 +25,7 @@ submodule services {
 			  type string;
 			  default '';
 		  }
-		  leaf configure {
+		  leaf configure-svc {
 //			  mandatory true;
 			  type boolean;
 			  default 'false';
@@ -99,7 +99,7 @@ submodule services {
 			  type string;
 			  default '';
 		  }
-		 leaf configure {
+		 leaf configure-svcset {
 //			 mandatory true;
 			 default 'false';
 			  type boolean;

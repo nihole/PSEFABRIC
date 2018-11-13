@@ -14,15 +14,20 @@ def host_to_type():
 
 def area_to_eq_aci():
     
-    map_aci = {}
+    map_apic_host = {}
+    map_apic_host['dc1'] = 'apic_aci_dc1'
+    map_apic_host['dc1'] = 'apic_aci_dc2'
 
-    map_aci['dc1'] = {}
-    map_aci['dc2'] = {}
-    map_aci['dc1']['a1'] = 'aci_dc1_a1'
-    map_aci['dc1']['a2'] = 'aci_dc1_a2'
-    map_aci['dc2']['a1'] = 'aci_dc2_a1'
-    map_aci['dc2']['a2'] = 'aci_dc2_a2'
-    return map_aci
+    
+    map_aci_tenant = {}
+    map_aci_tenant['dc1'] = {}
+    map_aci_tenant['dc2'] = {}
+    map_aci_tenant['dc1']['a1'] = 'a1'
+    map_aci_tenant['dc1']['a2'] = 'a2'
+    map_aci_tenant['dc2']['a1'] = 'a1'
+    map_aci_tenant['dc2']['a2'] = 'a2'
+
+    return (map_apic_host, map_aci_tenant)
 
 def area_to_eq_pa():
 
@@ -30,11 +35,12 @@ def area_to_eq_pa():
     Maps areas to panorama device-groups
     '''
     
-    map_pa = {}
-    map_pa['dc1'] = {}
-    map_pa['dc2'] = {}
-    map_pa['dc1']['a1'] = 'pa_dc1_a1'
-    map_pa['dc1']['a2'] = 'pa_dc1_a2'
-    map_pa['dc2']['a1'] = 'pa_dc2_a1'
-    map_pa['dc2']['a2'] = 'pa_dc2_a2'
-    return map_pa
+    map_pa_device_group = {}
+    map_pa_device_group['dc1'] = {}
+    map_pa_device_group['dc2'] = {}
+    map_pa_device_group['dc1']['a1'] = 'dc1_a1'
+    map_pa_device_group['dc1']['a2'] = 'dc1_a2'
+    map_pa_device_group['dc2']['a1'] = 'dc2_a1'
+    map_pa_device_group['dc2']['a2'] = 'dc2_a2'
+
+    return map_pa_device_group

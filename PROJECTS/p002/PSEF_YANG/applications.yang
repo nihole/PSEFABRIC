@@ -21,7 +21,7 @@ submodule applications {
 			  type string;
 			  default '';
 		  }
-		  leaf configure {
+		  leaf configure-app {
 			  default false;
 			  type boolean;
 		  }  
@@ -38,7 +38,7 @@ submodule applications {
 			  type string;
 			  default '';
 		  }
-		 leaf configure {
+		 leaf configure-appset {
 //			  mandatory true;
 			  default 'false';
 			  type boolean;

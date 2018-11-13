@@ -18,7 +18,7 @@ submodule addresses {
 		  type string;
 	  }
 	  container parameters {
-		  leaf configure {
+		  leaf configure-addr {
 //			  mandatory true;
 			  default true;
 			  type boolean;
@@ -76,23 +76,23 @@ submodule addresses {
 			  default '';
 		  }
 		  leaf aci-epg-name {
-			  when "../epg = 'true'";
+			  when "../epg-addrset = 'true'";
 			  type string;
 //			  mandatory true;
 			  default '';
 		  }
-		  leaf configure {
+		  leaf configure-addrset {
 //			  mandatory true;
 			  type boolean;
 			  default 'false';
 		  }
-		  leaf epg {
+		  leaf epg-addrset {
 //			  mandatory true;
 			  type boolean;  
 			  default 'false';
 		  }
 		  leaf path {
-			  when "../epg = 'true'";
+			  when "../epg-addrset = 'true'";
 			  type string;
 //			  mandatory true;
 			  default '';
