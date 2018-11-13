@@ -1,5 +1,4 @@
 import re
-import cidr_to_netmask
 
 '''The list of templates for pan
 '''
@@ -231,17 +230,17 @@ def pan_create_policy (device_group, name, source_address_set_list, destination_
 
     for source_address_set_element in source_address_set_list:
         if re.match(config_match_source, ''):
-            config_match_source = '%s' % source_address_set_element["addrset_par_3"]
+            config_match_source = '%s' % source_address_set_element["address-set-alias-1"]
         else:
-            config_match_source = config_match_source + ' %s' % source_address_set_element["addrset_par_3"]
+            config_match_source = config_match_source + ' %s' % source_address_set_element["address-set-alias-1"]
 
     config_match_source = '[ ' + config_match_source + ' ]'
 
     for destination_address_set_element in destination_address_set_list:
         if re.match(config_match_destination, ''):
-            config_match_destination = '%s' % destination_address_set_element["addrset_par_3"]
+            config_match_destination = '%s' % destination_address_set_element["address-set-alias-1"]
         else:
-            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["addrset_par_3"]
+            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["address-set-alias-1"]
 
     config_match_destination = '[ ' + config_match_destination + ' ]'
 

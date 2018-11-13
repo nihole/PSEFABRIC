@@ -35,7 +35,14 @@ def aci_detach_epg (contract_name, epg_name, path, relation):
 
     return (config_json)
 
-def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action ):
+def aci_create_policy (eq_parameter, name, epg_dict_cons, epg_dict_prov, application-sets, subject_dict, src_str, dst_str parameters, action):
+
+
+# eq_parameter, application-sets, src_str, dst_str are not used in this case
+
+    # if 'epg' parameter is false then exit
+    if (parameters['plc_par_2'] == 'false')
+        return None
 
     # Subject creation:
     config_sbj = ''
@@ -43,22 +50,22 @@ def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action 
     for subject_el in subject_dict:
         config_fltr_ = ''
         for filter_el in subject_el['services']:
-            config_fltr_el = '{"vzRsSubjFiltAtt":{"attributes":{"action":"permit","priorityOverride":"default","tnVzFilterName":"%s"}}}' % filter_el["svc_par_4"] 
+            config_fltr_el = '{"vzRsSubjFiltAtt":{"attributes":{"action":"permit","priorityOverride":"default","tnVzFilterName":"%s"}}}' % filter_el['parameter']["svc_par_4"] 
             if (config_fltr_ == ''):
                 config_fltr_ = config_fltr_el
             else:
                 config_fltr_ = config_fltr_ + ',' + config_fltr_el
         config_fltr = '[' + config_fltr_ + ']'
         if (config_sbj == ''):
-            config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el["svcset_par_4"]
+            config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el['parameters']["svcset_par_4"]
             config_sbj = config_sbj_part + config_fltr
         else:
-            config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el["svcset_par_4"]
+            config_sbj_part = '{"vzSubj":{"attributes":{"name":"%s","revFltPorts":"yes"},"children":' % subject_el['parameters']["svcset_par_4"]
             config_sbj = config_sbj + ',' + config_sbj_part + config_fltr
         config_sbj = '[' + config_sbj + '}}]'
 
 # Contracts creation:    
-    config_cntr_part = '{"fvTenant":{"attributes":{"dn":"uni/tn-common","status":"modified"},"children":[{"vzBrCP":{"attributes":{"dn":"uni/tn-common/brc-%s","name":"%s","scope":"context"},"children":' % (subject_el['svcset_par_4'], subject_el['svcset_par_4'])
+    config_cntr_part = '{"fvTenant":{"attributes":{"dn":"uni/tn-common","status":"modified"},"children":[{"vzBrCP":{"attributes":{"dn":"uni/tn-common/brc-%s","name":"%s","scope":"context"},"children":' % (subject_el['parameters']["svcset_par_4"], subject_el['parameters']["svcset_par_4"])
     config_cntr = config_cntr_part + config_sbj + '}}]}}'
 
 # EPGs attachment
@@ -67,14 +74,14 @@ def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action 
     config_epg_prov = ''
     for epg_cons_el in epg_dict_cons:
         if (config_epg_cons == ''):
-            config_epg_cons = aci_attach_epg(name, epg_cons_el['addrset_par_4'], epg_cons_el['acipath'], 'cons') 
+            config_epg_cons = aci_attach_epg(name, epg_cons_el['parameters']['addrset_par_4'], epg_cons_el['parameters']['path'], 'cons') 
         else:
-            config_epg_cons = config_epg_cons + '\n' + aci_attach_epg(name, epg_cons_el['addrset_par_4'], epg_cons_el['acipath'], 'cons')
+            config_epg_cons = config_epg_cons + '\n' + aci_attach_epg(name, epg_cons_el['parameters']['addrset_par_4'], epg_cons_el['parameters']['path'], 'cons')
     for epg_prov_el in epg_dict_prov:
         if (config_epg_prov == ''):
-            config_epg_prov = aci_attach_epg(name, epg_prov_el['addrset_par_4'], epg_prov_el['acipath'], 'prov')        
+            config_epg_prov = aci_attach_epg(name, epg_prov_el['parameters']['addrset_par_4'], epg_prov_el['parameters']['path'], 'prov')        
         else:
-            config_epg_prov = config_epg_prov + '\n' + aci_attach_epg(name, epg_prov_el['addrset_par_4'], epg_prov_el['acipath'], 'prov')
+            config_epg_prov = config_epg_prov + '\n' + aci_attach_epg(name, epg_prov_el['parameters']['addrset_par_4'], epg_prov_el['parameters']['path'], 'prov')
     
     config_epg = config_epg_cons + '\n' + config_epg_prov
     
@@ -82,9 +89,13 @@ def aci_create_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action 
 
     return (config_json)
 
-def aci_delete_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action, status ):
+def aci_delete_policy (name, eq_parameter, parameters, epg_dict_cons, epg_dict_prov, subject_dict, status):
 
+# eq_parameter is  not used in this case
 
+    # if 'epg' parameter is false then exit
+    if (parameters['plc_par_2'] == 'false')
+        return None
 
 # EPGs attachment
     config_epg = ''
@@ -92,14 +103,14 @@ def aci_delete_policy (name, epg_dict_cons, epg_dict_prov, subject_dict, action,
     config_epg_prov = ''
     for epg_cons_el in epg_dict_cons:
         if (config_epg_cons == ''):
-            config_epg_cons = aci_detach_epg(name, epg_cons_el['addrset_par_4'], epg_cons_el['acipath'], 'cons')
+            config_epg_cons = aci_detach_epg(name, epg_cons_el['parameters']['addrset_par_4'], epg_cons_el['parameters']['path'], 'cons')
         else:
-            config_epg_cons = config_epg_cons + '\n' + aci_detach_epg(name, epg_cons_el['addrset_par_4'], epg_cons_el['acipath'], 'cons')
+            config_epg_cons = config_epg_cons + '\n' + aci_detach_epg(name, epg_cons_el['parameters']['addrset_par_4'], epg_cons_el['parameters']['path'], 'cons')
     for epg_prov_el in epg_dict_prov:
         if (config_epg_prov == ''):
-            config_epg_prov = aci_detach_epg(name, epg_prov_el['addrset_par_4'], epg_prov_el['acipath'], 'prov')
+            config_epg_prov = aci_detach_epg(name, epg_prov_el['parameters']['addrset_par_4'], epg_prov_el['parameters']['path'], 'prov')
         else:
-            config_epg_prov = config_epg_prov + '\n' + aci_detach_epg(name, epg_prov_el['addrset_par_4'], epg_prov_el['acipath'], 'prov')
+            config_epg_prov = config_epg_prov + '\n' + aci_detach_epg(name, epg_prov_el['parameters']['addrset_par_4'], epg_prov_el['parameters']['path'], 'prov')
 
     config_epg = config_epg_cons + '\n' + config_epg_prov
 

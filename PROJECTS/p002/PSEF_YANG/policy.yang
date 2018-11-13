@@ -1,0 +1,95 @@
+// p002
+
+module policy {
+
+  yang-version "1.1";
+
+  // namespace
+  namespace "http://psefabric/policy";
+
+  prefix "policy";
+
+  include addresses;
+  include services;
+  include applications;
+  
+  list policies {
+	  key policy-name;
+		  leaf policy-name {
+			  type string;
+			  mandatory true;
+		  }
+		  container parameters {
+			  leaf pa-policy-name {
+				  type string;
+				  default '';
+			  }
+			  leaf epg {
+				  mandatory true;
+				  type boolean;  
+			  }
+			  leaf aci-contract-name {
+				  type string;
+				  default "";
+			  }  
+		  }
+		  container match {
+			  leaf-list source-address-sets {
+				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg=../../parameters/epg)" {
+				      error-message
+					"All address-sets in policies shoul be with the same epg flag";
+				  } 
+				  min-elements 1;
+				  type leafref {
+					  path "/address-sets/address-set-name";
+				  }
+			   }
+			  leaf-list destination-address-sets {
+				  must "boolean(/address-sets[address-set-name=current()]/parameters/epg=../../parameters/epg)" {
+				      error-message
+					"All address-sets in policies shoul be with the same epg flag";
+				  }	
+				  min-elements 1;
+				  type leafref {
+					  path "/address-sets/address-set-name";
+				  }
+			  }  
+			  leaf-list service-sets {
+				  min-elements 1;
+				  type leafref {
+					  path "/service-sets/service-set-name";
+				  }
+			  }
+			  leaf-list application-sets {
+				  min-elements 1;
+				  type leafref {
+					  path "/application-sets/application-set-name";
+				  }
+			  }
+		  }
+		  container then {
+              description
+                "Definitions of action criteria for this Access List Entry.";
+              choice packet-handling {
+                default "permit";
+                description
+                  "Packet handling action.";
+                case deny {
+                  leaf deny {
+                    type empty;
+                    description
+                      "Deny action.";
+                  }
+                }
+                case permit {
+                  leaf permit {
+                    type empty;
+                    description
+                      "Permit action.";
+                  }
+               }
+           }
+	  }    
+   }
+
+}

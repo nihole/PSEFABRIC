@@ -1,0 +1,107 @@
+// p002
+
+submodule addresses {
+
+  yang-version "1.1";
+  belongs-to policy {
+	  prefix policy;
+  }
+
+  import ietf-inet-types { prefix ietf; }
+  import structure { prefix structure; }
+  
+  
+  list addresses {
+	  key address-name;
+	  leaf address-name {
+		  mandatory true;
+		  type string;
+	  }
+	  container parameters {
+		  leaf configure {
+//			  mandatory true;
+			  default true;
+			  type boolean;
+		  }
+		  leaf pa-address-obj-name {
+			  type string;
+//			  mandatory true;
+			  default true;
+		  }
+	  }
+	  leaf ipv4-prefix {
+		  mandatory true;
+		  type ietf:ipv4-prefix;
+		  description
+			  "ipv4 prefix";
+  	  }
+	  container structure {
+		  leaf dc {
+			  type leafref {
+				  path "/structure:structure/structure:data-center";
+			  }
+			  mandatory true;
+		  }
+		  leaf area {
+			  type leafref {
+				  path "/structure:structure/structure:area";
+			  }
+			  mandatory true;
+		  }
+		  leaf zone {
+			  type leafref {
+				  path "/structure:structure/structure:zone";
+			  }
+			  mandatory true;
+		  }
+		  leaf sub-zone {
+			  type leafref {
+				  path "/structure:structure/structure:sub-zone";
+			  }
+			  mandatory true;
+		  }
+	  }
+
+  }
+  
+  list address-sets {
+	  key address-set-name;
+	  leaf address-set-name {
+		  mandatory true;
+		  type string;
+	  }
+	  container parameters {
+		  leaf pa-address-grp-name {
+			  type string;
+			  default '';
+		  }
+		  leaf aci-epg-name {
+			  when "../epg = 'true'";
+			  type string;
+			  mandatory true;
+		  }
+		  leaf configure {
+			  mandatory true;
+			  type boolean;
+		  }
+		  leaf epg {
+			  mandatory true;
+			  type boolean;  
+		  }
+		  leaf path {
+			  when "../epg = 'true'";
+			  type string;
+			  mandatory true;  
+		  }  
+	  }
+ 	  leaf-list addresses {
+ 		  min-elements 1;
+		  type leafref {
+			  path "/addresses/address-name";
+		  }
+      }
+	  
+  }
+  
+} 
+  

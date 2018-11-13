@@ -413,22 +413,78 @@ def default_change (psef_conf_):
 
     if 'addresses' in psef_conf_parameters['data']:
         for addresses_element in psef_conf_parameters['data']['addresses']:
-            addresses_element['parameters']['addr_par_1'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_1'])
-            addresses_element['parameters']['addr_par_2'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_2'])
-            addresses_element['parameters']['addr_par_3'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_3'])
-            addresses_element['parameters']['addr_par_4'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_4'])
-            addresses_element['parameters']['addr_par_5'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_5'])
-            addresses_element['parameters']['addr_par_6'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_6'])
+            if vocabulary.par_voc['addr_par_1'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_1'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_1'])
+            else:
+                addresses_element['parameters']['addr_par_1'] = 'false'
+            
+            if vocabulary.par_voc['addr_par_2'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_2'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_2'])
+            else:
+                addresses_element['parameters']['addr_par_2'] = 'false'
+            
+            if vocabulary.par_voc['addr_par_3'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_3'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_3'])
+            else:
+                addresses_element['parameters']['addr_par_3'] = ''
+            
+            if vocabulary.par_voc['addr_par_4'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_4'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_4'])
+            else:
+                addresses_element['parameters']['addr_par_4'] = ''
+            
+            if vocabulary.par_voc['addr_par_5'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_5'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_5'])
+            else:
+                addresses_element['parameters']['addr_par_5'] = ''
+            
+            if vocabulary.par_voc['addr_par_6'] in addresses_element['parameters']:
+                addresses_element['parameters']['addr_par_6'] = addresses_element['parameters'].pop(vocabulary.par_voc['addr_par_6'])
+            else:
+                addresses_element['parameters']['addr_par_6'] = ''
 
-            addresses_element['structure']['str_1'] = addresses_element['structure'].pop(vocabulary.str_voc['str_1'])
-            addresses_element['structure']['str_2'] = addresses_element['structure'].pop(vocabulary.str_voc['str_2'])
-            addresses_element['structure']['str_3'] = addresses_element['structure'].pop(vocabulary.str_voc['str_3'])
-            addresses_element['structure']['str_4'] = addresses_element['structure'].pop(vocabulary.str_voc['str_4'])
-            addresses_element['structure']['str_5'] = addresses_element['structure'].pop(vocabulary.str_voc['str_5'])
-            addresses_element['structure']['str_6'] = addresses_element['structure'].pop(vocabulary.str_voc['str_6'])
-            addresses_element['structure']['str_7'] = addresses_element['structure'].pop(vocabulary.str_voc['str_7'])
-            addresses_element['structure']['str_8'] = addresses_element['structure'].pop(vocabulary.str_voc['str_8'])
-            addresses_element['structure']['str_9'] = addresses_element['structure'].pop(vocabulary.str_voc['str_9'])
+
+            
+            if vocabulary.str_voc['str_1'] in addresses_element['structure']:
+                addresses_element['structure']['str_1'] = addresses_element['structure'].pop(vocabulary.str_voc['str_1'])
+            else:
+                addresses_element['structure']['str_1'] = 'none'
+
+            if vocabulary.str_voc['str_2'] in addresses_element['structure']:
+                addresses_element['structure']['str_2'] = addresses_element['structure'].pop(vocabulary.str_voc['str_2'])
+            else:
+                addresses_element['structure']['str_2'] = 'none'
+
+            if vocabulary.str_voc['str_3'] in addresses_element['structure']:
+                addresses_element['structure']['str_3'] = addresses_element['structure'].pop(vocabulary.str_voc['str_3'])
+            else:
+                addresses_element['structure']['str_3'] = 'none'
+            if vocabulary.str_voc['str_4'] in addresses_element['structure']:
+                addresses_element['structure']['str_4'] = addresses_element['structure'].pop(vocabulary.str_voc['str_4'])
+            else:
+                addresses_element['structure']['str_4'] = 'none'
+            if vocabulary.str_voc['str_5'] in addresses_element['structure']:
+                addresses_element['structure']['str_5'] = addresses_element['structure'].pop(vocabulary.str_voc['str_5'])
+            else:
+                addresses_element['structure']['str_5'] = 'none'
+            if vocabulary.str_voc['str_6'] in addresses_element['structure']:
+                addresses_element['structure']['str_6'] = addresses_element['structure'].pop(vocabulary.str_voc['str_6'])
+            else:
+                addresses_element['structure']['str_6'] = 'none'
+            if vocabulary.str_voc['str_7'] in addresses_element['structure']:
+                addresses_element['structure']['str_7'] = addresses_element['structure'].pop(vocabulary.str_voc['str_7'])
+            else:
+                addresses_element['structure']['str_7'] = 'none'
+            if vocabulary.str_voc['str_8'] in addresses_element['structure']:
+                addresses_element['structure']['str_8'] = addresses_element['structure'].pop(vocabulary.str_voc['str_8'])
+            else:
+                addresses_element['structure']['str_8'] = 'none'
+
+            if vocabulary.str_voc['str_9'] in addresses_element['structure']:
+                addresses_element['structure']['str_9'] = addresses_element['structure'].pop(vocabulary.str_voc['str_9'])
+            else:
+                addresses_element['structure']['str_9'] = 'none'
+
 
             if (addresses_element['parameters']['addr_par_1'] == 'false'):
 #                address_element['parameters']['addr_par_1'] =
@@ -451,12 +507,32 @@ def default_change (psef_conf_):
 
     if 'address-sets' in psef_conf_parameters['data']:
         for address_set_element in psef_conf_parameters['data']['address-sets']:
-            address_set_element['parameters']['addrset_par_1'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_1'])
-            address_set_element['parameters']['addrset_par_2'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_2'])
-            address_set_element['parameters']['addrset_par_3'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_3'])
-            address_set_element['parameters']['addrset_par_4'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_4'])
-            address_set_element['parameters']['addrset_par_5'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_5'])
-            address_set_element['parameters']['addrset_par_6'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_6'])
+            if vocabulary.par_voc['addrset_par_1'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_1'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_1'])
+            else:
+                address_set_element['parameters']['addrset_par_1'] = 'false'
+            if vocabulary.par_voc['addrset_par_2'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_2'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_2'])
+            else:
+                address_set_element['parameters']['addrset_par_2'] = 'false'
+            if vocabulary.par_voc['addrset_par_3'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_3'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_3'])
+            else:
+                address_set_element['parameters']['addrset_par_3'] = ''
+            if vocabulary.par_voc['addrset_par_4'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_4'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_4'])
+            else:
+                address_set_element['parameters']['addrset_par_4'] = ''
+            if vocabulary.par_voc['addrset_par_5'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_5'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_5'])
+            else:
+                address_set_element['parameters']['addrset_par_5'] = ''
+            if vocabulary.par_voc['addrset_par_6'] in address_set_element['parameters']:
+                address_set_element['parameters']['addrset_par_6'] = address_set_element['parameters'].pop(vocabulary.par_voc['addrset_par_6'])
+            else:
+                address_set_element['parameters']['addrset_par_6'] = ''
+
+
 
             if (address_set_element['parameters']['addrset_par_1'] == 'false'):
 #                address_set_element['parameters']['addrset_par_1'] =
@@ -479,12 +555,32 @@ def default_change (psef_conf_):
 
     if 'services' in psef_conf_parameters['data']:
         for services_element in psef_conf_parameters['data']['services']:
-            services_element['parameters']['svc_par_1'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_1'])
-            services_element['parameters']['svc_par_2'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_2'])
-            services_element['parameters']['svc_par_3'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_3'])
-            services_element['parameters']['svc_par_4'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_4'])
-            services_element['parameters']['svc_par_5'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_5'])
-            services_element['parameters']['svc_par_6'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_6'])
+            if vocabulary.par_voc['svc_par_1'] in services_element['parameters']:
+                services_element['parameters']['svc_par_1'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_1'])
+            else:
+                services_element['parameters']['svc_par_1'] = 'false'
+            if vocabulary.par_voc['svc_par_2'] in services_element['parameters']:
+                services_element['parameters']['svc_par_2'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_2'])
+            else:
+                services_element['parameters']['svc_par_2'] = 'false'
+            if vocabulary.par_voc['svc_par_3'] in services_element['parameters']:
+                services_element['parameters']['svc_par_3'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_3'])
+            else:
+                services_element['parameters']['svc_par_3'] = ''
+            if vocabulary.par_voc['svc_par_4'] in services_element['parameters']:
+                services_element['parameters']['svc_par_4'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_4'])
+            else:
+                services_element['parameters']['svc_par_4'] = ''
+            if vocabulary.par_voc['svc_par_5'] in services_element['parameters']:
+                services_element['parameters']['svc_par_5'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_5'])
+            else:
+                services_element['parameters']['svc_par_5'] = ''
+            if vocabulary.par_voc['svc_par_6'] in services_element['parameters']:
+                services_element['parameters']['svc_par_6'] = services_element['parameters'].pop(vocabulary.par_voc['svc_par_6'])
+            else:
+                services_element['parameters']['svc_par_6'] = ''
+
+
 
             if (services_element['parameters']['svc_par_1'] == 'false'):
 #                services_element['parameters']['svc_par_1'] =
@@ -507,12 +603,31 @@ def default_change (psef_conf_):
 
     if 'service-sets' in psef_conf_parameters['data']:
         for service_set_element in psef_conf_parameters['data']['service-sets']:
-            service_set_element['parameters']['svcset_par_1'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_1'])
-            service_set_element['parameters']['svcset_par_2'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_2'])
-            service_set_element['parameters']['svcset_par_3'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_3'])
-            service_set_element['parameters']['svcset_par_4'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_4'])
-            service_set_element['parameters']['svcset_par_5'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_5'])
-            service_set_element['parameters']['svcset_par_6'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_6'])
+            if vocabulary.par_voc['svcset_par_1'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_1'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_1'])
+            else:
+                service_set_element['parameters']['svcset_par_1'] = 'false'
+            if vocabulary.par_voc['svcset_par_2'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_2'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_2'])
+            else:
+                service_set_element['parameters']['svcset_par_2'] = 'false'
+            if vocabulary.par_voc['svcset_par_3'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_3'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_3'])
+            else:
+                service_set_element['parameters']['svcset_par_3'] = ''
+            if vocabulary.par_voc['svcset_par_4'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_4'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_4'])
+            else:
+                service_set_element['parameters']['svcset_par_4'] = ''
+            if vocabulary.par_voc['svcset_par_5'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_5'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_5'])
+            else:
+                service_set_element['parameters']['svcset_par_5'] = ''
+            if vocabulary.par_voc['svcset_par_6'] in service_set_element['parameters']:
+                service_set_element['parameters']['svcset_par_6'] = service_set_element['parameters'].pop(vocabulary.par_voc['svcset_par_6'])
+            else:
+                service_set_element['parameters']['svcset_par_6'] = ''
+
 
             if (service_set_element['parameters']['svcset_par_1'] == 'false'):
 #                service_set_element['parameters']['svcset_par_1'] =
@@ -536,12 +651,32 @@ def default_change (psef_conf_):
 
     if 'applications' in psef_conf_parameters['data']:
         for applications_element in psef_conf_parameters['data']['applications']:
-            applications_element['parameters']['app_par_1'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_1'])
-            applications_element['parameters']['app_par_2'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_2'])
-            applications_element['parameters']['app_par_3'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_3'])
-            applications_element['parameters']['app_par_4'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_4'])
-            applications_element['parameters']['app_par_5'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_5'])
-            applications_element['parameters']['app_par_6'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_6'])
+            if vocabulary.par_voc['app_par_1'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_1'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_1'])
+            else:
+                applications_element['parameters']['app_par_1'] = 'false'
+            if vocabulary.par_voc['app_par_2'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_2'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_2'])
+            else:
+                applications_element['parameters']['app_par_2'] = 'false'
+            if vocabulary.par_voc['app_par_3'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_3'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_3'])
+            else:
+                applications_element['parameters']['app_par_3'] = ''
+            if vocabulary.par_voc['app_par_4'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_4'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_4'])
+            else:
+                applications_element['parameters']['app_par_4'] = ''
+            if vocabulary.par_voc['app_par_5'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_5'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_5'])
+            else:
+                applications_element['parameters']['app_par_5'] = ''
+            if vocabulary.par_voc['app_par_6'] in applications_element['parameters']:
+                applications_element['parameters']['app_par_6'] = applications_element['parameters'].pop(vocabulary.par_voc['app_par_6'])
+            else:
+                applications_element['parameters']['app_par_6'] = ''
+
+
 
             if (applications_element['parameters']['app_par_1'] == 'false'):
 #                applications_element['parameters']['app_par_1'] =
@@ -564,12 +699,32 @@ def default_change (psef_conf_):
 
     if 'application-sets' in psef_conf_parameters['data']:
         for application_set_element in psef_conf_parameters['data']['application-sets']:
-            application_set_element['parameters']['appset_par_1'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_1'])
-            application_set_element['parameters']['appset_par_2'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_2'])
-            application_set_element['parameters']['appset_par_3'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_3'])
-            application_set_element['parameters']['appset_par_4'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_4'])
-            application_set_element['parameters']['appset_par_5'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_5'])
-            application_set_element['parameters']['appset_par_6'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_6'])
+            if vocabulary.par_voc['appset_par_1'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_1'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_1'])
+            else:
+                application_set_element['parameters']['appset_par_1'] = 'false'
+            if vocabulary.par_voc['appset_par_2'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_2'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_2'])
+            else:
+                application_set_element['parameters']['appset_par_2'] = 'false'
+            if vocabulary.par_voc['appset_par_3'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_3'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_3'])
+            else:
+                application_set_element['parameters']['appset_par_3'] = ''
+            if vocabulary.par_voc['appset_par_4'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_4'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_4'])
+            else:
+                application_set_element['parameters']['appset_par_4'] = ''
+            if vocabulary.par_voc['appset_par_5'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_5'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_5'])
+            else:
+                application_set_element['parameters']['appset_par_5'] = ''
+            if vocabulary.par_voc['appset_par_6'] in application_set_element['parameters']:
+                application_set_element['parameters']['appset_par_6'] = application_set_element['parameters'].pop(vocabulary.par_voc['appset_par_6'])
+            else:
+                application_set_element['parameters']['appset_par_6'] = ''
+
+
 
             if (application_set_element['parameters']['appset_par_1'] == 'false'):
 #                application_set_element['parameters']['appset_par_1'] =
@@ -593,12 +748,31 @@ def default_change (psef_conf_):
 
     if ('policies' in psef_conf_parameters['data']):
         for policy_element in psef_conf_parameters['data']['policies']:
-            policy_element['parameters']['plc_par_1'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_1'])
-            policy_element['parameters']['plc_par_2'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_2'])
-            policy_element['parameters']['plc_par_3'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_3'])
-            policy_element['parameters']['plc_par_4'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_4'])
-            policy_element['parameters']['plc_par_5'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_5'])
-            policy_element['parameters']['plc_par_6'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_6'])
+            if vocabulary.par_voc['plc_par_1'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_1'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_1'])
+            else:
+                policy_element['parameters']['plc_par_1'] = 'false'
+            if vocabulary.par_voc['plc_par_2'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_2'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_2'])
+            else:
+                policy_element['parameters']['plc_par_2'] = 'false'
+            if vocabulary.par_voc['plc_par_3'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_3'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_3'])
+            else:
+                policy_element['parameters']['plc_par_3'] = ''
+            if vocabulary.par_voc['plc_par_4'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_4'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_4'])
+            else:
+                policy_element['parameters']['plc_par_4'] = ''
+            if vocabulary.par_voc['plc_par_5'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_5'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_5'])
+            else:
+                policy_element['parameters']['plc_par_5'] = ''
+            if vocabulary.par_voc['plc_par_6'] in policy_element['parameters']:
+                policy_element['parameters']['plc_par_6'] = policy_element['parameters'].pop(vocabulary.par_voc['plc_par_6'])
+            else:
+                policy_element['parameters']['plc_par_6'] = ''
+
 
             if (not policy_element['parameters']['plc_par_1'] == 'false'):
 #                policy_element['parameters']['plc_par_1'] =

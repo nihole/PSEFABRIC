@@ -1,0 +1,55 @@
+// p002
+
+submodule applications {
+  belongs-to policy {
+    prefix policy;
+  }
+	  
+  yang-version "1.1";
+
+  import ietf-inet-types { prefix ietf; }
+  import ietf-packet-fields { prefix fields; }
+  
+  list applications {
+	  key application-name;
+	  leaf application-name {
+		  mandatory true;
+		  type string;
+	  }
+	  container parameters {
+		  leaf pa-application-name {
+			  type string;
+			  default '';
+		  }
+		  leaf configure {
+			  default false;
+			  type boolean;
+		  }  
+	  }
+   }
+  list application-sets {
+	 key application-set-name;
+	 leaf application-set-name {
+		 mandatory true;
+		  type string;
+	  }
+	 container parameters {
+		 leaf pa-application-grp-name {
+			  type string;
+			  default '';
+		  }
+		 leaf configure {
+			  mandatory true;
+			  type boolean;
+		  }	 
+	 }
+	 
+	  leaf-list applications {
+          min-elements 1;
+		  type leafref {
+			  path "/applications/application-name";
+		  }
+	 }
+	  
+ }
+}  
