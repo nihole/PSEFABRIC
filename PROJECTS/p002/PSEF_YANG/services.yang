@@ -26,8 +26,9 @@ submodule services {
 			  default '';
 		  }
 		  leaf configure {
-			  mandatory true;
+//			  mandatory true;
 			  type boolean;
+			  default 'false';
 		  }  
 	  }
 	  leaf prot {
@@ -99,7 +100,8 @@ submodule services {
 			  default '';
 		  }
 		 leaf configure {
-			 mandatory true;
+//			 mandatory true;
+			 default 'false';
 			  type boolean;
 		  } 
 	 }

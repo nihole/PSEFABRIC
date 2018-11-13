@@ -39,7 +39,8 @@ submodule applications {
 			  default '';
 		  }
 		 leaf configure {
-			  mandatory true;
+//			  mandatory true;
+			  default 'false';
 			  type boolean;
 		  }	 
 	 }

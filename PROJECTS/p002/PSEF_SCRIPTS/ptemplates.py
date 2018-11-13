@@ -10,20 +10,41 @@ import re
 
 ######## addresses  ###########
 
-def pan_create_address (device_group, name, ipv4_prefix):
+def pan_create_address (device_group, psefname, ipv4_prefix, parameters):
+
+# psefname is not used
+    if parameters['addr_par_1'] == 'false':
+        return None
+
+    name = parameters['addr_par_3']
+
 #    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
 #    config_txt = '''set %s address %s ip-netmask %s/%s''' % (device_group, name, network, netmask)
     config_txt = '''set %s address %s ip-netmask %s''' % (device_group, name, ipv4_prefix)
     return config_txt
 
-def pan_delete_address (device_group, name, ipv4_prefix):
-    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
+def pan_delete_address (device_group, psefname, ipv4_prefixi, parameters):
+
+# psefname is not used
+    if parameters['addr_par_1'] == 'false':
+        return None
+
+    name = parameters['addr_par_3']
+
+#    network, netmask, gate = cidr_to_netmask.cidr_to_netmask(ipv4_prefix)
     config_txt = '''delete %s address %s''' % (device_group, name)
     return config_txt
 
 ######## address-set  ##########
 
-def pan_create_address_set (device_group, name,addresses):
+def pan_create_address_set (device_group, psefname, addresses, parameters):
+
+# psefname is not used
+    if parameters['addrset_par_1'] == 'false':
+        return None
+
+    name = parameters['addrset_par_3']
+
     config_addresses = ''
     for address_element in addresses:
         if ( config_addresses == ''):
@@ -36,7 +57,15 @@ def pan_create_address_set (device_group, name,addresses):
     config_txt = '''set %s address-group %s static %s''' % (device_group, name, config_addresses)
     return config_txt
 
-def pan_delete_address_set (device_group, name, addresses):
+def pan_delete_address_set (device_group, psefname, addresses, parameters):
+
+
+# psefname is not used
+    if parameters['addrset_par_2'] == 'false':
+        return None
+
+    name = parameters['addrset_par_3']
+
     config_addresses = ''
     for address_element in addresses:
         if ( config_addresses == ''):
@@ -52,7 +81,14 @@ def pan_delete_address_set (device_group, name, addresses):
 
 ######### service (services) ###########
 
-def pan_create_service (device_group, name, prot, ports):
+def pan_create_service (device_group, psefname, prot, ports, parameters):
+
+# psefname is not used
+    if parameters['svc_par_1'] == 'false':
+        return None
+
+    name = parameters['svc_par_3']
+
     if (prot == '6'):
         prot_ = 'tcp'
     elif (prot == '17'):
@@ -72,14 +108,27 @@ def pan_create_service (device_group, name, prot, ports):
 
     return config_txt
 
-def pan_delete_service (device_group, name, prot, ports):
+def pan_delete_service (device_group, psefname, prot, ports, parameters):
+
+# psefname is not used
+    if parameters['svc_par_1'] == 'false':
+        return None
+
+    name = parameters['svc_par_3']
+
     config_txt = '''delete %s service %s''' % (device_group, name)
     return config_txt
 
 
 ######### service-set (services)  ###########
 
-def pan_create_service_set (device_group, name, service):
+def pan_create_service_set (device_group, psefname, service, parameters):
+
+# psefname is not used
+    if parameters['svcset_par_1'] == 'false':
+        return None
+
+    name = parameters['svcset_par_3']
 
     config_services = ''
 
@@ -96,7 +145,15 @@ def pan_create_service_set (device_group, name, service):
 
     return config_txt
 
-def pan_delete_service_set (device_group, name, service):
+def pan_delete_service_set (device_group, psefname, service, parameters):
+    
+# psefname is not used
+    if parameters['svcset_par_1'] == 'false':
+        return None
+
+    name = parameters['svcset_par_3']
+
+
     config_services = ''
 
     for service_element in service:
@@ -114,8 +171,14 @@ def pan_delete_service_set (device_group, name, service):
 
 ######### application-set (applications)  ###########
 
-def pan_create_application_set (device_group, name, application):
+def pan_create_application_set (device_group, psefname, application, parameters):
 
+# psefname is not used
+    if parameters['appset_par_1'] == 'false':
+        return None
+
+    name = parameters['appset_par_3']
+    
     config_applications = ''
 
     for application_element in application:
@@ -131,7 +194,14 @@ def pan_create_application_set (device_group, name, application):
 
     return config_txt
 
-def pan_delete_application_set (device_group, name, application):
+def pan_delete_application_set (device_group, psefname, application, parameters):
+
+# psefname is not used
+    if parameters['appset_par_1'] == 'false':
+        return None
+
+    name = parameters['appset_par_3']
+
     config_applications = ''
 
     for application_element in application:
@@ -221,7 +291,15 @@ def pan_delete_policy_src_inter_area (device_group, name):
 
     return config_txt
 
-def pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
+def pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
+
+# psefname is not used
+    if parameters['plc_par_1'] == 'false':
+        return None
+
+    name = parameters['plc_par_3']
+
+
     config_access = ''
     config_match_source= ''
     config_match_destination = ''
@@ -230,17 +308,17 @@ def pan_create_policy (device_group, name, source_address_set_list, destination_
 
     for source_address_set_element in source_address_set_list:
         if re.match(config_match_source, ''):
-            config_match_source = '%s' % source_address_set_element["address-set-alias-1"]
+            config_match_source = '%s' % source_address_set_element["parameters"]["addrset_par_3"]
         else:
-            config_match_source = config_match_source + ' %s' % source_address_set_element["address-set-alias-1"]
+            config_match_source = config_match_source + ' %s' % source_address_set_element["parameters"]["addrset_par_3"]
 
     config_match_source = '[ ' + config_match_source + ' ]'
 
     for destination_address_set_element in destination_address_set_list:
         if re.match(config_match_destination, ''):
-            config_match_destination = '%s' % destination_address_set_element["address-set-alias-1"]
+            config_match_destination = '%s' % destination_address_set_element["parameters"]["addrset_par_3"]
         else:
-            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["address-set-alias-1"]
+            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["parameters"]["addrset_par_3"]
 
     config_match_destination = '[ ' + config_match_destination + ' ]'
 
@@ -268,7 +346,7 @@ def pan_create_policy (device_group, name, source_address_set_list, destination_
 
     config_txt_zone = '''
 set device-group %s pre-rulebase security rules %s to %s
-set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, dst_zone, device_group, name, src_zone)
+set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, dst_str['zone'], device_group, name, src_str['zone'])
 
     config_txt_addresses = '''
 set device-group %s pre-rulebase security rules %s source %s
@@ -287,9 +365,16 @@ set device-group %s pre-rulebase security rules %s action allow''' % (device_gro
 
     return config_txt
 
-def pan_delete_policy (device_group, name):
+def pan_delete_policy (device_group, name, parameters):
+
+# psefname is not used
+    if parameters['plc_par_1'] == 'false':
+        return None
+
+    name = parameters['plc_par_3']
 
     config_txt = '''
-delete device-group %s pre-rulebase security rules %s''' % (device_group, name)
+delete device-group %s pre-rulebase security rules %s''' % (device_group, psefname, parameters)
+
 
     return config_txt

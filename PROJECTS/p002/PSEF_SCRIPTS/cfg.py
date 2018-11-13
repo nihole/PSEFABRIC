@@ -30,8 +30,8 @@ But if we don't have candidate configuration feature then we have to remove only
 
 import re
 import mult_cfg
-import extemplates_1
-import extemplates_2
+import ptemplates
+import ptemplates
 import host_to_type
 
 cfg = {}
@@ -119,7 +119,8 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                 for el in cmd_for_host_diff[eq_name]['rm']['address']:
                     for command_element in el['command-list']:
                         cfg_new = eval (command_element + "(el['eq_parameter'], el['name'],el['ipv4-prefix'], el['parameters'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        if cfg_new:
+                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
     
 # rm service-set

@@ -55,7 +55,7 @@ static int read_conf (struct sockaddr_in *addr) {
     if (cdb_start_session(rsock, CDB_RUNNING) != CONFD_OK)
         return CONFD_ERR;
 /*    res = execute("timeout 10 python ./conf-scripts/get-xml-diff.py 2>/dev/null"); */  
-    res = execute("timeout 10 python $PSEFABRIC/PSEFABRIC/PSEF_SCRIPTS/psefabric.py");               
+    res = execute("timeout 10 python $PSEFABRIC/PSEF_SCRIPTS/psefabric.py");               
 
     if (strcmp(res,"OK\n") != 0) {
         printf ("%s", res);

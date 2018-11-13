@@ -15,7 +15,8 @@ import re
 import copy
 import host_to_type
 
-def mult_dict_address(ifcfg):
+
+def mult_dict_address(str_list, parameters):
 
 ##########  Description  #######
     '''
@@ -23,10 +24,11 @@ def mult_dict_address(ifcfg):
 #############  BODY ############
 
     mult = []
-    if (ifcfg == 'true'):
+    if (parameters['addr_par_1'] == 'true'):
+    # May be some logic based on par1, par2, ... value
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
-        mult[0]['eq_parameter'] = 'shared'
+        mult[0]['eq_parameter'] = 'some_parameter'
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -35,7 +37,7 @@ def mult_dict_address(ifcfg):
 
     return (mult)
 
-def mult_dict_address_set(ifcfg):
+def mult_dict_address_set(parameters):
 
 ##########  Description  #######
     '''
@@ -43,7 +45,7 @@ def mult_dict_address_set(ifcfg):
 #############  BODY ############
 
     mult = []
-    if (ifcfg == 'true'):
+    if (parameters['addrset_par_1'] == 'true'):
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
         mult[0]['eq_parameter'] = 'shared'
@@ -55,7 +57,7 @@ def mult_dict_address_set(ifcfg):
 
     return (mult)
 
-def mult_dict_service(ifcfg): 
+def mult_dict_service(parameters): 
 
 ##########  Description  #######
     '''
@@ -63,7 +65,7 @@ def mult_dict_service(ifcfg):
 #############  BODY ############
 
     mult=[]
-    if (ifcfg == 'true'):
+    if (parameters['svc_par_1'] == 'true'):
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
         mult[0]['eq_parameter'] = 'shared'
@@ -75,7 +77,7 @@ def mult_dict_service(ifcfg):
     
     return (mult)
 
-def mult_dict_service_set(ifcfg):
+def mult_dict_service_set(parameters):
 
 ##########  Description  #######
     '''
@@ -83,7 +85,7 @@ def mult_dict_service_set(ifcfg):
 #############  BODY ############
 
     mult=[]
-    if (ifcfg == 'true'):
+    if (parameters['svcset_par_1'] == 'true'):
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
         mult[0]['eq_parameter'] = 'shared'
@@ -95,7 +97,7 @@ def mult_dict_service_set(ifcfg):
 
     return (mult)
 
-def mult_dict_application(ifcfg):
+def mult_dict_application(parameters):
 
 ##########  Description  #######
     '''
@@ -103,7 +105,7 @@ def mult_dict_application(ifcfg):
 #############  BODY ############
 
     mult=[]
-    if (ifcfg == 'true'):   
+    if (parameters['app_par_1'] == 'true'):   
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
         mult[0]['eq_parameter'] = 'shared'
@@ -113,7 +115,7 @@ def mult_dict_application(ifcfg):
 
     return (mult)
 
-def mult_dict_application_set(ifcfg):
+def mult_dict_application_set(parameters):
 
 ##########  Description  #######
     '''
@@ -121,7 +123,7 @@ def mult_dict_application_set(ifcfg):
 #############  BODY ############
 
     mult=[]
-    if (ifcfg == 'true'):   
+    if (parameters['appset_par_1'] == 'true'):   
         mult.append({})
         mult[0]['eq_addr'] = 'panorama'
         mult[0]['eq_parameter'] = 'shared'
@@ -134,32 +136,32 @@ def mult_dict_application_set(ifcfg):
     return (mult)
 
 
-def mult_dict_policy(src_dc, src_area, src_zone, src_sub_zone, dst_dc, dst_area, dst_zone, dst_sub_zone, service_sets_dict):
+def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 
 ##########  Description  #######
 ########## End of description #####
 
-    map_aci_ = host_to_type.area_to_eq_aci()
-    map_pa_ = host_to_type.area_to_eq_pa()
-
     mult = []
 
-    if (re.match(src_dc, dst_dc)):
+    # Some logical variables may be defined
+    # For example:
+
+    if (re.match(src_str[0], dst_str[0])):
         same_dc_flag = True
     else:
         same_dc_flag = False
 
-    if (re.match(src_area, dst_area)):
+    if (re.match(src_str[1], dst_str[1])):
         same_area_flag = True
     else:
         same_area_flag = False
 
-    if (re.match(src_zone, dst_zone)):
+    if (re.match(src_str[2], dst_str[2])):
         same_zone_flag = True
     else:
         same_zone_flag = False
 
-    if (re.match(src_sub_zone, dst_sub_zone)):
+    if (re.match(src_str[3], dst_str[3])):
         same_sub_zone_flag = True
     else:
         same_sub_zone_flag = False

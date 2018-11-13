@@ -81,7 +81,7 @@ def cmd_list_address (action_, address_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters and structure elements if needed 
-    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address(address_['structure']))
+    mult_dict_add = copy.deepcopy(psef_logic.mult_dict_address(address_['structure'], address_['parameters']))
  
     for cmd_element in mult_dict_add:
         address_attributes = {}
@@ -112,7 +112,7 @@ def cmd_list_address_set (action_, address_set_):
 
     # Change the list of parameters if needed 
     # If structure elemets are needed address_set index_new/old should be used
-    mult_dict_add_set = psef_logic.mult_dict_address_set()
+    mult_dict_add_set = psef_logic.mult_dict_address_set(address_set_['parameters'])
     address_list = []
     j = 0
     for address_dict_el in address_set_['addresses']:
@@ -146,7 +146,7 @@ def cmd_list_service (action_, service_):
         sys.exit("Incorrect action!!")
 
     # Add the list of parameters if needed 
-    mult_dict_app = psef_logic.mult_dict_service()
+    mult_dict_app = psef_logic.mult_dict_service(service_['parameters'])
 
     for cmd_element in mult_dict_app:
         service_attributes = {}
@@ -177,7 +177,7 @@ def cmd_list_service_set (action_, service_set_):
 
 
     # Add the list of parameters if needed 
-    mult_dict_add_set = psef_logic.mult_dict_service_set()
+    mult_dict_add_set = psef_logic.mult_dict_service_set(service_set_['parameters'])
     service_list = []
     j = 0
     for service_dict_el in service_set_['services']:
@@ -211,7 +211,7 @@ def cmd_list_applciation (action_, applciation_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters if needed 
-    mult_dict_app = psef_logic.mult_dict_applciation(application_['app_par_1'], application_['app_par_2'])
+    mult_dict_app = psef_logic.mult_dict_applciation(application_['parameters'], )
 
     for cmd_element in mult_dict_app:
         applciation_attributes = {}
@@ -239,7 +239,7 @@ def cmd_list_application_set (action_, application_set_):
         sys.exit("Incorrect action!!")
 
     # Change the list of parameters if needed 
-    mult_dict_add_set = psef_logic.mult_dict_application_set()
+    mult_dict_add_set = psef_logic.mult_dict_application_set(application_set_['parameters'])
  
     application_list = []
 
@@ -305,7 +305,7 @@ def cmd_list_policy (action_, pol_):
             policy_attributes = {}
 
             ### get a dict with MOs as keys and a lists of configuration commands as values ####
-            mult_dict_pol = psef_logic.mult_dict_policy(list(src_resolve_element), list(dst_resolve_element), pol_['match']['service-sets'])
+            mult_dict_pol = psef_logic.mult_dict_policy(list(src_resolve_element), list(dst_resolve_element), pol_['match']['service-sets'], pol_['parameters'])
             
             ### add information related to policy configuration to a new dict (cmd_for_host) ###
             for cmd_element in mult_dict_pol:

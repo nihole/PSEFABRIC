@@ -16,7 +16,7 @@ import copy
 
 
 # Change the list of parameters if needed
-def mult_dict_address(str_list):
+def mult_dict_address(str_list, parameters):
 
 ##########  Description  #######
     '''
@@ -45,7 +45,7 @@ def mult_dict_address(str_list):
     return (mult)
 
 # Change the list of parameters if needed
-def mult_dict_address_set():
+def mult_dict_address_set(parameters):
 
 ##########  Description  #######
     '''
@@ -74,7 +74,7 @@ def mult_dict_address_set():
     return (mult)
 
 # Change the list of parameters if needed
-def mult_dict_service():
+def mult_dict_service(parameters):
 
 ##########  Description  #######
     '''
@@ -103,7 +103,7 @@ def mult_dict_service():
     return (mult)
 
 # Add the list of parameters if needed
-def mult_dict_service_set():
+def mult_dict_service_set(parameters):
 
 ##########  Description  #######
     '''
@@ -132,7 +132,7 @@ def mult_dict_service_set():
     return (mult)
 
 # Add the list of parameters if needed
-def mult_dict_application():
+def mult_dict_application(parameters):
 
     mult = []
     # May be some logic based on par1, par2, ... value
@@ -153,7 +153,7 @@ def mult_dict_application():
 
 
 # Change the list of parameters if needed
-def mult_dict_application_set():
+def mult_dict_application_set(parameters):
 
 ##########  Description  #######
     '''
@@ -182,7 +182,7 @@ def mult_dict_application_set():
     return (mult)
 
 
-def mult_dict_policy(src_str, dst_str, service_sets_dict):
+def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 
 ##########  Description  #######
 ########## End of description #####

@@ -78,20 +78,24 @@ submodule addresses {
 		  leaf aci-epg-name {
 			  when "../epg = 'true'";
 			  type string;
-			  mandatory true;
+//			  mandatory true;
+			  default '';
 		  }
 		  leaf configure {
-			  mandatory true;
+//			  mandatory true;
 			  type boolean;
+			  default 'false';
 		  }
 		  leaf epg {
-			  mandatory true;
+//			  mandatory true;
 			  type boolean;  
+			  default 'false';
 		  }
 		  leaf path {
 			  when "../epg = 'true'";
 			  type string;
-			  mandatory true;  
+//			  mandatory true;
+			  default '';
 		  }  
 	  }
  	  leaf-list addresses {
