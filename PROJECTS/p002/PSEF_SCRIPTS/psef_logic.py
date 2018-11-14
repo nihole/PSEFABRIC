@@ -144,9 +144,10 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 ##########  Description  #######
 ########## End of description #####
 
+    (map_apic_host_, map_aci_tenant_) = copy.deepcopy(host_to_type.area_to_eq_aci())
+    host_ = copy.deepcopy(host_to_type.host_to_type())
+    map_pa_device_group_ = copy.deepcopy(host_to_type.area_to_eq_pa())
 
-    # Some logical variables may be defined
-    # For example:
 
     src_dc = src_str[0]
     dst_dc = dst_str[0]
@@ -177,37 +178,36 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
     else:
         same_sub_zone_flag = False
 
+    mult = []
+
     if (same_dc_flag and same_zone_flag and same_area_flag and not same_sub_zone_flag):
     # Only contracts on ACI side
-        mult = []
         mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = host_to_type.map_apic_host_[src_dc]
-        mult[0][vocabulary.eq_rvoc['tenant']] = host_to_type.map_aci_tenant[src_dc][src_area]
+        mult[0][vocabulary.eq_rvoc['host']] = map_apic_host_[src_dc]
+        mult[0][vocabulary.eq_rvoc['tenant']] = map_aci_tenant_[src_dc][src_area]
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['rm'].append('acitemplates.aci_delete_policy')
         mult[0]['cmd']['ad'].append('acitemplates.aci_create_policy')
 
-    if (same_dc_flag and same_area_flag and not same_zone_flag):
+    elif (same_dc_flag and same_area_flag and not same_zone_flag):
     # Policy on PA side between different zones inside the same VSYS
-        mult = []
         mult.append({})
         mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = host_to_type.map_pa_device-group[src_dc][src_area]
+        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
         mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy')
         mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
 
-    if (same_dc_flag and not same_area_flag):
+    elif (same_dc_flag and not same_area_flag):
     # Policy on PA side between different VSYSes (or FWs)
-        mult = []
         mult.append({})
         mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
         # For source VSYS
-        mult[0][vocabulary.eq_rvoc['device-group']] = host_to_type.map_pa_device-group[src_dc][src_area]
+        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -216,20 +216,19 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
         mult.append({})
         mult[1][vocabulary.eq_rvoc['host']] = 'panorama'
         # For destination VSYS
-        mult[1][vocabulary.eq_rvoc['device-group']] = host_to_type.map_pa_device-group[dst_dc][dst_area]
+        mult[1][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[dst_dc][dst_area]
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
         mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
 
-    if (not same_dc_flag):
+    elif (not same_dc_flag):
     # Policy on PA side between different VSYSes (or FWs)
-        mult = []
         mult.append({})
         mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
         # For source DC/VSYS
-        mult[0][vocabulary.eq_rvoc['device-group']] = host_to_type.map_pa_device-group[src_dc][src_area]
+        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
@@ -238,12 +237,15 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
         mult.append({})
         mult[1][vocabulary.eq_rvoc['host']] = 'panorama'
         # For destination DC/VSYS
-        mult[1][vocabulary.eq_rvoc['device-group']] = host_to_type.map_pa_device-group[dst_dc][dst_area]
+        mult[1][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[dst_dc][dst_area]
         mult[1]['cmd'] = {}
         mult[1]['cmd']['ad'] = []
         mult[1]['cmd']['rm'] = []
         mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
         mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
 
+#    else:
+
     return (mult)
+
 

@@ -6,10 +6,8 @@ The mult_cfg.py script uses these dicts in the deciding of how to process the da
 def host_to_type():
     host = {}
     host['panorama'] = 'pa_panorama'
-    host['aci_dc1_a1'] = 'cisco_aci'
-    host['aci_dc1_a2'] = 'cisco_aci'
-    host['aci_dc2_a1'] = 'cisco_aci'
-    host['aci_dc2_a2'] = 'cisco_aci'
+    host['apic_aci_dc1'] = 'cisco_aci'
+    host['apic_aci_dc2'] = 'cisco_aci'
     return host
 
 def area_to_eq_aci():

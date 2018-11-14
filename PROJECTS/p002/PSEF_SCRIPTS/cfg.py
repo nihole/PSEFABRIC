@@ -31,7 +31,7 @@ But if we don't have candidate configuration feature then we have to remove only
 import re
 import mult_cfg
 import ptemplates
-import ptemplates
+import acitemplates
 import host_to_type
 import vocabulary
 
@@ -79,7 +79,10 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                 for el in policy_list:
                     for command_element in el['command-list']:
                         cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'], el['parameters'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        if cfg_new:
+                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        else: 
+                            continue
                         cfg_new = ''
 
 # In our example panorama_2 equipment don't have candidate config feature. 
@@ -100,7 +103,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                     else:
                         status = 'delete'
                     for command_element in el_rm['command-list']:
-                        cfg_new = eval(command_element + "(el_rm['name'], el_rm['tenant'], el_rm['parameters'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-set-dicts'], status)")
+                        cfg_new = eval(command_element + "(el_rm['name'], el_rm[vocabulary.eq_rvoc['tenant']], el_rm['parameters'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-set-dicts'], status)")
                         if cfg_new:
                             cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
@@ -217,12 +220,22 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
 
 # add policy
 
-        if (re.search('panorama', host[eq_name]) or re.search('aci', host[eq_name])):
+        if (re.search('panorama', host[eq_name])):
             if len(cmd_for_host_full[eq_name]['ad']['policy']):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el['eq_parameter'], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-sets'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
+                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-sets'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
+                        if cfg_new:
+                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = ''
+
+        elif (re.search('aci', host[eq_name])):
+            if len(cmd_for_host_full[eq_name]['ad']['policy']):
+                policy_list = cmd_for_host_full[eq_name]['ad']['policy']
+                for el in policy_list:
+                    for command_element in el['command-list']:
+                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['tenant']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
                         if cfg_new:
                             cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''

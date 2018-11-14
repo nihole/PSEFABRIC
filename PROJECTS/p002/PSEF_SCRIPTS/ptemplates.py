@@ -223,83 +223,60 @@ def pan_delete_application_set (device_group, psefname, application, parameters)
 ######### access ###########
 
 
-def pan_create_policy_allapp_dst_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
+def pan_create_policy_allapp_dst_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
 
-#    name = name + '_dtrns'
     config_txt = ''
-    svc_any = ['any']
-    app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'sz_outside', action )
+    service_set_list = ['any']
+    application_set_list = ['any']
+    dst_str[2] = 'sz-outside'
+    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action )
     
     return config_txt
 
-def pan_create_policy_src_transit (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone,  action ):
+def pan_create_policy_src_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
 
-#    name = name + '_strns'
+    src_str[2] = 'sz-outside'
     config_txt = ''
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'sz_outside', dst_dc, dst_area, dst_zone, action )
+    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action )
 
     return config_txt
 
-def pan_create_policy_allapp_dst_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
 
-    name = name + '_to_transit'
-    config_txt = ''
-    svc_any = ['any']
-    app_any = ['any']
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, app_any, svc_any, src_dc, src_area, src_zone, dst_dc, dst_area, 'inter-area-transit',  action )
-
-    return config_txt
-
-def pan_create_policy_src_inter_area (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, src_zone, dst_dc, dst_area, dst_zone, action ):
-
-    name = name + '_from_transit'
-    config_txt = ''
-    config_txt = pan_create_policy (device_group, name, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_dc, src_area, 'inter-area-transit', dst_dc, dst_area, dst_zone, action )
-
-    return config_txt
-
-def pan_delete_policy_allapp_dst_transit (device_group, name ):
+def pan_delete_policy_allapp_dst_transit (device_group, name, parameters ):
     
-#    name = name + '_dtrns'
+# psefname is not used
+#    if parameters[vocabulary.par_rvoc['configure-plc']] == 'false':
+#        return None
+
+    name = parameters[vocabulary.par_rvoc['pa-policy-name']]
+
     config_txt = ''
-#    app_any = ['any']
-    config_txt = pan_delete_policy (device_group, name)
+    config_txt = pan_delete_policy (device_group, name, parameters)
 
     return config_txt
 
-def pan_delete_policy_src_transit (device_group, name):
+def pan_delete_policy_src_transit (device_group, name, parameters):
 
-#    name = name + '_strns'
+# psefname is not used
+#    if parameters[vocabulary.par_rvoc['configure-plc']] == 'false':
+#        return None
+
+    name = parameters[vocabulary.par_rvoc['pa-policy-name']]
+
     config_txt = ''
-    config_txt = pan_delete_policy (device_group, name)
+    config_txt = pan_delete_policy (device_group, name, parameters)
 
     return config_txt
 
-def pan_delete_policy_allapp_dst_inter_area (device_group, name):
-
-    name = name + '_to_transit'
-    config_txt = ''
-#    app_any = ['any']
-    config_txt = pan_delete_policy (device_group, name)
-
-    return config_txt
-
-def pan_delete_policy_src_inter_area (device_group, name):
-
-    name = name + '_from_transit'
-    config_txt = ''
-    config_txt = pan_delete_policy (device_group, name)
-
-    return config_txt
 
 def pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
 
 # psefname is not used
-    if parameters['plc_par_1'] == 'false':
-        return None
+#    if parameters[vocabulary.par_rvoc['configure-plc']] == 'false':
+#        return None
 
-    name = parameters['plc_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-policy-name']]
+
 
 
     config_access = ''
@@ -310,17 +287,17 @@ def pan_create_policy (device_group, psefname, source_address_set_list, destinat
 
     for source_address_set_element in source_address_set_list:
         if re.match(config_match_source, ''):
-            config_match_source = '%s' % source_address_set_element["parameters"]["addrset_par_3"]
+            config_match_source = '%s' % source_address_set_element["parameters"][vocabulary.par_rvoc['pa-address-grp-name']]
         else:
-            config_match_source = config_match_source + ' %s' % source_address_set_element["parameters"]["addrset_par_3"]
+            config_match_source = config_match_source + ' %s' % source_address_set_element["parameters"][vocabulary.par_rvoc['pa-address-grp-name']]
 
     config_match_source = '[ ' + config_match_source + ' ]'
 
     for destination_address_set_element in destination_address_set_list:
         if re.match(config_match_destination, ''):
-            config_match_destination = '%s' % destination_address_set_element["parameters"]["addrset_par_3"]
+            config_match_destination = '%s' % destination_address_set_element["parameters"][vocabulary.par_rvoc['pa-address-grp-name']]
         else:
-            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["parameters"]["addrset_par_3"]
+            config_match_destination = config_match_destination + ' %s' % destination_address_set_element["parameters"][vocabulary.par_rvoc['pa-address-grp-name']]
 
     config_match_destination = '[ ' + config_match_destination + ' ]'
 
@@ -348,7 +325,7 @@ def pan_create_policy (device_group, psefname, source_address_set_list, destinat
 
     config_txt_zone = '''
 set device-group %s pre-rulebase security rules %s to %s
-set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, dst_str['zone'], device_group, name, src_str['zone'])
+set device-group %s pre-rulebase security rules %s from %s''' % (device_group, name, dst_str[2], device_group, name, src_str[2])
 
     config_txt_addresses = '''
 set device-group %s pre-rulebase security rules %s source %s
@@ -367,16 +344,16 @@ set device-group %s pre-rulebase security rules %s action allow''' % (device_gro
 
     return config_txt
 
-def pan_delete_policy (device_group, name, parameters):
+def pan_delete_policy (device_group, psefname, parameters):
 
 # psefname is not used
-    if parameters['plc_par_1'] == 'false':
-        return None
+#    if parameters[vocabulary.par_rvoc['configure-plc']] == 'false':
+#        return None
 
-    name = parameters['plc_par_3']
+    name = parameters[vocabulary.par_rvoc['pa-policy-name']]
 
     config_txt = '''
-delete device-group %s pre-rulebase security rules %s''' % (device_group, psefname, parameters)
+delete device-group %s pre-rulebase security rules %s''' % (device_group, name)
 
 
     return config_txt
