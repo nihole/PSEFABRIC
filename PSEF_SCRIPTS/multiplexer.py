@@ -114,10 +114,12 @@ def cmd_list_address_set (action_, address_set_):
     # If structure elemets are needed address_set index_new/old should be used
     mult_dict_add_set = psef_logic.mult_dict_address_set(address_set_['parameters'])
     address_list = []
+    address_dicts = []
     j = 0
     for address_dict_el in address_set_['addresses']:
         # Change it if you want to use different name (not a psefabric's name)
         address_list.append(address_set_['addresses'][j]["address-name"])
+        address_dicts.append(address_set_['addresses'][j])
         j = j + 1
     for cmd_element in mult_dict_add_set:
         address_set_attributes = {}
@@ -125,7 +127,9 @@ def cmd_list_address_set (action_, address_set_):
         address_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         address_set_attributes['name'] = address_set_['address-set-name']
         address_set_attributes['address-list'] = address_list
+        address_set_attributes['address-dicts'] = address_dicts
         address_set_attributes['parameters'] = address_set_['parameters']
+
 
         address_set_attributes['command-list'] = cmd_element['cmd'][action_]
         cmd_for_host[cmd_element['eq_addr']][action_]['address-set'].append(address_set_attributes)
@@ -179,10 +183,12 @@ def cmd_list_service_set (action_, service_set_):
     # Add the list of parameters if needed 
     mult_dict_add_set = psef_logic.mult_dict_service_set(service_set_['parameters'])
     service_list = []
+    service_dicts = []
     j = 0
     for service_dict_el in service_set_['services']:
         # Change it if you want to use different name (not a psefabric's name)
         service_list.append(service_dict_el["service-name"])
+        service_dicts.append(service_dict_el)
         j = j + 1
     for cmd_element in mult_dict_add_set:
         service_set_attributes = {}
@@ -190,6 +196,7 @@ def cmd_list_service_set (action_, service_set_):
         service_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         service_set_attributes['name'] = service_set_['service-set-name']
         service_set_attributes['service-list'] = service_list
+        service_set_attributes['service-dicts'] = service_dicts
         service_set_attributes['parameters'] = service_set_['parameters']
 
         service_set_attributes['command-list'] = cmd_element['cmd'][action_]
@@ -242,16 +249,19 @@ def cmd_list_application_set (action_, application_set_):
     mult_dict_add_set = psef_logic.mult_dict_application_set(application_set_['parameters'])
  
     application_list = []
+    application_dicts = []
 
     for application_dict_el in application_set_['applications']:
-        # Change it if you want to use different name (not a psefabric's name)
         application_list.append(application_dict_el["application-name"])
+        application_dicts.append(application_dict_el)
+
     for cmd_element in mult_dict_add_set:
         application_set_attributes = {}
         application_set_attributes['eq'] = cmd_element['eq_addr']
         application_set_attributes['eq_parameter'] = cmd_element['eq_parameter']
         application_set_attributes['name'] = application_set_['application-set-name']
         application_set_attributes['application-list'] = application_list
+        application_set_attributes['application-dicts'] = application_dicts
         application_set_attributes['parameters'] = application_set_['parameters']
 
         application_set_attributes['command-list'] = cmd_element['cmd'][action_]
@@ -280,13 +290,17 @@ def cmd_list_policy (action_, pol_):
     src_address_set_list = []
     name_ = pol_['policy-name']
 
-    application_set_list = pol_['match']['application-sets']
     act = 'permit'
     service_set_list = []
     service_set_lst = []
+    application_set_list = []
+    application_set_lst = []
     for service_set_el in pol_['match']['service-sets']:
         service_set_list.append(service_set_el)
         service_set_lst.append(service_set_el['service-set-name'])
+    for application_set_el in pol_['match']['application-sets']:
+        application_set_list.append(application_set_el)
+        application_set_lst.append(application_set_el['application-set-name'])
 
     for src_resolve_element in pol_['match']['source-address-sets']:
         src_address_set_list = pol_['match']['source-address-sets'][src_resolve_element]
@@ -315,9 +329,10 @@ def cmd_list_policy (action_, pol_):
                 policy_attributes['name'] = name_
                 policy_attributes['source-address-sets'] = src_address_set_list
                 policy_attributes['destination-address-sets'] = dst_address_set_list
-                policy_attributes['application-sets'] = application_set_list
                 policy_attributes['service-set-dicts'] = service_set_list
                 policy_attributes['service-sets'] = service_set_lst
+                policy_attributes['application-set-dicts'] = application_set_list
+                policy_attributes['application-sets'] = application_set_lst
                 policy_attributes['src_str'] = list(src_resolve_element)
                 policy_attributes['dst_str'] = list(dst_resolve_element)
                 policy_attributes['parameters'] = pol_['parameters']
@@ -640,16 +655,48 @@ def policy_opt(cmd_for_host_full_):
                                 j = j + 1
 
                         # application-set in policy optimization
+                        application_set_list_rm = []
+                        application_set_list_ad = []
 
-                        app_set_list_rm = policies_list_rm[i]['application-sets']
-                        app_set_list_ad = policies_list_add[j]['application-sets']
+                        app_set_list_rm = policies_list_rm[i]["application-set-dicts"]
+                        app_set_list_ad = policies_list_add[j]["application-set-dicts"]
 
-                        m_app = list(set(app_set_list_ad) & set(app_set_list_rm))
+                        for app_set_dict_rm in app_set_list_rm:
+                            application_set_list_rm.append(app_set_dict_rm["application-set-name"])
 
+                        for app_set_dict_ad in app_set_list_ad:
+                            application_set_list_ad.append(app_set_dict_ad["application-set-name"])
+
+                        m_app = list(set(application_set_list_ad) & set(application_set_list_rm))
                         if m_app:
-                            for m in m_app:
-                                app_set_list_rm.remove(m)
-                                app_set_list_ad.remove(m)
+                            j = 0
+                            while j < len(app_set_list_rm):
+                                application_set_dict_rm = app_set_list_rm[j]
+                                for m in m_app:
+                                    if (m == application_set_dict_rm["application-set-name"]):
+                                        app_set_list_rm.remove(application_set_dict_rm)
+                                        j = j - 1
+                                        break
+                                j = j + 1
+                            j = 0
+                            while j < len(app_set_list_ad):
+                                application_set_dict_ad = app_set_list_ad[j]
+                                for m in m_app:
+                                    if (m == application_set_dict_ad["application-set-name"]):
+                                        app_set_list_ad.remove(application_set_dict_ad)
+                                        j = j - 1
+                                        break
+                                j = j + 1
+
+#                        app_set_list_rm = policies_list_rm[i]['application-sets']
+#                        app_set_list_ad = policies_list_add[j]['application-sets']
+
+#                        m_app = list(set(app_set_list_ad) & set(app_set_list_rm))
+
+#                        if m_app:
+#                            for m in m_app:
+#                                app_set_list_rm.remove(m)
+#                                app_set_list_ad.remove(m)
 
 
                         flag_ad = (policies_list_add[j]['source-address-sets'] or policies_list_add[j]['destination-address-sets'] or policies_list_add[j]["service-set-dicts"] or  policies_list_add[j]['application-sets'] )

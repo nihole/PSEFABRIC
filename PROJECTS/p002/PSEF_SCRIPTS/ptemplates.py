@@ -38,13 +38,17 @@ def pan_delete_address (device_group, psefname, ipv4_prefixi, parameters):
 
 ######## address-set  ##########
 
-def pan_create_address_set (device_group, psefname, addresses, parameters):
+def pan_create_address_set (device_group, psefname, address_dicts, parameters):
 
 # psefname is not used
     if parameters[vocabulary.par_rvoc['configure-addrset']] == 'false':
         return None
 
     name = parameters[vocabulary.par_rvoc['pa-address-grp-name']]
+
+    addresses = []
+    for address_el in address_dicts:
+        addresses.append(address_el['parameters'][vocabulary.par_rvoc['pa-address-obj-name']])
 
     config_addresses = ''
     for address_element in addresses:
@@ -124,7 +128,7 @@ def pan_delete_service (device_group, psefname, prot, ports, parameters):
 
 ######### service-set (services)  ###########
 
-def pan_create_service_set (device_group, psefname, service, parameters):
+def pan_create_service_set (device_group, psefname, service_dicts, parameters):
 
 # psefname is not used
     if parameters[vocabulary.par_rvoc['configure-svcset']] == 'false':
@@ -134,7 +138,11 @@ def pan_create_service_set (device_group, psefname, service, parameters):
 
     config_services = ''
 
-    for service_element in service:
+    services = []
+    for service_el in service_dicts:
+        services.append(service_el['parameters'][vocabulary.par_rvoc['pa-service-name']])
+
+    for service_element in services:
         if re.match(config_services, ''):
             config_services = '%s' % service_element
         else:
@@ -173,7 +181,7 @@ def pan_delete_service_set (device_group, psefname, service, parameters):
 
 ######### application-set (applications)  ###########
 
-def pan_create_application_set (device_group, psefname, application, parameters):
+def pan_create_application_set (device_group, psefname, application_dicts, parameters):
 
 # psefname is not used
     if parameters[vocabulary.par_rvoc['configure-appset']] == 'false':
@@ -183,7 +191,11 @@ def pan_create_application_set (device_group, psefname, application, parameters)
     
     config_applications = ''
 
-    for application_element in application:
+    applications = []
+    for application_el in application_dicts:
+        applications.append(application_el['parameters'][vocabulary.par_rvoc['pa-application-name']])
+
+    for application_element in applications:
         if re.match(config_applications, ''):
             config_applications = '%s' % application_element
         else:
@@ -223,21 +235,21 @@ def pan_delete_application_set (device_group, psefname, application, parameters)
 ######### access ###########
 
 
-def pan_create_policy_allapp_dst_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
+def pan_create_policy_allapp_dst_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_dicts, service_sets, src_str, dst_str, parameters, action ):
 
     config_txt = ''
     service_set_list = ['any']
     application_set_list = ['any']
     dst_str[2] = 'sz-outside'
-    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action )
+    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_dicts, service_sets, src_str, dst_str, parameters, action )
     
     return config_txt
 
-def pan_create_policy_src_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
+def pan_create_policy_src_transit (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_dicts, service_sets, src_str, dst_str, parameters, action ):
 
     src_str[2] = 'sz-outside'
     config_txt = ''
-    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action )
+    config_txt = pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_dicts, service_sets, src_str, dst_str, parameters, action )
 
     return config_txt
 
@@ -269,7 +281,7 @@ def pan_delete_policy_src_transit (device_group, name, parameters):
     return config_txt
 
 
-def pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_list, service_set_list, src_str, dst_str, parameters, action ):
+def pan_create_policy (device_group, psefname, source_address_set_list, destination_address_set_list, application_set_dicts, service_set_dicts, src_str, dst_str, parameters, action ):
 
 # psefname is not used
 #    if parameters[vocabulary.par_rvoc['configure-plc']] == 'false':
@@ -284,6 +296,15 @@ def pan_create_policy (device_group, psefname, source_address_set_list, destinat
     config_match_destination = ''
     config_match_service = ''
     config_match_application = ''
+
+
+    service_set_list = []
+    for service_set_el in service_set_dicts:
+        service_set_list.append(service_set_el['parameters'][vocabulary.par_rvoc['pa-service-grp-name']])
+
+    application_set_list = []
+    for application_set_el in application_set_dicts:
+        application_set_list.append(application_set_el['parameters'][vocabulary.par_rvoc['pa-application-grp-name']])
 
     for source_address_set_element in source_address_set_list:
         if re.match(config_match_source, ''):

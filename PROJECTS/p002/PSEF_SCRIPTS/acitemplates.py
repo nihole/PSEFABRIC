@@ -36,7 +36,7 @@ def aci_detach_epg (contract_name, epg_name, path, relation):
 
     return (config_json)
 
-def aci_create_policy (eq_parameter, psefname, epg_dict_cons, epg_dict_prov, application_sets, subject_dict, src_str, dst_str, parameters, action):
+def aci_create_policy (eq_parameter, psefname, epg_dict_cons, epg_dict_prov, application_sets, subject_dict, src_str, dst_str, parameters):
 
 # eq_parameter and application_sets are  not used in this case
 
@@ -119,10 +119,12 @@ def aci_delete_policy (psefname, tenant, parameters, epg_dict_cons, epg_dict_pro
 
     config_epg = config_epg_cons + '\n' + config_epg_prov
 
-    if (status == 'change'):
-        config_cntr = aci_create_policy (name, {}, {}, subject_dict, action )
+    if (False and (status == 'change')):
+        config_cntr = aci_create_policy (tenant, psefname, epg_dict_cons, epg_dict_prov, {}, subject_dict, {}, {}, parameters )
     elif (status == 'delete'):
         config_cntr = '{"fvTenant":{"attributes":{"dn":"uni/tn-common","status":"modified"},"children":[{"vzBrCP":{"attributes":{"dn":"uni/tn-common/brc-%s","status":"deleted"},"children":[]}}]}}' % name
+    else:
+        config_cntr = ''
 
     config_json = config_cntr + '\n' + config_epg
 

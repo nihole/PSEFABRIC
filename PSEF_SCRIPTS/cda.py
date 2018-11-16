@@ -285,6 +285,13 @@ def psef_full (psef_conf, address_set_full, service_set_full, application_set_fu
                 service_set_full_dict = service_set_full_[service_set_]
                 psef_conf_['data']['policies'][j]["match"]["service-sets"][i] = service_set_full_dict
                 i = i + 1
+            i = 0
+            for application_set_ in policy_["match"]["application-sets"]:
+                application_set_dict_ = {}
+                application_set_full_dict = {}
+                application_set_full_dict = application_set_full_[application_set_]
+                psef_conf_['data']['policies'][j]["match"]["application-sets"][i] = application_set_full_dict
+                i = i + 1
             j = j + 1
 
     # full address-sets

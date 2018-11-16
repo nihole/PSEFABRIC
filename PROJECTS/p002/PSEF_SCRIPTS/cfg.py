@@ -186,7 +186,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['service-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['service-list'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['service-dicts'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -195,7 +195,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['application-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['application-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['application-list'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['application-dicts'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -214,7 +214,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
             if len(cmd_for_host_full[eq_name]['ad']['address-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['address-list'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['address-dicts'], el['parameters'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
@@ -225,7 +225,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-sets'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
+                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-set-dicts'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
                         if cfg_new:
                             cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
@@ -235,7 +235,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['tenant']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
+                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['tenant']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'])")
                         if cfg_new:
                             cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''

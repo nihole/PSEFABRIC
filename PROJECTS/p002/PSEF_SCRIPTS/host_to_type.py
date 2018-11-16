@@ -20,10 +20,10 @@ def area_to_eq_aci():
     map_aci_tenant = {}
     map_aci_tenant['dc1'] = {}
     map_aci_tenant['dc2'] = {}
-    map_aci_tenant['dc1']['a1'] = 'a1'
-    map_aci_tenant['dc1']['a2'] = 'a2'
-    map_aci_tenant['dc2']['a1'] = 'a1'
-    map_aci_tenant['dc2']['a2'] = 'a2'
+    map_aci_tenant['dc1']['a1'] = 't1'
+    map_aci_tenant['dc1']['a2'] = 't2'
+    map_aci_tenant['dc2']['a1'] = 't1'
+    map_aci_tenant['dc2']['a2'] = 't2'
 
     return (map_apic_host, map_aci_tenant)
 
