@@ -1,0 +1,27 @@
+module psefabric-types {
+
+  yang-version "1.1";
+
+  // namespace
+  namespace "http://psefabric/types";
+
+  prefix "types";
+
+  import ietf-inet-types { prefix inettypes; }
+ 
+  typedef dc {
+	  type string;
+  }
+  typedef vrf {
+	  type string;
+  }
+  typedef zone {
+	  type string;
+  }
+  typedef eq {
+	  type string;
+  }
+  typedef interface {
+	  type string;
+  }
+} 

@@ -1,0 +1,47 @@
+// p001
+
+module structure {
+
+  yang-version "1.1";
+
+  // namespace
+  namespace "http://psefabric/structure";
+
+  prefix "structure";
+
+  import psefabric-types { prefix types; }
+  
+  container structure {
+	  leaf-list data-centers {
+		  type types:dc;
+		  default 'none';
+	  }
+	  leaf-list VRFs {
+		  type types:vrf;
+		  default 'none';
+	  }
+	  leaf-list zones {
+		  type types:zone;
+		  default 'none';
+	  }
+	  leaf-list equipment {
+		  type types:eq;
+		  default 'none';
+	  }
+	  leaf-list  interfaces {
+		  type types:interface;
+		  default 'none';
+	  }	  
+	  list vlans {
+		  key vlan-name;
+		  leaf vlan-name {
+			  type string;
+		  }
+		  leaf vlan-number {
+			  type int16 {
+			  range "0..4095";  
+			  }
+		  }
+	  }
+  }
+} 

@@ -1,0 +1,105 @@
+submodule addresses {
+
+  yang-version "1.1";
+  belongs-to policy {
+	  prefix policy;
+  }
+
+  import ietf-inet-types { prefix ietf; }
+  import structure { prefix structure; }
+  
+  
+  list addresses {
+	  key address-name;
+	  leaf address-name {
+		  mandatory true;
+		  type string;
+	  }
+	  leaf ipv4-prefix {
+		  mandatory true;
+		  type ietf:ipv4-prefix;
+		  description
+			  "ipv4 prefix";
+  	  }
+	  container parameters {
+		  leaf configure-addr {
+//			  mandatory true;
+			  default true;
+			  type boolean;
+		  }
+		  leaf aggregation-addr {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+	  }
+	  container structure {
+		  leaf dc {
+			  type leafref {
+				  path "/structure:structure/structure:data-centers";
+			  }
+			  mandatory true;
+//			  default 'none';
+		  }
+		  leaf vrf {
+			  type leafref {
+				  path "/structure:structure/structure:VRFs";
+			  }
+			  mandatory true;
+//			  default 'none';
+		  }
+		  leaf zone {
+			  type leafref {
+				  path "/structure:structure/structure:zones";
+			  }
+			  mandatory true;
+//			  default 'none';
+		  }
+		  leaf device {
+			  type leafref {
+				  path "/structure:structure/structure:equipment";
+			  }
+			  mandatory true;
+//			  default 'none';
+		  }
+		  leaf interface {
+			  type leafref {
+				  path "/structure:structure/structure:interfaces";
+			  }
+			  mandatory true;
+//			  default 'none';
+		  }
+		  leaf vlan {
+			  type leafref {
+				  path "/structure:structure/structure:vlans/structure:vlan-number";
+			  }
+//			  mandatory false;
+		  }
+	  }
+
+  }
+  
+  list address-sets {
+	  key address-set-name;
+	  leaf address-set-name {
+		  mandatory true;
+		  type string;
+	  }
+	  container parameters {
+		  leaf configure-addrset {
+//			  mandatory true;
+			  default false;
+			  type boolean;
+		  }
+	  }
+ 	  leaf-list addresses { 
+ 		  min-elements 1;
+		  type leafref {
+			  path "/addresses/address-name";
+		  }
+      }
+	  
+  }
+  
+} 
+  
