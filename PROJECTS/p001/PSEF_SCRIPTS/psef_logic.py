@@ -16,10 +16,11 @@ mult_dict_policy()
 
 import re
 import copy
-import host_to_type
 import vocabulary
 
-def mult_dict_address(str_list, parameters):
+
+# Change the list of parameters if needed
+def mult_dict_address(str_dict, parameters):
 
 ##########  Description  #######
     '''
@@ -27,19 +28,80 @@ def mult_dict_address(str_list, parameters):
 #############  BODY ############
 
     mult = []
-    if (parameters[vocabulary.par_rvoc['configure-addr']] == 'true'):
     # May be some logic based on par1, par2, ... value
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_address')
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_address')
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('jtemplates.srx_create_address')
+    mult[0]['cmd']['rm'].append('jtemplates.srx_delete_address')
+
+    mult.append({})
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_address')
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_address')
+
+    if ((str_dict[vocabulary.str_rvoc['device']] == 'dc1_sw1') and (parameters[vocabulary.par_rvoc["aggregation-addr"]] == 'false')):
+        mult[1]['cmd']['rm'].append('ctemplates.cisco_remove_vlan_to_trunk')
+        mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_svi')
+        mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_vlan')
+        mult[1]['cmd']['ad'].append('ctemplates.cisco_create_vlan')
+        mult[1]['cmd']['ad'].append('ctemplates.cisco_create_svi')
+        mult[1]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_address')
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_address')
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc3_r1'
+    mult[3]['eq_parameter'] = ''
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_address')
+    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_address')
+    mult.append({})
+    mult[4]['eq_addr'] = 'dc2_sw1'
+    mult[4]['eq_parameter'] = ''
+    mult[4]['cmd'] = {}
+    mult[4]['cmd']['ad'] = []
+    mult[4]['cmd']['rm'] = []
+    if ((str_dict[vocabulary.str_rvoc['device']] == 'dc2_sw1') and (parameters[vocabulary.par_rvoc["aggregation-addr"]] == 'false')):
+        mult[4]['cmd']['rm'].append('ctemplates.cisco_remove_vlan_to_trunk')
+        mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_svi')
+        mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_vlan')
+        mult[4]['cmd']['ad'].append('ctemplates.cisco_create_vlan')
+        mult[4]['cmd']['ad'].append('ctemplates.cisco_create_svi')
+        mult[4]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
+    mult.append({})
+    mult[5]['eq_addr'] = 'dc3_sw1'
+    mult[5]['eq_parameter'] = ''
+    mult[5]['cmd'] = {}
+    mult[5]['cmd']['ad'] = []
+    mult[5]['cmd']['rm'] = []
+    if ((str_dict[vocabulary.str_rvoc['device']] == 'dc3_sw1') and (parameters[vocabulary.par_rvoc["aggregation-addr"]] == 'false')):
+        mult[5]['cmd']['rm'].append('ctemplates.cisco_remove_vlan_to_trunk')
+        mult[5]['cmd']['rm'].append('ctemplates.cisco_delete_svi')
+        mult[5]['cmd']['rm'].append('ctemplates.cisco_delete_vlan')
+        mult[5]['cmd']['ad'].append('ctemplates.cisco_create_vlan')
+        mult[5]['cmd']['ad'].append('ctemplates.cisco_create_svi')
+        mult[5]['cmd']['ad'].append('ctemplates.cisco_add_vlan_to_trunk')
+    
 
     return (mult)
 
+# Change the list of parameters if needed
 def mult_dict_address_set(parameters):
 
 ##########  Description  #######
@@ -48,38 +110,70 @@ def mult_dict_address_set(parameters):
 #############  BODY ############
 
     mult = []
-    if (parameters[vocabulary.par_rvoc['configure-addrset']] == 'true'):
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_address_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_address_set')
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['rm'].append('jtemplates.srx_delete_address_set')
+    mult[0]['cmd']['ad'].append('jtemplates.srx_create_address_set')
+
+    mult.append({})
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_address_set')
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_address_set')
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_address_set')
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_address_set')
+
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc3_r1'
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+    mult[3]['cmd']['rm'].append('ctemplates.asa_delete_address_set')
+    mult[3]['cmd']['ad'].append('ctemplates.asa_create_address_set')
 
     return (mult)
 
-def mult_dict_service(parameters): 
+# Change the list of parameters if needed
+def mult_dict_service(parameters):
 
 ##########  Description  #######
     '''
     '''
 #############  BODY ############
 
-    mult=[]
-    if (parameters[vocabulary.par_rvoc['configure-svc']] == 'true'):
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_service')
-    
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates_1.create_service')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_service')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates_2.create_service')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_service')
+
     return (mult)
 
+# Add the list of parameters if needed
 def mult_dict_service_set(parameters):
 
 ##########  Description  #######
@@ -87,20 +181,28 @@ def mult_dict_service_set(parameters):
     '''
 #############  BODY ############
 
-    mult=[]
-    if (parameters[vocabulary.par_rvoc['configure-svcset']] == 'true'):
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_service_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_service_set')
+    mult = []
+    # May be some logic based on par1, par2, ... value
+    mult.append({})
+    mult[0]['eq_addr'] = 'example_device1'
+    mult[0]['eq_parameter'] = 'some_parameter'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'].append('extemplates_1.create_service_set')
+    mult[0]['cmd']['rm'].append('extemplates_1.delete_service_set')
+    mult.append({})
+    mult[1]['eq_addr'] = 'example_device2'
+    mult[1]['eq_parameter'] = 'some_parameter'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['ad'].append('extemplates_2.create_service_set')
+    mult[1]['cmd']['rm'].append('extemplates_2.delete_service_set')
 
     return (mult)
 
-def mult_dict_application(parameters):
+def mult_dict_application(): 
 
 ##########  Description  #######
     '''
@@ -108,17 +210,49 @@ def mult_dict_application(parameters):
 #############  BODY ############
 
     mult=[]
-    if (parameters[vocabulary.par_rvoc['configure-app']] == 'true'):   
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'].append('jtemplates.srx_delete_application')
+    mult[0]['cmd']['ad'].append('jtemplates.srx_create_application')
+    
+    mult.append({}) 
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_application')
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application')
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_application')
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_application')
+
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_application')
+    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application')
+
+    mult.append({})
+    mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['cmd'] = {}
+    mult[4]['cmd']['ad'] = []
+    mult[4]['cmd']['rm'] = []
+    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_application')
+    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_application')
 
     return (mult)
 
-def mult_dict_application_set(parameters):
+def mult_dict_application_set():
 
 ##########  Description  #######
     '''
@@ -126,15 +260,45 @@ def mult_dict_application_set(parameters):
 #############  BODY ############
 
     mult=[]
-    if (parameters[vocabulary.par_rvoc['configure-appset']] == 'true'):   
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = 'shared'
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_application_set')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_application_set')
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+    mult[0]['cmd']['rm'].append('jtemplates.srx_delete_application_set')
+    mult[0]['cmd']['ad'].append('jtemplates.srx_create_application_set')
+
+    mult.append({})
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_application_set')
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_application_set')
+
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
+    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
+
+    mult.append({})
+    mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['cmd'] = {}
+    mult[4]['cmd']['ad'] = []
+    mult[4]['cmd']['rm'] = []
+    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
+    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
 
     return (mult)
 
@@ -144,108 +308,76 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 ##########  Description  #######
 ########## End of description #####
 
-    (map_apic_host_, map_aci_tenant_) = copy.deepcopy(host_to_type.area_to_eq_aci())
     host_ = copy.deepcopy(host_to_type.host_to_type())
-    map_pa_device_group_ = copy.deepcopy(host_to_type.area_to_eq_pa())
-
 
     src_dc = src_str[0]
     dst_dc = dst_str[0]
-    src_area = src_str[1]
-    dst_area = dst_str[1]
+    src_vrf = src_str[1]
+    dst_vrf = dst_str[1]
     src_zone = src_str[2]
     dst_zone = dst_str[2]
-    src_sub_zone = src_str[3]
-    dst_sub_zone = dst_str[3]
 
     if (re.match(src_dc, dst_dc)):
         same_dc_flag = True
     else:
         same_dc_flag = False
 
-    if (re.match(src_area, dst_area)):
-        same_area_flag = True
+    if (re.match(src_vrf, dst_vrf)):
+        same_vrf_flag = True
     else:
-        same_area_flag = False
+        same_vrf_flag = False
 
     if (re.match(src_zone, dst_zone)):
         same_zone_flag = True
     else:
         same_zone_flag = False
 
-    if (re.match(src_sub_zone, dst_sub_zone)):
-        same_sub_zone_flag = True
-    else:
-        same_sub_zone_flag = False
-
     mult = []
 
-    if (same_dc_flag and same_zone_flag and same_area_flag and not same_sub_zone_flag):
-    # Only contracts on ACI side
+# Then depending on these values we may program psefabric actions.
+    # For example:
+
+    if (dst_dc == 'dc1'):
         mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = map_apic_host_[src_dc]
-        mult[0][vocabulary.eq_rvoc['tenant']] = map_aci_tenant_[src_dc][src_area]
+        mult[0]['eq_addr'] = 'dc1_sw1'
+        mult[0]['eq_parameter'] = ''
         mult[0]['cmd'] = {}
         mult[0]['cmd']['ad'] = []
         mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('acitemplates.aci_delete_policy')
-        mult[0]['cmd']['ad'].append('acitemplates.aci_create_policy')
-
-    elif (same_dc_flag and same_area_flag and not same_zone_flag):
-    # Policy on PA side between different zones inside the same VSYS
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy')
-
-    elif (same_dc_flag and not same_area_flag):
-    # Policy on PA side between different VSYSes (or FWs)
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        # For source VSYS
-        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_allapp_dst_transit')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_transit')
-        mult.append({})
-        mult[1][vocabulary.eq_rvoc['host']] = 'panorama'
-        # For destination VSYS
-        mult[1][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[dst_dc][dst_area]
-        mult[1]['cmd'] = {}
-        mult[1]['cmd']['ad'] = []
-        mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
-        mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
-
-    elif (not same_dc_flag):
-    # Policy on PA side between different VSYSes (or FWs)
-        mult.append({})
-        mult[0][vocabulary.eq_rvoc['host']] = 'panorama'
-        # For source DC/VSYS
-        mult[0][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[src_dc][src_area]
-        mult[0]['cmd'] = {}
-        mult[0]['cmd']['ad'] = []
-        mult[0]['cmd']['rm'] = []
-        mult[0]['cmd']['rm'].append('ptemplates.pan_delete_policy_allapp_dst_transit')
-        mult[0]['cmd']['ad'].append('ptemplates.pan_create_policy_allapp_dst_transit')
-        mult.append({})
-        mult[1][vocabulary.eq_rvoc['host']] = 'panorama'
-        # For destination DC/VSYS
-        mult[1][vocabulary.eq_rvoc['device-group']] = map_pa_device_group_[dst_dc][dst_area]
-        mult[1]['cmd'] = {}
-        mult[1]['cmd']['ad'] = []
-        mult[1]['cmd']['rm'] = []
-        mult[1]['cmd']['rm'].append('ptemplates.pan_delete_policy_src_transit')
-        mult[1]['cmd']['ad'].append('ptemplates.pan_create_policy_src_transit')
-
-#    else:
+        mult[0]['cmd']['ad'].append('ctemplates.cisco_create_access')
+        mult[0]['cmd']['rm'].append('ctemplates.cisco_delete_access')
+        if (not (same_dc_flag and same_vrf_flag)):
+            # May be some logic based on par1, par2, ... value
+            mult.append({})
+            mult[1]['eq_addr'] = 'dc1_fw1'
+            mult[1]['eq_parameter'] = ''
+            mult[1]['cmd'] = {}
+            mult[1]['cmd']['ad'] = []
+            mult[1]['cmd']['rm'] = []
+            mult[1]['cmd']['ad'].append('jtemplates.srx_create_policy')
+            mult[1]['cmd']['rm'].append('jtemplates.srx_delete_policy')
+    elif (dst_dc == 'dc2'):
+        if (not (same_dc_flag and same_vrf_flag)):
+            # May be some logic based on par1, par2, ... value
+            mult.append({})
+            mult[0]['eq_addr'] = 'dc2_fw1'
+            mult[0]['eq_parameter'] = ''
+            mult[0]['cmd'] = {}
+            mult[0]['cmd']['ad'] = []
+            mult[0]['cmd']['rm'] = []
+            mult[0]['cmd']['ad'].append('ctemplates.asa_create_access')
+            mult[0]['cmd']['rm'].append('ctemplates.asa_delete_access')
+    elif (dst_dc == 'dc3'):
+        if (not same_dc_flag and not same_vrf_flag):
+            # May be some logic based on par1, par2, ... value
+            mult.append({})
+            mult[0]['eq_addr'] = 'dc1_fw1'
+            mult[0]['eq_parameter'] = ''
+            mult[0]['cmd'] = {}
+            mult[0]['cmd']['ad'] = []
+            mult[0]['cmd']['rm'] = []
+            mult[0]['cmd']['ad'].append('ctemplates.zbf_create_policy')
+            mult[0]['cmd']['rm'].append('ctemplates.zbf_delete_policy')
 
     return (mult)
-
 

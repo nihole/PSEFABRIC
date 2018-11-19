@@ -30,10 +30,10 @@ But if we don't have candidate configuration feature then we have to remove only
 
 import re
 import mult_cfg
-import ptemplates
-import acitemplates
-import host_to_type
+import jtemplates
+import ctemplates
 import vocabulary
+import host_to_type
 
 cfg = {}
 def create_configs (cmd_for_host_diff, cmd_for_host_full):
@@ -69,175 +69,120 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
         '''
 
 # rm policy
-# In our example panorama_1 equipment have a configuration interface with possibility of candidate config. 
+# In our example example_vendor_1 equipment have a configuration interface with possibility of candidate config. 
 # It meens that to change configuration of the object we may remove old and create a new object
 # cmd_for_host_full dict is used for this purpose
 
-        if (re.search('panorama', host[eq_name])):
+        if (re.search('juniper', host[eq_name])):
             if (cmd_for_host_full[eq_name]['rm']['policy']):
                 policy_list = cmd_for_host_full[eq_name]['rm']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'], el['parameters'])")
-                        if cfg_new:
-                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        else: 
-                            continue
+                        cfg_new = eval(command_element + "(el['name'])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
-# In our example panorama_2 equipment don't have candidate config feature. 
+# In our example example_vendor_2 equipment don't have candidate config feature. 
 # It meens that to change configuration of the object if we need to delete something we have to delete exactly what we need to delete (no more)
 # cmd_for_host_diff dict is used for this purpose
 
-        if (re.search('aci', host[eq_name])):
+        if (re.search('cisco', host[eq_name])):
             if (cmd_for_host_diff[eq_name]['rm']['policy']):
                 policy_list_rm = cmd_for_host_diff[eq_name]['rm']['policy']
                 for el_rm in policy_list_rm:
-                    if (cmd_for_host_full[eq_name]['ad']['policy']):
-                        policy_ad_list = cmd_for_host_full[eq_name]['ad']['policy']
-                        for el_ad in policy_ad_list:
-                            if el_rm['name'] in el_ad.itervalues():
-                                status = 'change'
-                            else:
-                                status = 'delete'
-                    else:
-                        status = 'delete'
                     for command_element in el_rm['command-list']:
-                        cfg_new = eval(command_element + "(el_rm['name'], el_rm[vocabulary.eq_rvoc['tenant']], el_rm['parameters'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-set-dicts'], status)")
-                        if cfg_new:
-                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = eval(command_element + "(el_rm['name'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-sets'], status)")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 # rm address-set
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if (cmd_for_host_diff[eq_name]['rm']['address-set']):
                 for el in cmd_for_host_full[eq_name]['rm']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['address-list'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el['name'],el['address-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 # rm address
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if (cmd_for_host_diff[eq_name]['rm']['address']):
                 for el in cmd_for_host_diff[eq_name]['rm']['address']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['ipv4-prefix'], el['parameters'])")
-                        if cfg_new:
-                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = eval (command_element + "(el['name'],el['ipv4-prefix'], el['structure']['vlan'], el['structure'][vocabulary.str_rvoc['vrf']], el['structure'][vocabulary.str_rvoc['interface']])")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
     
 # rm service-set
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if (cmd_for_host_diff[eq_name]['rm']['service-set']):
                 for el in cmd_for_host_full[eq_name]['rm']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['service-list'],el['parameters'])")
+                        cfg_new = eval (command_element + "(el['name'],el['service-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 # rm service
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if (cmd_for_host_diff[eq_name]['rm']['service']):
                 for el in cmd_for_host_diff[eq_name]['rm']['service']:
                     for command_element in el['command-list']:
                         if 'ports' in el:
-                            cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['prot'],el['ports']['destination-port-range'], el['parameters'])")
+                            cfg_new = eval (command_element + "(el['name'],el['prot'],el['ports']['destination-port-range'])")
                         else:
-                            cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['prot'],{},el['parameters'])")
+                            cfg_new = eval(command_element + "(el['name'],el['prot'],{})")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
-
-# rm application-set
-        if (re.search('panorama', host[eq_name])):
-            if (cmd_for_host_diff[eq_name]['rm']['application-set']):
-                for el in cmd_for_host_full[eq_name]['rm']['application-set']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['application-list'],el['parameters'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-## rm application
-#        if (eq_name == 'panorama'):
-#            if (cmd_for_host_diff[eq_name]['rm']['application']):
-#                for el in cmd_for_host_full[eq_name]['rm']['application']:
-#                    for command_element in el['command-list']:
-#                        if 'ports' in el:
-#                            cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['app_par_3'],el['prot'],el['ports']['destination-port-range'])")
-#                        else:
-#                            cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['app_par_3'],el['prot'],{})")
-#                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-#                        cfg_new = ''
 
 # add service
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if len(cmd_for_host_full[eq_name]['ad']['service']):
                 for el in cmd_for_host_full[eq_name]['ad']['service']:
                     for command_element in el['command-list']:
                         if 'ports' in el:
-                            cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['prot'],el['ports']['destination-port-range'],el['parameters'])")
+                            cfg_new = eval (command_element + "(el['name'],el['prot'],el['ports']['destination-port-range'])")
                         else:
-                            cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['prot'],{},el['parameters'])")
+                            cfg_new = eval(command_element + "(el['name'],el['prot'],{})")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 # add service-set
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if len(cmd_for_host_full[eq_name]['ad']['service-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['service-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['service-dicts'], el['parameters'])")
-                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-# add application-set
-        if (re.search('panorama', host[eq_name])):
-            if len(cmd_for_host_full[eq_name]['ad']['application-set']):
-                for el in cmd_for_host_full[eq_name]['ad']['application-set']:
-                    for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['application-dicts'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el['name'],el['service-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 
 # add address
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if len(cmd_for_host_full[eq_name]['ad']['address']):
                 for el in cmd_for_host_full[eq_name]['ad']['address']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['ipv4-prefix'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el['name'],el['ipv4-prefix'], el['structure']['vlan'], el['structure'][vocabulary.str_rvoc['vrf']], el['structure'][vocabulary.str_rvoc['interface']])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 # add address-set
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if len(cmd_for_host_full[eq_name]['ad']['address-set']):
                 for el in cmd_for_host_full[eq_name]['ad']['address-set']:
                     for command_element in el['command-list']:
-                        cfg_new = eval (command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['address-dicts'], el['parameters'])")
+                        cfg_new = eval (command_element + "(el['name'],el['address-list'])")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
 # add policy
 
-        if (re.search('panorama', host[eq_name])):
+        if (True):
             if len(cmd_for_host_full[eq_name]['ad']['policy']):
                 policy_list = cmd_for_host_full[eq_name]['ad']['policy']
                 for el in policy_list:
                     for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['device-group']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-set-dicts'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'],'permit')")
-                        if cfg_new:
-                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
-                        cfg_new = ''
-
-        elif (re.search('aci', host[eq_name])):
-            if len(cmd_for_host_full[eq_name]['ad']['policy']):
-                policy_list = cmd_for_host_full[eq_name]['ad']['policy']
-                for el in policy_list:
-                    for command_element in el['command-list']:
-                        cfg_new = eval(command_element + "(el[vocabulary.eq_rvoc['tenant']], el['name'],el['source-address-sets'],el['destination-address-sets'],el['application-sets'],el['service-set-dicts'],el['src_str'],el['dst_str'],el['parameters'])")
-                        if cfg_new:
-                            cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
+                        cfg_new = eval(command_element + "(el['name'],el['source-address-sets'],el['destination-address-sets'],el['service-sets'],'permit')")
+                        cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
     return cfg
 

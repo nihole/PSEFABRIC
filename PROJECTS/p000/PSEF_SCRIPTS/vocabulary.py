@@ -64,3 +64,7 @@ str_voc['str_6'] = 'str_6'
 str_voc['str_7'] = 'str_7'
 str_voc['str_8'] = 'str_8'
 str_voc['str_9'] = 'str_9'
+
+par_rvoc = dict((v,k) for k,v in par_voc.iteritems())
+str_rvoc = dict((v,k) for k,v in str_voc.iteritems())
+

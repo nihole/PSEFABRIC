@@ -7,6 +7,7 @@ The list of templates for juniper srx
 ###################   policy   ###########################
 
 def srx_create_policy (name, source_address_set_list, destination_address_set_list, service_list, action ):
+#    eq_paramete, parameters are not used
     config_match_source = ''
     config_match_destination = ''
     config_match_service = ''
@@ -52,7 +53,7 @@ def srx_create_policy (name, source_address_set_list, destination_address_set_li
     return config_xml
 
 
-def srx_delete_policy(name, source_address_set_list, destination_address_set_list, service_list, action ):
+def srx_delete_policy(name):
     config_xml ='''
 <security>
 <policies> 
@@ -68,7 +69,7 @@ def srx_delete_policy(name, source_address_set_list, destination_address_set_lis
 
 ###############  address  ###############################
 
-def srx_create_address (name, ipv4_prefix, vlan, vrf):
+def srx_create_address (name, ipv4_prefix, vlan, vrf, interface):
     config_xml = '''
 <security>
 <address-book>
@@ -81,7 +82,7 @@ def srx_create_address (name, ipv4_prefix, vlan, vrf):
 </security>''' % (name, ipv4_prefix)
     return config_xml
 
-def srx_delete_address (name, ipv4_prefix, vlan, vrf):
+def srx_delete_address (name, ipv4_prefix, vlan, vrf, interface):
     config_xml = '''
 <security>
 <address-book>

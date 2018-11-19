@@ -23,8 +23,7 @@ import os
 import host_to_type
 import re
 import copy
-import pa_cfg_correction
-import aci_cfg_correction
+import ex_cfg_correction
 
 PSEFABRIC = os.environ['PSEFABRIC']
 
@@ -56,14 +55,14 @@ def mult_cfg(cfg_):
 
     host_ = copy.deepcopy(host_to_type.host_to_type())
     for eq_addr in cfg_:
-        if re.search('panorama', host_[eq_addr]):
-#            config = pa_cfg_correction.pa_cli_correction(cfg_[eq_addr])
+        if (re.search('juniper', host_[eq_addr])):
+#            config = ex_cfg_correction.ex_cli_correction(cfg_[eq_addr])
+            config = cfg_[eq_addr]
+            version_file(eq_addr, config,'xml')
+        elif (re.search('cisco', host_[eq_addr])):
+#            config = ex_cfg_correction.ex_cli_correction(cfg_[eq_addr])
             config = cfg_[eq_addr]
             version_file(eq_addr, config,'txt')
-        elif re.search('aci', host_[eq_addr]):
-#            config = aci_cfg_correction.ex_cli_correction(cfg_[eq_addr])
-            config = cfg_[eq_addr]
-            version_file(eq_addr, config,'json')
 
 #        elif 
 #        elif

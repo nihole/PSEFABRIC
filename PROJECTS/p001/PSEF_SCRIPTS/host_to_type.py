@@ -5,40 +5,12 @@ The mult_cfg.py script uses these dicts in the deciding of how to process the da
 
 def host_to_type():
     host = {}
-    host['panorama'] = 'pa_panorama'
-    host['apic_aci_dc1'] = 'cisco_aci'
-    host['apic_aci_dc2'] = 'cisco_aci'
+    host['dc1_sw1'] = 'cisco_l3sw'
+    host['dc1_fw1'] = 'juniper_srx'
+    host['dc2_fw1'] = 'cisco_asa'
+    host['dc2_sw1'] = 'cisco_l3sw'
+    host['dc3_sw1'] = 'cisco_l2sw'
+    host['dc3_r1'] = 'cisco_router'
     return host
 
-def area_to_eq_aci():
-    
-    map_apic_host = {}
-    map_apic_host['dc1'] = 'apic_aci_dc1'
-    map_apic_host['dc1'] = 'apic_aci_dc2'
-
-    
-    map_aci_tenant = {}
-    map_aci_tenant['dc1'] = {}
-    map_aci_tenant['dc2'] = {}
-    map_aci_tenant['dc1']['a1'] = 't1'
-    map_aci_tenant['dc1']['a2'] = 't2'
-    map_aci_tenant['dc2']['a1'] = 't1'
-    map_aci_tenant['dc2']['a2'] = 't2'
-
-    return (map_apic_host, map_aci_tenant)
-
-def area_to_eq_pa():
-
-    '''
-    Maps areas to panorama device-groups
-    '''
-    
-    map_pa_device_group = {}
-    map_pa_device_group['dc1'] = {}
-    map_pa_device_group['dc2'] = {}
-    map_pa_device_group['dc1']['a1'] = 'dc1_a1'
-    map_pa_device_group['dc1']['a2'] = 'dc1_a2'
-    map_pa_device_group['dc2']['a1'] = 'dc2_a1'
-    map_pa_device_group['dc2']['a2'] = 'dc2_a2'
-
-    return map_pa_device_group
+# Also may be some mapping dictionaries here (for mapping some logical network  area to physical entities, for example areas -> aci tenants and palo alto VSYSes)  
