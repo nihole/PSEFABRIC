@@ -23,7 +23,8 @@ import os
 import host_to_type
 import re
 import copy
-import ex_cfg_correction
+import cisco_cfg_correction
+import juniper_cfg_correction
 
 PSEFABRIC = os.environ['PSEFABRIC']
 
@@ -56,12 +57,10 @@ def mult_cfg(cfg_):
     host_ = copy.deepcopy(host_to_type.host_to_type())
     for eq_addr in cfg_:
         if (re.search('juniper', host_[eq_addr])):
-#            config = ex_cfg_correction.ex_cli_correction(cfg_[eq_addr])
-            config = cfg_[eq_addr]
+            config = juniper_cfg_correction.juniper_xml_correction(cfg_[eq_addr])
             version_file(eq_addr, config,'xml')
         elif (re.search('cisco', host_[eq_addr])):
-#            config = ex_cfg_correction.ex_cli_correction(cfg_[eq_addr])
-            config = cfg_[eq_addr]
+            config = cisco_cfg_correction.cisco_cli_correction(cfg_[eq_addr])
             version_file(eq_addr, config,'txt')
 
 #        elif 

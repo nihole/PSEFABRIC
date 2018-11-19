@@ -145,9 +145,9 @@ object-group network %s
 no object-group network %s
 no object-group network %s''' % (name, config_addresses, name, name)
     return config_txt
-######### application ###########
+######### service ###########
 
-def cisco_create_application (name, prot, ports):
+def cisco_create_service (name, prot, ports):
     if (prot == '6'):
         prot_ = 'tcp'
     elif (prot == '17'):
@@ -166,13 +166,13 @@ object-group service %s
 
     return config_txt
 
-def cisco_delete_application (name, prot, ports):
+def cisco_delete_service (name, prot, ports):
     config_txt = '''
 no object-group service %s''' % name
     return config_txt
 
 
-def asa_create_application (name, prot, ports):
+def asa_create_service (name, prot, ports):
     if (prot == '6'):
         prot_ = 'tcp'
     elif (prot == '17'):
@@ -191,85 +191,85 @@ service-object %s %s''' % (name, prot_, ports_range)
 
     return config_txt
 
-def asa_delete_application (name, prot, ports):
+def asa_delete_service (name, prot, ports):
     config_txt = '''
 no object-group service %s''' % name
     return config_txt
 
 
-######### application-set  ###########
+######### service-set  ###########
 
-def cisco_create_application_set (name, application):
+def cisco_create_service_set (name, service):
 
-    config_applications = ''
+    config_services = ''
 
-    for application_element in application:
-        if re.match(config_applications, ''):
-            config_applications = 'group-object %s' % application_element
+    for service_element in service:
+        if re.match(config_services, ''):
+            config_services = 'group-object %s' % service_element
         else:
-            config_applications = config_applications + '\n' + 'group-object %s' % application_element
+            config_services = config_services + '\n' + 'group-object %s' % service_element
 
 
     config_txt='''
 object-group service %s
-%s''' % (name, config_applications)
+%s''' % (name, config_services)
 
     return config_txt
 
-def cisco_delete_application_set (name, application):
+def cisco_delete_service_set (name, service):
 
-    config_applications = ''
+    config_services = ''
 
-    for application_element in application:
-        if re.match(config_applications, ''):
-            config_applications = 'no group-object %s' % application_element
+    for service_element in service:
+        if re.match(config_services, ''):
+            config_services = 'no group-object %s' % service_element
         else:
-            config_applications = config_applications + '\n' + 'no group-object %s' % application_element
+            config_services = config_services + '\n' + 'no group-object %s' % service_element
 
 
     config_txt='''
 no object-group service %s
 object-group service %s
 %s
-no object-group service %s''' % (name, name, config_applications, name)
+no object-group service %s''' % (name, name, config_services, name)
 
     return config_txt
 
 
 
-def asa_create_application_set (name, application):
+def asa_create_service_set (name, service):
 
-    config_applications = ''
+    config_services = ''
 
-    for application_element in application:
-        if re.match(config_applications, ''):
-            config_applications = 'group-object %s' % application_element
+    for service_element in service:
+        if re.match(config_services, ''):
+            config_services = 'group-object %s' % service_element
         else:
-            config_applications = config_applications + '\n' + 'group-object %s' % application_element
+            config_services = config_services + '\n' + 'group-object %s' % service_element
 
 
     config_txt='''
 object-group service %s
-%s''' % (name, config_applications)
+%s''' % (name, config_services)
 
     return config_txt
 
-def asa_delete_application_set (name, application):
+def asa_delete_service_set (name, service):
 
-    config_applications = ''
+    config_services = ''
 
-    for application_element in application:
-        if re.match(config_applications, ''):
-            config_applications = 'no group-object %s' % application_element
+    for service_element in service:
+        if re.match(config_services, ''):
+            config_services = 'no group-object %s' % service_element
         else:
-            config_applications = config_applications + '\n' + 'no group-object %s' % application_element
+            config_services = config_services + '\n' + 'no group-object %s' % service_element
 
 
     config_txt='''
 no object-group service %s
 object-group service %s
 %s
-no object-group service %s''' % (name, name, config_applications, name)
+no object-group service %s''' % (name, name, config_services, name)
 
     return config_txt
 
@@ -277,13 +277,13 @@ no object-group service %s''' % (name, name, config_applications, name)
 
 ######### access ###########
 
-def cisco_create_access (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def cisco_create_access (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list:
-                config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list:
+                config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
     config_txt = '''
@@ -292,26 +292,26 @@ ip access-list extended all_vlans_out
 
     return config_txt
 
-def cisco_delete_access (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def cisco_delete_access (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list:
-                config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list:
+                config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''
 ip access-list extended all_vlans_out
 %s''' % config_access
     return config_txt  
 
-def zbf_create_policy (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def zbf_create_policy (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
-                config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list['service-set']:
+                config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
     config_txt = '''
@@ -320,13 +320,13 @@ ip access-list extended vpn-to-trust
 
     return config_txt
 
-def zbf_delete_policy (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def zbf_delete_policy (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list['application-set']:
-                config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list['service-set']:
+                config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''
 ip access-list extended vpn-to-trust
@@ -335,13 +335,13 @@ ip access-list extended vpn-to-trust
     return config_txt
   
 
-def asa_create_access (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def asa_create_access (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list:
-                config_access = config_access +  'access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list:
+                config_access = config_access +  'access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
     config_txt = '''
@@ -349,13 +349,13 @@ def asa_create_access (name, source_address_set_list, destination_address_set_li
 
     return config_txt
 
-def asa_delete_access (name, source_address_set_list, destination_address_set_list, application_list, action ):
+def asa_delete_access (name, source_address_set_list, destination_address_set_list, service_list, action ):
     config_access = ''
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for application_element in application_list:
-                config_access = config_access +  'no access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (application_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
+            for service_element in service_list:
+                config_access = config_access +  'no access-list all_zones_out extended permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''
 ip access-list extended all_vlans_out

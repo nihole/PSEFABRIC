@@ -28,8 +28,8 @@ submodule applications {
 		 mandatory true;
 		  type string;
 	  }
-	  container paramete-appset {
-		  leaf configure {
+	  container parameters {
+		  leaf configure-appset {
 //			  mandatory true;
 			  default false;
 			  type boolean;

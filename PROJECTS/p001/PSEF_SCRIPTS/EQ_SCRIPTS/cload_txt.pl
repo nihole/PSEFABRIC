@@ -45,7 +45,7 @@ Options:
 
 ########### Main body ################
 
-my $filename = "../../PSEF_CONF/EQ_CONF/"  . $hostname . "\.txt";
+my $filename = "../../../../PSEF_CONF/EQ_CONF/"  . $hostname . "\.txt";
 $session = conn ($cred_ref);
 send_cfg($session, $filename);
      

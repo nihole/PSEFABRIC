@@ -9,8 +9,8 @@ mult_dict_address()
 mult_dict_address_set()
 mult_dict_service()
 mult_dict_service_set()
-mult_dict_sapplication()
-mult_dict_application_set()
+mult_dict_sservice()
+mult_dict_service_set()
 mult_dict_policy()
 '''
 
@@ -112,6 +112,7 @@ def mult_dict_address_set(parameters):
     mult = []
     mult.append({})
     mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
     mult[0]['cmd'] = {}
     mult[0]['cmd']['ad'] = []
     mult[0]['cmd']['rm'] = []
@@ -120,6 +121,7 @@ def mult_dict_address_set(parameters):
 
     mult.append({})
     mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
@@ -128,6 +130,7 @@ def mult_dict_address_set(parameters):
 
     mult.append({})
     mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
@@ -136,6 +139,7 @@ def mult_dict_address_set(parameters):
 
     mult.append({})
     mult[3]['eq_addr'] = 'dc3_r1'
+    mult[3]['eq_parameter'] = ''
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
@@ -144,65 +148,8 @@ def mult_dict_address_set(parameters):
 
     return (mult)
 
-# Change the list of parameters if needed
-def mult_dict_service(parameters):
 
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-    mult = []
-    # May be some logic based on par1, par2, ... value
-    mult.append({})
-    mult[0]['eq_addr'] = 'example_device1'
-    mult[0]['eq_parameter'] = 'some_parameter'
-    mult[0]['cmd'] = {}
-    mult[0]['cmd']['ad'] = []
-    mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates_1.create_service')
-    mult[0]['cmd']['rm'].append('extemplates_1.delete_service')
-    mult.append({})
-    mult[1]['eq_addr'] = 'example_device2'
-    mult[1]['eq_parameter'] = 'some_parameter'
-    mult[1]['cmd'] = {}
-    mult[1]['cmd']['ad'] = []
-    mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates_2.create_service')
-    mult[1]['cmd']['rm'].append('extemplates_2.delete_service')
-
-    return (mult)
-
-# Add the list of parameters if needed
-def mult_dict_service_set(parameters):
-
-##########  Description  #######
-    '''
-    '''
-#############  BODY ############
-
-    mult = []
-    # May be some logic based on par1, par2, ... value
-    mult.append({})
-    mult[0]['eq_addr'] = 'example_device1'
-    mult[0]['eq_parameter'] = 'some_parameter'
-    mult[0]['cmd'] = {}
-    mult[0]['cmd']['ad'] = []
-    mult[0]['cmd']['rm'] = []
-    mult[0]['cmd']['ad'].append('extemplates_1.create_service_set')
-    mult[0]['cmd']['rm'].append('extemplates_1.delete_service_set')
-    mult.append({})
-    mult[1]['eq_addr'] = 'example_device2'
-    mult[1]['eq_parameter'] = 'some_parameter'
-    mult[1]['cmd'] = {}
-    mult[1]['cmd']['ad'] = []
-    mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['ad'].append('extemplates_2.create_service_set')
-    mult[1]['cmd']['rm'].append('extemplates_2.delete_service_set')
-
-    return (mult)
-
-def mult_dict_application(): 
+def mult_dict_application(parameters): 
 
 ##########  Description  #######
     '''
@@ -212,6 +159,101 @@ def mult_dict_application():
     mult=[]
     mult.append({})
     mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+    
+    mult.append({}) 
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['eq_parameter'] = ''
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['eq_parameter'] = ''
+    mult[4]['cmd'] = {}
+    mult[4]['cmd']['ad'] = []
+    mult[4]['cmd']['rm'] = []
+
+    return (mult)
+
+def mult_dict_application_set(parameters):
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+    mult=[]
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
+    mult[0]['cmd'] = {}
+    mult[0]['cmd']['rm'] = []
+    mult[0]['cmd']['ad'] = []
+
+    mult.append({})
+    mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
+    mult[1]['cmd'] = {}
+    mult[1]['cmd']['ad'] = []
+    mult[1]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
+    mult[2]['cmd'] = {}
+    mult[2]['cmd']['ad'] = []
+    mult[2]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['eq_parameter'] = ''
+    mult[3]['cmd'] = {}
+    mult[3]['cmd']['ad'] = []
+    mult[3]['cmd']['rm'] = []
+
+    mult.append({})
+    mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['eq_parameter'] = ''
+    mult[4]['cmd'] = {}
+    mult[4]['cmd']['ad'] = []
+    mult[4]['cmd']['rm'] = []
+
+    return (mult)
+
+
+
+
+
+def mult_dict_service(parameters): 
+
+##########  Description  #######
+    '''
+    '''
+#############  BODY ############
+
+    mult=[]
+    mult.append({})
+    mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
@@ -220,39 +262,43 @@ def mult_dict_application():
     
     mult.append({}) 
     mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_application')
-    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application')
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_service')
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_service')
 
     mult.append({})
     mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
-    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_application')
-    mult[2]['cmd']['ad'].append('ctemplates.asa_create_application')
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_service')
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_service')
 
     mult.append({})
     mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['eq_parameter'] = ''
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
-    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_application')
-    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application')
+    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_service')
+    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_service')
 
     mult.append({})
     mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['eq_parameter'] = ''
     mult[4]['cmd'] = {}
     mult[4]['cmd']['ad'] = []
     mult[4]['cmd']['rm'] = []
-    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_application')
-    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_application')
+    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_service')
+    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_service')
 
     return (mult)
 
-def mult_dict_application_set():
+def mult_dict_service_set(parameters):
 
 ##########  Description  #######
     '''
@@ -262,6 +308,7 @@ def mult_dict_application_set():
     mult=[]
     mult.append({})
     mult[0]['eq_addr'] = 'dc1_fw1'
+    mult[0]['eq_parameter'] = ''
     mult[0]['cmd'] = {}
     mult[0]['cmd']['rm'] = []
     mult[0]['cmd']['ad'] = []
@@ -270,35 +317,39 @@ def mult_dict_application_set():
 
     mult.append({})
     mult[1]['eq_addr'] = 'dc1_sw1'
+    mult[1]['eq_parameter'] = ''
     mult[1]['cmd'] = {}
     mult[1]['cmd']['ad'] = []
     mult[1]['cmd']['rm'] = []
-    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
-    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
+    mult[1]['cmd']['rm'].append('ctemplates.cisco_delete_service_set')
+    mult[1]['cmd']['ad'].append('ctemplates.cisco_create_service_set')
 
     mult.append({})
     mult[2]['eq_addr'] = 'dc2_fw1'
+    mult[2]['eq_parameter'] = ''
     mult[2]['cmd'] = {}
     mult[2]['cmd']['ad'] = []
     mult[2]['cmd']['rm'] = []
-    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_application_set')
-    mult[2]['cmd']['ad'].append('ctemplates.asa_create_application_set')
+    mult[2]['cmd']['rm'].append('ctemplates.asa_delete_service_set')
+    mult[2]['cmd']['ad'].append('ctemplates.asa_create_service_set')
 
     mult.append({})
     mult[3]['eq_addr'] = 'dc2_sw1'
+    mult[3]['eq_parameter'] = ''
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
-    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
-    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
+    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_service_set')
+    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_service_set')
 
     mult.append({})
     mult[4]['eq_addr'] = 'dc3_r1'
+    mult[4]['eq_parameter'] = ''
     mult[4]['cmd'] = {}
     mult[4]['cmd']['ad'] = []
     mult[4]['cmd']['rm'] = []
-    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_application_set')
-    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_application_set')
+    mult[4]['cmd']['rm'].append('ctemplates.cisco_delete_service_set')
+    mult[4]['cmd']['ad'].append('ctemplates.cisco_create_service_set')
 
     return (mult)
 
@@ -308,7 +359,6 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 ##########  Description  #######
 ########## End of description #####
 
-    host_ = copy.deepcopy(host_to_type.host_to_type())
 
     src_dc = src_str[0]
     dst_dc = dst_str[0]
@@ -337,7 +387,7 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
 # Then depending on these values we may program psefabric actions.
     # For example:
 
-    if (dst_dc == 'dc1'):
+    if (dst_dc == 'DC1'):
         mult.append({})
         mult[0]['eq_addr'] = 'dc1_sw1'
         mult[0]['eq_parameter'] = ''
@@ -356,7 +406,7 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
             mult[1]['cmd']['rm'] = []
             mult[1]['cmd']['ad'].append('jtemplates.srx_create_policy')
             mult[1]['cmd']['rm'].append('jtemplates.srx_delete_policy')
-    elif (dst_dc == 'dc2'):
+    elif (dst_dc == 'DC2'):
         if (not (same_dc_flag and same_vrf_flag)):
             # May be some logic based on par1, par2, ... value
             mult.append({})
@@ -367,7 +417,7 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
             mult[0]['cmd']['rm'] = []
             mult[0]['cmd']['ad'].append('ctemplates.asa_create_access')
             mult[0]['cmd']['rm'].append('ctemplates.asa_delete_access')
-    elif (dst_dc == 'dc3'):
+    elif (dst_dc == 'DC3'):
         if (not same_dc_flag and not same_vrf_flag):
             # May be some logic based on par1, par2, ... value
             mult.append({})

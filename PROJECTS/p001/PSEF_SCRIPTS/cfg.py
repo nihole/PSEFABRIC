@@ -91,7 +91,7 @@ def create_configs (cmd_for_host_diff, cmd_for_host_full):
                 policy_list_rm = cmd_for_host_diff[eq_name]['rm']['policy']
                 for el_rm in policy_list_rm:
                     for command_element in el_rm['command-list']:
-                        cfg_new = eval(command_element + "(el_rm['name'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-sets'], status)")
+                        cfg_new = eval(command_element + "(el_rm['name'], el_rm['source-address-sets'], el_rm['destination-address-sets'], el_rm['service-sets'], 'permit')")
                         cfg[eq_name] = cfg[eq_name] + '\n' + cfg_new
                         cfg_new = ''
 
