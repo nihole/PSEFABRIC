@@ -13,10 +13,20 @@ approach preserves all the strengths of your network.
 You may use different vendors, architectures, equipment (including firewalls and load balancers), etc. In general, 
 you don't need to change your old network.
 
+Two important examples are given here:
+- project p001 shows how this approach can be implemented for Cisco Routers/Switches, 
+  Cisco ASA and Juniper FWs centralized management 
+- project p002 is a PSEFABRIC solution for underlying networks based on the Cisco ACI/Palo Alto FWs solutions.
+
 PSEFABRIC implementation does not require the purchase of any new equipment or software. 
 
 This implementation of PSEFABRIC is designed to manage subnets, accesses, service chains and can be useful for 
-data-centers and offices. This approach also may be used for VMs and load balancing VSes creation/deleting. 
+data-centers and offices. This approach may also be used for VMs and load balancing VSes creation/deleting. 
 
-PSEFABRIC is more than this single implementation. This is an approach, a new concept. And in the framework of 
+But PSEFABRIC is something more than this specific implementation. This is an approach, a new concept. And in the framework of 
 this approach, if it is possible to automate something in your network, you can build it into a PSEFABRIC.
+
+I hope you will enjoy.
+
+Best Regards,
+Roman Elokhin
