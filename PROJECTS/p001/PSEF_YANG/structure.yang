@@ -14,23 +14,18 @@ module structure {
   container structure {
 	  leaf-list data-centers {
 		  type types:dc;
-		  default 'none';
 	  }
 	  leaf-list VRFs {
 		  type types:vrf;
-		  default 'none';
 	  }
 	  leaf-list zones {
 		  type types:zone;
-		  default 'none';
 	  }
 	  leaf-list equipment {
 		  type types:eq;
-		  default 'none';
 	  }
 	  leaf-list  interfaces {
 		  type types:interface;
-		  default 'none';
 	  }	  
 	  list vlans {
 		  key vlan-name;
