@@ -310,7 +310,7 @@ def zbf_create_policy (name, source_address_set_list, destination_address_set_li
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for service_element in service_list['service-set']:
+            for service_element in service_list:
                 config_access = config_access +  'permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
 
@@ -325,7 +325,7 @@ def zbf_delete_policy (name, source_address_set_list, destination_address_set_li
 
     for source_address_set_element in source_address_set_list:
         for destination_address_set_element in destination_address_set_list:
-            for service_element in service_list['service-set']:
+            for service_element in service_list:
                 config_access = config_access +  'no permit object-group %s object-group %s object-group %s\n' % (service_element, source_address_set_element['address-set-name'], destination_address_set_element['address-set-name'])
 
     config_txt = '''

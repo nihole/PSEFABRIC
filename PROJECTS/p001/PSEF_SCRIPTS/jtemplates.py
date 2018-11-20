@@ -11,6 +11,7 @@ def srx_create_policy (name, source_address_set_list, destination_address_set_li
     config_match_source = ''
     config_match_destination = ''
     config_match_application = ''
+
     
 
     for source_address_set_element in source_address_set_list:
@@ -25,7 +26,7 @@ def srx_create_policy (name, source_address_set_list, destination_address_set_li
         else:
             config_match_destination = config_match_destination + '\n<destination-address>%s</destination-address>' % destination_address_set_element['address-set-name']
                             
-    for application_element in application_list['application-set']:
+    for application_element in application_list:
         if re.match(config_match_application, ''):
             config_match_application = '<application>%s</application>' % application_element
         else:

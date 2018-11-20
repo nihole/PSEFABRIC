@@ -421,7 +421,7 @@ def mult_dict_policy(src_str, dst_str, service_sets_dict, parameters):
         if (not same_dc_flag and not same_vrf_flag):
             # May be some logic based on par1, par2, ... value
             mult.append({})
-            mult[0]['eq_addr'] = 'dc1_fw1'
+            mult[0]['eq_addr'] = 'dc3_r1'
             mult[0]['eq_parameter'] = ''
             mult[0]['cmd'] = {}
             mult[0]['cmd']['ad'] = []
