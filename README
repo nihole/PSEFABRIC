@@ -1,3 +1,6 @@
+For more information, see
+https://github.com/nihole/PSEFABRIC/wiki
+
 PSEFABRIC is a new approach to network automation and management.
 
 It provides a single point of network management with a simple and intuitive interface, and on the other hand, this solution is very flexible and can work with a wide range of network architectures, with different types of equipment and vendors.
@@ -12,5 +15,4 @@ This approach also maybe used for VMs and load balancing VSes creation/deleting.
 
 PSEFABRIC is more than this single implementation. This is an approach, a new concept. And in the framework of this approach, if it is possible to automate something in your network, you can build it into a PSEFABRIC.
 
-For more information, see
-https://github.com/nihole/PSEFABRIC/wiki
+
