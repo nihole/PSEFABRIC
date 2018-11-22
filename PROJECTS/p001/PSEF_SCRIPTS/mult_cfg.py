@@ -11,11 +11,10 @@
 Three purposes of this layer:
     - some additional configuration manipulation, for example:
       (additional modules may be used for this purposes)
-        - removing of duplicated lines
-        - restoring of correct order of commnads if necessary
+        - removing duplicate lines
+        - restoring the correct order of commands if necessary
     - encapsulation or adaptation of the configuration files to protocols or tools are used at Layer 6 (telnet/ssh, neconf, ansible etc.)
     - saving of configuration files (folder $PSEFABRIC/PSEF_CONF/EQ_CONF/)
-
 '''
 
 import versionfile as vrs

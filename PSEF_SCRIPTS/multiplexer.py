@@ -399,20 +399,19 @@ def demultiplex(diff_list):
 def policy_opt(cmd_for_host_full_):
 
     '''
-    Changing of an object is realiased as two operations: remove & creation in the cmd_for_host dict. It means that this changing object is persent in both lists (as creation as deleting).
-    The purpose of this function is to exclude such objects from the both lists.
-    New dictionary (cmd_for_host_diff) will be used together with the old one (cmd_for_host_full) in configuration decision process.
-    We have to take into account the next objects:
+    The operation of changing an object is represented as two operations in the cmd_for_host dictionary: remove & creation. 
+    It means that this changing object presents in both lists (as creation as deleting).
 
-    addresses
-    address-sets
-    services
-    service-sets
-    applications
-    application-sets
-    address-sets in policy
-    service-sets in policy
-    application-sets in policy
+    The purpose of this function is to exclude such objects from both lists.
+
+    This is performed for the next objects:
+
+    * addresses, services, applications
+    * addresses in address-sets, services in service-sets, applications in application-sets
+    * address-sets, service-sets, application-sets in policies
+
+    New dictionary (cmd_for_host_diff) will be used together with the old one (cmd_for_host_full) in configuration decision process.
+
     '''
 
     cmd_for_host_ = {}
