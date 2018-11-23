@@ -284,8 +284,6 @@ def mult_dict_service(parameters):
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
-    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_service')
-    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_service')
 
     mult.append({})
     mult[4]['eq_addr'] = 'dc3_r1'
@@ -339,8 +337,6 @@ def mult_dict_service_set(parameters):
     mult[3]['cmd'] = {}
     mult[3]['cmd']['ad'] = []
     mult[3]['cmd']['rm'] = []
-    mult[3]['cmd']['rm'].append('ctemplates.cisco_delete_service_set')
-    mult[3]['cmd']['ad'].append('ctemplates.cisco_create_service_set')
 
     mult.append({})
     mult[4]['eq_addr'] = 'dc3_r1'
