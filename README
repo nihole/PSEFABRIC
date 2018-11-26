@@ -24,8 +24,9 @@ PSEFABRIC implementation does not require the purchase of any new equipment or s
 This implementation of PSEFABRIC is designed to manage subnets, accesses, service chains and can be useful for 
 data-centers and offices. This approach may also be used for VMs and load balancing VSes creation/deleting. 
 
-But PSEFABRIC is something more than this specific implementation. This is an approach, a new concept. And in the framework of 
-this approach, if it is possible to automate something in your network, you can build it into a PSEFABRIC.
+But PSEFABRIC is something more than this specific implementation. This is an approach, a new concept. 
+And in the framework of this approach, if it is possible to automate something in your network, you can 
+build it into a PSEFABRIC.
 
 I hope you will enjoy.
 
