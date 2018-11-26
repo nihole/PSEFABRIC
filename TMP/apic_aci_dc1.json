@@ -1,0 +1,439 @@
+
+{
+	"info": {
+		"name": "test",
+		"_postman_id": "e61529df-a10b-69e0-7e49-56647667624a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+        	{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"aaaUser\" : { \"attributes\": {\"name\":\"admin\",\"pwd\":\"C1sco12345\" } } } "
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/aaaLogin.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"aaaLogin.json"
+					]
+				},
+				"description": "login"
+			},
+			"response": []
+		},
+		{
+			"name": "req_0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-common\",\"status\":\"modified\"},\"children\":[{\"vzBrCP\":{\"attributes\":{\"dn\":\"uni/tn-common/brc-cntr-case-9\",\"name\":\"cntr-case-9\",\"scope\":\"context\"},\"children\":[{\"vzSubj\":{\"attributes\":{\"name\":\"web-sbj\",\"revFltPorts\":\"yes\"},\"children\":[{\"vzRsSubjFiltAtt\":{\"attributes\":{\"tnVzFilterName\":\"http_fltr\"}}},{\"vzRsSubjFiltAtt\":{\"attributes\":{\"tnVzFilterName\":\"https_fltr\"}}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1\",\"name\":\"app1\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg1\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg1/rscons-cntr-case-9\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1\",\"name\":\"app1\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg2/rsprov-cntr-case-9\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-common\",\"status\":\"modified\"},\"children\":[{\"vzBrCP\":{\"attributes\":{\"dn\":\"uni/tn-common/brc-cntr-case-7\",\"name\":\"cntr-case-7\",\"scope\":\"context\"},\"children\":[{\"vzSubj\":{\"attributes\":{\"name\":\"web-sbj\",\"revFltPorts\":\"yes\"},\"children\":[{\"vzRsSubjFiltAtt\":{\"attributes\":{\"tnVzFilterName\":\"http_fltr\"}}},{\"vzRsSubjFiltAtt\":{\"attributes\":{\"tnVzFilterName\":\"https_fltr\"}}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3\",\"name\":\"app3\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3/epg-epg1\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3/epg-epg1/rscons-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_5",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3\",\"name\":\"app3\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app3/epg-epg2/rscons-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_6",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1\",\"name\":\"app1\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg2/rscons-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_7",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1\",\"name\":\"app1\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg1\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app1/epg-epg1/rscons-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_8",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4\",\"name\":\"app4\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4/epg-epg2/rsprov-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_9",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4\",\"name\":\"app4\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app4/epg-epg2/rsprov-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_10",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2\",\"name\":\"app2\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2/epg-epg2\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2/epg-epg2/rsprov-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "req_11",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-t1\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2\",\"name\":\"app2\", \"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2/epg-epg1\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"dn\":\"uni/tn-t1/ap-app2/epg-epg1/rsprov-cntr-case-7\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://198.18.133.200/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"198",
+						"18",
+						"133",
+						"200"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+    	 ]
+}
