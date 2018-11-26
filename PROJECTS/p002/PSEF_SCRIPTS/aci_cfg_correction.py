@@ -94,9 +94,12 @@ def rest_tail():
 
 def aci_json_correction(cfg_json):
 
-    cfg_json_ = collection_header()
-    n = 0
     cmd_list = cfg_json.splitlines()
+    if len(cmd_list):
+        cfg_json_ = collection_header()
+    else: 
+        cfg_json_ = ''
+    n = 0
     for line in cmd_list:
         if not line:
             continue
