@@ -4,6 +4,7 @@
 
 use Getopt::Long;
 use Carp qw( croak );
+use lib './';
 use SendCommands;
 
 my %opt;
@@ -48,7 +49,7 @@ Options:
 
 ##### Main body #######
 
-my $filename = "../PSEF_CONF/EQ_CONF/" . $hostname . "\.xml";
+my $filename = "../../../PSEF_CONF/EQ_CONF/" . $hostname . "\.xml";
 local $/ = undef;
 open(my $fh, '<', $filename) or die "cannot open file $filename: $!";
 $config_xml = <$fh>;
