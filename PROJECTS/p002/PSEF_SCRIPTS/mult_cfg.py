@@ -61,8 +61,8 @@ def mult_cfg(cfg_):
             config = cfg_[eq_addr]
             version_file(eq_addr, config,'txt')
         elif re.search('aci', host_[eq_addr]):
-#            config = aci_cfg_correction.ex_cli_correction(cfg_[eq_addr])
-            config = cfg_[eq_addr]
+            config = aci_cfg_correction.aci_json_correction(cfg_[eq_addr])
+#            config = cfg_[eq_addr]
             version_file(eq_addr, config,'json')
 
 #        elif 

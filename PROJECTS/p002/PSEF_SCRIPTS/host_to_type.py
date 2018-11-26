@@ -14,7 +14,7 @@ def area_to_eq_aci():
     
     map_apic_host = {}
     map_apic_host['dc1'] = 'apic_aci_dc1'
-    map_apic_host['dc1'] = 'apic_aci_dc2'
+    map_apic_host['dc2'] = 'apic_aci_dc2'
 
     
     map_aci_tenant = {}
