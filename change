@@ -1,2 +1,0 @@
-find -type f -name \*.yml -exec sed -i -r 's/.mgt.int.stg/.infra/g' {} \;
-find -type f -name \*.txt -exec sed -i -r 's/.mgt.int.stg/.infra/g' {} \;
