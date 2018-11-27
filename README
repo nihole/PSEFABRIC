@@ -8,7 +8,7 @@ It provides a single point of network management with a simple and intuitive int
 this solution is very flexible and can work with a wide range of network architectures, with different types 
 of equipment and vendors.
 
-This allows you to see the entire network as a whole and manage it as a single device and at the same time this 
+PSEFABRIC allows you to see the entire network as a whole and manage it as a single device and at the same time this 
 approach preserves all the strengths of your network. 
 
 You may use different vendors, architectures, equipment (including firewalls and load balancers), etc. In general, 
