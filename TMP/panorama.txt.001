@@ -1,0 +1,33 @@
+
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-8
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-1
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-1
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-3
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-3
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-3
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-2
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-2
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-5
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-5
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-5
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-4
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-4
+
+delete device-group dc1_a2 pre-rulebase security rules policy-case-4
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-7
+
+delete device-group dc1_a1 pre-rulebase security rules policy-case-6

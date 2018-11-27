@@ -1,129 +1,123 @@
 
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 to a1_zn3
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 source [ a1_zn12_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 destination [ a1_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-8 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-8
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 to sz-outside
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 from a1_zn1
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 source [ a1_app2_epg2_grp a1_app2_epg1_grp a1_app1_epg2_grp a1_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 destination [ a2_app2_epg2_grp a2_app2_epg1_grp a2_app1_epg2_grp a2_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-1 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-1
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 to a2_zn1
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 from sz-outside
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 source [ a1_app2_epg2_grp a1_app2_epg1_grp a1_app1_epg2_grp a1_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 destination [ a2_app2_epg2_grp a2_app2_epg1_grp a2_app1_epg2_grp a2_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-1 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-1
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 to sz-outside
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 source [ a1_zn12_subz1_grp a1_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 destination [ a2_zn12_subz1_grp a2_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-3
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 to a2_zn2
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 from sz-outside
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 source [ a1_zn12_subz1_grp a1_zn23_subz1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 destination [ a2_zn12_subz1_grp a2_zn23_subz1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-3 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-3
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 to a1_zn1
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 source [ a1_zn12_subz1_grp a1_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 destination [ a2_zn12_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-3 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-3
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 to sz-outside
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 source [ a1_app3_epg1_grp a1_app5_epg1_grp a1_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 destination [ a2_app3_epg1_grp a2_app5_epg1_grp a2_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-2 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-2
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 to a2_zn2
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 from sz-outside
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 source [ a1_app3_epg1_grp a1_app5_epg1_grp a1_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 destination [ a2_app3_epg1_grp a2_app5_epg1_grp a2_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-2 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-2
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 to sz-outside
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 source [ a12_zn12_subz1_grp a1_zn12_subz1_grp a2_zn12_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 destination [ a23_zn12_subz1_grp a2_zn23_subz1_grp a1_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-5
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 to a2_zn3
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 from sz-outside
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 source [ a12_zn12_subz1_grp a1_zn12_subz1_grp a2_zn12_subz1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 destination [ a23_zn12_subz1_grp a2_zn23_subz1_grp a1_zn23_subz1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-5 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-5
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 to a1_zn3
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 source [ a12_zn12_subz1_grp a1_zn12_subz1_grp a2_zn12_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 destination [ a1_zn23_subz1_grp a23_zn12_subz1_grp a2_zn23_subz1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-5 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-5
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 to sz-outside
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 from a2_zn1
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 source [ a2_app1_epg1_grp a1_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 destination [ a1_app3_epg1_grp a2_app3_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-4
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 to a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 from sz-outside
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 source [ a2_app1_epg1_grp a1_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 destination [ a1_app3_epg1_grp a2_app3_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-4 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-4
 
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 to a2_zn2
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 from a2_zn1
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 source [ a2_app1_epg1_grp a1_app1_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 destination [ a2_app3_epg1_grp a1_app3_epg1_grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 application [  any ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 service [  pa-web-grp ]
-set device-group dc1_a2 pre-rulebase security rules policy-case-4 action allow
+delete device-group dc1_a2 pre-rulebase security rules policy-case-4
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 to a1_zn1
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 from a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 source [ a1_app3_epg1_grp a1_app3_epg2_grp a1_app1_epg2_grp a1_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 destination [ a1_app2_epg2_grp a1_app2_epg1_grp a1_app4_epg2_grp a1_app4_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-7 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-7
 
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 to a1_zn2
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 from a1_zn1
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 source [ a1_app2_epg2_grp a1_app2_epg1_grp a1_app1_epg2_grp a1_app1_epg1_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 destination [ a1_app3_epg1_grp a1_app3_epg2_grp a1_app4_epg1_grp a1_app4_epg2_grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 application [  any ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 service [  pa-web-grp ]
-set device-group dc1_a1 pre-rulebase security rules policy-case-6 action allow
+delete device-group dc1_a1 pre-rulebase security rules policy-case-6
+delete shared address-group a12_zn12_subz1_grp
+delete shared address-group a1_zn12_subz1_grp
+delete shared address-group a1_zn1_subz1_addr1_grp
+delete shared address-group a1_zn1_subz1_addr2_grp
+delete shared address-group a1_app1_epg1_grp
+delete shared address-group a1_zn1_subz2_addr1_grp
+delete shared address-group a1_zn1_subz2_addr2_grp
+delete shared address-group a1_app1_epg2_grp
+delete shared address-group a1_app2_epg1_grp
+delete shared address-group a1_app2_epg2_grp
+delete shared address-group a1_zn23_subz1_grp
+delete shared address-group a1_app3_epg1_grp
+delete shared address-group a1_app3_epg2_grp
+delete shared address-group a1_app4_epg1_grp
+delete shared address-group a1_app4_epg2_grp
+delete shared address-group a1_app5_epg1_grp
+delete shared address-group a1_app5_epg2_grp
+delete shared address-group a1_app6_epg1_grp
+delete shared address-group a1_app6_epg2_grp
+delete shared address-group a23_zn12_subz1_grp
+delete shared address-group a2_zn12_subz1_grp
+delete shared address-group a2_app1_epg1_grp
+delete shared address-group a2_app1_epg2_grp
+delete shared address-group a2_app2_epg1_grp
+delete shared address-group a2_app2_epg2_grp
+delete shared address-group a2_zn23_subz1_grp
+delete shared address-group a2_app3_epg1_grp
+delete shared address-group a2_app3_epg2_grp
+delete shared address-group a2_app4_epg1_grp
+delete shared address-group a2_app4_epg2_grp
+delete shared address-group a2_app5_epg1_grp
+delete shared address-group a2_app5_epg2_grp
+delete shared address-group a2_app6_epg1_grp
+delete shared address-group a2_app6_epg2_grp
+delete shared address a1_app1_epg1_10.1.1.1_32
+delete shared address a1_app1_epg1_10.1.1.2_32
+delete shared address a1_app1_epg2_10.1.1.3_32
+delete shared address a1_app1_epg2_10.1.1.4_32
+delete shared address a1_app2_epg1_10.1.1.5_32
+delete shared address a1_app2_epg1_10.1.1.6_32
+delete shared address a1_app2_epg2_10.1.1.7_32
+delete shared address a1_app2_epg2_10.1.1.8_32
+delete shared address a1_app3_epg1_10.1.2.1_32
+delete shared address a1_app3_epg1_10.1.2.2_32
+delete shared address a1_app3_epg2_10.1.2.3_32
+delete shared address a1_app3_epg2_10.1.2.4_32
+delete shared address a1_app4_epg1_10.1.2.5_32
+delete shared address a1_app4_epg1_10.1.2.6_32
+delete shared address a1_app4_epg2_10.1.2.7_32
+delete shared address a1_app4_epg2_10.1.2.8_32
+delete shared address a1_app5_epg1_10.1.3.1_32
+delete shared address a1_app5_epg1_10.1.3.2_32
+delete shared address a1_app5_epg2_10.1.3.3_32
+delete shared address a1_app5_epg2_10.1.3.4_32
+delete shared address a1_app6_epg1_10.1.3.5_32
+delete shared address a1_app6_epg1_10.1.3.6_32
+delete shared address a1_app6_epg2_10.1.3.7_32
+delete shared address a1_app6_epg2_10.1.3.8_32
+delete shared address a2_app1_epg1_10.2.1.1_32
+delete shared address a2_app1_epg1_10.2.1.2_32
+delete shared address a2_app1_epg2_10.2.1.3_32
+delete shared address a2_app1_epg2_10.2.1.4_32
+delete shared address a2_app2_epg1_10.2.1.5_32
+delete shared address a2_app2_epg1_10.2.1.6_32
+delete shared address a2_app2_epg2_10.2.1.7_32
+delete shared address a2_app2_epg2_10.2.1.8_32
+delete shared address a2_app3_epg1_10.2.2.1_32
+delete shared address a2_app3_epg1_10.2.2.2_32
+delete shared address a2_app3_epg2_10.2.2.3_32
+delete shared address a2_app3_epg2_10.2.2.4_32
+delete shared address a2_app4_epg1_10.2.2.5_32
+delete shared address a2_app4_epg1_10.2.2.6_32
+delete shared address a2_app4_epg2_10.2.2.7_32
+delete shared address a2_app4_epg2_10.2.2.8_32
+delete shared address a2_app5_epg1_10.2.3.1_32
+delete shared address a2_app5_epg1_10.2.3.2_32
+delete shared address a2_app5_epg2_10.2.3.3_32
+delete shared address a2_app5_epg2_10.2.3.4_32
+delete shared address a2_app6_epg1_10.2.3.5_32
+delete shared address a2_app6_epg1_10.2.3.6_32
+delete shared address a2_app6_epg2_10.2.3.7_32
+delete shared address a2_app6_epg2_10.2.3.8_32
+delete shared service-group pa-admin-grp 
+delete shared service-group pa-admin_sec-grp 
+delete shared service-group pa-web-grp 
+delete shared service pa-http
+delete shared service pa-https
+delete shared service pa-ssh
+delete shared service pa-telnet
+delete shared application-group any
