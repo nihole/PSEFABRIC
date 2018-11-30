@@ -57,18 +57,12 @@ def mult_cfg(cfg_):
     host_ = copy.deepcopy(host_to_type.host_to_type())
     for eq_addr in cfg_:
         if re.search('panorama', host_[eq_addr]):
-#            config = pa_cfg_correction.pa_cli_correction(cfg_[eq_addr])
-            config = cfg_[eq_addr]
+            config = pa_cfg_correction.pa_cli_correction(cfg_[eq_addr])
             version_file(eq_addr, config,'txt')
         elif re.search('aci', host_[eq_addr]):
             config = aci_cfg_correction.aci_json_correction(cfg_[eq_addr])
-#            config = cfg_[eq_addr]
             version_file(eq_addr, config,'json')
 
-#        elif 
-#        elif
-#        ... 
-#        else
            
         del host_[eq_addr]
     return "OK"
