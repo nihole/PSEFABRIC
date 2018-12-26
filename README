@@ -15,8 +15,7 @@ You may use different vendors, architectures, equipment (including firewalls and
 you don't need to change your old network.
 
 Two important examples are given here:
-- project p001 shows how this approach can be implemented for Cisco Routers/Switches, 
-  Cisco ASA and Juniper FWs centralized management 
+- project p001 shows how this approach can be implemented for Cisco Routers/Switches, Cisco ASA and Juniper FWs environment 
 - project p002 is a PSEFABRIC solution for underlying networks based on the Cisco ACI/Palo Alto FWs solutions.
 
 PSEFABRIC implementation does not require the purchase of any new equipment or software. 
