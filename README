@@ -1,6 +1,5 @@
 For more information, see
 https://github.com/nihole/PSEFABRIC/wiki
-!!!! Wiki is under construction now
 
 PSEFABRIC is a new approach to network automation and management.
 
@@ -26,12 +25,3 @@ data-centers and offices. This approach may also be used for VMs and load balanc
 But PSEFABRIC is something more than this specific implementation. This is an approach, a new concept. 
 And in the framework of this approach, if it is possible to automate something in your network, you can 
 build it into a PSEFABRIC.
-
-I hope you will enjoy.
-
-Best Regards,
-Roman Elokhin
-
-mail: nihole@mail.ru
-skype: roman.elohin
-linkedin: https://www.linkedin.com/in/roman-elokhin-a49b5934/
